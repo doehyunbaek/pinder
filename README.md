@@ -49,9 +49,14 @@ node scrape-arxiv.js --limit 25 --concurrency 4
 
 ## Google login + Google Sheets sync
 
-Pinder can optionally use Google login and the user's own Google Sheet to sync settings across devices while still being a static GitHub Pages app.
+Pinder can optionally use Google login and the user's own Google Sheet to sync settings and review outcomes across devices while still being a static GitHub Pages app.
 
-The app creates or reuses a spreadsheet named `Pinder Sync` in the signed-in user's Google Drive and stores settings there.
+The app creates or reuses a spreadsheet named `Pinder Sync` in the signed-in user's Google Drive and stores:
+
+- settings in the `settings` tab
+- review outcomes in the `decisions` tab
+
+Review outcomes are keyed by the paper's arXiv abstract URL.
 
 1. Open Google Cloud Console
 2. Create or choose a project

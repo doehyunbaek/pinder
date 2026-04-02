@@ -43,6 +43,7 @@ const state = {
   drag: null,
   animating: false,
   statusTimer: null,
+  decisionSyncTimer: null,
 };
 
 const elements = {
@@ -215,6 +216,7 @@ function getGoogleConfig() {
     clientId: config.clientId || '',
     sheetTitle: config.sheetTitle || 'Pinder Sync',
     settingsSheetTitle: config.settingsSheetTitle || 'settings',
+    decisionsSheetTitle: config.decisionsSheetTitle || 'decisions',
     scopes: config.scopes || [
       'https://www.googleapis.com/auth/drive.file',
       'https://www.googleapis.com/auth/spreadsheets',
@@ -243,7 +245,7 @@ function initializeCloudSync() {
   try {
     state.auth.configured = true;
     state.auth.error = '';
-    state.auth.syncMessage = 'Not signed in. Sign in with Google to sync settings to your own sheet.';
+    state.auth.syncMessage = 'Not signed in. Sign in with Google to sync settings and review outcomes to your own sheet.';
     state.auth.tokenClient = window.google.accounts.oauth2.initTokenClient({
       client_id: config.clientId,
       scope: config.scopes.join(' '),
@@ -262,6 +264,7 @@ async function attemptSilentSignIn() {
     await ensureValidAccessToken({ interactive: false });
     await loadGoogleProfile();
     await syncSettingsFromCloud({ interactive: false });
+    await syncDecisionsFromCloud({ interactive: false });
   } catch (error) {
     state.auth.busy = false;
     state.auth.syncInProgress = false;
@@ -270,7 +273,7 @@ async function attemptSilentSignIn() {
     state.auth.accessToken = '';
     state.auth.tokenExpiresAt = 0;
     state.auth.sheetId = '';
-    state.auth.syncMessage = 'Settings stay on this device until you sign in with Google.';
+    state.auth.syncMessage = 'Settings and review outcomes stay on this device until you sign in with Google.';
     updateAuthUi();
   }
 }
@@ -303,9 +306,9 @@ function updateAuthUi() {
   if (state.auth.error) {
     elements.syncStatus.textContent = state.auth.error;
   } else if (state.auth.syncInProgress) {
-    elements.syncStatus.textContent = 'Syncing settings with Google Sheets…';
+    elements.syncStatus.textContent = 'Syncing settings and review outcomes with Google Sheets…';
   } else {
-    elements.syncStatus.textContent = state.auth.syncMessage || 'Settings will sync to your Google Sheet.';
+    elements.syncStatus.textContent = state.auth.syncMessage || 'Settings and review outcomes will sync to your Google Sheet.';
   }
 }
 
@@ -426,7 +429,7 @@ async function ensureSyncSpreadsheet({ interactive = false } = {}) {
   const config = getGoogleConfig();
   const createResponse = await googleApiFetch('https://sheets.googleapis.com/v4/spreadsheets', {
     method: 'POST',
-    interactive: true,
+    interactive,
     body: JSON.stringify({
       properties: {
         title: config.sheetTitle,
@@ -437,6 +440,11 @@ async function ensureSyncSpreadsheet({ interactive = false } = {}) {
             title: config.settingsSheetTitle,
           },
         },
+        {
+          properties: {
+            title: config.decisionsSheetTitle,
+          },
+        },
       ],
     }),
   });
@@ -445,7 +453,7 @@ async function ensureSyncSpreadsheet({ interactive = false } = {}) {
 
   await googleApiFetch(`https://www.googleapis.com/drive/v3/files/${state.auth.sheetId}`, {
     method: 'PATCH',
-    interactive: true,
+    interactive,
     body: JSON.stringify({
       appProperties: {
         pinderApp: 'settings',
@@ -486,6 +494,108 @@ async function ensureSettingsSheetTab(spreadsheetId, { interactive = false } = {
       ],
     }),
   });
+}
+
+async function ensureDecisionsSheetTab(spreadsheetId, { interactive = false } = {}) {
+  const config = getGoogleConfig();
+  const response = await googleApiFetch(
+    `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}?fields=sheets.properties`,
+    { interactive },
+  );
+  const payload = await response.json();
+  const hasDecisionsSheet = payload.sheets?.some(
+    (sheet) => sheet.properties?.title === config.decisionsSheetTitle,
+  );
+
+  if (hasDecisionsSheet) {
+    return;
+  }
+
+  await googleApiFetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}:batchUpdate`, {
+    method: 'POST',
+    interactive,
+    body: JSON.stringify({
+      requests: [
+        {
+          addSheet: {
+            properties: {
+              title: config.decisionsSheetTitle,
+            },
+          },
+        },
+      ],
+    }),
+  });
+}
+
+function extractArxivIdFromUrl(url) {
+  if (!url) {
+    return '';
+  }
+
+  try {
+    const parsed = new URL(url, window.location.href);
+    const match = parsed.pathname.match(/\/abs\/([^/?#]+)/);
+    return match?.[1] || '';
+  } catch (error) {
+    const match = String(url).match(/\/abs\/([^/?#]+)/);
+    return match?.[1] || '';
+  }
+}
+
+function buildAbsUrlFromPaperId(paperId) {
+  return `https://arxiv.org/abs/${paperId}`;
+}
+
+function getPaperById(paperId) {
+  return state.papers.find((paper) => paper.id === paperId) || null;
+}
+
+function getDecisionAbsUrl(paperId, decisionEntry = {}) {
+  return decisionEntry.absUrl || getPaperById(paperId)?.absUrl || buildAbsUrlFromPaperId(paperId);
+}
+
+function normalizeDecisionEntry(decisionEntry, paperId = '') {
+  if (!decisionEntry || !DECISIONS[decisionEntry.decision]) {
+    return null;
+  }
+
+  const resolvedPaperId = paperId || extractArxivIdFromUrl(decisionEntry.absUrl) || '';
+  if (!resolvedPaperId) {
+    return null;
+  }
+
+  return {
+    decision: decisionEntry.decision,
+    decidedAt: normalizeUpdatedAt(decisionEntry.decidedAt) || new Date().toISOString(),
+    absUrl: getDecisionAbsUrl(resolvedPaperId, decisionEntry),
+  };
+}
+
+function normalizeDecisionMap(rawDecisions = {}) {
+  const normalized = {};
+
+  Object.entries(rawDecisions).forEach(([paperId, decisionEntry]) => {
+    const normalizedEntry = normalizeDecisionEntry(decisionEntry, paperId);
+    if (normalizedEntry) {
+      normalized[paperId] = normalizedEntry;
+    }
+  });
+
+  return normalized;
+}
+
+function mergeDecisionMaps(localDecisions, remoteDecisions) {
+  const merged = { ...localDecisions };
+
+  Object.entries(remoteDecisions).forEach(([paperId, remoteEntry]) => {
+    const localEntry = merged[paperId];
+    if (!localEntry || isRemoteSettingsNewer(remoteEntry.decidedAt, localEntry.decidedAt)) {
+      merged[paperId] = remoteEntry;
+    }
+  });
+
+  return merged;
 }
 
 function parseRemoteSettings(values) {
@@ -542,6 +652,78 @@ async function writeRemoteSettings({ interactive = false } = {}) {
   );
 }
 
+function parseRemoteDecisions(values) {
+  const parsed = {};
+
+  values.slice(1).forEach((row) => {
+    const [absUrl, decision, decidedAt, paperIdFromSheet] = row;
+    const paperId = paperIdFromSheet || extractArxivIdFromUrl(absUrl);
+    const normalizedEntry = normalizeDecisionEntry({ absUrl, decision, decidedAt }, paperId);
+
+    if (paperId && normalizedEntry) {
+      parsed[paperId] = normalizedEntry;
+    }
+  });
+
+  return parsed;
+}
+
+async function readRemoteDecisions({ interactive = false } = {}) {
+  const spreadsheetId = await ensureSyncSpreadsheet({ interactive });
+  await ensureDecisionsSheetTab(spreadsheetId, { interactive });
+  const range = encodeURIComponent(`${getGoogleConfig().decisionsSheetTitle}!A:D`);
+  const response = await googleApiFetch(
+    `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}`,
+    { interactive },
+  );
+  const payload = await response.json();
+  return parseRemoteDecisions(payload.values || []);
+}
+
+async function writeRemoteDecisions({ interactive = false } = {}) {
+  const spreadsheetId = await ensureSyncSpreadsheet({ interactive });
+  await ensureDecisionsSheetTab(spreadsheetId, { interactive });
+  const config = getGoogleConfig();
+  const clearRangeName = `${config.decisionsSheetTitle}!A:D`;
+  const clearRange = encodeURIComponent(clearRangeName);
+
+  await googleApiFetch(
+    `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${clearRange}:clear`,
+    {
+      method: 'POST',
+      interactive,
+      body: JSON.stringify({}),
+    },
+  );
+
+  const rows = [
+    ['absUrl', 'decision', 'decidedAt', 'paperId'],
+    ...Object.entries(normalizeDecisionMap(state.decisions))
+      .sort(([, leftEntry], [, rightEntry]) => new Date(leftEntry.decidedAt) - new Date(rightEntry.decidedAt))
+      .map(([paperId, decisionEntry]) => [
+        getDecisionAbsUrl(paperId, decisionEntry),
+        decisionEntry.decision,
+        decisionEntry.decidedAt || '',
+        paperId,
+      ]),
+  ];
+
+  const rangeName = `${config.decisionsSheetTitle}!A1:D${rows.length}`;
+  const range = encodeURIComponent(rangeName);
+  await googleApiFetch(
+    `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?valueInputOption=RAW`,
+    {
+      method: 'PUT',
+      interactive,
+      body: JSON.stringify({
+        range: rangeName,
+        majorDimension: 'ROWS',
+        values: rows,
+      }),
+    },
+  );
+}
+
 async function syncSettingsFromCloud({ interactive = false } = {}) {
   if (!state.auth.user) {
     return;
@@ -571,6 +753,17 @@ async function syncSettingsFromCloud({ interactive = false } = {}) {
   }
 }
 
+function scheduleDecisionSync() {
+  if (!state.auth.user) {
+    return;
+  }
+
+  window.clearTimeout(state.decisionSyncTimer);
+  state.decisionSyncTimer = window.setTimeout(() => {
+    syncDecisionsToCloud({ interactive: false });
+  }, 900);
+}
+
 async function syncSettingsToCloud({ interactive = false } = {}) {
   if (!state.auth.user) {
     return;
@@ -597,6 +790,57 @@ async function syncSettingsToCloud({ interactive = false } = {}) {
   updateAuthUi();
 }
 
+async function syncDecisionsFromCloud({ interactive = false } = {}) {
+  if (!state.auth.user) {
+    return;
+  }
+
+  state.auth.syncInProgress = true;
+  state.auth.syncMessage = 'Checking Google Sheet for review outcomes…';
+  updateAuthUi();
+
+  try {
+    const remoteDecisions = await readRemoteDecisions({ interactive });
+    const mergedDecisions = mergeDecisionMaps(normalizeDecisionMap(state.decisions), remoteDecisions);
+    state.decisions = mergedDecisions;
+    saveDecisions();
+
+    if (state.papers.length) {
+      render();
+    }
+
+    await syncDecisionsToCloud({ interactive });
+    state.auth.syncMessage = 'Settings and review outcomes synced to Google Sheets.';
+  } catch (error) {
+    handleCloudSyncError(error);
+    return;
+  }
+
+  state.auth.syncInProgress = false;
+  updateAuthUi();
+}
+
+async function syncDecisionsToCloud({ interactive = false } = {}) {
+  if (!state.auth.user) {
+    return;
+  }
+
+  state.auth.syncInProgress = true;
+  updateAuthUi();
+
+  try {
+    await writeRemoteDecisions({ interactive });
+    state.auth.error = '';
+    state.auth.syncMessage = 'Review outcomes synced to Google Sheets.';
+  } catch (error) {
+    handleCloudSyncError(error);
+    return;
+  }
+
+  state.auth.syncInProgress = false;
+  updateAuthUi();
+}
+
 async function signInWithGoogle() {
   if (!state.auth.configured) {
     return;
@@ -611,6 +855,7 @@ async function signInWithGoogle() {
     await ensureValidAccessToken({ interactive: true });
     await loadGoogleProfile();
     await syncSettingsFromCloud({ interactive: true });
+    await syncDecisionsFromCloud({ interactive: true });
     closeSettingsMenu();
     flashStatus('Signed in with Google Sheets sync.');
   } catch (error) {
@@ -641,6 +886,7 @@ async function signOutFromGoogle() {
     return;
   }
 
+  window.clearTimeout(state.decisionSyncTimer);
   state.auth.busy = false;
   state.auth.user = null;
   state.auth.accessToken = '';
@@ -648,7 +894,7 @@ async function signOutFromGoogle() {
   state.auth.sheetId = '';
   state.auth.error = '';
   state.auth.syncInProgress = false;
-  state.auth.syncMessage = 'Signed out. Your settings remain saved on this device.';
+  state.auth.syncMessage = 'Signed out. Your settings and review outcomes remain saved on this device.';
   updateAuthUi();
   closeSettingsMenu();
   flashStatus('Signed out from Google Sheets sync.');
@@ -697,7 +943,7 @@ function onShowButtonsToggleChange(event) {
   closeSettingsMenu();
 
   if (state.auth.user) {
-    syncSettingsToCloud({ interactive: true });
+    syncSettingsToCloud({ interactive: false });
   }
 
   flashStatus(
@@ -957,10 +1203,12 @@ function recordDecision(paper, decisionKey) {
   state.decisions[paper.id] = {
     decision: decisionKey,
     decidedAt: new Date().toISOString(),
+    absUrl: paper.absUrl,
   };
 
   state.undoStack.push(paper.id);
   saveDecisions();
+  scheduleDecisionSync();
 }
 
 function undoLastDecision() {
@@ -972,12 +1220,17 @@ function undoLastDecision() {
 
   delete state.decisions[undoId];
   saveDecisions();
+  scheduleDecisionSync();
+
   render();
   flashStatus('Undid the last review.');
 }
 
 function findMostRecentDecisionId() {
+  const currentPaperIds = new Set(state.papers.map((paper) => paper.id));
+
   return Object.entries(state.decisions)
+    .filter(([paperId]) => currentPaperIds.has(paperId))
     .sort(([, a], [, b]) => new Date(b.decidedAt) - new Date(a.decidedAt))[0]?.[0];
 }
 
@@ -1018,6 +1271,8 @@ function resetAllDecisions() {
   state.decisions = {};
   state.undoStack = [];
   saveDecisions();
+  scheduleDecisionSync();
+
   render();
   flashStatus('Cleared all reviews.');
 }
@@ -1105,7 +1360,7 @@ function getReviewedPapers() {
       authors: paper.authors,
       authorsText: paper.authorsText,
       abstract: paper.abstract,
-      absUrl: paper.absUrl,
+      absUrl: getDecisionAbsUrl(paper.id, state.decisions[paper.id]),
       pdfUrl: paper.pdfUrl,
       decision: state.decisions[paper.id].decision,
       decidedAt: state.decisions[paper.id].decidedAt,
@@ -1121,8 +1376,9 @@ function getDecisionCounts() {
     reject: 0,
   };
 
-  Object.values(state.decisions).forEach((entry) => {
-    if (counts[entry.decision] !== undefined) {
+  state.papers.forEach((paper) => {
+    const entry = state.decisions[paper.id];
+    if (entry && counts[entry.decision] !== undefined) {
       counts[entry.decision] += 1;
     }
   });
@@ -1158,7 +1414,7 @@ function saveSettings() {
 
 function loadDecisions() {
   try {
-    return JSON.parse(window.localStorage.getItem(STORAGE_KEY) || '{}');
+    return normalizeDecisionMap(JSON.parse(window.localStorage.getItem(STORAGE_KEY) || '{}'));
   } catch (error) {
     console.warn('Could not read saved decisions.', error);
     return {};
@@ -1167,7 +1423,7 @@ function loadDecisions() {
 
 function saveDecisions() {
   try {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state.decisions));
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(normalizeDecisionMap(state.decisions)));
   } catch (error) {
     console.warn('Could not save decisions.', error);
   }
