@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>Pinder</title>
-    <link rel="stylesheet" href="./styles.css?v=20260402-2" />
+    <link rel="stylesheet" href="./styles.css?v=20260402-4" />
   </head>
   <body>
     <main class="app-shell">
@@ -44,6 +44,16 @@
                 <span>Show button controls</span>
               </label>
               <p class="settings-hint">Swipes and arrow keys still work when buttons are hidden.</p>
+
+              <div class="settings-divider"></div>
+
+              <p class="settings-title">Account</p>
+              <p class="settings-auth-status" id="authStatus">Checking Google Sheets sync…</p>
+              <p class="settings-sync-status" id="syncStatus"></p>
+              <div class="settings-auth-actions">
+                <button class="secondary-button settings-auth-button" id="signInButton" type="button">Sign in with Google</button>
+                <button class="secondary-button settings-auth-button hidden" id="signOutButton" type="button">Sign out</button>
+              </div>
             </div>
           </div>
         </div>
@@ -119,6 +129,8 @@
       </footer>
     </main>
 
-    <script src="./app.js?v=20260402-2"></script>
+    <script src="./google-api-config.js?v=20260402-4"></script>
+    <script src="https://accounts.google.com/gsi/client"></script>
+    <script src="./app.js?v=20260402-4"></script>
   </body>
 </html>

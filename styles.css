@@ -177,6 +177,43 @@ button {
   color: #cbd5e1;
 }
 
+.settings-divider {
+  height: 1px;
+  margin: 14px 0;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.settings-auth-status,
+.settings-sync-status {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.settings-auth-status {
+  color: #f8fafc;
+  font-weight: 700;
+}
+
+.settings-sync-status {
+  margin-top: 6px;
+  color: #cbd5e1;
+  font-size: 0.95rem;
+}
+
+.settings-auth-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.settings-auth-button {
+  min-height: 44px;
+  color: #f8fafc;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
 .progress-track {
   width: 100%;
   height: 10px;
