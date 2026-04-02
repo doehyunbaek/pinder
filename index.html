@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>Pinder</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow" id="sourceLabel">arXiv</p>
+          <h1>Pinder</h1>
+          <p class="subhead">Swipe papers like Tinder, but for papers.</p>
+        </div>
+        <div class="progress-panel">
+          <div class="progress-copy">
+            <span id="progressText">Loading papers…</span>
+            <span id="remainingText"></span>
+          </div>
+          <div class="progress-track" aria-hidden="true">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+      </header>
+
+      <section class="legend" aria-label="Review controls">
+        <div class="legend-item reject">↓ Reject</div>
+        <div class="legend-item weak-reject">← Weak reject</div>
+        <div class="legend-item weak-accept">→ Weak accept</div>
+        <div class="legend-item accept">↑ Accept</div>
+      </section>
+
+      <section class="board" aria-live="polite">
+        <div class="status-panel hidden" id="statusPanel"></div>
+
+        <div class="card-stack" id="cardStack">
+          <article class="paper-card next-card" id="nextCard" aria-hidden="true">
+            <p class="next-label">Up next</p>
+            <h2 id="nextTitle">Loading…</h2>
+            <p id="nextAuthors"></p>
+          </article>
+
+          <article class="paper-card current-card" id="currentCard">
+            <div class="decision-badge hidden" id="decisionBadge"></div>
+            <div class="paper-card-content">
+              <div class="paper-links">
+                <span class="paper-id" id="paperId"></span>
+                <div class="paper-link-actions">
+                  <a id="absLink" target="_blank" rel="noreferrer noopener">Open arXiv</a>
+                  <a id="pdfLink" target="_blank" rel="noreferrer noopener">PDF</a>
+                </div>
+              </div>
+
+              <section class="paper-section">
+                <p class="section-label">Title</p>
+                <h2 id="paperTitle"></h2>
+              </section>
+
+              <section class="paper-section">
+                <p class="section-label">Authors</p>
+                <p id="paperAuthors"></p>
+              </section>
+
+              <section class="paper-section paper-abstract-section">
+                <div class="paper-section-header">
+                  <p class="section-label">Abstract</p>
+                  <button class="ghost-button" id="readMoreButton" type="button">Read full abstract</button>
+                </div>
+                <p id="paperAbstract" class="abstract-preview"></p>
+              </section>
+            </div>
+          </article>
+        </div>
+
+        <section class="empty-state hidden" id="emptyState">
+          <p class="eyebrow">All done</p>
+          <h2>You're out of papers.</h2>
+          <p id="emptySummary">You reviewed everything in this batch.</p>
+          <div class="summary-grid" id="summaryGrid"></div>
+        </section>
+      </section>
+
+      <section class="action-grid" aria-label="Rating buttons">
+        <button class="action-button reject" data-decision="reject" type="button">↓ Reject</button>
+        <button class="action-button weak-reject" data-decision="weakReject" type="button">← Weak reject</button>
+        <button class="action-button weak-accept" data-decision="weakAccept" type="button">→ Weak accept</button>
+        <button class="action-button accept" data-decision="accept" type="button">↑ Accept</button>
+      </section>
+
+      <footer class="footer-bar">
+        <div class="stats" id="stats"></div>
+        <div class="footer-actions">
+          <button class="secondary-button" id="undoButton" type="button">Undo</button>
+          <button class="secondary-button" id="exportButton" type="button">Export reviews</button>
+          <button class="secondary-button danger" id="resetButton" type="button">Reset</button>
+        </div>
+      </footer>
+    </main>
+
+    <div class="modal hidden" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-backdrop" id="modalBackdrop"></div>
+      <div class="modal-sheet" role="document">
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow" id="modalPaperId"></p>
+            <h2 id="modalTitle"></h2>
+          </div>
+          <button class="secondary-button" id="closeModalButton" type="button">Close</button>
+        </div>
+        <p class="modal-authors" id="modalAuthors"></p>
+        <p class="modal-abstract" id="modalAbstract"></p>
+        <div class="modal-links">
+          <a class="secondary-button link-button" id="modalAbsLink" target="_blank" rel="noreferrer noopener">Open arXiv</a>
+          <a class="secondary-button link-button" id="modalPdfLink" target="_blank" rel="noreferrer noopener">Open PDF</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
