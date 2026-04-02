@@ -35,13 +35,15 @@ By default the app fetches papers from the current browser year-month in `cs.SE`
 
 `https://arxiv.org/list/cs.SE/YYYY-MM?skip=0&show=2000`
 
-It fetches papers dynamically in the browser through `scrape.js`, and shows the newest papers first for that month.
+It fetches papers dynamically in the browser through `scrape.js`, shows the newest papers first for the selected month, and then keeps loading older months so the feed continues backward in time.
 
 You can override the source list URL with a query parameter:
 
 ```txt
 ?source=https://arxiv.org/list/cs.SE/2026-04?skip=0&show=2000
 ```
+
+If the source URL is an arXiv monthly list URL, Pinder keeps going backward month by month from that starting point.
 
 Because arXiv does not expose browser-friendly CORS headers for this workflow, `scrape.js` uses a public CORS proxy to read arXiv pages client-side.
 

@@ -2,6 +2,7 @@
   const DEFAULT_LIST_URL = buildDefaultListUrl();
   const REQUEST_TIMEOUT_MS = 30000;
   const PAPER_CACHE = new Map();
+  const EARLIEST_ARXIV_YEAR = 1991;
   const PROXY_BUILDERS = [
     (targetUrl) => `https://api.codetabs.com/v1/proxy/?quest=${encodeURIComponent(targetUrl)}`,
     (targetUrl) => `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
@@ -11,6 +12,72 @@
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     return `https://arxiv.org/list/cs.SE/${year}-${month}?skip=0&show=2000`;
+  }
+
+  function describeListUrl(listUrl) {
+    if (!listUrl) {
+      return null;
+    }
+
+    try {
+      const parsedUrl = new URL(listUrl, window.location.href);
+      const match = parsedUrl.pathname.match(/^\/list\/([^/]+)\/(\d{4})-(\d{2})\/?$/i);
+      if (!match) {
+        return null;
+      }
+
+      const archive = match[1];
+      const year = Number(match[2]);
+      const month = Number(match[3]);
+      if (!Number.isInteger(year) || !Number.isInteger(month) || month < 1 || month > 12) {
+        return null;
+      }
+
+      const skip = Number(parsedUrl.searchParams.get('skip') || 0);
+      const show = Number(parsedUrl.searchParams.get('show') || 2000);
+
+      return {
+        archive,
+        year,
+        month,
+        period: `${match[2]}-${match[3]}`,
+        skip: Number.isFinite(skip) ? Math.max(0, skip) : 0,
+        show: Number.isFinite(show) ? Math.max(1, show) : 2000,
+      };
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function buildListUrl({ archive, year, month, skip = 0, show = 2000 }) {
+    const normalizedMonth = String(month).padStart(2, '0');
+    return `https://arxiv.org/list/${archive}/${year}-${normalizedMonth}?skip=${skip}&show=${show}`;
+  }
+
+  function getPreviousListUrl(listUrl) {
+    const parsed = describeListUrl(listUrl);
+    if (!parsed) {
+      return '';
+    }
+
+    let { year, month } = parsed;
+    month -= 1;
+    if (month < 1) {
+      month = 12;
+      year -= 1;
+    }
+
+    if (year < EARLIEST_ARXIV_YEAR) {
+      return '';
+    }
+
+    return buildListUrl({
+      archive: parsed.archive,
+      year,
+      month,
+      skip: parsed.skip,
+      show: parsed.show,
+    });
   }
 
   function createPaperStub(id) {
@@ -28,12 +95,12 @@
     };
   }
 
-  async function fetchPaperList({ listUrl = DEFAULT_LIST_URL, onProgress = () => {} } = {}) {
+  async function fetchPaperList({ listUrl = DEFAULT_LIST_URL, allowEmpty = false, onProgress = () => {} } = {}) {
     onProgress('Fetching paper list from arXiv…');
     const html = await fetchThroughProxy(listUrl);
     const papers = parseListPage(html);
 
-    if (!papers.length) {
+    if (!papers.length && !allowEmpty) {
       throw new Error('Could not parse any papers from the arXiv list page.');
     }
 
@@ -244,6 +311,8 @@
 
   window.PinderScraper = {
     DEFAULT_LIST_URL,
+    describeListUrl,
+    getPreviousListUrl,
     fetchPaperList,
     ensurePaperLoaded,
     prefetchPapers,

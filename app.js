@@ -31,6 +31,9 @@ const DECISIONS = {
 
 const STORAGE_KEY = 'pinder-decisions-v1';
 const SETTINGS_STORAGE_KEY = 'pinder-settings-v1';
+const PAPER_DETAILS_PREFETCH_COUNT = 4;
+const OLDER_MONTH_PREFETCH_TRIGGER_REMAINING = 24;
+const OLDER_MONTH_APPEND_TRIGGER_REMAINING = 10;
 
 const state = {
   sourceUrl: '',
@@ -43,6 +46,17 @@ const state = {
   animating: false,
   statusTimer: null,
   decisionSyncTimer: null,
+  loadedSourceUrls: [],
+  loadedPaperIds: new Set(),
+  feedArchive: '',
+  newestLoadedPeriod: '',
+  oldestLoadedPeriod: '',
+  nextOlderSourceUrl: '',
+  prefetchedOlderBatch: null,
+  olderMonthPromise: null,
+  olderMonthLoading: false,
+  olderMonthExhausted: false,
+  olderMonthError: '',
 };
 
 const elements = {
@@ -115,17 +129,18 @@ async function init() {
       onProgress: (message) => showStatus(message),
     });
 
-    state.sourceUrl = payload.sourceUrl || sourceUrl;
-    state.papers = payload.papers || [];
-    elements.sourceLabel.textContent = formatSourceLabel(state.sourceUrl, state.papers.length);
+    const resolvedSourceUrl = payload.sourceUrl || sourceUrl;
+    initializeFeedState(resolvedSourceUrl);
+    appendPaperBatch(resolvedSourceUrl, payload.papers || []);
 
     if (!state.papers.length) {
       throw new Error('No papers were found on the arXiv list page.');
     }
 
     await prefetchVisiblePapers();
-    hideStatus();
     render();
+    hideStatus();
+    ensureOlderPaperSupplySoon();
   } catch (error) {
     console.error(error);
     showStatus(
@@ -143,22 +158,98 @@ function getSourceUrlFromQuery() {
   return requestedSourceUrl || window.PinderScraper.DEFAULT_LIST_URL;
 }
 
+function initializeFeedState(sourceUrl) {
+  state.sourceUrl = sourceUrl;
+  state.papers = [];
+  state.loadedSourceUrls = [];
+  state.loadedPaperIds = new Set();
+  state.prefetchedOlderBatch = null;
+  state.olderMonthPromise = null;
+  state.olderMonthLoading = false;
+  state.olderMonthError = '';
+
+  const sourceInfo = describeListUrl(sourceUrl);
+  state.feedArchive = sourceInfo?.archive || '';
+  state.newestLoadedPeriod = sourceInfo?.period || '';
+  state.oldestLoadedPeriod = sourceInfo?.period || '';
+  state.nextOlderSourceUrl = window.PinderScraper.getPreviousListUrl?.(sourceUrl) || '';
+  state.olderMonthExhausted = !state.nextOlderSourceUrl;
+  updateSourceLabel();
+}
+
+function describeListUrl(sourceUrl) {
+  return window.PinderScraper.describeListUrl?.(sourceUrl) || null;
+}
+
+function appendPaperBatch(sourceUrl, papers) {
+  if (!Array.isArray(papers) || !papers.length) {
+    return 0;
+  }
+
+  const sourceInfo = describeListUrl(sourceUrl);
+  const uniquePapers = papers
+    .filter((paper) => paper?.id && !state.loadedPaperIds.has(paper.id))
+    .map((paper) => ({
+      ...paper,
+      sourceUrl,
+      sourcePeriod: sourceInfo?.period || '',
+    }));
+
+  uniquePapers.forEach((paper) => {
+    state.loadedPaperIds.add(paper.id);
+  });
+
+  if (!uniquePapers.length) {
+    return 0;
+  }
+
+  state.papers.push(...uniquePapers);
+
+  if (!state.loadedSourceUrls.includes(sourceUrl)) {
+    state.loadedSourceUrls.push(sourceUrl);
+  }
+
+  if (sourceInfo?.archive) {
+    state.feedArchive = sourceInfo.archive;
+  }
+
+  if (sourceInfo?.period) {
+    if (!state.newestLoadedPeriod) {
+      state.newestLoadedPeriod = sourceInfo.period;
+    }
+    state.oldestLoadedPeriod = sourceInfo.period;
+  }
+
+  updateSourceLabel();
+  return uniquePapers.length;
+}
+
+function updateSourceLabel() {
+  elements.sourceLabel.textContent = formatSourceLabel();
+}
+
+async function loadPaperDetails(paper) {
+  if (!paper) {
+    return null;
+  }
+
+  return window.PinderScraper.ensurePaperLoaded(paper, {
+    onProgress: (message) => showStatus(message),
+  });
+}
+
 async function prefetchVisiblePapers() {
   const remainingPapers = getRemainingPapers();
-  const visiblePapers = remainingPapers.slice(0, 4);
+  const visiblePapers = remainingPapers.slice(0, PAPER_DETAILS_PREFETCH_COUNT);
 
-  await Promise.all(
-    visiblePapers.map(async (paper) => {
-      await window.PinderScraper.ensurePaperLoaded(paper, {
-        onProgress: (message) => showStatus(message),
-      });
-    }),
-  );
+  await Promise.all(visiblePapers.map((paper) => loadPaperDetails(paper)));
 }
 
 function prefetchVisiblePapersSoon() {
   const remainingPapers = getRemainingPapers();
-  const papersToPrefetch = remainingPapers.slice(0, 4).filter((paper) => !paper.loaded && !paper.loading);
+  const papersToPrefetch = remainingPapers
+    .slice(0, PAPER_DETAILS_PREFETCH_COUNT)
+    .filter((paper) => !paper.loaded && !paper.loading);
 
   if (!papersToPrefetch.length) {
     return;
@@ -167,7 +258,7 @@ function prefetchVisiblePapersSoon() {
   window.PinderScraper
     .prefetchPapers(remainingPapers, {
       startIndex: 0,
-      count: 4,
+      count: PAPER_DETAILS_PREFETCH_COUNT,
       concurrency: 2,
       onProgress: (message) => showStatus(message),
     })
@@ -179,6 +270,147 @@ function prefetchVisiblePapersSoon() {
     })
     .catch((error) => {
       console.warn('Could not prefetch paper details.', error);
+    });
+}
+
+function canLoadOlderPapers() {
+  return Boolean(state.prefetchedOlderBatch || state.olderMonthLoading || state.nextOlderSourceUrl);
+}
+
+function consumePrefetchedOlderBatch() {
+  if (!state.prefetchedOlderBatch) {
+    return 0;
+  }
+
+  const batch = state.prefetchedOlderBatch;
+  state.prefetchedOlderBatch = null;
+  return appendPaperBatch(batch.sourceUrl, batch.papers);
+}
+
+async function prefetchOlderMonth({ urgent = false } = {}) {
+  if (state.prefetchedOlderBatch || state.olderMonthExhausted) {
+    return state.prefetchedOlderBatch;
+  }
+
+  if (!state.nextOlderSourceUrl) {
+    state.olderMonthExhausted = true;
+    return null;
+  }
+
+  if (state.olderMonthPromise) {
+    return state.olderMonthPromise;
+  }
+
+  state.olderMonthLoading = true;
+  state.olderMonthError = '';
+
+  state.olderMonthPromise = (async () => {
+    let candidateUrl = state.nextOlderSourceUrl;
+
+    while (candidateUrl) {
+      const candidateInfo = describeListUrl(candidateUrl);
+
+      if (urgent) {
+        showStatus(
+          candidateInfo?.period
+            ? `Loading older papers from ${candidateInfo.period}…`
+            : 'Loading older papers…',
+        );
+      }
+
+      try {
+        const payload = await window.PinderScraper.fetchPaperList({
+          listUrl: candidateUrl,
+          allowEmpty: true,
+        });
+        state.nextOlderSourceUrl = window.PinderScraper.getPreviousListUrl?.(candidateUrl) || '';
+        if (!state.nextOlderSourceUrl) {
+          state.olderMonthExhausted = true;
+        }
+
+        const freshPapers = (payload.papers || []).filter((paper) => !state.loadedPaperIds.has(paper.id));
+        if (freshPapers.length) {
+          state.prefetchedOlderBatch = {
+            sourceUrl: candidateUrl,
+            papers: freshPapers,
+          };
+          return state.prefetchedOlderBatch;
+        }
+
+        candidateUrl = state.nextOlderSourceUrl;
+      } catch (error) {
+        state.olderMonthError = error?.message || 'Could not load older papers.';
+        if (!urgent) {
+          console.warn(`Could not prefetch older papers from ${candidateUrl}.`, error);
+          return null;
+        }
+        throw error;
+      }
+    }
+
+    state.olderMonthExhausted = true;
+    return null;
+  })().finally(() => {
+    state.olderMonthLoading = false;
+    state.olderMonthPromise = null;
+  });
+
+  return state.olderMonthPromise;
+}
+
+async function ensureOlderPaperSupply({ urgent = false } = {}) {
+  let appended = false;
+
+  while (true) {
+    let remainingCount = getRemainingPapers().length;
+
+    if (state.prefetchedOlderBatch && (urgent || remainingCount <= OLDER_MONTH_APPEND_TRIGGER_REMAINING)) {
+      appended = consumePrefetchedOlderBatch() > 0 || appended;
+      remainingCount = getRemainingPapers().length;
+    }
+
+    if (
+      !state.prefetchedOlderBatch
+      && !state.olderMonthExhausted
+      && state.nextOlderSourceUrl
+      && (urgent || remainingCount <= OLDER_MONTH_PREFETCH_TRIGGER_REMAINING)
+    ) {
+      await prefetchOlderMonth({ urgent });
+
+      if (state.prefetchedOlderBatch && (urgent || getRemainingPapers().length <= OLDER_MONTH_APPEND_TRIGGER_REMAINING)) {
+        appended = consumePrefetchedOlderBatch() > 0 || appended;
+      }
+    }
+
+    if (!urgent || getCurrentPaper() || state.olderMonthExhausted || !state.nextOlderSourceUrl) {
+      break;
+    }
+
+    if (!state.prefetchedOlderBatch && !state.olderMonthLoading) {
+      continue;
+    }
+
+    break;
+  }
+
+  if (!state.prefetchedOlderBatch && !state.olderMonthExhausted && state.nextOlderSourceUrl && !state.olderMonthLoading) {
+    prefetchOlderMonth({ urgent: false }).catch((error) => {
+      console.warn('Could not keep older paper prefetch warm.', error);
+    });
+  }
+
+  return { appended };
+}
+
+function ensureOlderPaperSupplySoon() {
+  ensureOlderPaperSupply({ urgent: false })
+    .then((result) => {
+      if (result?.appended) {
+        render();
+      }
+    })
+    .catch((error) => {
+      console.warn('Could not prepare older papers.', error);
     });
 }
 
@@ -770,6 +1002,7 @@ function render() {
   const total = state.papers.length;
   const reviewedCount = total - remainingPapers.length;
   const counts = getDecisionCounts();
+  const waitingForOlderPapers = !currentPaper && canLoadOlderPapers();
 
   elements.progressFill.style.width = `${total ? (reviewedCount / total) * 100 : 0}%`;
 
@@ -780,15 +1013,44 @@ function render() {
   elements.currentCard.classList.toggle('hidden', !currentPaper);
   elements.nextCard.classList.toggle('hidden', !currentPaper);
   elements.cardStack.classList.toggle('hidden', !currentPaper);
-  elements.emptyState.classList.toggle('hidden', Boolean(currentPaper));
+  elements.emptyState.classList.toggle('hidden', Boolean(currentPaper) || waitingForOlderPapers);
 
   if (currentPaper) {
     renderCurrentPaper(currentPaper);
     renderNextPaper(nextPaper);
     prefetchVisiblePapersSoon();
-  } else {
-    renderSummary(counts, total);
+    ensureOlderPaperSupplySoon();
+    return;
   }
+
+  if (waitingForOlderPapers) {
+    showStatus('Loading older papers…');
+    ensureOlderPaperSupply({ urgent: true })
+      .then(() => {
+        if (getCurrentPaper()) {
+          hideStatus();
+          render();
+          return;
+        }
+
+        if (!canLoadOlderPapers()) {
+          hideStatus();
+          render();
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        showStatus(
+          'Could not load older papers right now. Hard refresh and try again. If the problem persists, the public CORS proxy may be temporarily unavailable.',
+          true,
+        );
+        renderSummary(counts, total);
+        elements.emptyState.classList.remove('hidden');
+      });
+    return;
+  }
+
+  renderSummary(counts, total);
 }
 
 function renderCurrentPaper(paper) {
@@ -818,7 +1080,7 @@ function renderNextPaper(paper) {
 }
 
 function renderSummary(counts, total) {
-  elements.emptySummary.textContent = `You reviewed ${total} papers from this batch.`;
+  elements.emptySummary.textContent = `You reviewed ${total} papers from this feed.`;
   elements.summaryGrid.innerHTML = [
     summaryCardMarkup('Accept', counts.accept),
     summaryCardMarkup('Weak accept', counts.weakAccept),
@@ -879,13 +1141,22 @@ function getDecisionCounts() {
   return counts;
 }
 
-function formatSourceLabel(sourceUrl, count) {
-  const match = sourceUrl.match(/list\/([^/]+)\/([^?]+)/i);
-  if (!match) {
-    return `arXiv · ${count} papers`;
+function formatSourceLabel() {
+  const sourceInfo = describeListUrl(state.sourceUrl);
+  const archive = state.feedArchive || sourceInfo?.archive || '';
+  const newestPeriod = state.newestLoadedPeriod || sourceInfo?.period || '';
+  const oldestPeriod = state.oldestLoadedPeriod || newestPeriod;
+  const count = state.papers.length;
+
+  if (!archive || !newestPeriod) {
+    return `arXiv · ${count} papers loaded`;
   }
 
-  return `arXiv · ${match[1]} · ${match[2]} · ${count} papers`;
+  const periodLabel = oldestPeriod && oldestPeriod !== newestPeriod
+    ? `${newestPeriod} → ${oldestPeriod}`
+    : newestPeriod;
+
+  return `arXiv · ${archive} · ${periodLabel} · ${count} papers loaded`;
 }
 
 function loadSettings() {
