@@ -31,16 +31,16 @@ Reviews are saved in `localStorage` on the device, so it works without a backend
 
 ## Paper source
 
-By default the app fetches papers from:
+By default the app fetches papers from the current browser year-month in `cs.SE`, for example:
 
-`https://arxiv.org/list/cs.SE/2026-03?skip=0&show=2000`
+`https://arxiv.org/list/cs.SE/YYYY-MM?skip=0&show=2000`
 
-It now fetches papers dynamically in the browser through `scrape.js`.
+It fetches papers dynamically in the browser through `scrape.js`, and shows the newest papers first for that month.
 
 You can override the source list URL with a query parameter:
 
 ```txt
-?source=https://arxiv.org/list/cs.SE/2026-03?skip=0&show=2000
+?source=https://arxiv.org/list/cs.SE/2026-04?skip=0&show=2000
 ```
 
 Because arXiv does not expose browser-friendly CORS headers for this workflow, `scrape.js` uses a public CORS proxy to read arXiv pages client-side.

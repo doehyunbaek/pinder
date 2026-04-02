@@ -1,11 +1,17 @@
 (() => {
-  const DEFAULT_LIST_URL = 'https://arxiv.org/list/cs.SE/2026-03?skip=0&show=2000';
+  const DEFAULT_LIST_URL = buildDefaultListUrl();
   const REQUEST_TIMEOUT_MS = 30000;
   const PAPER_CACHE = new Map();
   const PROXY_BUILDERS = [
     (targetUrl) => `https://api.codetabs.com/v1/proxy/?quest=${encodeURIComponent(targetUrl)}`,
     (targetUrl) => `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
   ];
+
+  function buildDefaultListUrl(date = new Date()) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    return `https://arxiv.org/list/cs.SE/${year}-${month}?skip=0&show=2000`;
+  }
 
   function createPaperStub(id) {
     return {
@@ -179,7 +185,8 @@
           error: '',
         };
       })
-      .filter(Boolean);
+      .filter(Boolean)
+      .sort((leftPaper, rightPaper) => comparePaperIdsLatestFirst(leftPaper.id, rightPaper.id));
   }
 
   function parseAbstractPage(html, fallbackPaperId) {
@@ -201,6 +208,10 @@
       absUrl: `https://arxiv.org/abs/${fallbackPaperId}`,
       pdfUrl: `https://arxiv.org/pdf/${fallbackPaperId}`,
     };
+  }
+
+  function comparePaperIdsLatestFirst(leftPaperId, rightPaperId) {
+    return rightPaperId.localeCompare(leftPaperId, undefined, { numeric: true, sensitivity: 'base' });
   }
 
   function normalizePaperId(rawPaperId) {
