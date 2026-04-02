@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>pinder</title>
-    <link rel="stylesheet" href="./styles.css?v=20260402-5" />
+    <link rel="stylesheet" href="./styles.css?v=20260402-8" />
   </head>
   <body>
     <main class="app-shell">
@@ -24,6 +24,8 @@
           </div>
 
           <div class="topbar-actions">
+            <button class="auth-button" id="topAuthButton" type="button">Sign in</button>
+
             <button
               class="icon-button"
               id="settingsButton"
@@ -43,6 +45,10 @@
                 <input id="showButtonsToggle" type="checkbox" checked />
                 <span>Show button controls</span>
               </label>
+              <label class="settings-option" for="showAuthorsToggle">
+                <input id="showAuthorsToggle" type="checkbox" checked />
+                <span>Show authors</span>
+              </label>
               <p class="settings-hint">Swipes and arrow keys still work when buttons are hidden.</p>
 
               <div class="settings-divider"></div>
@@ -50,10 +56,6 @@
               <p class="settings-title">Account</p>
               <p class="settings-auth-status" id="authStatus">Checking Google Sheets sync…</p>
               <p class="settings-sync-status" id="syncStatus"></p>
-              <div class="settings-auth-actions">
-                <button class="secondary-button settings-auth-button" id="signInButton" type="button">Sign in with Google</button>
-                <button class="secondary-button settings-auth-button hidden" id="signOutButton" type="button">Sign out</button>
-              </div>
             </div>
           </div>
         </div>
@@ -91,7 +93,7 @@
                 <h2 id="paperTitle"></h2>
               </section>
 
-              <section class="paper-section">
+              <section class="paper-section" id="authorsSection">
                 <p class="section-label">Authors</p>
                 <p id="paperAuthors"></p>
               </section>
@@ -129,8 +131,9 @@
       </footer>
     </main>
 
-    <script src="./google-api-config.js?v=20260402-5"></script>
+    <script src="./google-api-config.js?v=20260402-8"></script>
     <script src="https://accounts.google.com/gsi/client"></script>
-    <script src="./app.js?v=20260402-5"></script>
+    <script src="./auth.js?v=20260402-8"></script>
+    <script src="./app.js?v=20260402-8"></script>
   </body>
 </html>

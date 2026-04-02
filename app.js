@@ -37,7 +37,6 @@ const state = {
   papers: [],
   decisions: loadDecisions(),
   settings: loadSettings(),
-  auth: createInitialAuthState(),
   settingsOpen: false,
   undoStack: [],
   drag: null,
@@ -49,13 +48,13 @@ const state = {
 const elements = {
   statusPanel: document.getElementById('statusPanel'),
   sourceLabel: document.getElementById('sourceLabel'),
+  topAuthButton: document.getElementById('topAuthButton'),
   settingsButton: document.getElementById('settingsButton'),
   settingsMenu: document.getElementById('settingsMenu'),
   showButtonsToggle: document.getElementById('showButtonsToggle'),
+  showAuthorsToggle: document.getElementById('showAuthorsToggle'),
   authStatus: document.getElementById('authStatus'),
   syncStatus: document.getElementById('syncStatus'),
-  signInButton: document.getElementById('signInButton'),
-  signOutButton: document.getElementById('signOutButton'),
   progressFill: document.getElementById('progressFill'),
   cardStack: document.getElementById('cardStack'),
   currentCard: document.getElementById('currentCard'),
@@ -65,6 +64,7 @@ const elements = {
   absLink: document.getElementById('absLink'),
   pdfLink: document.getElementById('pdfLink'),
   paperTitle: document.getElementById('paperTitle'),
+  authorsSection: document.getElementById('authorsSection'),
   paperAuthors: document.getElementById('paperAuthors'),
   paperAbstract: document.getElementById('paperAbstract'),
   nextTitle: document.getElementById('nextTitle'),
@@ -80,8 +80,6 @@ const elements = {
   actionButtons: Array.from(document.querySelectorAll('.action-button')),
 };
 
-init();
-
 async function init() {
   const missingRequirements = getMissingDomRequirements();
   if (missingRequirements.length) {
@@ -91,9 +89,16 @@ async function init() {
     return;
   }
 
+  if (!auth) {
+    const message = 'Could not load auth.js. Hard refresh the page and try again.';
+    console.error(message);
+    document.body.innerHTML = `<main class="app-shell"><div class="status-panel">${message}</div></main>`;
+    return;
+  }
+
   applySettings();
   bindEvents();
-  initializeCloudSync();
+  auth.initialize();
   showStatus('Loading papers…');
 
   try {
@@ -129,13 +134,13 @@ function getMissingDomRequirements() {
   const requiredKeys = [
     'statusPanel',
     'sourceLabel',
+    'topAuthButton',
     'settingsButton',
     'settingsMenu',
     'showButtonsToggle',
+    'showAuthorsToggle',
     'authStatus',
     'syncStatus',
-    'signInButton',
-    'signOutButton',
     'progressFill',
     'cardStack',
     'currentCard',
@@ -145,6 +150,7 @@ function getMissingDomRequirements() {
     'absLink',
     'pdfLink',
     'paperTitle',
+    'authorsSection',
     'paperAuthors',
     'paperAbstract',
     'nextTitle',
@@ -167,24 +173,10 @@ function getMissingDomRequirements() {
   return missing;
 }
 
-function createInitialAuthState() {
-  return {
-    configured: false,
-    busy: false,
-    syncInProgress: false,
-    syncMessage: '',
-    error: '',
-    user: null,
-    accessToken: '',
-    tokenExpiresAt: 0,
-    tokenClient: null,
-    sheetId: '',
-  };
-}
-
 function normalizeSettings(rawSettings = {}) {
   return {
     showActionButtons: rawSettings.showActionButtons !== false,
+    showAuthors: rawSettings.showAuthors !== false,
     updatedAt: normalizeUpdatedAt(rawSettings.updatedAt),
   };
 }
@@ -209,109 +201,6 @@ function normalizeUpdatedAt(value) {
   return null;
 }
 
-function getGoogleConfig() {
-  const config = window.PINDER_GOOGLE_CONFIG || {};
-
-  return {
-    clientId: config.clientId || '',
-    sheetTitle: config.sheetTitle || 'Pinder Sync',
-    settingsSheetTitle: config.settingsSheetTitle || 'settings',
-    decisionsSheetTitle: config.decisionsSheetTitle || 'decisions',
-    scopes: config.scopes || [
-      'https://www.googleapis.com/auth/drive.file',
-      'https://www.googleapis.com/auth/spreadsheets',
-      'https://www.googleapis.com/auth/userinfo.email',
-      'https://www.googleapis.com/auth/userinfo.profile',
-    ],
-  };
-}
-
-function initializeCloudSync() {
-  updateAuthUi();
-
-  const config = getGoogleConfig();
-  if (!config.clientId) {
-    state.auth.error = 'Google Sheets sync is not configured for this copy of Pinder yet.';
-    updateAuthUi();
-    return;
-  }
-
-  if (!window.google?.accounts?.oauth2?.initTokenClient) {
-    state.auth.error = 'Google Identity Services could not be loaded, so Sheets sync is unavailable.';
-    updateAuthUi();
-    return;
-  }
-
-  try {
-    state.auth.configured = true;
-    state.auth.error = '';
-    state.auth.syncMessage = 'Not signed in. Sign in with Google to sync settings and review outcomes to your own sheet.';
-    state.auth.tokenClient = window.google.accounts.oauth2.initTokenClient({
-      client_id: config.clientId,
-      scope: config.scopes.join(' '),
-      callback: () => {},
-      error_callback: () => {},
-    });
-    updateAuthUi();
-    attemptSilentSignIn();
-  } catch (error) {
-    handleCloudSyncError(error);
-  }
-}
-
-async function attemptSilentSignIn() {
-  try {
-    await ensureValidAccessToken({ interactive: false });
-    await loadGoogleProfile();
-    await syncSettingsFromCloud({ interactive: false });
-    await syncDecisionsFromCloud({ interactive: false });
-  } catch (error) {
-    state.auth.busy = false;
-    state.auth.syncInProgress = false;
-    state.auth.error = '';
-    state.auth.user = null;
-    state.auth.accessToken = '';
-    state.auth.tokenExpiresAt = 0;
-    state.auth.sheetId = '';
-    state.auth.syncMessage = 'Settings and review outcomes stay on this device until you sign in with Google.';
-    updateAuthUi();
-  }
-}
-
-function updateAuthUi() {
-  if (!state.auth.configured) {
-    elements.authStatus.textContent = 'Google Sheets sync unavailable';
-    elements.syncStatus.textContent = state.auth.error || 'Add Google OAuth config to enable login and sheet sync.';
-    elements.signInButton.textContent = 'Google Sheets sync unavailable';
-    elements.signInButton.disabled = true;
-    elements.signInButton.classList.remove('hidden');
-    elements.signOutButton.classList.add('hidden');
-    return;
-  }
-
-  if (state.auth.user) {
-    const identity = state.auth.user.name || state.auth.user.email || 'Google user';
-    elements.authStatus.textContent = `Signed in as ${identity}`;
-    elements.signInButton.classList.add('hidden');
-    elements.signOutButton.classList.remove('hidden');
-    elements.signOutButton.disabled = state.auth.busy;
-  } else {
-    elements.authStatus.textContent = 'Not signed in';
-    elements.signInButton.classList.remove('hidden');
-    elements.signOutButton.classList.add('hidden');
-    elements.signInButton.textContent = state.auth.busy ? 'Opening Google…' : 'Sign in with Google';
-    elements.signInButton.disabled = state.auth.busy;
-  }
-
-  if (state.auth.error) {
-    elements.syncStatus.textContent = state.auth.error;
-  } else if (state.auth.syncInProgress) {
-    elements.syncStatus.textContent = 'Syncing settings and review outcomes with Google Sheets…';
-  } else {
-    elements.syncStatus.textContent = state.auth.syncMessage || 'Settings and review outcomes will sync to your Google Sheet.';
-  }
-}
-
 function isRemoteSettingsNewer(remoteUpdatedAt, localUpdatedAt) {
   const remoteTime = Date.parse(remoteUpdatedAt || '');
   const localTime = Date.parse(localUpdatedAt || '');
@@ -325,207 +214,6 @@ function isRemoteSettingsNewer(remoteUpdatedAt, localUpdatedAt) {
   }
 
   return remoteTime > localTime;
-}
-
-function requestGoogleAccessToken({ interactive }) {
-  return new Promise((resolve, reject) => {
-    if (!state.auth.tokenClient) {
-      reject(new Error('Google token client is not ready.'));
-      return;
-    }
-
-    state.auth.tokenClient.callback = (response) => {
-      if (response?.error) {
-        reject(new Error(response.error));
-        return;
-      }
-      resolve(response);
-    };
-
-    state.auth.tokenClient.error_callback = (error) => {
-      reject(error instanceof Error ? error : new Error(error?.type || 'Google login failed.'));
-    };
-
-    state.auth.tokenClient.requestAccessToken({
-      prompt: interactive ? 'consent' : '',
-    });
-  });
-}
-
-async function ensureValidAccessToken({ interactive }) {
-  if (state.auth.accessToken && Date.now() < state.auth.tokenExpiresAt - 60_000) {
-    return state.auth.accessToken;
-  }
-
-  const response = await requestGoogleAccessToken({ interactive });
-  state.auth.accessToken = response.access_token;
-  state.auth.tokenExpiresAt = Date.now() + Number(response.expires_in || 3600) * 1000;
-  return state.auth.accessToken;
-}
-
-async function loadGoogleProfile() {
-  const accessToken = await ensureValidAccessToken({ interactive: false });
-  const response = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(`Could not load Google profile (${response.status})`);
-  }
-
-  const profile = await response.json();
-  state.auth.user = {
-    id: profile.sub,
-    email: profile.email,
-    name: profile.name,
-    picture: profile.picture,
-  };
-  updateAuthUi();
-  return state.auth.user;
-}
-
-async function googleApiFetch(url, options = {}) {
-  const accessToken = await ensureValidAccessToken({ interactive: Boolean(options.interactive) });
-  const response = await fetch(url, {
-    method: options.method || 'GET',
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      ...(options.body ? { 'Content-Type': 'application/json' } : {}),
-      ...(options.headers || {}),
-    },
-    body: options.body,
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Google API ${response.status}: ${errorText}`);
-  }
-
-  return response;
-}
-
-async function ensureSyncSpreadsheet({ interactive = false } = {}) {
-  if (state.auth.sheetId) {
-    return state.auth.sheetId;
-  }
-
-  const query = encodeURIComponent(
-    "trashed = false and mimeType = 'application/vnd.google-apps.spreadsheet' and appProperties has { key='pinderApp' and value='settings' }",
-  );
-  const searchResponse = await googleApiFetch(
-    `https://www.googleapis.com/drive/v3/files?q=${query}&pageSize=10&fields=files(id,name,modifiedTime)&orderBy=modifiedTime desc`,
-    { interactive },
-  );
-  const searchPayload = await searchResponse.json();
-  const existingFile = searchPayload.files?.[0];
-
-  if (existingFile?.id) {
-    state.auth.sheetId = existingFile.id;
-    return state.auth.sheetId;
-  }
-
-  const config = getGoogleConfig();
-  const createResponse = await googleApiFetch('https://sheets.googleapis.com/v4/spreadsheets', {
-    method: 'POST',
-    interactive,
-    body: JSON.stringify({
-      properties: {
-        title: config.sheetTitle,
-      },
-      sheets: [
-        {
-          properties: {
-            title: config.settingsSheetTitle,
-          },
-        },
-        {
-          properties: {
-            title: config.decisionsSheetTitle,
-          },
-        },
-      ],
-    }),
-  });
-  const createPayload = await createResponse.json();
-  state.auth.sheetId = createPayload.spreadsheetId;
-
-  await googleApiFetch(`https://www.googleapis.com/drive/v3/files/${state.auth.sheetId}`, {
-    method: 'PATCH',
-    interactive,
-    body: JSON.stringify({
-      appProperties: {
-        pinderApp: 'settings',
-      },
-    }),
-  });
-
-  return state.auth.sheetId;
-}
-
-async function ensureSettingsSheetTab(spreadsheetId, { interactive = false } = {}) {
-  const config = getGoogleConfig();
-  const response = await googleApiFetch(
-    `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}?fields=sheets.properties`,
-    { interactive },
-  );
-  const payload = await response.json();
-  const hasSettingsSheet = payload.sheets?.some(
-    (sheet) => sheet.properties?.title === config.settingsSheetTitle,
-  );
-
-  if (hasSettingsSheet) {
-    return;
-  }
-
-  await googleApiFetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}:batchUpdate`, {
-    method: 'POST',
-    interactive,
-    body: JSON.stringify({
-      requests: [
-        {
-          addSheet: {
-            properties: {
-              title: config.settingsSheetTitle,
-            },
-          },
-        },
-      ],
-    }),
-  });
-}
-
-async function ensureDecisionsSheetTab(spreadsheetId, { interactive = false } = {}) {
-  const config = getGoogleConfig();
-  const response = await googleApiFetch(
-    `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}?fields=sheets.properties`,
-    { interactive },
-  );
-  const payload = await response.json();
-  const hasDecisionsSheet = payload.sheets?.some(
-    (sheet) => sheet.properties?.title === config.decisionsSheetTitle,
-  );
-
-  if (hasDecisionsSheet) {
-    return;
-  }
-
-  await googleApiFetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}:batchUpdate`, {
-    method: 'POST',
-    interactive,
-    body: JSON.stringify({
-      requests: [
-        {
-          addSheet: {
-            properties: {
-              title: config.decisionsSheetTitle,
-            },
-          },
-        },
-      ],
-    }),
-  });
 }
 
 function extractArxivIdFromUrl(url) {
@@ -598,320 +286,57 @@ function mergeDecisionMaps(localDecisions, remoteDecisions) {
   return merged;
 }
 
-function parseRemoteSettings(values) {
-  const parsed = {};
-
-  values.slice(1).forEach((row) => {
-    const [key, value, updatedAt] = row;
-    if (!key) {
-      return;
+const auth = window.PinderAuth?.createController({
+  elements,
+  normalizeSettings,
+  normalizeDecisionMap,
+  mergeDecisionMaps,
+  getDecisionAbsUrl,
+  getSettings: () => state.settings,
+  setSettings: (settings) => {
+    state.settings = normalizeSettings(settings);
+  },
+  saveSettings,
+  applySettings,
+  getDecisions: () => state.decisions,
+  setDecisions: (decisions) => {
+    state.decisions = normalizeDecisionMap(decisions);
+  },
+  saveDecisions,
+  renderIfReady: () => {
+    if (state.papers.length) {
+      render();
     }
+  },
+  closeSettingsMenu,
+  flashStatus,
+  clearDecisionSyncTimer: () => {
+    window.clearTimeout(state.decisionSyncTimer);
+  },
+});
 
-    if (key === 'showActionButtons') {
-      parsed.showActionButtons = String(value).toLowerCase() !== 'false';
-      parsed.updatedAt = updatedAt || parsed.updatedAt;
-    }
-  });
-
-  return Object.keys(parsed).length ? normalizeSettings(parsed) : null;
-}
-
-async function readRemoteSettings({ interactive = false } = {}) {
-  const spreadsheetId = await ensureSyncSpreadsheet({ interactive });
-  await ensureSettingsSheetTab(spreadsheetId, { interactive });
-  const range = encodeURIComponent(`${getGoogleConfig().settingsSheetTitle}!A:C`);
-  const response = await googleApiFetch(
-    `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}`,
-    { interactive },
-  );
-  const payload = await response.json();
-  return parseRemoteSettings(payload.values || []);
-}
-
-async function writeRemoteSettings({ interactive = false } = {}) {
-  const spreadsheetId = await ensureSyncSpreadsheet({ interactive });
-  await ensureSettingsSheetTab(spreadsheetId, { interactive });
-  const settings = normalizeSettings(state.settings);
-  const rangeName = `${getGoogleConfig().settingsSheetTitle}!A1:C2`;
-  const range = encodeURIComponent(rangeName);
-
-  await googleApiFetch(
-    `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?valueInputOption=RAW`,
-    {
-      method: 'PUT',
-      interactive,
-      body: JSON.stringify({
-        range: rangeName,
-        majorDimension: 'ROWS',
-        values: [
-          ['key', 'value', 'updatedAt'],
-          ['showActionButtons', settings.showActionButtons ? 'true' : 'false', settings.updatedAt || ''],
-        ],
-      }),
-    },
-  );
-}
-
-function parseRemoteDecisions(values) {
-  const parsed = {};
-
-  values.slice(1).forEach((row) => {
-    const [absUrl, decision, decidedAt, paperIdFromSheet] = row;
-    const paperId = paperIdFromSheet || extractArxivIdFromUrl(absUrl);
-    const normalizedEntry = normalizeDecisionEntry({ absUrl, decision, decidedAt }, paperId);
-
-    if (paperId && normalizedEntry) {
-      parsed[paperId] = normalizedEntry;
-    }
-  });
-
-  return parsed;
-}
-
-async function readRemoteDecisions({ interactive = false } = {}) {
-  const spreadsheetId = await ensureSyncSpreadsheet({ interactive });
-  await ensureDecisionsSheetTab(spreadsheetId, { interactive });
-  const range = encodeURIComponent(`${getGoogleConfig().decisionsSheetTitle}!A:D`);
-  const response = await googleApiFetch(
-    `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}`,
-    { interactive },
-  );
-  const payload = await response.json();
-  return parseRemoteDecisions(payload.values || []);
-}
-
-async function writeRemoteDecisions({ interactive = false } = {}) {
-  const spreadsheetId = await ensureSyncSpreadsheet({ interactive });
-  await ensureDecisionsSheetTab(spreadsheetId, { interactive });
-  const config = getGoogleConfig();
-  const clearRangeName = `${config.decisionsSheetTitle}!A:D`;
-  const clearRange = encodeURIComponent(clearRangeName);
-
-  await googleApiFetch(
-    `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${clearRange}:clear`,
-    {
-      method: 'POST',
-      interactive,
-      body: JSON.stringify({}),
-    },
-  );
-
-  const rows = [
-    ['absUrl', 'decision', 'decidedAt', 'paperId'],
-    ...Object.entries(normalizeDecisionMap(state.decisions))
-      .sort(([, leftEntry], [, rightEntry]) => new Date(leftEntry.decidedAt) - new Date(rightEntry.decidedAt))
-      .map(([paperId, decisionEntry]) => [
-        getDecisionAbsUrl(paperId, decisionEntry),
-        decisionEntry.decision,
-        decisionEntry.decidedAt || '',
-        paperId,
-      ]),
-  ];
-
-  const rangeName = `${config.decisionsSheetTitle}!A1:D${rows.length}`;
-  const range = encodeURIComponent(rangeName);
-  await googleApiFetch(
-    `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?valueInputOption=RAW`,
-    {
-      method: 'PUT',
-      interactive,
-      body: JSON.stringify({
-        range: rangeName,
-        majorDimension: 'ROWS',
-        values: rows,
-      }),
-    },
-  );
-}
-
-async function syncSettingsFromCloud({ interactive = false } = {}) {
-  if (!state.auth.user) {
-    return;
-  }
-
-  state.auth.syncInProgress = true;
-  state.auth.syncMessage = 'Checking Google Sheet…';
-  updateAuthUi();
-
-  try {
-    const remoteSettings = await readRemoteSettings({ interactive });
-    const localSettings = normalizeSettings(state.settings);
-
-    if (remoteSettings && isRemoteSettingsNewer(remoteSettings.updatedAt, localSettings.updatedAt)) {
-      state.settings = remoteSettings;
-      saveSettings();
-      applySettings();
-      state.auth.syncMessage = 'Settings downloaded from Google Sheets.';
-      state.auth.syncInProgress = false;
-      updateAuthUi();
-      return;
-    }
-
-    await syncSettingsToCloud({ interactive });
-  } catch (error) {
-    handleCloudSyncError(error);
-  }
-}
+init();
 
 function scheduleDecisionSync() {
-  if (!state.auth.user) {
+  if (!auth?.isSignedIn()) {
     return;
   }
 
   window.clearTimeout(state.decisionSyncTimer);
   state.decisionSyncTimer = window.setTimeout(() => {
-    syncDecisionsToCloud({ interactive: false });
+    auth.syncDecisionsToCloud({ interactive: false });
   }, 900);
-}
-
-async function syncSettingsToCloud({ interactive = false } = {}) {
-  if (!state.auth.user) {
-    return;
-  }
-
-  if (!state.settings.updatedAt) {
-    state.settings.updatedAt = new Date().toISOString();
-    saveSettings();
-  }
-
-  state.auth.syncInProgress = true;
-  updateAuthUi();
-
-  try {
-    await writeRemoteSettings({ interactive });
-    state.auth.error = '';
-    state.auth.syncMessage = 'Settings synced to Google Sheets.';
-  } catch (error) {
-    handleCloudSyncError(error);
-    return;
-  }
-
-  state.auth.syncInProgress = false;
-  updateAuthUi();
-}
-
-async function syncDecisionsFromCloud({ interactive = false } = {}) {
-  if (!state.auth.user) {
-    return;
-  }
-
-  state.auth.syncInProgress = true;
-  state.auth.syncMessage = 'Checking Google Sheet for review outcomes…';
-  updateAuthUi();
-
-  try {
-    const remoteDecisions = await readRemoteDecisions({ interactive });
-    const mergedDecisions = mergeDecisionMaps(normalizeDecisionMap(state.decisions), remoteDecisions);
-    state.decisions = mergedDecisions;
-    saveDecisions();
-
-    if (state.papers.length) {
-      render();
-    }
-
-    await syncDecisionsToCloud({ interactive });
-    state.auth.syncMessage = 'Settings and review outcomes synced to Google Sheets.';
-  } catch (error) {
-    handleCloudSyncError(error);
-    return;
-  }
-
-  state.auth.syncInProgress = false;
-  updateAuthUi();
-}
-
-async function syncDecisionsToCloud({ interactive = false } = {}) {
-  if (!state.auth.user) {
-    return;
-  }
-
-  state.auth.syncInProgress = true;
-  updateAuthUi();
-
-  try {
-    await writeRemoteDecisions({ interactive });
-    state.auth.error = '';
-    state.auth.syncMessage = 'Review outcomes synced to Google Sheets.';
-  } catch (error) {
-    handleCloudSyncError(error);
-    return;
-  }
-
-  state.auth.syncInProgress = false;
-  updateAuthUi();
-}
-
-async function signInWithGoogle() {
-  if (!state.auth.configured) {
-    return;
-  }
-
-  state.auth.busy = true;
-  state.auth.error = '';
-  state.auth.syncMessage = 'Opening Google sign-in…';
-  updateAuthUi();
-
-  try {
-    await ensureValidAccessToken({ interactive: true });
-    await loadGoogleProfile();
-    await syncSettingsFromCloud({ interactive: true });
-    await syncDecisionsFromCloud({ interactive: true });
-    closeSettingsMenu();
-    flashStatus('Signed in with Google Sheets sync.');
-  } catch (error) {
-    handleCloudSyncError(error);
-    return;
-  }
-
-  state.auth.busy = false;
-  updateAuthUi();
-}
-
-async function signOutFromGoogle() {
-  if (!state.auth.configured) {
-    return;
-  }
-
-  state.auth.busy = true;
-  updateAuthUi();
-
-  try {
-    if (state.auth.accessToken) {
-      await new Promise((resolve) => {
-        window.google.accounts.oauth2.revoke(state.auth.accessToken, () => resolve());
-      });
-    }
-  } catch (error) {
-    handleCloudSyncError(error);
-    return;
-  }
-
-  window.clearTimeout(state.decisionSyncTimer);
-  state.auth.busy = false;
-  state.auth.user = null;
-  state.auth.accessToken = '';
-  state.auth.tokenExpiresAt = 0;
-  state.auth.sheetId = '';
-  state.auth.error = '';
-  state.auth.syncInProgress = false;
-  state.auth.syncMessage = 'Signed out. Your settings and review outcomes remain saved on this device.';
-  updateAuthUi();
-  closeSettingsMenu();
-  flashStatus('Signed out from Google Sheets sync.');
-}
-
-function handleCloudSyncError(error) {
-  console.error(error);
-  state.auth.busy = false;
-  state.auth.syncInProgress = false;
-  state.auth.error = error?.message || 'Google Sheets sync failed.';
-  updateAuthUi();
 }
 
 function applySettings() {
   const showActionButtons = state.settings.showActionButtons !== false;
+  const showAuthors = state.settings.showAuthors !== false;
+
   elements.showButtonsToggle.checked = showActionButtons;
+  elements.showAuthorsToggle.checked = showAuthors;
   elements.actionGrid.classList.toggle('hidden', !showActionButtons);
+  elements.authorsSection.classList.toggle('hidden', !showAuthors);
+  elements.nextAuthors.classList.toggle('hidden', !showAuthors);
 }
 
 function openSettingsMenu() {
@@ -935,22 +360,31 @@ function toggleSettingsMenu() {
   openSettingsMenu();
 }
 
-function onShowButtonsToggleChange(event) {
-  state.settings.showActionButtons = event.target.checked;
+function persistSettingsChange(message) {
   state.settings.updatedAt = new Date().toISOString();
   saveSettings();
   applySettings();
   closeSettingsMenu();
 
-  if (state.auth.user) {
-    syncSettingsToCloud({ interactive: false });
+  if (auth.isSignedIn()) {
+    auth.syncSettingsToCloud({ interactive: false });
   }
 
-  flashStatus(
+  flashStatus(message);
+}
+
+function onShowButtonsToggleChange(event) {
+  state.settings.showActionButtons = event.target.checked;
+  persistSettingsChange(
     event.target.checked
       ? 'Button controls shown.'
       : 'Button controls hidden. Swipe or use arrow keys to rate papers.',
   );
+}
+
+function onShowAuthorsToggleChange(event) {
+  state.settings.showAuthors = event.target.checked;
+  persistSettingsChange(event.target.checked ? 'Authors shown.' : 'Authors hidden.');
 }
 
 function onDocumentClick(event) {
@@ -978,10 +412,10 @@ function bindEvents() {
   elements.currentCard.addEventListener('pointerup', onPointerUp);
   elements.currentCard.addEventListener('pointercancel', onPointerCancel);
 
+  elements.topAuthButton.addEventListener('click', auth.onTopAuthButtonClick);
   elements.settingsButton.addEventListener('click', toggleSettingsMenu);
   elements.showButtonsToggle.addEventListener('change', onShowButtonsToggleChange);
-  elements.signInButton.addEventListener('click', signInWithGoogle);
-  elements.signOutButton.addEventListener('click', signOutFromGoogle);
+  elements.showAuthorsToggle.addEventListener('change', onShowAuthorsToggleChange);
 
   elements.actionButtons.forEach((button) => {
     button.addEventListener('click', () => {

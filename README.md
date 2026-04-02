@@ -9,7 +9,8 @@ Pinder is a static, client-side paper swiping app for GitHub Pages.
 - → swipe: weak accept
 - ↑ swipe: accept
 - Or tap the on-screen buttons
-- Use the settings button in the top-right to hide/show the on-screen buttons
+- Use the sign-in/sign-out button in the top-right to connect Google Sheets sync
+- Use the settings button in the top-right to hide/show the on-screen buttons and authors
 
 Each paper card shows:
 
@@ -23,7 +24,8 @@ Reviews are saved in `localStorage` on the device, so it works without a backend
 
 - `index.html` — app shell
 - `styles.css` — mobile-friendly styling for iPhone and desktop
-- `app.js` — swipe logic, local saving, Google Sheets sync, export, undo
+- `app.js` — swipe logic, local saving, export, undo
+- `auth.js` — Google Sheets auth and sync logic
 - `google-api-config.js` — Google OAuth client config for Sheets sync
 - `scrape-arxiv.js` — scraper for arXiv list pages
 - `papers.json` — scraped paper data loaded by the app
@@ -71,6 +73,8 @@ Review outcomes are keyed by the paper's arXiv abstract URL.
 7. Edit `google-api-config.js` and fill in `clientId`
 
 Without Google OAuth config, the app still works locally with device-only settings.
+
+Google auth is cached in the current browser tab/session, so refreshing the page should not require signing in again until the session expires.
 
 ## Test locally
 
