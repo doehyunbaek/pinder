@@ -712,7 +712,7 @@ function bindEvents() {
 
   elements.undoButton.addEventListener('click', undoLastDecision);
   elements.exportButton.addEventListener('click', exportDecisions);
-  elements.resetButton.addEventListener('click', resetAllDecisions);
+  elements.resetButton.addEventListener('click', resubmitWeakRejectDecisions);
 
   document.addEventListener('click', onDocumentClick);
   document.addEventListener('keydown', onKeyDown);
@@ -981,18 +981,33 @@ function exportDecisions() {
   flashStatus('Exported reviews as JSON.');
 }
 
-function resetAllDecisions() {
-  if (!window.confirm('Clear all saved reviews on this device?')) {
+function resubmitWeakRejectDecisions() {
+  const weakRejectPaperIds = Object.entries(state.decisions)
+    .filter(([, decisionEntry]) => decisionEntry?.decision === 'weakReject')
+    .map(([paperId]) => paperId);
+
+  if (!weakRejectPaperIds.length) {
+    flashStatus('No weak-reject papers to resubmit.');
     return;
   }
 
-  state.decisions = {};
-  state.undoStack = [];
+  if (!window.confirm(`Resubmit ${weakRejectPaperIds.length} weak-reject paper${weakRejectPaperIds.length === 1 ? '' : 's'}? Other decisions will stay saved.`)) {
+    return;
+  }
+
+  weakRejectPaperIds.forEach((paperId) => {
+    delete state.decisions[paperId];
+  });
+
+  const weakRejectIdSet = new Set(weakRejectPaperIds);
+  state.undoStack = state.undoStack.filter((paperId) => !weakRejectIdSet.has(paperId));
   saveDecisions();
   scheduleDecisionSync();
 
   render();
-  flashStatus('Cleared all reviews.');
+  flashStatus(
+    `Resubmitted ${weakRejectPaperIds.length} weak-reject paper${weakRejectPaperIds.length === 1 ? '' : 's'}.`,
+  );
 }
 
 function render() {
@@ -1009,6 +1024,7 @@ function render() {
   elements.stats.textContent = `Accept ${counts.accept} · Weak accept ${counts.weakAccept} · Weak reject ${counts.weakReject} · Reject ${counts.reject}`;
   elements.undoButton.disabled = !reviewedCount;
   elements.exportButton.disabled = !reviewedCount;
+  elements.resetButton.disabled = !counts.weakReject;
 
   elements.currentCard.classList.toggle('hidden', !currentPaper);
   elements.nextCard.classList.toggle('hidden', !currentPaper);
