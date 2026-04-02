@@ -9,6 +9,7 @@ Pinder is a static, client-side paper swiping app for GitHub Pages.
 - → swipe: weak accept
 - ↑ swipe: accept
 - Or tap the on-screen buttons
+- Use the settings button in the top-right to hide/show the on-screen buttons
 
 Each paper card shows:
 

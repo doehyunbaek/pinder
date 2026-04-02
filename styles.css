@@ -76,6 +76,23 @@ button {
   gap: 14px;
 }
 
+.topbar-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.topbar-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.topbar-actions {
+  position: relative;
+  flex-shrink: 0;
+}
+
 .topbar h1 {
   margin: 0;
   font-size: clamp(2rem, 7vw, 3rem);
@@ -91,10 +108,73 @@ button {
 .progress-panel {
   display: flex;
   align-items: center;
+  width: 100%;
   padding: 10px 12px;
   border-radius: 16px;
   background: rgba(15, 23, 42, 0.42);
   border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.icon-button {
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(15, 23, 42, 0.42);
+  color: #e2e8f0;
+}
+
+.icon-button svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.settings-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 20;
+  width: min(280px, calc(100vw - 32px));
+  padding: 14px;
+  border-radius: 20px;
+  background: rgba(15, 23, 42, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 50px rgba(2, 6, 23, 0.38);
+}
+
+.settings-title {
+  margin: 0 0 10px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #93c5fd;
+}
+
+.settings-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #f8fafc;
+  font-weight: 700;
+}
+
+.settings-option input {
+  width: 18px;
+  height: 18px;
+  accent-color: #60a5fa;
+}
+
+.settings-hint {
+  margin: 10px 0 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #cbd5e1;
 }
 
 .progress-track {
@@ -418,11 +498,16 @@ button {
   .topbar {
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: flex-start;
+  }
+
+  .topbar-main {
+    flex: 1;
   }
 
   .progress-panel {
     width: min(220px, 100%);
+    align-self: flex-start;
   }
 
   .paper-card-content {

@@ -7,19 +7,47 @@
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
     <meta name="theme-color" content="#0f172a" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>Pinder</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=20260402-2" />
   </head>
   <body>
     <main class="app-shell">
       <header class="topbar">
-        <div>
-          <p class="eyebrow" id="sourceLabel">arXiv</p>
-          <h1>Pinder</h1>
-          <p class="subhead">Swipe papers like Tinder, but for papers.</p>
+        <div class="topbar-main">
+          <div class="topbar-copy">
+            <p class="eyebrow" id="sourceLabel">arXiv</p>
+            <h1>Pinder</h1>
+            <p class="subhead">Swipe papers like Tinder, but for papers.</p>
+          </div>
+
+          <div class="topbar-actions">
+            <button
+              class="icon-button"
+              id="settingsButton"
+              type="button"
+              aria-label="Open settings"
+              aria-controls="settingsMenu"
+              aria-expanded="false"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19.14 12.94c.04-.31.06-.63.06-.94s-.02-.63-.06-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.03 7.03 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.49-.42h-3.84a.5.5 0 0 0-.49.42l-.36 2.54c-.58.22-1.13.53-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.68 8.84a.5.5 0 0 0 .12.64l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94L2.8 14.52a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.5.4 1.05.72 1.63.94l.36 2.54a.5.5 0 0 0 .49.42h3.84a.5.5 0 0 0 .49-.42l.36-2.54c.58-.22 1.13-.53 1.63-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58ZM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7Z" />
+              </svg>
+            </button>
+
+            <div class="settings-menu hidden" id="settingsMenu">
+              <p class="settings-title">Settings</p>
+              <label class="settings-option" for="showButtonsToggle">
+                <input id="showButtonsToggle" type="checkbox" checked />
+                <span>Show button controls</span>
+              </label>
+              <p class="settings-hint">Swipes and arrow keys still work when buttons are hidden.</p>
+            </div>
+          </div>
         </div>
+
         <div class="progress-panel" aria-hidden="true">
           <div class="progress-track">
             <div class="progress-fill" id="progressFill"></div>
@@ -74,7 +102,7 @@
         </section>
       </section>
 
-      <section class="action-grid" aria-label="Rating buttons">
+      <section class="action-grid" id="actionGrid" aria-label="Rating buttons">
         <button class="action-button reject" data-decision="reject" type="button">↓ Reject</button>
         <button class="action-button weak-reject" data-decision="weakReject" type="button">← Weak reject</button>
         <button class="action-button weak-accept" data-decision="weakAccept" type="button">→ Weak accept</button>
@@ -91,6 +119,6 @@
       </footer>
     </main>
 
-    <script src="./app.js"></script>
+    <script src="./app.js?v=20260402-2"></script>
   </body>
 </html>

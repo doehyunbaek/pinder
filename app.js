@@ -30,11 +30,14 @@ const DECISIONS = {
 };
 
 const STORAGE_KEY = 'pinder-decisions-v1';
+const SETTINGS_STORAGE_KEY = 'pinder-settings-v1';
 
 const state = {
   sourceUrl: '',
   papers: [],
   decisions: loadDecisions(),
+  settings: loadSettings(),
+  settingsOpen: false,
   undoStack: [],
   drag: null,
   animating: false,
@@ -44,6 +47,9 @@ const state = {
 const elements = {
   statusPanel: document.getElementById('statusPanel'),
   sourceLabel: document.getElementById('sourceLabel'),
+  settingsButton: document.getElementById('settingsButton'),
+  settingsMenu: document.getElementById('settingsMenu'),
+  showButtonsToggle: document.getElementById('showButtonsToggle'),
   progressFill: document.getElementById('progressFill'),
   cardStack: document.getElementById('cardStack'),
   currentCard: document.getElementById('currentCard'),
@@ -64,12 +70,22 @@ const elements = {
   undoButton: document.getElementById('undoButton'),
   exportButton: document.getElementById('exportButton'),
   resetButton: document.getElementById('resetButton'),
+  actionGrid: document.getElementById('actionGrid'),
   actionButtons: Array.from(document.querySelectorAll('.action-button')),
 };
 
 init();
 
 async function init() {
+  const missingRequirements = getMissingDomRequirements();
+  if (missingRequirements.length) {
+    const message = `Pinder assets are out of sync. This usually means GitHub Pages or your browser cached an older app.js or index.html. Hard refresh the page and try again. Missing: ${missingRequirements.join(', ')}`;
+    console.error(message);
+    document.body.innerHTML = `<main class="app-shell"><div class="status-panel">${message}</div></main>`;
+    return;
+  }
+
+  applySettings();
   bindEvents();
   showStatus('Loading papers…');
 
@@ -102,11 +118,110 @@ async function init() {
   }
 }
 
+function getMissingDomRequirements() {
+  const requiredKeys = [
+    'statusPanel',
+    'sourceLabel',
+    'settingsButton',
+    'settingsMenu',
+    'showButtonsToggle',
+    'progressFill',
+    'cardStack',
+    'currentCard',
+    'nextCard',
+    'decisionBadge',
+    'paperId',
+    'absLink',
+    'pdfLink',
+    'paperTitle',
+    'paperAuthors',
+    'paperAbstract',
+    'nextTitle',
+    'nextAuthors',
+    'emptyState',
+    'emptySummary',
+    'summaryGrid',
+    'stats',
+    'undoButton',
+    'exportButton',
+    'resetButton',
+    'actionGrid',
+  ];
+
+  const missing = requiredKeys.filter((key) => !elements[key]);
+  if (elements.actionButtons.length !== 4) {
+    missing.push('actionButtons[4]');
+  }
+
+  return missing;
+}
+
+function applySettings() {
+  const showActionButtons = state.settings.showActionButtons !== false;
+  elements.showButtonsToggle.checked = showActionButtons;
+  elements.actionGrid.classList.toggle('hidden', !showActionButtons);
+}
+
+function openSettingsMenu() {
+  state.settingsOpen = true;
+  elements.settingsMenu.classList.remove('hidden');
+  elements.settingsButton.setAttribute('aria-expanded', 'true');
+}
+
+function closeSettingsMenu() {
+  state.settingsOpen = false;
+  elements.settingsMenu.classList.add('hidden');
+  elements.settingsButton.setAttribute('aria-expanded', 'false');
+}
+
+function toggleSettingsMenu() {
+  if (state.settingsOpen) {
+    closeSettingsMenu();
+    return;
+  }
+
+  openSettingsMenu();
+}
+
+function onShowButtonsToggleChange(event) {
+  state.settings.showActionButtons = event.target.checked;
+  saveSettings();
+  applySettings();
+  closeSettingsMenu();
+  flashStatus(
+    event.target.checked
+      ? 'Button controls shown.'
+      : 'Button controls hidden. Swipe or use arrow keys to rate papers.',
+  );
+}
+
+function onDocumentClick(event) {
+  if (!state.settingsOpen) {
+    return;
+  }
+
+  if (!(event.target instanceof Node)) {
+    return;
+  }
+
+  if (
+    elements.settingsMenu.contains(event.target)
+    || elements.settingsButton.contains(event.target)
+  ) {
+    return;
+  }
+
+  closeSettingsMenu();
+}
+
 function bindEvents() {
   elements.currentCard.addEventListener('pointerdown', onPointerDown);
   elements.currentCard.addEventListener('pointermove', onPointerMove);
   elements.currentCard.addEventListener('pointerup', onPointerUp);
   elements.currentCard.addEventListener('pointercancel', onPointerCancel);
+
+  elements.settingsButton.addEventListener('click', toggleSettingsMenu);
+  elements.showButtonsToggle.addEventListener('change', onShowButtonsToggleChange);
 
   elements.actionButtons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -121,10 +236,20 @@ function bindEvents() {
   elements.exportButton.addEventListener('click', exportDecisions);
   elements.resetButton.addEventListener('click', resetAllDecisions);
 
+  document.addEventListener('click', onDocumentClick);
   document.addEventListener('keydown', onKeyDown);
 }
 
 function onKeyDown(event) {
+  if (event.key === 'Escape' && state.settingsOpen) {
+    closeSettingsMenu();
+    return;
+  }
+
+  if (state.settingsOpen) {
+    return;
+  }
+
   const targetTag = document.activeElement?.tagName;
   if (targetTag === 'INPUT' || targetTag === 'TEXTAREA') {
     return;
@@ -498,6 +623,28 @@ function formatSourceLabel(sourceUrl, count) {
   }
 
   return `arXiv · ${match[1]} · ${match[2]} · ${count} papers`;
+}
+
+function loadSettings() {
+  try {
+    return {
+      showActionButtons: true,
+      ...JSON.parse(window.localStorage.getItem(SETTINGS_STORAGE_KEY) || '{}'),
+    };
+  } catch (error) {
+    console.warn('Could not read saved settings.', error);
+    return {
+      showActionButtons: true,
+    };
+  }
+}
+
+function saveSettings() {
+  try {
+    window.localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(state.settings));
+  } catch (error) {
+    console.warn('Could not save settings.', error);
+  }
 }
 
 function loadDecisions() {
