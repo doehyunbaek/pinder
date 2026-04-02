@@ -90,24 +90,11 @@ button {
 
 .progress-panel {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 14px 16px;
-  border-radius: 18px;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 16px;
   background: rgba(15, 23, 42, 0.42);
   border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.progress-copy {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-  color: #e2e8f0;
-}
-
-.progress-copy span:last-child {
-  color: #94a3b8;
 }
 
 .progress-track {
@@ -126,28 +113,12 @@ button {
   transition: width 180ms ease;
 }
 
-.legend {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.legend-item,
 .action-button,
-.secondary-button,
-.link-button {
+.secondary-button {
   border-radius: 16px;
   border: 1px solid transparent;
 }
 
-.legend-item {
-  padding: 10px 12px;
-  text-align: center;
-  font-weight: 700;
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.legend-item.reject,
 .action-button.reject,
 .decision-badge.reject {
   color: #fee2e2;
@@ -155,7 +126,6 @@ button {
   border-color: rgba(239, 68, 68, 0.42);
 }
 
-.legend-item.weak-reject,
 .action-button.weak-reject,
 .decision-badge.weak-reject {
   color: #ffedd5;
@@ -163,7 +133,6 @@ button {
   border-color: rgba(249, 115, 22, 0.42);
 }
 
-.legend-item.weak-accept,
 .action-button.weak-accept,
 .decision-badge.weak-accept {
   color: #dbeafe;
@@ -171,7 +140,6 @@ button {
   border-color: rgba(59, 130, 246, 0.42);
 }
 
-.legend-item.accept,
 .action-button.accept,
 .decision-badge.accept {
   color: #dcfce7;
@@ -288,8 +256,7 @@ button {
   flex-wrap: wrap;
 }
 
-.paper-link-actions a,
-.modal-links a {
+.paper-link-actions a {
   text-decoration: none;
   color: #0f172a;
   font-weight: 700;
@@ -320,13 +287,6 @@ button {
   color: #64748b;
 }
 
-.paper-section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-}
-
 .paper-abstract-section {
   flex: 1;
   min-height: 0;
@@ -342,9 +302,7 @@ button {
   overflow: hidden;
 }
 
-.ghost-button,
-.secondary-button,
-.link-button {
+.secondary-button {
   background: rgba(15, 23, 42, 0.06);
   color: #0f172a;
   border: 1px solid rgba(15, 23, 42, 0.08);
@@ -352,14 +310,6 @@ button {
   font-weight: 700;
 }
 
-.ghost-button {
-  padding: 0;
-  background: transparent;
-  border: 0;
-  color: #1d4ed8;
-}
-
-.ghost-button:disabled,
 .secondary-button:disabled,
 .action-button:disabled {
   opacity: 0.45;
@@ -460,69 +410,6 @@ button {
   color: white;
 }
 
-.modal {
-  position: fixed;
-  inset: 0;
-  z-index: 30;
-}
-
-.modal-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(2, 6, 23, 0.76);
-  backdrop-filter: blur(10px);
-}
-
-.modal-sheet {
-  position: absolute;
-  inset: auto 0 0 0;
-  max-height: min(84svh, 900px);
-  padding: 20px 20px calc(24px + env(safe-area-inset-bottom)) 20px;
-  border-radius: 28px 28px 0 0;
-  background: white;
-  color: var(--text);
-  overflow: auto;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  align-items: flex-start;
-}
-
-.modal-header h2,
-.modal-authors,
-.modal-abstract {
-  margin: 0;
-}
-
-.modal-header h2 {
-  line-height: 1.12;
-}
-
-.modal-authors {
-  margin-top: 12px;
-  color: var(--text-muted);
-}
-
-.modal-abstract {
-  margin-top: 18px;
-  line-height: 1.65;
-  white-space: pre-wrap;
-}
-
-.modal-links {
-  margin-top: 20px;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.link-button {
-  text-decoration: none;
-}
-
 @media (min-width: 720px) {
   .app-shell {
     gap: 18px;
@@ -535,11 +422,7 @@ button {
   }
 
   .progress-panel {
-    width: min(320px, 100%);
-  }
-
-  .legend {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    width: min(220px, 100%);
   }
 
   .paper-card-content {

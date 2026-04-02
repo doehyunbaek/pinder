@@ -38,15 +38,12 @@ const state = {
   undoStack: [],
   drag: null,
   animating: false,
-  modalPaper: null,
   statusTimer: null,
 };
 
 const elements = {
   statusPanel: document.getElementById('statusPanel'),
   sourceLabel: document.getElementById('sourceLabel'),
-  progressText: document.getElementById('progressText'),
-  remainingText: document.getElementById('remainingText'),
   progressFill: document.getElementById('progressFill'),
   cardStack: document.getElementById('cardStack'),
   currentCard: document.getElementById('currentCard'),
@@ -58,7 +55,6 @@ const elements = {
   paperTitle: document.getElementById('paperTitle'),
   paperAuthors: document.getElementById('paperAuthors'),
   paperAbstract: document.getElementById('paperAbstract'),
-  readMoreButton: document.getElementById('readMoreButton'),
   nextTitle: document.getElementById('nextTitle'),
   nextAuthors: document.getElementById('nextAuthors'),
   emptyState: document.getElementById('emptyState'),
@@ -69,15 +65,6 @@ const elements = {
   exportButton: document.getElementById('exportButton'),
   resetButton: document.getElementById('resetButton'),
   actionButtons: Array.from(document.querySelectorAll('.action-button')),
-  modal: document.getElementById('modal'),
-  modalBackdrop: document.getElementById('modalBackdrop'),
-  closeModalButton: document.getElementById('closeModalButton'),
-  modalPaperId: document.getElementById('modalPaperId'),
-  modalTitle: document.getElementById('modalTitle'),
-  modalAuthors: document.getElementById('modalAuthors'),
-  modalAbstract: document.getElementById('modalAbstract'),
-  modalAbsLink: document.getElementById('modalAbsLink'),
-  modalPdfLink: document.getElementById('modalPdfLink'),
 };
 
 init();
@@ -109,8 +96,7 @@ async function init() {
       'Could not load papers.json. If you are previewing locally, use a static server or deploy to GitHub Pages.',
       true,
     );
-    elements.progressText.textContent = 'Could not load papers';
-    elements.remainingText.textContent = '';
+    elements.progressFill.style.width = '0%';
     elements.currentCard.classList.add('hidden');
     elements.nextCard.classList.add('hidden');
   }
@@ -121,13 +107,6 @@ function bindEvents() {
   elements.currentCard.addEventListener('pointermove', onPointerMove);
   elements.currentCard.addEventListener('pointerup', onPointerUp);
   elements.currentCard.addEventListener('pointercancel', onPointerCancel);
-
-  elements.readMoreButton.addEventListener('click', () => {
-    const paper = getCurrentPaper();
-    if (paper) {
-      openModal(paper);
-    }
-  });
 
   elements.actionButtons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -142,22 +121,10 @@ function bindEvents() {
   elements.exportButton.addEventListener('click', exportDecisions);
   elements.resetButton.addEventListener('click', resetAllDecisions);
 
-  elements.modalBackdrop.addEventListener('click', closeModal);
-  elements.closeModalButton.addEventListener('click', closeModal);
-
   document.addEventListener('keydown', onKeyDown);
 }
 
 function onKeyDown(event) {
-  if (state.modalPaper && event.key === 'Escape') {
-    closeModal();
-    return;
-  }
-
-  if (state.modalPaper) {
-    return;
-  }
-
   const targetTag = document.activeElement?.tagName;
   if (targetTag === 'INPUT' || targetTag === 'TEXTAREA') {
     return;
@@ -183,7 +150,7 @@ function onKeyDown(event) {
 }
 
 function onPointerDown(event) {
-  if (state.animating || state.modalPaper || !getCurrentPaper()) {
+  if (state.animating || !getCurrentPaper()) {
     return;
   }
 
@@ -310,7 +277,7 @@ function updateDecisionBadge(decisionKey) {
 }
 
 function rateCurrent(decisionKey) {
-  if (state.animating || state.modalPaper || !getCurrentPaper()) {
+  if (state.animating || !getCurrentPaper()) {
     return;
   }
 
@@ -416,22 +383,6 @@ function resetAllDecisions() {
   flashStatus('Cleared all reviews.');
 }
 
-function openModal(paper) {
-  state.modalPaper = paper;
-  elements.modalPaperId.textContent = paper.id;
-  elements.modalTitle.textContent = paper.title;
-  elements.modalAuthors.textContent = paper.authorsText || 'Unknown authors';
-  elements.modalAbstract.textContent = paper.abstract || 'No abstract available.';
-  elements.modalAbsLink.href = paper.absUrl;
-  elements.modalPdfLink.href = paper.pdfUrl;
-  elements.modal.classList.remove('hidden');
-}
-
-function closeModal() {
-  state.modalPaper = null;
-  elements.modal.classList.add('hidden');
-}
-
 function render() {
   const remainingPapers = getRemainingPapers();
   const currentPaper = remainingPapers[0] || null;
@@ -440,8 +391,6 @@ function render() {
   const reviewedCount = total - remainingPapers.length;
   const counts = getDecisionCounts();
 
-  elements.progressText.textContent = `${reviewedCount} / ${total} reviewed`;
-  elements.remainingText.textContent = `${total - reviewedCount} remaining`;
   elements.progressFill.style.width = `${total ? (reviewedCount / total) * 100 : 0}%`;
 
   elements.stats.textContent = `Accept ${counts.accept} · Weak accept ${counts.weakAccept} · Weak reject ${counts.weakReject} · Reject ${counts.reject}`;

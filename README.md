@@ -14,8 +14,7 @@ Each paper card shows:
 
 - title
 - authors
-- abstract preview
-- full abstract in a modal
+- abstract
 
 Reviews are saved in `localStorage` on the device, so it works without a backend.
 
@@ -45,6 +44,18 @@ Optional flags:
 node scrape-arxiv.js --url "https://arxiv.org/list/cs.SE/2026-03?skip=0&show=2000" --output papers.json
 node scrape-arxiv.js --limit 25 --concurrency 4
 ```
+
+## Test locally
+
+Because the app fetches `papers.json`, run it through a local static server instead of opening `index.html` directly.
+
+```bash
+npx serve . -l 3000
+```
+
+Then open:
+
+`http://localhost:3000`
 
 ## Deploy
 
