@@ -96,38 +96,90 @@ async function init() {
     return;
   }
 
+  if (!window.PinderScraper) {
+    const message = 'Could not load scrape.js. Hard refresh the page and try again.';
+    console.error(message);
+    document.body.innerHTML = `<main class="app-shell"><div class="status-panel">${message}</div></main>`;
+    return;
+  }
+
   applySettings();
   bindEvents();
   auth.initialize();
-  showStatus('Loading papers…');
+  showStatus('Fetching papers from arXiv…');
 
   try {
-    const response = await fetch('./papers.json', { cache: 'no-store' });
-    if (!response.ok) {
-      throw new Error(`Unable to load papers.json (${response.status})`);
-    }
+    const sourceUrl = getSourceUrlFromQuery();
+    const payload = await window.PinderScraper.fetchPaperList({
+      listUrl: sourceUrl,
+      onProgress: (message) => showStatus(message),
+    });
 
-    const payload = await response.json();
-    state.sourceUrl = payload.sourceUrl || '';
-    state.papers = Array.isArray(payload) ? payload : payload.papers || [];
+    state.sourceUrl = payload.sourceUrl || sourceUrl;
+    state.papers = payload.papers || [];
     elements.sourceLabel.textContent = formatSourceLabel(state.sourceUrl, state.papers.length);
 
     if (!state.papers.length) {
-      throw new Error('papers.json did not contain any papers.');
+      throw new Error('No papers were found on the arXiv list page.');
     }
 
+    await prefetchVisiblePapers();
     hideStatus();
     render();
   } catch (error) {
     console.error(error);
     showStatus(
-      'Could not load papers.json. If you are previewing locally, use a static server or deploy to GitHub Pages.',
+      'Could not fetch papers from arXiv in the browser. Hard refresh and try again. If the problem persists, the public CORS proxy may be temporarily unavailable.',
       true,
     );
     elements.progressFill.style.width = '0%';
     elements.currentCard.classList.add('hidden');
     elements.nextCard.classList.add('hidden');
   }
+}
+
+function getSourceUrlFromQuery() {
+  const requestedSourceUrl = new URLSearchParams(window.location.search).get('source');
+  return requestedSourceUrl || window.PinderScraper.DEFAULT_LIST_URL;
+}
+
+async function prefetchVisiblePapers() {
+  const remainingPapers = getRemainingPapers();
+  const visiblePapers = remainingPapers.slice(0, 4);
+
+  await Promise.all(
+    visiblePapers.map(async (paper) => {
+      await window.PinderScraper.ensurePaperLoaded(paper, {
+        onProgress: (message) => showStatus(message),
+      });
+    }),
+  );
+}
+
+function prefetchVisiblePapersSoon() {
+  const remainingPapers = getRemainingPapers();
+  const papersToPrefetch = remainingPapers.slice(0, 4).filter((paper) => !paper.loaded && !paper.loading);
+
+  if (!papersToPrefetch.length) {
+    return;
+  }
+
+  window.PinderScraper
+    .prefetchPapers(remainingPapers, {
+      startIndex: 0,
+      count: 4,
+      concurrency: 2,
+      onProgress: (message) => showStatus(message),
+    })
+    .then(() => {
+      if (!elements.statusPanel.classList.contains('hidden')) {
+        hideStatus();
+      }
+      render();
+    })
+    .catch((error) => {
+      console.warn('Could not prefetch paper details.', error);
+    });
 }
 
 function getMissingDomRequirements() {
@@ -733,6 +785,7 @@ function render() {
   if (currentPaper) {
     renderCurrentPaper(currentPaper);
     renderNextPaper(nextPaper);
+    prefetchVisiblePapersSoon();
   } else {
     renderSummary(counts, total);
   }
@@ -740,9 +793,13 @@ function render() {
 
 function renderCurrentPaper(paper) {
   elements.paperId.textContent = paper.id;
-  elements.paperTitle.textContent = paper.title;
-  elements.paperAuthors.textContent = paper.authorsText || 'Unknown authors';
-  elements.paperAbstract.textContent = paper.abstract || 'No abstract available.';
+  elements.paperTitle.textContent = paper.title || `Loading ${paper.id}…`;
+  elements.paperAuthors.textContent = !paper.loaded
+    ? 'Loading authors…'
+    : (paper.authorsText || 'Unknown authors');
+  elements.paperAbstract.textContent = !paper.loaded
+    ? 'Loading abstract…'
+    : (paper.abstract || paper.error || 'No abstract available.');
   elements.absLink.href = paper.absUrl;
   elements.pdfLink.href = paper.pdfUrl;
 }
@@ -754,8 +811,10 @@ function renderNextPaper(paper) {
     return;
   }
 
-  elements.nextTitle.textContent = paper.title;
-  elements.nextAuthors.textContent = paper.authorsText || 'Unknown authors';
+  elements.nextTitle.textContent = paper.title || `Loading ${paper.id}…`;
+  elements.nextAuthors.textContent = !paper.loaded
+    ? 'Loading authors…'
+    : (paper.authorsText || 'Unknown authors');
 }
 
 function renderSummary(counts, total) {

@@ -27,27 +27,23 @@ Reviews are saved in `localStorage` on the device, so it works without a backend
 - `app.js` — swipe logic, local saving, export, undo
 - `auth.js` — Google Sheets auth and sync logic
 - `google-api-config.js` — Google OAuth client config for Sheets sync
-- `scrape-arxiv.js` — scraper for arXiv list pages
-- `papers.json` — scraped paper data loaded by the app
+- `scrape.js` — client-side arXiv fetcher/parser used by the app
 
-## Scrape papers
+## Paper source
 
-By default the scraper pulls from:
+By default the app fetches papers from:
 
 `https://arxiv.org/list/cs.SE/2026-03?skip=0&show=2000`
 
-Run:
+It now fetches papers dynamically in the browser through `scrape.js`.
 
-```bash
-node scrape-arxiv.js
+You can override the source list URL with a query parameter:
+
+```txt
+?source=https://arxiv.org/list/cs.SE/2026-03?skip=0&show=2000
 ```
 
-Optional flags:
-
-```bash
-node scrape-arxiv.js --url "https://arxiv.org/list/cs.SE/2026-03?skip=0&show=2000" --output papers.json
-node scrape-arxiv.js --limit 25 --concurrency 4
-```
+Because arXiv does not expose browser-friendly CORS headers for this workflow, `scrape.js` uses a public CORS proxy to read arXiv pages client-side.
 
 ## Google login + Google Sheets sync
 
@@ -78,7 +74,7 @@ Google auth is cached in the current browser tab/session, so refreshing the page
 
 ## Test locally
 
-Because the app fetches `papers.json`, run it through a local static server instead of opening `index.html` directly.
+Because the app fetches scripts and paper data dynamically, run it through a local static server instead of opening `index.html` directly.
 
 ```bash
 npx serve . -l 3000
@@ -92,4 +88,4 @@ Then open:
 
 Push this repo to GitHub and enable GitHub Pages for the repository.
 
-The app is fully client-side and loads `papers.json` from the same static site.
+The app is fully client-side and fetches arXiv data dynamically in the browser.
