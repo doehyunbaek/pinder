@@ -1025,7 +1025,7 @@ function render() {
   if (currentPeriod) {
     const papersInCurrentPeriod = state.papers.filter((paper) => paper.sourcePeriod === currentPeriod);
     progressTotal = papersInCurrentPeriod.length;
-    progressReviewed = papersInCurrentPeriod.filter((paper) => state.decisions[paper.id]).length;
+    progressReviewed = papersInCurrentPeriod.reduce((n, paper) => n + (state.decisions[paper.id] ? 1 : 0), 0);
   }
   elements.progressFill.style.width = `${progressTotal ? (progressReviewed / progressTotal) * 100 : 0}%`;
 
