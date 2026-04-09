@@ -1019,7 +1019,17 @@ function render() {
   const counts = getDecisionCounts();
   const waitingForOlderPapers = !currentPaper && canLoadOlderPapers();
 
-  elements.progressFill.style.width = `${total ? (reviewedCount / total) * 100 : 0}%`;
+  const currentPeriod = currentPaper?.sourcePeriod;
+  let progressTotal = total;
+  let progressReviewed = reviewedCount;
+  if (currentPeriod) {
+    const papersInCurrentPeriod = state.papers.filter((paper) => paper.sourcePeriod === currentPeriod);
+    progressTotal = papersInCurrentPeriod.length;
+    progressReviewed = papersInCurrentPeriod.filter((paper) => state.decisions[paper.id]).length;
+  }
+  elements.progressFill.style.width = `${progressTotal ? (progressReviewed / progressTotal) * 100 : 0}%`;
+
+  updateSourceLabel();
 
   elements.stats.textContent = `Accept ${counts.accept} · Weak accept ${counts.weakAccept} · Weak reject ${counts.weakReject} · Reject ${counts.reject}`;
   elements.undoButton.disabled = !reviewedCount;
@@ -1168,9 +1178,12 @@ function formatSourceLabel() {
     return `arXiv · ${count} papers loaded`;
   }
 
-  const periodLabel = oldestPeriod && oldestPeriod !== newestPeriod
-    ? `${newestPeriod} → ${oldestPeriod}`
-    : newestPeriod;
+  const currentPaper = getCurrentPaper();
+  const periodLabel = currentPaper?.sourcePeriod
+    ? currentPaper.sourcePeriod
+    : (oldestPeriod && oldestPeriod !== newestPeriod
+      ? `${newestPeriod} → ${oldestPeriod}`
+      : newestPeriod);
 
   return `arXiv · ${archive} · ${periodLabel} · ${count} papers loaded`;
 }
