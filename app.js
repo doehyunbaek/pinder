@@ -34,6 +34,7 @@ const SETTINGS_STORAGE_KEY = 'pinder-settings-v1';
 const PAPER_DETAILS_PREFETCH_COUNT = 4;
 const OLDER_MONTH_PREFETCH_TRIGGER_REMAINING = 24;
 const OLDER_MONTH_APPEND_TRIGGER_REMAINING = 10;
+const CARD_TAP_DISTANCE_THRESHOLD = 10;
 
 const state = {
   sourceUrl: '',
@@ -41,6 +42,7 @@ const state = {
   decisions: loadDecisions(),
   settings: loadSettings(),
   settingsOpen: false,
+  abstractModalOpen: false,
   undoStack: [],
   drag: null,
   animating: false,
@@ -72,6 +74,7 @@ const elements = {
   progressFill: document.getElementById('progressFill'),
   cardStack: document.getElementById('cardStack'),
   currentCard: document.getElementById('currentCard'),
+  paperCardContent: document.getElementById('paperCardContent'),
   nextCard: document.getElementById('nextCard'),
   decisionBadge: document.getElementById('decisionBadge'),
   paperId: document.getElementById('paperId'),
@@ -81,6 +84,12 @@ const elements = {
   authorsSection: document.getElementById('authorsSection'),
   paperAuthors: document.getElementById('paperAuthors'),
   paperAbstract: document.getElementById('paperAbstract'),
+  abstractModal: document.getElementById('abstractModal'),
+  abstractModalBackdrop: document.getElementById('abstractModalBackdrop'),
+  abstractModalSheet: document.getElementById('abstractModalSheet'),
+  abstractModalBody: document.getElementById('abstractModalBody'),
+  abstractModalTitle: document.getElementById('abstractModalTitle'),
+  abstractModalText: document.getElementById('abstractModalText'),
   nextTitle: document.getElementById('nextTitle'),
   nextAuthors: document.getElementById('nextAuthors'),
   emptyState: document.getElementById('emptyState'),
@@ -428,6 +437,7 @@ function getMissingDomRequirements() {
     'progressFill',
     'cardStack',
     'currentCard',
+    'paperCardContent',
     'nextCard',
     'decisionBadge',
     'paperId',
@@ -437,6 +447,12 @@ function getMissingDomRequirements() {
     'authorsSection',
     'paperAuthors',
     'paperAbstract',
+    'abstractModal',
+    'abstractModalBackdrop',
+    'abstractModalSheet',
+    'abstractModalBody',
+    'abstractModalTitle',
+    'abstractModalText',
     'nextTitle',
     'nextAuthors',
     'emptyState',
@@ -695,6 +711,7 @@ function bindEvents() {
   elements.currentCard.addEventListener('pointermove', onPointerMove);
   elements.currentCard.addEventListener('pointerup', onPointerUp);
   elements.currentCard.addEventListener('pointercancel', onPointerCancel);
+  elements.abstractModal.addEventListener('click', onAbstractModalClick);
 
   elements.topAuthButton.addEventListener('click', auth.onTopAuthButtonClick);
   elements.settingsButton.addEventListener('click', toggleSettingsMenu);
@@ -718,13 +735,77 @@ function bindEvents() {
   document.addEventListener('keydown', onKeyDown);
 }
 
-function onKeyDown(event) {
-  if (event.key === 'Escape' && state.settingsOpen) {
-    closeSettingsMenu();
+function onAbstractModalClick(event) {
+  if (event.target === elements.abstractModal || event.target === elements.abstractModalBackdrop) {
+    closeAbstractModal();
+  }
+}
+
+function toggleAbstractModal() {
+  if (state.abstractModalOpen) {
+    closeAbstractModal();
     return;
   }
 
-  if (state.settingsOpen) {
+  openAbstractModal();
+}
+
+function openAbstractModal() {
+  const paper = getCurrentPaper();
+  if (!paper) {
+    return;
+  }
+
+  updateAbstractModalContent(paper);
+  state.abstractModalOpen = true;
+  elements.abstractModal.classList.remove('hidden');
+  elements.abstractModal.setAttribute('aria-hidden', 'false');
+  elements.abstractModalBody.scrollTop = 0;
+  document.body.classList.add('modal-open');
+
+  window.requestAnimationFrame(() => {
+    elements.abstractModalSheet.focus();
+  });
+}
+
+function closeAbstractModal() {
+  if (!state.abstractModalOpen) {
+    return;
+  }
+
+  state.abstractModalOpen = false;
+  elements.abstractModal.classList.add('hidden');
+  elements.abstractModal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('modal-open');
+}
+
+function updateAbstractModalContent(paper = getCurrentPaper()) {
+  if (!paper) {
+    elements.abstractModalTitle.textContent = '';
+    elements.abstractModalText.textContent = '';
+    return;
+  }
+
+  elements.abstractModalTitle.textContent = paper.title || paper.id || 'Abstract';
+  elements.abstractModalText.textContent = !paper.loaded
+    ? 'Loading abstract…'
+    : (paper.abstract || paper.error || 'No abstract available.');
+}
+
+function onKeyDown(event) {
+  if (event.key === 'Escape') {
+    if (state.abstractModalOpen) {
+      closeAbstractModal();
+      return;
+    }
+
+    if (state.settingsOpen) {
+      closeSettingsMenu();
+      return;
+    }
+  }
+
+  if (state.settingsOpen || state.abstractModalOpen) {
     return;
   }
 
@@ -761,7 +842,8 @@ function onPointerDown(event) {
     return;
   }
 
-  if (event.target instanceof Element && event.target.closest('a, button')) {
+  const target = event.target instanceof Element ? event.target : null;
+  if (target && target.closest('a, button')) {
     return;
   }
 
@@ -771,6 +853,7 @@ function onPointerDown(event) {
     startY: event.clientY,
     dx: 0,
     dy: 0,
+    targetOpensAbstract: Boolean(target && elements.paperCardContent.contains(target)),
   };
 
   elements.currentCard.setPointerCapture(event.pointerId);
@@ -816,9 +899,17 @@ function finishDrag(cancelled = false) {
   elements.currentCard.classList.remove('dragging');
 
   const decision = cancelled ? null : getDecisionFromVector(drag.dx, drag.dy);
+  const wasTap = !cancelled
+    && drag.targetOpensAbstract
+    && Math.hypot(drag.dx, drag.dy) <= CARD_TAP_DISTANCE_THRESHOLD;
+
   if (!decision) {
     resetCardTransform();
     updateDecisionBadge(null);
+
+    if (wasTap) {
+      toggleAbstractModal();
+    }
     return;
   }
 
@@ -898,6 +989,7 @@ function animateDecision(decisionKey, dx = 0, dy = 0) {
     return;
   }
 
+  closeAbstractModal();
   state.animating = true;
   updateDecisionBadge(decisionKey);
 
@@ -1036,6 +1128,10 @@ function render() {
   elements.exportButton.disabled = !reviewedCount;
   elements.resetButton.disabled = !counts.weakReject;
 
+  if (!currentPaper) {
+    closeAbstractModal();
+  }
+
   elements.currentCard.classList.toggle('hidden', !currentPaper);
   elements.nextCard.classList.toggle('hidden', !currentPaper);
   elements.cardStack.classList.toggle('hidden', !currentPaper);
@@ -1090,6 +1186,7 @@ function renderCurrentPaper(paper) {
     : (paper.abstract || paper.error || 'No abstract available.');
   elements.absLink.href = paper.absUrl;
   elements.pdfLink.href = paper.pdfUrl;
+  updateAbstractModalContent(paper);
 }
 
 function renderNextPaper(paper) {

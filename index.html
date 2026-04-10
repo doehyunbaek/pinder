@@ -79,7 +79,7 @@
 
           <article class="paper-card current-card" id="currentCard">
             <div class="decision-badge hidden" id="decisionBadge"></div>
-            <div class="paper-card-content">
+            <div class="paper-card-content" id="paperCardContent">
               <div class="paper-links">
                 <span class="paper-id" id="paperId"></span>
                 <div class="paper-link-actions">
@@ -129,6 +129,28 @@
           <button class="secondary-button danger" id="resetButton" type="button">Resubmit</button>
         </div>
       </footer>
+
+      <div
+        class="abstract-modal hidden"
+        id="abstractModal"
+        role="dialog"
+        aria-modal="true"
+        aria-hidden="true"
+        aria-labelledby="abstractModalTitle"
+        aria-describedby="abstractModalText"
+      >
+        <div class="abstract-modal-backdrop" id="abstractModalBackdrop"></div>
+        <div class="abstract-modal-sheet" id="abstractModalSheet" tabindex="-1">
+          <div class="abstract-modal-header">
+            <p class="section-label">Abstract</p>
+            <p class="abstract-modal-hint">Tap outside to close</p>
+          </div>
+          <h2 class="abstract-modal-title" id="abstractModalTitle"></h2>
+          <div class="abstract-modal-body" id="abstractModalBody">
+            <p id="abstractModalText"></p>
+          </div>
+        </div>
+      </div>
     </main>
 
     <script src="./google-api-config.js?v=20260402-16"></script>

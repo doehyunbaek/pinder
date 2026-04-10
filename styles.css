@@ -35,6 +35,10 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+body.modal-open {
+  overflow: hidden;
+}
+
 a {
   color: inherit;
 }
@@ -442,6 +446,78 @@ button {
   overflow: hidden;
 }
 
+.abstract-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding:
+    calc(18px + env(safe-area-inset-top))
+    16px
+    calc(18px + env(safe-area-inset-bottom));
+}
+
+.abstract-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.72);
+  backdrop-filter: blur(12px);
+}
+
+.abstract-modal-sheet {
+  position: relative;
+  width: min(680px, 100%);
+  max-height: min(78svh, 680px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.98);
+  color: var(--text);
+  box-shadow: 0 34px 90px rgba(2, 6, 23, 0.42);
+  overflow: hidden;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.abstract-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.abstract-modal-hint {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.abstract-modal-title {
+  margin: 0;
+  font-size: clamp(1.25rem, 4.8vw, 1.8rem);
+  line-height: 1.15;
+}
+
+.abstract-modal-body {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  padding-right: 4px;
+}
+
+.abstract-modal-body p {
+  margin: 0;
+  color: #334155;
+  line-height: 1.65;
+}
+
 .secondary-button {
   background: rgba(15, 23, 42, 0.06);
   color: #0f172a;
@@ -583,6 +659,15 @@ button {
 @media (max-width: 719px) {
   .card-stack {
     min-height: 60svh;
+  }
+
+  .abstract-modal {
+    align-items: flex-end;
+  }
+
+  .abstract-modal-sheet {
+    max-height: min(82svh, 720px);
+    border-radius: 28px 28px 24px 24px;
   }
 
   .footer-actions {
