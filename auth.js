@@ -1,5 +1,5 @@
 (() => {
-  const AUTH_SESSION_STORAGE_KEY = 'pinder-google-auth-session-v1';
+  const AUTH_STORAGE_KEY = 'pinder-google-auth-session-v1';
 
   function createInitialAuthState() {
     return {
@@ -89,7 +89,7 @@
 
     function loadCachedAuthSession() {
       try {
-        return JSON.parse(window.sessionStorage.getItem(AUTH_SESSION_STORAGE_KEY) || 'null');
+        return JSON.parse(window.localStorage.getItem(AUTH_STORAGE_KEY) || 'null');
       } catch (error) {
         console.warn('Could not read cached Google auth session.', error);
         return null;
@@ -99,12 +99,12 @@
     function saveCachedAuthSession() {
       try {
         if (!authState.user || !authState.accessToken || !authState.tokenExpiresAt) {
-          window.sessionStorage.removeItem(AUTH_SESSION_STORAGE_KEY);
+          window.localStorage.removeItem(AUTH_STORAGE_KEY);
           return;
         }
 
-        window.sessionStorage.setItem(
-          AUTH_SESSION_STORAGE_KEY,
+        window.localStorage.setItem(
+          AUTH_STORAGE_KEY,
           JSON.stringify({
             user: authState.user,
             accessToken: authState.accessToken,
@@ -120,7 +120,7 @@
 
     function clearCachedAuthSession() {
       try {
-        window.sessionStorage.removeItem(AUTH_SESSION_STORAGE_KEY);
+        window.localStorage.removeItem(AUTH_STORAGE_KEY);
       } catch (error) {
         console.warn('Could not clear cached Google auth session.', error);
       }
@@ -151,7 +151,7 @@
       authState.tokenExpiresAt = Number(cachedSession.tokenExpiresAt || 0);
       authState.grantedScopes = grantedScopes;
       authState.sheetId = cachedSession.sheetId || '';
-      authState.syncMessage = 'Using cached Google session from this browser tab.';
+      authState.syncMessage = 'Using cached Google session from this browser.';
       return true;
     }
 
