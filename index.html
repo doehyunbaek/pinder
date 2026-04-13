@@ -18,9 +18,39 @@
       <header class="topbar">
         <div class="topbar-main">
           <div class="topbar-copy">
-            <p class="eyebrow" id="sourceLabel">arXiv</p>
+            <div class="source-switcher">
+              <button
+                class="source-switcher-button"
+                id="sourceSwitcherButton"
+                type="button"
+                aria-label="Change paper source"
+                aria-haspopup="menu"
+                aria-controls="sourceMenu"
+                aria-expanded="false"
+              >
+                <span class="eyebrow source-switcher-label" id="sourceLabel">arXiv</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 10l5 5 5-5" />
+                </svg>
+              </button>
+
+              <div class="source-menu hidden" id="sourceMenu" role="menu" aria-label="Paper sources">
+                <button class="source-menu-option" id="sourceArxivOption" type="button" role="menuitem">
+                  <span class="source-menu-option-title">arXiv · cs.SE</span>
+                  <span class="source-menu-option-hint">Live monthly feed</span>
+                </button>
+                <button class="source-menu-option" id="sourceIcseOption" type="button" role="menuitem">
+                  <span class="source-menu-option-title">ICSE accepted papers</span>
+                  <span class="source-menu-option-hint">Browse ICSE 2018–2026</span>
+                </button>
+              </div>
+            </div>
             <h1>pinder</h1>
             <p class="subhead">Swipe like tinder, but for papers.</p>
+            <div class="track-picker-wrap hidden" id="trackPickerWrap">
+              <label class="track-picker-label" for="trackPicker">ICSE year</label>
+              <select class="track-picker" id="trackPicker" aria-label="Choose ICSE year"></select>
+            </div>
           </div>
 
           <div class="topbar-actions">

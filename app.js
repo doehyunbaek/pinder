@@ -31,6 +31,9 @@ const DECISIONS = {
 
 const STORAGE_KEY = 'pinder-decisions-v1';
 const SETTINGS_STORAGE_KEY = 'pinder-settings-v1';
+const LAST_ARXIV_SOURCE_STORAGE_KEY = 'pinder-last-arxiv-source-v1';
+const LAST_ICSE_TRACK_STORAGE_KEY = 'pinder-last-icse-track-v1';
+const ICSE_COLLECTION_SOURCE = 'data/icse.json';
 const PAPER_DETAILS_PREFETCH_COUNT = 4;
 const OLDER_MONTH_PREFETCH_TRIGGER_REMAINING = 24;
 const OLDER_MONTH_APPEND_TRIGGER_REMAINING = 10;
@@ -38,10 +41,14 @@ const CARD_TAP_DISTANCE_THRESHOLD = 10;
 
 const state = {
   sourceUrl: '',
+  sourceLabel: '',
+  trackOptions: [],
+  selectedTrackKey: '',
   papers: [],
   decisions: loadDecisions(),
   settings: loadSettings(),
   settingsOpen: false,
+  sourceMenuOpen: false,
   abstractModalOpen: false,
   undoStack: [],
   drag: null,
@@ -63,7 +70,13 @@ const state = {
 
 const elements = {
   statusPanel: document.getElementById('statusPanel'),
+  sourceSwitcherButton: document.getElementById('sourceSwitcherButton'),
   sourceLabel: document.getElementById('sourceLabel'),
+  sourceMenu: document.getElementById('sourceMenu'),
+  sourceArxivOption: document.getElementById('sourceArxivOption'),
+  sourceIcseOption: document.getElementById('sourceIcseOption'),
+  trackPickerWrap: document.getElementById('trackPickerWrap'),
+  trackPicker: document.getElementById('trackPicker'),
   topAuthButton: document.getElementById('topAuthButton'),
   settingsButton: document.getElementById('settingsButton'),
   settingsMenu: document.getElementById('settingsMenu'),
@@ -129,21 +142,26 @@ async function init() {
   applySettings();
   bindEvents();
   auth.initialize();
-  showStatus('Fetching papers from arXiv…');
+  showStatus('Fetching papers…');
 
   try {
     const sourceUrl = getSourceUrlFromQuery();
+    const sourceTrack = getSourceTrackFromQuery();
     const payload = await window.PinderScraper.fetchPaperList({
       listUrl: sourceUrl,
+      trackKey: sourceTrack,
       onProgress: (message) => showStatus(message),
     });
 
     const resolvedSourceUrl = payload.sourceUrl || sourceUrl;
-    initializeFeedState(resolvedSourceUrl);
+    initializeFeedState(resolvedSourceUrl, payload.sourceLabel || '', {
+      trackOptions: payload.trackOptions || [],
+      selectedTrackKey: payload.selectedTrackKey || '',
+    });
     appendPaperBatch(resolvedSourceUrl, payload.papers || []);
 
     if (!state.papers.length) {
-      throw new Error('No papers were found on the arXiv list page.');
+      throw new Error('No papers were found in the selected source.');
     }
 
     await prefetchVisiblePapers();
@@ -153,7 +171,7 @@ async function init() {
   } catch (error) {
     console.error(error);
     showStatus(
-      'Could not fetch papers from arXiv in the browser. Hard refresh and try again. If the problem persists, the public CORS proxy may be temporarily unavailable.',
+      'Could not fetch papers in the browser. Hard refresh and try again. If the problem persists, the selected source or a public CORS proxy may be temporarily unavailable.',
       true,
     );
     elements.progressFill.style.width = '0%';
@@ -167,8 +185,15 @@ function getSourceUrlFromQuery() {
   return requestedSourceUrl || window.PinderScraper.DEFAULT_LIST_URL;
 }
 
-function initializeFeedState(sourceUrl) {
+function getSourceTrackFromQuery() {
+  return new URLSearchParams(window.location.search).get('track') || '';
+}
+
+function initializeFeedState(sourceUrl, sourceLabel = '', { trackOptions = [], selectedTrackKey = '' } = {}) {
   state.sourceUrl = sourceUrl;
+  state.sourceLabel = sourceLabel;
+  state.trackOptions = Array.isArray(trackOptions) ? trackOptions : [];
+  state.selectedTrackKey = selectedTrackKey || '';
   state.papers = [];
   state.loadedSourceUrls = [];
   state.loadedPaperIds = new Set();
@@ -184,6 +209,9 @@ function initializeFeedState(sourceUrl) {
   state.nextOlderSourceUrl = window.PinderScraper.getPreviousListUrl?.(sourceUrl) || '';
   state.olderMonthExhausted = !state.nextOlderSourceUrl;
   updateSourceLabel();
+  updateSourceMenu();
+  updateTrackPicker();
+  rememberCurrentSourceSelection();
 }
 
 function describeListUrl(sourceUrl) {
@@ -235,6 +263,162 @@ function appendPaperBatch(sourceUrl, papers) {
 
 function updateSourceLabel() {
   elements.sourceLabel.textContent = formatSourceLabel();
+}
+
+function updateSourceMenu() {
+  const currentSourceMode = getCurrentSourceMode();
+  elements.sourceArxivOption.classList.toggle('active', currentSourceMode === 'arxiv');
+  elements.sourceIcseOption.classList.toggle('active', currentSourceMode === 'icse');
+}
+
+function openSourceMenu() {
+  closeSettingsMenu();
+  state.sourceMenuOpen = true;
+  updateSourceMenu();
+  elements.sourceMenu.classList.remove('hidden');
+  elements.sourceSwitcherButton.setAttribute('aria-expanded', 'true');
+}
+
+function closeSourceMenu() {
+  state.sourceMenuOpen = false;
+  elements.sourceMenu.classList.add('hidden');
+  elements.sourceSwitcherButton.setAttribute('aria-expanded', 'false');
+}
+
+function toggleSourceMenu() {
+  if (state.sourceMenuOpen) {
+    closeSourceMenu();
+    return;
+  }
+
+  openSourceMenu();
+}
+
+function getCurrentSourceMode() {
+  return isIcseCollectionSource(state.sourceUrl) ? 'icse' : 'arxiv';
+}
+
+function isIcseCollectionSource(sourceUrl) {
+  if (!sourceUrl) {
+    return false;
+  }
+
+  try {
+    const parsedUrl = new URL(sourceUrl, window.location.href);
+    return parsedUrl.pathname.endsWith('/icse.json') || parsedUrl.pathname === '/icse.json';
+  } catch (error) {
+    const normalizedSourceUrl = String(sourceUrl || '').trim();
+    return normalizedSourceUrl === ICSE_COLLECTION_SOURCE || normalizedSourceUrl.endsWith('/icse.json');
+  }
+}
+
+function saveLastSourcePreference(storageKey, value) {
+  try {
+    if (value) {
+      window.localStorage.setItem(storageKey, value);
+    }
+  } catch (error) {
+    console.warn('Could not save source preference.', error);
+  }
+}
+
+function loadLastSourcePreference(storageKey) {
+  try {
+    return window.localStorage.getItem(storageKey) || '';
+  } catch (error) {
+    return '';
+  }
+}
+
+function rememberCurrentSourceSelection() {
+  if (getCurrentSourceMode() === 'icse') {
+    saveLastSourcePreference(LAST_ICSE_TRACK_STORAGE_KEY, state.selectedTrackKey || '');
+    return;
+  }
+
+  const sourceInfo = describeListUrl(state.sourceUrl);
+  if (sourceInfo?.archive) {
+    saveLastSourcePreference(LAST_ARXIV_SOURCE_STORAGE_KEY, state.sourceUrl);
+  }
+}
+
+function switchSourceMode(nextSourceMode) {
+  const currentSourceMode = getCurrentSourceMode();
+  closeSourceMenu();
+
+  if (nextSourceMode === currentSourceMode) {
+    return;
+  }
+
+  const nextUrl = new URL(window.location.href);
+
+  if (nextSourceMode === 'icse') {
+    nextUrl.searchParams.set('source', ICSE_COLLECTION_SOURCE);
+    const preferredTrackKey = state.selectedTrackKey || loadLastSourcePreference(LAST_ICSE_TRACK_STORAGE_KEY);
+    if (preferredTrackKey) {
+      nextUrl.searchParams.set('track', preferredTrackKey);
+    } else {
+      nextUrl.searchParams.delete('track');
+    }
+  } else {
+    nextUrl.searchParams.set('source', loadLastSourcePreference(LAST_ARXIV_SOURCE_STORAGE_KEY) || window.PinderScraper.DEFAULT_LIST_URL);
+    nextUrl.searchParams.delete('track');
+  }
+
+  showStatus(nextSourceMode === 'icse' ? 'Switching to ICSE…' : 'Switching to arXiv…');
+  window.location.assign(nextUrl.toString());
+}
+
+function updateTrackPicker() {
+  const trackOptions = Array.isArray(state.trackOptions) ? state.trackOptions : [];
+  const showTrackPicker = trackOptions.length > 1;
+
+  elements.trackPickerWrap.classList.toggle('hidden', !showTrackPicker);
+  elements.trackPicker.disabled = !showTrackPicker;
+
+  if (!showTrackPicker) {
+    elements.trackPicker.replaceChildren();
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+  trackOptions.forEach((trackOption) => {
+    const optionElement = document.createElement('option');
+    optionElement.value = String(trackOption.key || '');
+    optionElement.textContent = formatTrackPickerOptionLabel(trackOption);
+    fragment.appendChild(optionElement);
+  });
+
+  elements.trackPicker.replaceChildren(fragment);
+  elements.trackPicker.value = state.selectedTrackKey || String(trackOptions[0]?.key || '');
+}
+
+function formatTrackPickerOptionLabel(trackOption = {}) {
+  const rawLabel = String(trackOption.label || '').trim();
+  const year = String(trackOption.year || '').trim();
+  const suffix = rawLabel
+    .replace(/^ICSE\s+\d{4}\s*/i, '')
+    .replace(/^ICSE\s*/i, '')
+    .trim();
+
+  if (year && suffix) {
+    return `${year} · ${suffix}`;
+  }
+
+  return rawLabel || year || String(trackOption.key || 'Track');
+}
+
+function onTrackPickerChange(event) {
+  const nextTrackKey = String(event.target.value || '').trim();
+  if (!nextTrackKey || nextTrackKey === state.selectedTrackKey) {
+    return;
+  }
+
+  const nextUrl = new URL(window.location.href);
+  nextUrl.searchParams.set('source', getSourceUrlFromQuery());
+  nextUrl.searchParams.set('track', nextTrackKey);
+  showStatus('Switching ICSE track…');
+  window.location.assign(nextUrl.toString());
 }
 
 async function loadPaperDetails(paper) {
@@ -426,7 +610,13 @@ function ensureOlderPaperSupplySoon() {
 function getMissingDomRequirements() {
   const requiredKeys = [
     'statusPanel',
+    'sourceSwitcherButton',
     'sourceLabel',
+    'sourceMenu',
+    'sourceArxivOption',
+    'sourceIcseOption',
+    'trackPickerWrap',
+    'trackPicker',
     'topAuthButton',
     'settingsButton',
     'settingsMenu',
@@ -535,6 +725,31 @@ function buildAbsUrlFromPaperId(paperId) {
   return `https://arxiv.org/abs/${paperId}`;
 }
 
+function looksLikeArxivPaperId(paperId) {
+  return /^\d{4}\.\d{4,5}$/i.test(paperId) || /^[a-z.-]+\/\d{7}$/i.test(paperId);
+}
+
+function formatPaperIdentifier(paper) {
+  if (!paper) {
+    return '';
+  }
+
+  if (paper.displayId) {
+    return paper.displayId;
+  }
+
+  const paperId = String(paper.id || '').trim();
+  if (looksLikeArxivPaperId(paperId)) {
+    return paperId;
+  }
+
+  if (Number.isFinite(paper.order)) {
+    return `#${paper.order}`;
+  }
+
+  return paperId;
+}
+
 function getPaperById(paperId) {
   return state.papers.find((paper) => paper.id === paperId) || null;
 }
@@ -640,6 +855,7 @@ function applySettings() {
 }
 
 function openSettingsMenu() {
+  closeSourceMenu();
   state.settingsOpen = true;
   elements.settingsMenu.classList.remove('hidden');
   elements.settingsButton.setAttribute('aria-expanded', 'true');
@@ -688,22 +904,25 @@ function onShowAuthorsToggleChange(event) {
 }
 
 function onDocumentClick(event) {
-  if (!state.settingsOpen) {
-    return;
-  }
-
   if (!(event.target instanceof Node)) {
     return;
   }
 
   if (
-    elements.settingsMenu.contains(event.target)
-    || elements.settingsButton.contains(event.target)
+    state.settingsOpen
+    && !elements.settingsMenu.contains(event.target)
+    && !elements.settingsButton.contains(event.target)
   ) {
-    return;
+    closeSettingsMenu();
   }
 
-  closeSettingsMenu();
+  if (
+    state.sourceMenuOpen
+    && !elements.sourceMenu.contains(event.target)
+    && !elements.sourceSwitcherButton.contains(event.target)
+  ) {
+    closeSourceMenu();
+  }
 }
 
 function bindEvents() {
@@ -714,9 +933,13 @@ function bindEvents() {
   elements.abstractModal.addEventListener('click', onAbstractModalClick);
 
   elements.topAuthButton.addEventListener('click', auth.onTopAuthButtonClick);
+  elements.sourceSwitcherButton.addEventListener('click', toggleSourceMenu);
+  elements.sourceArxivOption.addEventListener('click', () => switchSourceMode('arxiv'));
+  elements.sourceIcseOption.addEventListener('click', () => switchSourceMode('icse'));
   elements.settingsButton.addEventListener('click', toggleSettingsMenu);
   elements.showButtonsToggle.addEventListener('change', onShowButtonsToggleChange);
   elements.showAuthorsToggle.addEventListener('change', onShowAuthorsToggleChange);
+  elements.trackPicker.addEventListener('change', onTrackPickerChange);
 
   elements.actionButtons.forEach((button) => {
     button.addEventListener('click', () => {
@@ -803,9 +1026,14 @@ function onKeyDown(event) {
       closeSettingsMenu();
       return;
     }
+
+    if (state.sourceMenuOpen) {
+      closeSourceMenu();
+      return;
+    }
   }
 
-  if (state.settingsOpen || state.abstractModalOpen) {
+  if (state.settingsOpen || state.sourceMenuOpen || state.abstractModalOpen) {
     return;
   }
 
@@ -1176,7 +1404,7 @@ function render() {
 }
 
 function renderCurrentPaper(paper) {
-  elements.paperId.textContent = paper.id;
+  elements.paperId.textContent = formatPaperIdentifier(paper);
   elements.paperTitle.textContent = paper.title || `Loading ${paper.id}…`;
   elements.paperAuthors.textContent = !paper.loaded
     ? 'Loading authors…'
@@ -1264,6 +1492,25 @@ function getDecisionCounts() {
   return counts;
 }
 
+function formatCustomSourceName(sourceUrl) {
+  if (state.sourceLabel) {
+    return state.sourceLabel;
+  }
+
+  try {
+    const parsedUrl = new URL(sourceUrl, window.location.href);
+    const lastPathSegment = decodeURIComponent(parsedUrl.pathname.split('/').filter(Boolean).pop() || '');
+    const normalizedName = lastPathSegment
+      .replace(/\.[a-z0-9]+$/i, '')
+      .replace(/[-_]+/g, ' ')
+      .trim();
+
+    return normalizedName || parsedUrl.host || 'Custom feed';
+  } catch (error) {
+    return 'Custom feed';
+  }
+}
+
 function formatSourceLabel() {
   const sourceInfo = describeListUrl(state.sourceUrl);
   const archive = state.feedArchive || sourceInfo?.archive || '';
@@ -1272,7 +1519,7 @@ function formatSourceLabel() {
   const count = state.papers.length;
 
   if (!archive || !newestPeriod) {
-    return `arXiv · ${count} papers loaded`;
+    return `${formatCustomSourceName(state.sourceUrl)} · ${count} papers loaded`;
   }
 
   const currentPaper = getCurrentPaper();

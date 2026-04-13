@@ -74,6 +74,85 @@ button {
   color: #93c5fd;
 }
 
+.source-switcher {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 100%;
+}
+
+.source-switcher-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+}
+
+.source-switcher-label {
+  margin: 0;
+}
+
+.source-switcher-button svg {
+  width: 15px;
+  height: 15px;
+  margin-top: -2px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  opacity: 0.86;
+  flex-shrink: 0;
+}
+
+.source-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 20;
+  width: min(300px, calc(100vw - 32px));
+  padding: 10px;
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 50px rgba(2, 6, 23, 0.38);
+}
+
+.source-menu-option {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  color: #e2e8f0;
+  text-align: left;
+}
+
+.source-menu-option + .source-menu-option {
+  margin-top: 8px;
+}
+
+.source-menu-option-title {
+  display: block;
+  font-weight: 800;
+}
+
+.source-menu-option-hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.88rem;
+  color: #cbd5e1;
+}
+
+.source-menu-option.active {
+  border-color: rgba(96, 165, 250, 0.34);
+  background: rgba(59, 130, 246, 0.14);
+  color: #dbeafe;
+}
+
 .topbar {
   display: flex;
   flex-direction: column;
@@ -110,6 +189,30 @@ button {
   margin: 8px 0 0;
   color: #cbd5e1;
   max-width: 38rem;
+}
+
+.track-picker-wrap {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.track-picker-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #cbd5e1;
+}
+
+.track-picker {
+  min-height: 40px;
+  min-width: 180px;
+  padding: 0 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(15, 23, 42, 0.42);
+  color: #e2e8f0;
 }
 
 .progress-panel {
@@ -657,6 +760,11 @@ button {
 }
 
 @media (max-width: 719px) {
+  .track-picker {
+    width: 100%;
+    min-width: 0;
+  }
+
   .card-stack {
     min-height: 60svh;
   }
