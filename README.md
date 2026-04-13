@@ -124,9 +124,12 @@ Pinder can optionally use Google login and the user's own Google Sheet to sync s
 The app creates or reuses a spreadsheet named `Pinder Sync` in the signed-in user's Google Drive and stores:
 
 - settings in the `settings` tab
-- review outcomes in the `decisions` tab
+- arXiv review outcomes in the `arxiv` tab
+- ICSE review outcomes in the `icse` tab
 
 Review outcomes are stored with each paper's URL and paper ID. For arXiv feeds, this uses the paper's arXiv abstract URL.
+
+For backward compatibility, older data in the legacy `decisions` tab is still read as arXiv data and then synced into the `arxiv` tab.
 
 1. Open Google Cloud Console
 2. Create or choose a project

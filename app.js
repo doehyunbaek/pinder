@@ -758,6 +758,47 @@ function getDecisionAbsUrl(paperId, decisionEntry = {}) {
   return decisionEntry.absUrl || getPaperById(paperId)?.absUrl || buildAbsUrlFromPaperId(paperId);
 }
 
+function inferDecisionSourceType(decisionEntry = {}, paperId = '') {
+  const explicitSourceType = String(decisionEntry.sourceType || '').trim();
+  if (explicitSourceType === 'arxiv' || explicitSourceType === 'icse') {
+    return explicitSourceType;
+  }
+
+  const resolvedPaperId = String(paperId || '').trim();
+  if (looksLikeArxivPaperId(resolvedPaperId)) {
+    return 'arxiv';
+  }
+
+  const paper = resolvedPaperId ? getPaperById(resolvedPaperId) : null;
+  if (paper?.sourceUrl && isIcseCollectionSource(paper.sourceUrl)) {
+    return 'icse';
+  }
+
+  const absUrl = getDecisionAbsUrl(resolvedPaperId, decisionEntry);
+  if (/arxiv\.org\/abs\//i.test(absUrl)) {
+    return 'arxiv';
+  }
+
+  if (/researchr\.org|icse-conferences\.org/i.test(absUrl)) {
+    return 'icse';
+  }
+
+  return 'arxiv';
+}
+
+function getDecisionSyncTarget() {
+  return isIcseCollectionSource(state.sourceUrl || getSourceUrlFromQuery()) ? 'icse' : 'arxiv';
+}
+
+function getDecisionsForSyncTarget(syncTarget = getDecisionSyncTarget()) {
+  const normalizedSyncTarget = syncTarget === 'icse' ? 'icse' : 'arxiv';
+  return Object.fromEntries(
+    Object.entries(normalizeDecisionMap(state.decisions)).filter(([paperId, decisionEntry]) => (
+      inferDecisionSourceType(decisionEntry, paperId) === normalizedSyncTarget
+    )),
+  );
+}
+
 function normalizeDecisionEntry(decisionEntry, paperId = '') {
   if (!decisionEntry || !DECISIONS[decisionEntry.decision]) {
     return null;
@@ -772,6 +813,7 @@ function normalizeDecisionEntry(decisionEntry, paperId = '') {
     decision: decisionEntry.decision,
     decidedAt: normalizeUpdatedAt(decisionEntry.decidedAt) || new Date().toISOString(),
     absUrl: getDecisionAbsUrl(resolvedPaperId, decisionEntry),
+    sourceType: inferDecisionSourceType(decisionEntry, resolvedPaperId),
   };
 }
 
@@ -807,6 +849,8 @@ const auth = window.PinderAuth?.createController({
   normalizeDecisionMap,
   mergeDecisionMaps,
   getDecisionAbsUrl,
+  getDecisionSyncTarget,
+  getDecisionsForSyncTarget,
   getSettings: () => state.settings,
   setSettings: (settings) => {
     state.settings = normalizeSettings(settings);
@@ -1242,6 +1286,7 @@ function recordDecision(paper, decisionKey) {
     decision: decisionKey,
     decidedAt: new Date().toISOString(),
     absUrl: paper.absUrl,
+    sourceType: isIcseCollectionSource(paper?.sourceUrl || state.sourceUrl) ? 'icse' : 'arxiv',
   };
 
   state.undoStack.push(paper.id);

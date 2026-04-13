@@ -52,6 +52,8 @@
       normalizeDecisionMap,
       mergeDecisionMaps,
       getDecisionAbsUrl,
+      getDecisionSyncTarget,
+      getDecisionsForSyncTarget,
       getSettings,
       setSettings,
       saveSettings,
@@ -72,7 +74,9 @@
         clientId: config.clientId || '',
         sheetTitle: config.sheetTitle || 'Pinder Sync',
         settingsSheetTitle: config.settingsSheetTitle || 'settings',
-        decisionsSheetTitle: config.decisionsSheetTitle || 'decisions',
+        arxivSheetTitle: config.arxivSheetTitle || 'arxiv',
+        icseSheetTitle: config.icseSheetTitle || 'icse',
+        legacyDecisionsSheetTitle: config.decisionsSheetTitle || 'decisions',
         scopes: config.scopes || [
           'https://www.googleapis.com/auth/drive.file',
           'https://www.googleapis.com/auth/spreadsheets',
@@ -85,6 +89,21 @@
     function hasRequiredScopes(grantedScopes = []) {
       const grantedScopeSet = new Set(grantedScopes);
       return getGoogleConfig().scopes.every((scope) => grantedScopeSet.has(scope));
+    }
+
+    function normalizeDecisionSyncTarget(syncTarget) {
+      return syncTarget === 'icse' ? 'icse' : 'arxiv';
+    }
+
+    function getDecisionSheetTitle(syncTarget) {
+      const config = getGoogleConfig();
+      return normalizeDecisionSyncTarget(syncTarget) === 'icse'
+        ? config.icseSheetTitle
+        : config.arxivSheetTitle;
+    }
+
+    function getDecisionSheetLabel(syncTarget) {
+      return normalizeDecisionSyncTarget(syncTarget) === 'icse' ? 'ICSE' : 'arXiv';
     }
 
     function loadCachedAuthSession() {
@@ -357,7 +376,12 @@
             },
             {
               properties: {
-                title: config.decisionsSheetTitle,
+                title: config.arxivSheetTitle,
+              },
+            },
+            {
+              properties: {
+                title: config.icseSheetTitle,
               },
             },
           ],
@@ -412,18 +436,17 @@
       });
     }
 
-    async function ensureDecisionsSheetTab(spreadsheetId, { interactive = false } = {}) {
-      const config = getGoogleConfig();
+    async function ensureDecisionSheetTab(spreadsheetId, sheetTitle, { interactive = false } = {}) {
       const response = await googleApiFetch(
         `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}?fields=sheets.properties`,
         { interactive },
       );
       const payload = await response.json();
-      const hasDecisionsSheet = payload.sheets?.some(
-        (sheet) => sheet.properties?.title === config.decisionsSheetTitle,
+      const hasDecisionSheet = payload.sheets?.some(
+        (sheet) => sheet.properties?.title === sheetTitle,
       );
 
-      if (hasDecisionsSheet) {
+      if (hasDecisionSheet) {
         return;
       }
 
@@ -435,7 +458,7 @@
             {
               addSheet: {
                 properties: {
-                  title: config.decisionsSheetTitle,
+                  title: sheetTitle,
                 },
               },
             },
@@ -505,8 +528,9 @@
       );
     }
 
-    function parseRemoteDecisions(values) {
+    function parseRemoteDecisions(values, syncTarget) {
       const parsed = {};
+      const normalizedSyncTarget = normalizeDecisionSyncTarget(syncTarget);
 
       values.slice(1).forEach((row) => {
         const [absUrl, decision, decidedAt, paperIdFromSheet] = row;
@@ -519,29 +543,60 @@
           absUrl,
           decision,
           decidedAt,
+          sourceType: normalizedSyncTarget,
         };
       });
 
       return normalizeDecisionMap(parsed);
     }
 
-    async function readRemoteDecisions({ interactive = false } = {}) {
-      const spreadsheetId = await ensureSyncSpreadsheet({ interactive });
-      await ensureDecisionsSheetTab(spreadsheetId, { interactive });
-      const range = encodeURIComponent(`${getGoogleConfig().decisionsSheetTitle}!A:D`);
+    async function readDecisionSheetValues(spreadsheetId, sheetTitle, { interactive = false } = {}) {
+      const range = encodeURIComponent(`${sheetTitle}!A:D`);
       const response = await googleApiFetch(
         `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}`,
         { interactive },
       );
       const payload = await response.json();
-      return parseRemoteDecisions(payload.values || []);
+      return payload.values || [];
     }
 
-    async function writeRemoteDecisions({ interactive = false } = {}) {
+    async function readRemoteDecisions({ interactive = false, syncTarget } = {}) {
+      const normalizedSyncTarget = normalizeDecisionSyncTarget(syncTarget);
       const spreadsheetId = await ensureSyncSpreadsheet({ interactive });
-      await ensureDecisionsSheetTab(spreadsheetId, { interactive });
-      const config = getGoogleConfig();
-      const clearRangeName = `${config.decisionsSheetTitle}!A:D`;
+      const decisionSheetTitle = getDecisionSheetTitle(normalizedSyncTarget);
+      await ensureDecisionSheetTab(spreadsheetId, decisionSheetTitle, { interactive });
+
+      const parsedDecisionMaps = [
+        parseRemoteDecisions(
+          await readDecisionSheetValues(spreadsheetId, decisionSheetTitle, { interactive }),
+          normalizedSyncTarget,
+        ),
+      ];
+
+      if (normalizedSyncTarget === 'arxiv') {
+        const legacySheetTitle = getGoogleConfig().legacyDecisionsSheetTitle;
+        if (legacySheetTitle && legacySheetTitle !== decisionSheetTitle) {
+          try {
+            const legacyValues = await readDecisionSheetValues(spreadsheetId, legacySheetTitle, { interactive });
+            parsedDecisionMaps.push(parseRemoteDecisions(legacyValues, 'arxiv'));
+          } catch (error) {
+            // Ignore missing legacy tab. Old users may not have it, and new users should not need it.
+          }
+        }
+      }
+
+      return parsedDecisionMaps.reduce(
+        (mergedDecisions, decisionMap) => mergeDecisionMaps(mergedDecisions, decisionMap),
+        {},
+      );
+    }
+
+    async function writeRemoteDecisions({ interactive = false, syncTarget } = {}) {
+      const normalizedSyncTarget = normalizeDecisionSyncTarget(syncTarget);
+      const spreadsheetId = await ensureSyncSpreadsheet({ interactive });
+      const decisionSheetTitle = getDecisionSheetTitle(normalizedSyncTarget);
+      await ensureDecisionSheetTab(spreadsheetId, decisionSheetTitle, { interactive });
+      const clearRangeName = `${decisionSheetTitle}!A:D`;
       const clearRange = encodeURIComponent(clearRangeName);
 
       await googleApiFetch(
@@ -555,7 +610,7 @@
 
       const rows = [
         ['absUrl', 'decision', 'decidedAt', 'paperId'],
-        ...Object.entries(normalizeDecisionMap(getDecisions()))
+        ...Object.entries(normalizeDecisionMap(getDecisionsForSyncTarget(normalizedSyncTarget)))
           .sort(([, leftEntry], [, rightEntry]) => new Date(leftEntry.decidedAt) - new Date(rightEntry.decidedAt))
           .map(([paperId, decisionEntry]) => [
             getDecisionAbsUrl(paperId, decisionEntry),
@@ -565,7 +620,7 @@
           ]),
       ];
 
-      const rangeName = `${config.decisionsSheetTitle}!A1:D${rows.length}`;
+      const rangeName = `${decisionSheetTitle}!A1:D${rows.length}`;
       const range = encodeURIComponent(rangeName);
       await googleApiFetch(
         `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?valueInputOption=RAW`,
@@ -664,19 +719,21 @@
         return false;
       }
 
+      const syncTarget = getDecisionSyncTarget();
+      const decisionSheetLabel = getDecisionSheetLabel(syncTarget);
       authState.syncInProgress = true;
-      authState.syncMessage = 'Checking Google Sheet for review outcomes…';
+      authState.syncMessage = `Checking Google Sheet for ${decisionSheetLabel} review outcomes…`;
       updateAuthUi();
 
       try {
-        const remoteDecisions = await readRemoteDecisions({ interactive });
+        const remoteDecisions = await readRemoteDecisions({ interactive, syncTarget });
         const mergedDecisions = mergeDecisionMaps(normalizeDecisionMap(getDecisions()), remoteDecisions);
         setDecisions(mergedDecisions);
         saveDecisions();
         renderIfReady();
 
         await syncDecisionsToCloud({ interactive });
-        authState.syncMessage = 'Settings and review outcomes synced to Google Sheets.';
+        authState.syncMessage = `Settings and ${decisionSheetLabel} review outcomes synced to Google Sheets.`;
       } catch (error) {
         handleCloudSyncError(error);
         return false;
@@ -692,13 +749,15 @@
         return false;
       }
 
+      const syncTarget = getDecisionSyncTarget();
+      const decisionSheetLabel = getDecisionSheetLabel(syncTarget);
       authState.syncInProgress = true;
       updateAuthUi();
 
       try {
-        await writeRemoteDecisions({ interactive });
+        await writeRemoteDecisions({ interactive, syncTarget });
         authState.error = '';
-        authState.syncMessage = 'Review outcomes synced to Google Sheets.';
+        authState.syncMessage = `${decisionSheetLabel} review outcomes synced to Google Sheets.`;
       } catch (error) {
         handleCloudSyncError(error);
         return false;

@@ -2,6 +2,8 @@ window.PINDER_GOOGLE_CONFIG = {
   clientId: '53785424506-cg6gqv0v8h5mb1nahrvarmk4iqovrseq.apps.googleusercontent.com',
   sheetTitle: 'Pinder Sync',
   settingsSheetTitle: 'settings',
+  arxivSheetTitle: 'arxiv',
+  icseSheetTitle: 'icse',
   decisionsSheetTitle: 'decisions',
   scopes: [
     'https://www.googleapis.com/auth/drive.file',
