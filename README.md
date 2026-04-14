@@ -27,9 +27,9 @@ Reviews are saved in `localStorage` on the device, so it works without a backend
 - `app.js` — swipe logic, local saving, export, undo
 - `auth.js` — Google Sheets auth and sync logic
 - `google-api-config.js` — Google OAuth client config for Sheets sync
-- `scrape.js` — client-side paper source fetcher/parser used by the app, plus the reusable Researchr track scraper used for ICSE datasets
-- `data/icse.json` — hardcoded ICSE 2018–2026 track URLs together with the scraped paper data
-- `scripts/scrape-icse-tracks.js` — Playwright-based collector that opens each ICSE track page and refreshes `data/icse.json`
+- `scrape.js` — client-side paper source fetcher/parser used by the app, plus reusable Researchr and DBLP conference scrapers used for ICSE datasets
+- `data/icse.json` — hardcoded ICSE 1976–2026 sources together with the scraped paper data
+- `scripts/scrape-icse-tracks.js` — Playwright-based collector that opens each ICSE source page and refreshes `data/icse.json`
 - `package.json` — development dependency for the ICSE scraping script
 
 ## Paper source
@@ -79,7 +79,7 @@ Bundled custom feed:
 
 - `data/icse.json`
 
-It contains the hardcoded ICSE 2018–2026 track metadata together with all collected accepted-paper abstracts.
+It contains the hardcoded ICSE 1976–2026 source metadata together with all collected paper abstracts.
 
 Examples:
 
@@ -100,7 +100,15 @@ The hardcoded ICSE track URLs and scraped outputs live together in:
 
 - `data/icse.json`
 
-The collector navigates to each conference page with Playwright and runs the reusable Researchr scraping function from `scrape.js` inside that page, then writes the updated results back into `data/icse.json`.
+The collector navigates to each conference page with Playwright and runs the reusable scraper function from `scrape.js` inside that page, then writes the updated results back into `data/icse.json`.
+
+Notes on older ICSE years:
+
+- 2018–2026 are scraped from Researchr track pages
+- 2009–2017 are scraped from DBLP conference pages, with abstracts resolved from OpenAlex via DOI metadata
+- 1976–2008 are scraped from DBLP proceedings pages, with abstracts resolved from OpenAlex via DOI metadata when available and title/year lookup otherwise
+- when no abstract can be resolved for some older papers, the dataset stores `No abstract available.`
+- ACM DL proceedings URLs are stored in `data/icse.json` for the ACM-era years where we had them as reference metadata (`proceedingsUrl`)
 
 To re-scrape them:
 

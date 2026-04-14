@@ -2,6 +2,8 @@
   const DEFAULT_LIST_URL = buildDefaultListUrl();
   const REQUEST_TIMEOUT_MS = 30000;
   const PAPER_CACHE = new Map();
+  const OPENALEX_WORK_CACHE = new Map();
+  let NEXT_OPENALEX_REQUEST_AT = 0;
   const EARLIEST_ARXIV_YEAR = 1991;
   const JSON_SOURCE_PATH_RE = /\.json$/i;
   const PROXY_BUILDERS = [
@@ -382,6 +384,8 @@
     const timeoutId = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
     try {
+      await throttleOpenAlexRequest(url);
+
       const response = await fetch(url, {
         cache: 'no-store',
         credentials: 'same-origin',
@@ -390,19 +394,36 @@
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP ${response.status} while fetching ${url}`);
+        const error = new Error(`HTTP ${response.status} while fetching ${url}`);
+        error.status = response.status;
+        throw error;
       }
 
       return await response.json();
     } catch (error) {
-      if (attempt >= 2) {
+      const status = Number(error?.status || 0);
+      const maxAttempts = status === 429 ? 6 : 3;
+      if (attempt >= maxAttempts) {
         throw error;
       }
 
-      await wait(attempt * 700);
+      await wait(status === 429 ? attempt * 3000 : attempt * 700);
       return fetchJson(url, options, attempt + 1);
     } finally {
       window.clearTimeout(timeoutId);
+    }
+  }
+
+  async function throttleOpenAlexRequest(url) {
+    if (!/^https:\/\/api\.openalex\.org\//i.test(cleanUrl(url))) {
+      return;
+    }
+
+    const now = Date.now();
+    const waitMilliseconds = Math.max(0, NEXT_OPENALEX_REQUEST_AT - now);
+    NEXT_OPENALEX_REQUEST_AT = Math.max(NEXT_OPENALEX_REQUEST_AT, now) + 400;
+    if (waitMilliseconds > 0) {
+      await wait(waitMilliseconds);
     }
   }
 
@@ -651,6 +672,517 @@
     return mergedLinks;
   }
 
+  async function scrapeCurrentDblpConferencePage({
+    sourceUrl = window.location.href,
+    sourceLabel = '',
+    sectionTitle = '',
+    includeSectionTitlePrefixes = [],
+    excludeSectionTitlePrefixes = [],
+    minPageCount = 0,
+    maxPageEnd = 0,
+    publicationYear = 0,
+    concurrency = 8,
+    onProgress = () => {},
+  } = {}) {
+    const papers = parseDblpConferencePapers(document, {
+      sourceUrl,
+      sectionTitle,
+      includeSectionTitlePrefixes,
+      excludeSectionTitlePrefixes,
+      minPageCount,
+      maxPageEnd,
+      publicationYear,
+    });
+    if (!papers.length) {
+      throw new Error('Could not find any papers on the DBLP conference page.');
+    }
+
+    const results = new Array(papers.length);
+    let nextIndex = 0;
+    let completed = 0;
+
+    async function worker() {
+      while (nextIndex < papers.length) {
+        const currentIndex = nextIndex;
+        nextIndex += 1;
+        const paper = papers[currentIndex];
+
+        try {
+          const openAlexWork = await fetchOpenAlexWorkForPaper(paper, { publicationYear });
+          const resolvedDoiUrl = cleanUrl(openAlexWork?.doi || paper.doiUrl || '');
+          const abstract = buildAbstractFromInvertedIndex(openAlexWork?.abstract_inverted_index)
+            || paper.abstract
+            || 'No abstract available.';
+          const openAccessPdfUrl = cleanUrl(
+            openAlexWork?.best_oa_location?.pdf_url
+              || openAlexWork?.primary_location?.pdf_url
+              || '',
+          );
+          const openAccessLandingUrl = cleanUrl(
+            openAlexWork?.best_oa_location?.landing_page_url
+              || openAlexWork?.primary_location?.landing_page_url
+              || '',
+          );
+          const publicationLinks = mergePublicationLinks(
+            resolvedDoiUrl ? [{ label: 'DOI', href: resolvedDoiUrl }] : [],
+            paper.publicationLinks,
+            openAccessPdfUrl ? [{ label: 'Open access PDF', href: openAccessPdfUrl }] : [],
+            openAccessLandingUrl ? [{ label: 'Open access landing page', href: openAccessLandingUrl }] : [],
+          );
+
+          results[currentIndex] = {
+            ...paper,
+            abstract,
+            absUrl: openAccessLandingUrl || resolvedDoiUrl || paper.absUrl || `${cleanUrl(sourceUrl)}#${paper.id}`,
+            pdfUrl: normalizePdfUrl(openAccessPdfUrl || paper.pdfUrl || ''),
+            doiUrl: resolvedDoiUrl,
+            publicationLinks,
+            loaded: true,
+            loading: false,
+            error: '',
+          };
+        } catch (error) {
+          results[currentIndex] = {
+            ...paper,
+            abstract: paper.abstract || 'No abstract available.',
+            loaded: true,
+            loading: false,
+            error: '',
+          };
+        }
+
+        completed += 1;
+        onProgress(`[${completed}/${papers.length}] ${results[currentIndex].title}`);
+      }
+    }
+
+    await Promise.all(Array.from({ length: Math.max(1, Math.min(concurrency, papers.length)) }, () => worker()));
+
+    return {
+      sourceUrl: cleanUrl(sourceUrl || window.location.href),
+      sourceLabel: cleanText(sourceLabel || inferDblpSourceLabel(document)),
+      collectedAt: new Date().toISOString(),
+      paperCount: results.filter(Boolean).length,
+      papers: results.filter(Boolean),
+    };
+  }
+
+  function parseDblpConferencePapers(
+    trackDocument,
+    {
+      sourceUrl = window.location.href,
+      sectionTitle = '',
+      includeSectionTitlePrefixes = [],
+      excludeSectionTitlePrefixes = [],
+      minPageCount = 0,
+      maxPageEnd = 0,
+      publicationYear = 0,
+    } = {},
+  ) {
+    return getDblpConferenceEntryElements(trackDocument, {
+      sectionTitle,
+      includeSectionTitlePrefixes,
+      excludeSectionTitlePrefixes,
+    })
+      .map((entryElement, index) => {
+        const title = cleanText(entryElement.querySelector('.title')?.textContent || '').replace(/\.$/, '');
+        const pageMetadata = parseDblpEntryPagination(entryElement);
+        if (!matchesDblpPageFilters(pageMetadata, { minPageCount, maxPageEnd })) {
+          return null;
+        }
+
+        const authors = Array.from(entryElement.querySelectorAll('span[itemprop="author"] span[itemprop="name"]'))
+          .map((authorElement) => cleanText(authorElement.textContent))
+          .filter(Boolean);
+        const authorsText = authors.join(', ');
+        const doiUrl = cleanUrl(entryElement.querySelector('nav.publ a[href^="https://doi.org/"]')?.href || '');
+        const dblpUrl = cleanUrl(
+          entryElement.querySelector('nav.publ a[href*="dblp.org/rec/"]')?.href
+            || entryElement.querySelector('li.drop-down div.head a[href]')?.href
+            || '',
+        );
+        const eeUrl = cleanUrl(entryElement.querySelector('nav.publ a[href]')?.href || '');
+        const publicationLinks = mergePublicationLinks(
+          doiUrl ? [{ label: 'DOI', href: doiUrl }] : [],
+          dblpUrl ? [{ label: 'DBLP', href: dblpUrl }] : [],
+          eeUrl && eeUrl !== doiUrl && eeUrl !== dblpUrl ? [{ label: 'Electronic edition', href: eeUrl }] : [],
+        );
+        const paperId = cleanText(stripDoiPrefix(doiUrl) || dblpUrl || title || `paper-${index + 1}`);
+
+        if (!paperId || !title) {
+          return null;
+        }
+
+        return {
+          order: index + 1,
+          id: paperId,
+          title,
+          authors,
+          authorsText,
+          abstract: '',
+          absUrl: doiUrl || dblpUrl || `${cleanUrl(sourceUrl)}#${paperId}`,
+          pdfUrl: '',
+          doiUrl,
+          publicationLinks,
+          trackUrl: cleanUrl(sourceUrl),
+          detailsUrl: dblpUrl,
+          publicationYear: Number.isInteger(publicationYear) ? publicationYear : 0,
+          loaded: false,
+          loading: false,
+          error: '',
+        };
+      })
+      .filter(Boolean)
+      .map((paper, index) => ({
+        ...paper,
+        order: index + 1,
+      }));
+  }
+
+  function getDblpConferenceEntryElements(
+    trackDocument,
+    {
+      sectionTitle = '',
+      includeSectionTitlePrefixes = [],
+      excludeSectionTitlePrefixes = [],
+    } = {},
+  ) {
+    const sections = getDblpConferenceSections(trackDocument);
+    if (!sections.length) {
+      return Array.from(trackDocument.querySelectorAll('li.entry.inproceedings'));
+    }
+
+    const normalizedSectionTitle = normalizeComparisonText(sectionTitle);
+    if (normalizedSectionTitle) {
+      const matchingSection = sections
+        .find((section) => normalizeComparisonText(section.title) === normalizedSectionTitle);
+      return matchingSection ? matchingSection.entryElements : [];
+    }
+
+    const normalizedIncludedPrefixes = normalizeComparisonTextList(includeSectionTitlePrefixes);
+    if (normalizedIncludedPrefixes.length) {
+      return sections
+        .filter((section) => matchesDblpSectionPrefix(section.title, normalizedIncludedPrefixes))
+        .flatMap((section) => section.entryElements);
+    }
+
+    const normalizedExcludedPrefixes = normalizeComparisonTextList(excludeSectionTitlePrefixes);
+    if (!normalizedExcludedPrefixes.length) {
+      return Array.from(trackDocument.querySelectorAll('li.entry.inproceedings'));
+    }
+
+    return sections
+      .filter((section) => !matchesDblpSectionPrefix(section.title, normalizedExcludedPrefixes))
+      .flatMap((section) => section.entryElements);
+  }
+
+  function getDblpConferenceSections(trackDocument) {
+    return Array.from(trackDocument.querySelectorAll('header.h2'))
+      .map((header) => {
+        const entryElements = [];
+        let currentNode = header.nextElementSibling;
+        while (currentNode) {
+          if (currentNode.matches?.('header.h2')) {
+            break;
+          }
+
+          if (currentNode.matches?.('li.entry.inproceedings')) {
+            entryElements.push(currentNode);
+          }
+
+          entryElements.push(...Array.from(currentNode.querySelectorAll?.('li.entry.inproceedings') || []));
+          currentNode = currentNode.nextElementSibling;
+        }
+
+        return {
+          title: cleanText(header.textContent || ''),
+          entryElements,
+        };
+      })
+      .filter((section) => section.entryElements.length);
+  }
+
+  function matchesDblpSectionPrefix(sectionTitle, normalizedPrefixes) {
+    if (!normalizedPrefixes.length) {
+      return false;
+    }
+
+    const normalizedSectionTitle = normalizeComparisonText(sectionTitle);
+    return normalizedPrefixes.some((prefix) => normalizedSectionTitle.startsWith(prefix));
+  }
+
+  function parseDblpEntryPagination(entryElement) {
+    return parseDblpPaginationText(cleanText(entryElement.querySelector('span[itemprop="pagination"]')?.textContent || ''));
+  }
+
+  function parseDblpPaginationText(paginationText) {
+    const cleanedPaginationText = cleanText(paginationText);
+    if (!cleanedPaginationText) {
+      return {
+        text: '',
+        pageStart: null,
+        pageEnd: null,
+        pageCount: null,
+      };
+    }
+
+    const pageNumbers = cleanedPaginationText.match(/\d+/g) || [];
+    if (!pageNumbers.length) {
+      return {
+        text: cleanedPaginationText,
+        pageStart: null,
+        pageEnd: null,
+        pageCount: null,
+      };
+    }
+
+    if (pageNumbers.length === 1) {
+      const pageNumber = Number(pageNumbers[0]);
+      return {
+        text: cleanedPaginationText,
+        pageStart: Number.isFinite(pageNumber) ? pageNumber : null,
+        pageEnd: Number.isFinite(pageNumber) ? pageNumber : null,
+        pageCount: Number.isFinite(pageNumber) ? 1 : null,
+      };
+    }
+
+    const pageStart = Number(pageNumbers[0]);
+    const pageEnd = Number(pageNumbers[pageNumbers.length - 1]);
+    const pageCount = Number.isFinite(pageStart) && Number.isFinite(pageEnd) && pageEnd >= pageStart
+      ? (pageEnd - pageStart + 1)
+      : null;
+
+    return {
+      text: cleanedPaginationText,
+      pageStart: Number.isFinite(pageStart) ? pageStart : null,
+      pageEnd: Number.isFinite(pageEnd) ? pageEnd : null,
+      pageCount,
+    };
+  }
+
+  function matchesDblpPageFilters(pageMetadata, { minPageCount = 0, maxPageEnd = 0 } = {}) {
+    const normalizedMinPageCount = Number(minPageCount) || 0;
+    if (normalizedMinPageCount > 0) {
+      if (!Number.isInteger(pageMetadata?.pageCount) || pageMetadata.pageCount < normalizedMinPageCount) {
+        return false;
+      }
+    }
+
+    const normalizedMaxPageEnd = Number(maxPageEnd) || 0;
+    if (normalizedMaxPageEnd > 0) {
+      if (!Number.isInteger(pageMetadata?.pageEnd) || pageMetadata.pageEnd > normalizedMaxPageEnd) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  function normalizeComparisonTextList(values) {
+    return (Array.isArray(values) ? values : [values])
+      .map((value) => normalizeComparisonText(value))
+      .filter(Boolean);
+  }
+
+  function normalizeComparisonText(text) {
+    return cleanText(text).toLowerCase();
+  }
+
+  async function fetchOpenAlexWorkForPaper(paper, { publicationYear = 0 } = {}) {
+    const workByDoi = await fetchOpenAlexWorkByDoi(paper?.doiUrl || '');
+    if (workByDoi) {
+      return workByDoi;
+    }
+
+    const resolvedPublicationYear = Number.isInteger(publicationYear) && publicationYear > 0
+      ? publicationYear
+      : (Number.isInteger(paper?.publicationYear) ? paper.publicationYear : 0);
+
+    return fetchOpenAlexWorkByTitle(paper?.title || '', { publicationYear: resolvedPublicationYear });
+  }
+
+  async function fetchOpenAlexWorkByDoi(doiUrlOrDoi) {
+    const doi = stripDoiPrefix(doiUrlOrDoi);
+    if (!doi) {
+      return null;
+    }
+
+    const cacheKey = `doi:${doi.toLowerCase()}`;
+    if (OPENALEX_WORK_CACHE.has(cacheKey)) {
+      return OPENALEX_WORK_CACHE.get(cacheKey);
+    }
+
+    const workPromise = (async () => {
+      const payload = await fetchJson(`https://api.openalex.org/works?filter=doi:${encodeURIComponent(doi)}`);
+      return Array.isArray(payload?.results) ? (payload.results[0] || null) : null;
+    })();
+
+    OPENALEX_WORK_CACHE.set(cacheKey, workPromise);
+
+    try {
+      return await workPromise;
+    } catch (error) {
+      OPENALEX_WORK_CACHE.delete(cacheKey);
+      throw error;
+    }
+  }
+
+  async function fetchOpenAlexWorkByTitle(title, { publicationYear = 0 } = {}) {
+    const normalizedTitle = normalizeTitleForComparison(title);
+    if (!normalizedTitle) {
+      return null;
+    }
+
+    const normalizedYear = Number.isInteger(publicationYear) && publicationYear > 0
+      ? publicationYear
+      : 0;
+    const cacheKey = `title:${normalizedYear}:${normalizedTitle}`;
+    if (OPENALEX_WORK_CACHE.has(cacheKey)) {
+      return OPENALEX_WORK_CACHE.get(cacheKey);
+    }
+
+    const workPromise = (async () => {
+      const queryUrl = new URL('https://api.openalex.org/works');
+      queryUrl.searchParams.set('search', title);
+      queryUrl.searchParams.set('per-page', '10');
+      if (normalizedYear) {
+        queryUrl.searchParams.set('filter', `publication_year:${normalizedYear}`);
+      }
+
+      const payload = await fetchJson(queryUrl.href);
+      const results = Array.isArray(payload?.results) ? payload.results : [];
+      const exactMatch = results.find((result) => titlesLikelyMatch(result?.display_name || '', title));
+      if (exactMatch) {
+        return exactMatch;
+      }
+
+      const rankedCandidates = results
+        .map((result) => ({
+          result,
+          score: scoreTitleSimilarity(result?.display_name || '', title),
+        }))
+        .sort((left, right) => right.score.overlap - left.score.overlap || right.score.jaccard - left.score.jaccard);
+      const bestCandidate = rankedCandidates[0];
+      if (!bestCandidate) {
+        return null;
+      }
+
+      if (bestCandidate.score.sharedTokenCount >= 4 && (bestCandidate.score.overlap >= 0.75 || bestCandidate.score.jaccard >= 0.6)) {
+        return bestCandidate.result;
+      }
+
+      return null;
+    })();
+
+    OPENALEX_WORK_CACHE.set(cacheKey, workPromise);
+
+    try {
+      return await workPromise;
+    } catch (error) {
+      OPENALEX_WORK_CACHE.delete(cacheKey);
+      throw error;
+    }
+  }
+
+  function buildAbstractFromInvertedIndex(abstractInvertedIndex) {
+    if (!abstractInvertedIndex || typeof abstractInvertedIndex !== 'object') {
+      return '';
+    }
+
+    const positions = [];
+    Object.entries(abstractInvertedIndex).forEach(([word, indexes]) => {
+      indexes.forEach((index) => {
+        positions[index] = word;
+      });
+    });
+
+    return cleanText(positions.join(' '));
+  }
+
+  function stripDoiPrefix(doiUrlOrDoi) {
+    return cleanText(String(doiUrlOrDoi || '').replace(/^https?:\/\/doi\.org\//i, ''));
+  }
+
+  function titlesLikelyMatch(leftTitle, rightTitle) {
+    const leftVariants = buildComparableTitleVariants(leftTitle);
+    const rightVariants = buildComparableTitleVariants(rightTitle);
+    if (!leftVariants.length || !rightVariants.length) {
+      return false;
+    }
+
+    return leftVariants.some((leftVariant) => rightVariants.some((rightVariant) => {
+      if (leftVariant === rightVariant) {
+        return true;
+      }
+
+      const minLength = Math.min(leftVariant.length, rightVariant.length);
+      if (minLength < 18) {
+        return false;
+      }
+
+      return leftVariant.startsWith(rightVariant) || rightVariant.startsWith(leftVariant);
+    }));
+  }
+
+  function buildComparableTitleVariants(title) {
+    const baseTitle = cleanText(title).replace(/\.$/, '');
+    const variants = new Set();
+
+    [
+      baseTitle,
+      baseTitle.replace(/\((?:abstract(?: only)?|extended abstract|tutorial|panel|experience report|status report)\)/ig, ''),
+      baseTitle.replace(/\b(?:abstract(?: only)?|extended abstract|tutorial|panel|experience report|status report)\b/ig, ''),
+      baseTitle.replace(/\([^)]*\)/g, ''),
+    ].forEach((value) => {
+      const normalizedValue = normalizeTitleForComparison(value);
+      if (normalizedValue) {
+        variants.add(normalizedValue);
+      }
+    });
+
+    return Array.from(variants);
+  }
+
+  function scoreTitleSimilarity(leftTitle, rightTitle) {
+    const leftTokens = new Set(normalizeTitleForComparison(leftTitle).split(' ').filter(Boolean));
+    const rightTokens = new Set(normalizeTitleForComparison(rightTitle).split(' ').filter(Boolean));
+    if (!leftTokens.size || !rightTokens.size) {
+      return {
+        overlap: 0,
+        jaccard: 0,
+        sharedTokenCount: 0,
+      };
+    }
+
+    let sharedTokenCount = 0;
+    leftTokens.forEach((token) => {
+      if (rightTokens.has(token)) {
+        sharedTokenCount += 1;
+      }
+    });
+
+    const unionCount = new Set([...leftTokens, ...rightTokens]).size;
+    return {
+      overlap: sharedTokenCount / Math.min(leftTokens.size, rightTokens.size),
+      jaccard: unionCount ? (sharedTokenCount / unionCount) : 0,
+      sharedTokenCount,
+    };
+  }
+
+  function normalizeTitleForComparison(title) {
+    return cleanText(title)
+      .normalize('NFKD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/&/g, ' and ')
+      .replace(/[^a-z0-9]+/g, ' ')
+      .trim();
+  }
+
+  function inferDblpSourceLabel(trackDocument) {
+    return cleanText(String(trackDocument?.title || '').replace(/^dblp:\s*/i, '')) || 'DBLP conference page';
+  }
+
   function parseListPage(html) {
     const document = new DOMParser().parseFromString(html, 'text/html');
     const rows = Array.from(document.querySelectorAll('#articles > dt'));
@@ -778,5 +1310,6 @@
     ensurePaperLoaded,
     prefetchPapers,
     scrapeCurrentResearchrTrack,
+    scrapeCurrentDblpConferencePage,
   };
 })();

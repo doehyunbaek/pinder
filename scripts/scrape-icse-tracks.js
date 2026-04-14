@@ -60,17 +60,40 @@ async function main() {
           waitUntil: 'domcontentloaded',
           timeout: 120000,
         });
-        await page.waitForSelector('#event-overview table', {
-          state: 'attached',
-          timeout: 120000,
-        });
+
+        if (track.scraper === 'dblp') {
+          await page.waitForSelector('li.entry.inproceedings', {
+            state: 'attached',
+            timeout: 120000,
+          });
+        } else {
+          await page.waitForSelector('#event-overview table', {
+            state: 'attached',
+            timeout: 120000,
+          });
+        }
+
         await page.addScriptTag({ content: scraperSource });
 
         const payload = await page.evaluate(async (trackEntry) => {
-          return window.PinderScraper.scrapeCurrentResearchrTrack({
+          const scraperName = trackEntry.scraper === 'dblp'
+            ? 'scrapeCurrentDblpConferencePage'
+            : 'scrapeCurrentResearchrTrack';
+
+          return window.PinderScraper[scraperName]({
             sourceUrl: trackEntry.trackUrl,
             sourceLabel: trackEntry.sourceLabel,
-            concurrency: 8,
+            sectionTitle: trackEntry.sectionTitle || '',
+            includeSectionTitlePrefixes: Array.isArray(trackEntry.includeSectionTitlePrefixes)
+              ? trackEntry.includeSectionTitlePrefixes
+              : [],
+            excludeSectionTitlePrefixes: Array.isArray(trackEntry.excludeSectionTitlePrefixes)
+              ? trackEntry.excludeSectionTitlePrefixes
+              : [],
+            minPageCount: Number(trackEntry.minPageCount) || 0,
+            maxPageEnd: Number(trackEntry.maxPageEnd) || 0,
+            publicationYear: Number(trackEntry.year) || 0,
+            concurrency: trackEntry.scraper === 'dblp' ? 4 : 8,
             onProgress: (message) => window.__pinderTrackProgress(`${trackEntry.year}: ${message}`),
           });
         }, track);
@@ -83,8 +106,19 @@ async function main() {
 
           return {
             ...entry,
+            scraper: track.scraper || entry.scraper || 'researchr',
+            sectionTitle: track.sectionTitle || entry.sectionTitle || '',
+            includeSectionTitlePrefixes: Array.isArray(track.includeSectionTitlePrefixes)
+              ? track.includeSectionTitlePrefixes
+              : (Array.isArray(entry.includeSectionTitlePrefixes) ? entry.includeSectionTitlePrefixes : []),
+            excludeSectionTitlePrefixes: Array.isArray(track.excludeSectionTitlePrefixes)
+              ? track.excludeSectionTitlePrefixes
+              : (Array.isArray(entry.excludeSectionTitlePrefixes) ? entry.excludeSectionTitlePrefixes : []),
+            minPageCount: Number(track.minPageCount) || Number(entry.minPageCount) || 0,
+            maxPageEnd: Number(track.maxPageEnd) || Number(entry.maxPageEnd) || 0,
             sourceLabel: payload.sourceLabel || entry.sourceLabel,
             trackUrl: track.trackUrl,
+            proceedingsUrl: track.proceedingsUrl || entry.proceedingsUrl || '',
             collectedAt: payload.collectedAt,
             paperCount: payload.paperCount,
             papers: payload.papers,
