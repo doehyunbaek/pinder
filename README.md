@@ -105,8 +105,8 @@ The collector navigates to each conference page with Playwright and runs the reu
 Notes on older ICSE years:
 
 - 2018–2026 are scraped from Researchr track pages
-- 2009–2017 are scraped from DBLP conference pages, with abstracts resolved from OpenAlex via DOI metadata
-- 1976–2008 are scraped from DBLP proceedings pages, with abstracts resolved from OpenAlex via DOI metadata when available and title/year lookup otherwise
+- 2009–2017 are scraped from DBLP conference pages, with abstracts resolved from OpenAlex first and then from DOI landing pages in Playwright when the publisher page exposes an abstract
+- 1976–2008 are scraped from DBLP proceedings pages, with abstracts resolved from OpenAlex via DOI metadata when available, DOI landing pages as a fallback, and title/year lookup otherwise
 - when no abstract can be resolved for some older papers, the dataset stores `No abstract available.`
 - ACM DL proceedings URLs are stored in `data/icse.json` for the ACM-era years where we had them as reference metadata (`proceedingsUrl`)
 
@@ -118,12 +118,26 @@ npx playwright install chromium
 npm run scrape:icse
 ```
 
+Notes:
+- older ICSE years use OpenAlex title lookup as a fallback, including a broader non-year-filtered retry when OpenAlex metadata has the wrong publication year
+- legacy DBLP ACM `citation.cfm?id=...` links are normalized into direct ACM DL record URLs (`https://dl.acm.org/doi/10.5555/...`) when the DBLP metadata provides enough information to derive them
+- ACM DOI landing-page fallback is disabled by default because `dl.acm.org` may block automated requests; if you explicitly want to try it again later, run with `PINDER_ENABLE_ACM_DOI_FALLBACK=1`
+
 You can also scrape just one year or slug:
 
 ```bash
 node scripts/scrape-icse-tracks.js 2026
 node scripts/scrape-icse-tracks.js icse-2024-research-track
 ```
+
+To do a targeted second pass over already-derived legacy ACM DL record URLs for older no-DOI papers:
+
+```bash
+node scripts/enrich-legacy-acm-abstracts.js
+node scripts/enrich-legacy-acm-abstracts.js 1976 1978 1979
+```
+
+The ACM enrichment pass is intentionally low-volume and may still stop early if ACM starts returning block pages.
 
 ## Google login + Google Sheets sync
 

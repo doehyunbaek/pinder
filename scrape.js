@@ -672,6 +672,37 @@
     return mergedLinks;
   }
 
+  function extractLegacyAcmCitationId(url) {
+    const match = cleanUrl(url).match(/[?&]id=([^&#]+)/i);
+    return cleanText(match?.[1] || '');
+  }
+
+  function inferDblpLegacyAcmProceedingsId(trackDocument) {
+    const citationLinks = Array.from(trackDocument.querySelectorAll('a[href*="citation.cfm?id="], a[href*="portal.acm.org/citation.cfm?id="]'));
+    const firstNumericCitationId = citationLinks
+      .map((anchor) => extractLegacyAcmCitationId(anchor.href))
+      .find((citationId) => /^\d+$/.test(citationId));
+
+    return cleanText(firstNumericCitationId || '');
+  }
+
+  function buildLegacyAcmDlUrl(legacyAcmCitationUrl, legacyAcmProceedingsId = '') {
+    const citationId = extractLegacyAcmCitationId(legacyAcmCitationUrl);
+    if (!citationId) {
+      return '';
+    }
+
+    const normalizedRecordId = /^\d+\.\d+$/.test(citationId)
+      ? citationId
+      : (/^\d+$/.test(citationId) && /^\d+$/.test(legacyAcmProceedingsId)
+        ? `${legacyAcmProceedingsId}.${citationId}`
+        : '');
+
+    return normalizedRecordId
+      ? `https://dl.acm.org/doi/10.5555/${normalizedRecordId}`
+      : '';
+  }
+
   async function scrapeCurrentDblpConferencePage({
     sourceUrl = window.location.href,
     sourceLabel = '',
@@ -779,6 +810,8 @@
       publicationYear = 0,
     } = {},
   ) {
+    const legacyAcmProceedingsId = inferDblpLegacyAcmProceedingsId(trackDocument);
+
     return getDblpConferenceEntryElements(trackDocument, {
       sectionTitle,
       includeSectionTitlePrefixes,
@@ -802,12 +835,14 @@
             || '',
         );
         const eeUrl = cleanUrl(entryElement.querySelector('nav.publ a[href]')?.href || '');
+        const legacyAcmDlUrl = buildLegacyAcmDlUrl(eeUrl, legacyAcmProceedingsId);
         const publicationLinks = mergePublicationLinks(
           doiUrl ? [{ label: 'DOI', href: doiUrl }] : [],
+          legacyAcmDlUrl ? [{ label: 'ACM DL', href: legacyAcmDlUrl }] : [],
           dblpUrl ? [{ label: 'DBLP', href: dblpUrl }] : [],
-          eeUrl && eeUrl !== doiUrl && eeUrl !== dblpUrl ? [{ label: 'Electronic edition', href: eeUrl }] : [],
+          eeUrl && eeUrl !== doiUrl && eeUrl !== dblpUrl && eeUrl !== legacyAcmDlUrl ? [{ label: 'Electronic edition', href: eeUrl }] : [],
         );
-        const paperId = cleanText(stripDoiPrefix(doiUrl) || dblpUrl || title || `paper-${index + 1}`);
+        const paperId = cleanText(stripDoiPrefix(doiUrl) || legacyAcmDlUrl || dblpUrl || title || `paper-${index + 1}`);
 
         if (!paperId || !title) {
           return null;
@@ -820,9 +855,10 @@
           authors,
           authorsText,
           abstract: '',
-          absUrl: doiUrl || dblpUrl || `${cleanUrl(sourceUrl)}#${paperId}`,
+          absUrl: doiUrl || legacyAcmDlUrl || dblpUrl || eeUrl || `${cleanUrl(sourceUrl)}#${paperId}`,
           pdfUrl: '',
           doiUrl,
+          acmDlUrl: legacyAcmDlUrl,
           publicationLinks,
           trackUrl: cleanUrl(sourceUrl),
           detailsUrl: dblpUrl,
@@ -989,16 +1025,24 @@
   }
 
   async function fetchOpenAlexWorkForPaper(paper, { publicationYear = 0 } = {}) {
-    const workByDoi = await fetchOpenAlexWorkByDoi(paper?.doiUrl || '');
-    if (workByDoi) {
-      return workByDoi;
-    }
-
     const resolvedPublicationYear = Number.isInteger(publicationYear) && publicationYear > 0
       ? publicationYear
       : (Number.isInteger(paper?.publicationYear) ? paper.publicationYear : 0);
+    const workByDoi = await fetchOpenAlexWorkByDoi(paper?.doiUrl || '');
+    const workByTitle = await fetchOpenAlexWorkByTitle(paper?.title || '', {
+      publicationYear: resolvedPublicationYear,
+      allowBroadYearMatch: true,
+    });
 
-    return fetchOpenAlexWorkByTitle(paper?.title || '', { publicationYear: resolvedPublicationYear });
+    if (!workByDoi) {
+      return workByTitle;
+    }
+
+    if (hasOpenAlexAbstract(workByTitle) && !hasOpenAlexAbstract(workByDoi)) {
+      return workByTitle;
+    }
+
+    return workByDoi || workByTitle;
   }
 
   async function fetchOpenAlexWorkByDoi(doiUrlOrDoi) {
@@ -1027,7 +1071,7 @@
     }
   }
 
-  async function fetchOpenAlexWorkByTitle(title, { publicationYear = 0 } = {}) {
+  async function fetchOpenAlexWorkByTitle(title, { publicationYear = 0, allowBroadYearMatch = false } = {}) {
     const normalizedTitle = normalizeTitleForComparison(title);
     if (!normalizedTitle) {
       return null;
@@ -1036,39 +1080,38 @@
     const normalizedYear = Number.isInteger(publicationYear) && publicationYear > 0
       ? publicationYear
       : 0;
-    const cacheKey = `title:${normalizedYear}:${normalizedTitle}`;
+    const cacheKey = `title:${normalizedYear}:${allowBroadYearMatch ? 'broad' : 'strict'}:${normalizedTitle}`;
     if (OPENALEX_WORK_CACHE.has(cacheKey)) {
       return OPENALEX_WORK_CACHE.get(cacheKey);
     }
 
     const workPromise = (async () => {
-      const queryUrl = new URL('https://api.openalex.org/works');
-      queryUrl.searchParams.set('search', title);
-      queryUrl.searchParams.set('per-page', '10');
+      const queryAttempts = [];
       if (normalizedYear) {
-        queryUrl.searchParams.set('filter', `publication_year:${normalizedYear}`);
+        queryAttempts.push({
+          yearFilter: normalizedYear,
+        });
+      }
+      if (!normalizedYear || allowBroadYearMatch) {
+        queryAttempts.push({
+          yearFilter: 0,
+        });
       }
 
-      const payload = await fetchJson(queryUrl.href);
-      const results = Array.isArray(payload?.results) ? payload.results : [];
-      const exactMatch = results.find((result) => titlesLikelyMatch(result?.display_name || '', title));
-      if (exactMatch) {
-        return exactMatch;
-      }
+      for (const queryAttempt of queryAttempts) {
+        const queryUrl = new URL('https://api.openalex.org/works');
+        queryUrl.searchParams.set('search', title);
+        queryUrl.searchParams.set('per-page', '10');
+        if (queryAttempt.yearFilter) {
+          queryUrl.searchParams.set('filter', `publication_year:${queryAttempt.yearFilter}`);
+        }
 
-      const rankedCandidates = results
-        .map((result) => ({
-          result,
-          score: scoreTitleSimilarity(result?.display_name || '', title),
-        }))
-        .sort((left, right) => right.score.overlap - left.score.overlap || right.score.jaccard - left.score.jaccard);
-      const bestCandidate = rankedCandidates[0];
-      if (!bestCandidate) {
-        return null;
-      }
-
-      if (bestCandidate.score.sharedTokenCount >= 4 && (bestCandidate.score.overlap >= 0.75 || bestCandidate.score.jaccard >= 0.6)) {
-        return bestCandidate.result;
+        const payload = await fetchJson(queryUrl.href);
+        const results = Array.isArray(payload?.results) ? payload.results : [];
+        const matchedWork = selectBestOpenAlexTitleMatch(results, title);
+        if (matchedWork) {
+          return matchedWork;
+        }
       }
 
       return null;
@@ -1082,6 +1125,34 @@
       OPENALEX_WORK_CACHE.delete(cacheKey);
       throw error;
     }
+  }
+
+  function selectBestOpenAlexTitleMatch(results, title) {
+    const exactMatch = results.find((result) => titlesLikelyMatch(result?.display_name || '', title));
+    if (exactMatch) {
+      return exactMatch;
+    }
+
+    const rankedCandidates = results
+      .map((result) => ({
+        result,
+        score: scoreTitleSimilarity(result?.display_name || '', title),
+      }))
+      .sort((left, right) => right.score.overlap - left.score.overlap || right.score.jaccard - left.score.jaccard);
+    const bestCandidate = rankedCandidates[0];
+    if (!bestCandidate) {
+      return null;
+    }
+
+    if (bestCandidate.score.sharedTokenCount >= 4 && (bestCandidate.score.overlap >= 0.75 || bestCandidate.score.jaccard >= 0.6)) {
+      return bestCandidate.result;
+    }
+
+    return null;
+  }
+
+  function hasOpenAlexAbstract(work) {
+    return Boolean(work?.abstract_inverted_index && typeof work.abstract_inverted_index === 'object' && Object.keys(work.abstract_inverted_index).length);
   }
 
   function buildAbstractFromInvertedIndex(abstractInvertedIndex) {
