@@ -1391,25 +1391,26 @@ function render() {
   const nextPaper = remainingPapers[1] || null;
   const total = state.papers.length;
   const reviewedCount = total - remainingPapers.length;
-  const counts = getDecisionCounts();
+  const totalCounts = getDecisionCounts();
+  const activeSourcePeriod = getActiveSourcePeriod();
+  const activePapers = getPapersForSourcePeriod(activeSourcePeriod);
+  const activeCounts = getDecisionCounts(activeSourcePeriod);
   const waitingForOlderPapers = !currentPaper && canLoadOlderPapers();
 
-  const currentPeriod = currentPaper?.sourcePeriod;
   let progressTotal = total;
   let progressReviewed = reviewedCount;
-  if (currentPeriod) {
-    const papersInCurrentPeriod = state.papers.filter((paper) => paper.sourcePeriod === currentPeriod);
-    progressTotal = papersInCurrentPeriod.length;
-    progressReviewed = papersInCurrentPeriod.reduce((n, paper) => n + (state.decisions[paper.id] ? 1 : 0), 0);
+  if (activeSourcePeriod) {
+    progressTotal = activePapers.length;
+    progressReviewed = activePapers.reduce((n, paper) => n + (state.decisions[paper.id] ? 1 : 0), 0);
   }
   elements.progressFill.style.width = `${progressTotal ? (progressReviewed / progressTotal) * 100 : 0}%`;
 
   updateSourceLabel();
 
-  renderStats(counts);
+  renderStats(activeCounts);
   elements.undoButton.disabled = !reviewedCount;
   elements.exportButton.disabled = !reviewedCount;
-  elements.resetButton.disabled = !counts.weakReject;
+  elements.resetButton.disabled = !totalCounts.weakReject;
 
   if (!currentPaper) {
     closeAbstractModal();
@@ -1449,13 +1450,13 @@ function render() {
           'Could not load older papers right now. Hard refresh and try again. If the problem persists, the public CORS proxy may be temporarily unavailable.',
           true,
         );
-        renderSummary(counts, total);
+        renderSummary(totalCounts, total);
         elements.emptyState.classList.remove('hidden');
       });
     return;
   }
 
-  renderSummary(counts, total);
+  renderSummary(totalCounts, total);
 }
 
 function renderCurrentPaper(paper) {
@@ -1535,7 +1536,21 @@ function getReviewedPapers() {
     .sort((a, b) => new Date(a.decidedAt) - new Date(b.decidedAt));
 }
 
-function getDecisionCounts() {
+function getActiveSourcePeriod() {
+  return getCurrentPaper()?.sourcePeriod
+    || state.oldestLoadedPeriod
+    || state.newestLoadedPeriod
+    || describeListUrl(state.sourceUrl)?.period
+    || '';
+}
+
+function getPapersForSourcePeriod(sourcePeriod = '') {
+  return sourcePeriod
+    ? state.papers.filter((paper) => paper.sourcePeriod === sourcePeriod)
+    : state.papers;
+}
+
+function getDecisionCounts(sourcePeriod = '') {
   const counts = {
     accept: 0,
     weakAccept: 0,
@@ -1543,7 +1558,7 @@ function getDecisionCounts() {
     reject: 0,
   };
 
-  state.papers.forEach((paper) => {
+  getPapersForSourcePeriod(sourcePeriod).forEach((paper) => {
     const entry = state.decisions[paper.id];
     if (entry && counts[entry.decision] !== undefined) {
       counts[entry.decision] += 1;
@@ -1575,22 +1590,14 @@ function formatCustomSourceName(sourceUrl) {
 function formatSourceLabel() {
   const sourceInfo = describeListUrl(state.sourceUrl);
   const archive = state.feedArchive || sourceInfo?.archive || '';
-  const newestPeriod = state.newestLoadedPeriod || sourceInfo?.period || '';
-  const oldestPeriod = state.oldestLoadedPeriod || newestPeriod;
-  const count = state.papers.length;
+  const activeSourcePeriod = getActiveSourcePeriod();
+  const count = getPapersForSourcePeriod(activeSourcePeriod).length || state.papers.length;
 
-  if (!archive || !newestPeriod) {
+  if (!archive || !activeSourcePeriod) {
     return `${formatCustomSourceName(state.sourceUrl)} · ${count} papers loaded`;
   }
 
-  const currentPaper = getCurrentPaper();
-  const periodLabel = currentPaper?.sourcePeriod
-    ? currentPaper.sourcePeriod
-    : (oldestPeriod && oldestPeriod !== newestPeriod
-      ? `${newestPeriod} → ${oldestPeriod}`
-      : newestPeriod);
-
-  return `arXiv · ${archive} · ${periodLabel} · ${count} papers loaded`;
+  return `arXiv · ${archive} · ${activeSourcePeriod} · ${count} papers loaded`;
 }
 
 function loadSettings() {
