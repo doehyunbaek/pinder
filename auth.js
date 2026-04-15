@@ -481,6 +481,11 @@
           parsed.updatedAt = updatedAt || parsed.updatedAt;
         }
 
+        if (key === 'showTitleTagline') {
+          parsed.showTitleTagline = String(value).toLowerCase() !== 'false';
+          parsed.updatedAt = updatedAt || parsed.updatedAt;
+        }
+
         if (key === 'showAuthors') {
           parsed.showAuthors = String(value).toLowerCase() !== 'false';
           parsed.updatedAt = updatedAt || parsed.updatedAt;
@@ -509,6 +514,7 @@
       const values = [
         ['key', 'value', 'updatedAt'],
         ['showActionButtons', settings.showActionButtons ? 'true' : 'false', settings.updatedAt || ''],
+        ['showTitleTagline', settings.showTitleTagline ? 'true' : 'false', settings.updatedAt || ''],
         ['showAuthors', settings.showAuthors ? 'true' : 'false', settings.updatedAt || ''],
       ];
       const rangeName = `${getGoogleConfig().settingsSheetTitle}!A1:C${values.length}`;

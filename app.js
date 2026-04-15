@@ -75,12 +75,14 @@ const elements = {
   sourceMenu: document.getElementById('sourceMenu'),
   sourceArxivOption: document.getElementById('sourceArxivOption'),
   sourceIcseOption: document.getElementById('sourceIcseOption'),
+  topbarBrand: document.getElementById('topbarBrand'),
   trackPickerWrap: document.getElementById('trackPickerWrap'),
   trackPicker: document.getElementById('trackPicker'),
   topAuthButton: document.getElementById('topAuthButton'),
   settingsButton: document.getElementById('settingsButton'),
   settingsMenu: document.getElementById('settingsMenu'),
   showButtonsToggle: document.getElementById('showButtonsToggle'),
+  showTitleToggle: document.getElementById('showTitleToggle'),
   showAuthorsToggle: document.getElementById('showAuthorsToggle'),
   authStatus: document.getElementById('authStatus'),
   syncStatus: document.getElementById('syncStatus'),
@@ -615,12 +617,14 @@ function getMissingDomRequirements() {
     'sourceMenu',
     'sourceArxivOption',
     'sourceIcseOption',
+    'topbarBrand',
     'trackPickerWrap',
     'trackPicker',
     'topAuthButton',
     'settingsButton',
     'settingsMenu',
     'showButtonsToggle',
+    'showTitleToggle',
     'showAuthorsToggle',
     'authStatus',
     'syncStatus',
@@ -666,6 +670,7 @@ function getMissingDomRequirements() {
 function normalizeSettings(rawSettings = {}) {
   return {
     showActionButtons: rawSettings.showActionButtons !== false,
+    showTitleTagline: rawSettings.showTitleTagline !== false,
     showAuthors: rawSettings.showAuthors !== false,
     updatedAt: normalizeUpdatedAt(rawSettings.updatedAt),
   };
@@ -889,11 +894,14 @@ function scheduleDecisionSync() {
 
 function applySettings() {
   const showActionButtons = state.settings.showActionButtons !== false;
+  const showTitleTagline = state.settings.showTitleTagline !== false;
   const showAuthors = state.settings.showAuthors !== false;
 
   elements.showButtonsToggle.checked = showActionButtons;
+  elements.showTitleToggle.checked = showTitleTagline;
   elements.showAuthorsToggle.checked = showAuthors;
   elements.actionGrid.classList.toggle('hidden', !showActionButtons);
+  elements.topbarBrand.classList.toggle('hidden', !showTitleTagline);
   elements.authorsSection.classList.toggle('hidden', !showAuthors);
   elements.nextAuthors.classList.toggle('hidden', !showAuthors);
 }
@@ -942,6 +950,11 @@ function onShowButtonsToggleChange(event) {
   );
 }
 
+function onShowTitleToggleChange(event) {
+  state.settings.showTitleTagline = event.target.checked;
+  persistSettingsChange(event.target.checked ? 'Title and tagline shown.' : 'Title and tagline hidden.');
+}
+
 function onShowAuthorsToggleChange(event) {
   state.settings.showAuthors = event.target.checked;
   persistSettingsChange(event.target.checked ? 'Authors shown.' : 'Authors hidden.');
@@ -982,6 +995,7 @@ function bindEvents() {
   elements.sourceIcseOption.addEventListener('click', () => switchSourceMode('icse'));
   elements.settingsButton.addEventListener('click', toggleSettingsMenu);
   elements.showButtonsToggle.addEventListener('change', onShowButtonsToggleChange);
+  elements.showTitleToggle.addEventListener('change', onShowTitleToggleChange);
   elements.showAuthorsToggle.addEventListener('change', onShowAuthorsToggleChange);
   elements.trackPicker.addEventListener('change', onTrackPickerChange);
 
