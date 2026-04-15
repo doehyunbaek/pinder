@@ -429,9 +429,7 @@ async function loadPaperDetails(paper) {
     return null;
   }
 
-  return window.PinderScraper.ensurePaperLoaded(paper, {
-    onProgress: (message) => showStatus(message),
-  });
+  return window.PinderScraper.ensurePaperLoaded(paper);
 }
 
 async function prefetchVisiblePapers() {
@@ -456,12 +454,8 @@ function prefetchVisiblePapersSoon() {
       startIndex: 0,
       count: PAPER_DETAILS_PREFETCH_COUNT,
       concurrency: 2,
-      onProgress: (message) => showStatus(message),
     })
     .then(() => {
-      if (!elements.statusPanel.classList.contains('hidden')) {
-        hideStatus();
-      }
       render();
     })
     .catch((error) => {
