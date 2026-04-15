@@ -216,6 +216,7 @@ button {
 }
 
 .progress-panel {
+  position: relative;
   display: flex;
   align-items: center;
   width: 100%;
@@ -223,6 +224,11 @@ button {
   border-radius: 16px;
   background: rgba(15, 23, 42, 0.42);
   border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.progress-panel:focus-visible {
+  outline: 2px solid rgba(96, 165, 250, 0.9);
+  outline-offset: 2px;
 }
 
 .auth-button,
@@ -666,8 +672,37 @@ button {
 }
 
 .stats {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  z-index: 24;
+  width: max-content;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(15, 23, 42, 0.96);
+  box-shadow: 0 16px 32px rgba(2, 6, 23, 0.28);
   color: #cbd5e1;
-  line-height: 1.45;
+  font-size: clamp(0.68rem, 2vw, 0.88rem);
+  font-weight: 700;
+  line-height: 1.35;
+  white-space: nowrap;
+  transform: translateY(-8px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease,
+    visibility 140ms ease;
+}
+
+.progress-panel:hover .stats,
+.progress-panel:focus-visible .stats,
+.progress-panel:focus-within .stats {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .footer-actions {

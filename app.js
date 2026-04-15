@@ -86,6 +86,7 @@ const elements = {
   showAuthorsToggle: document.getElementById('showAuthorsToggle'),
   authStatus: document.getElementById('authStatus'),
   syncStatus: document.getElementById('syncStatus'),
+  progressPanel: document.getElementById('progressPanel'),
   progressFill: document.getElementById('progressFill'),
   cardStack: document.getElementById('cardStack'),
   currentCard: document.getElementById('currentCard'),
@@ -628,6 +629,7 @@ function getMissingDomRequirements() {
     'showAuthorsToggle',
     'authStatus',
     'syncStatus',
+    'progressPanel',
     'progressFill',
     'cardStack',
     'currentCard',
@@ -1410,7 +1412,7 @@ function render() {
 
   updateSourceLabel();
 
-  elements.stats.textContent = `Accept ${counts.accept} · Weak accept ${counts.weakAccept} · Weak reject ${counts.weakReject} · Reject ${counts.reject}`;
+  renderStats(counts);
   elements.undoButton.disabled = !reviewedCount;
   elements.exportButton.disabled = !reviewedCount;
   elements.resetButton.disabled = !counts.weakReject;
@@ -1497,6 +1499,12 @@ function renderSummary(counts, total) {
     summaryCardMarkup('Weak reject', counts.weakReject),
     summaryCardMarkup('Reject', counts.reject),
   ].join('');
+}
+
+function renderStats(counts) {
+  const statsText = `Accept ${counts.accept} · Weak accept ${counts.weakAccept} · Weak reject ${counts.weakReject} · Reject ${counts.reject}`;
+  elements.stats.textContent = statsText;
+  elements.progressPanel.setAttribute('aria-label', `Review progress. ${statsText}`);
 }
 
 function summaryCardMarkup(label, value) {
