@@ -28,6 +28,49 @@
       .filter(Boolean);
   }
 
+  function getGoogleAuthErrorCode(error) {
+    return String(error?.googleAuthCode || error?.error || error?.type || error?.message || '').trim();
+  }
+
+  function createGoogleAuthError(error, { interactive = false } = {}) {
+    const code = getGoogleAuthErrorCode(error).toLowerCase();
+    const normalizedError = new Error(code || 'Google login failed.');
+
+    if (code.includes('popup_closed')) {
+      normalizedError.message = 'Google sign-in was closed before it finished.';
+    } else if (code.includes('popup_failed_to_open')) {
+      normalizedError.message = 'Browser blocked the Google sign-in popup. Allow popups and try again.';
+    } else if (code.includes('access_denied')) {
+      normalizedError.message = interactive
+        ? 'Google sign-in was cancelled.'
+        : 'Google session expired. Tap Sign in to reconnect Sheets sync.';
+    } else if (
+      code.includes('interaction_required')
+      || code.includes('login_required')
+      || code.includes('consent_required')
+      || code.includes('immediate_failed')
+      || (code.includes('account') && code.includes('required'))
+    ) {
+      normalizedError.message = interactive
+        ? 'Google sign-in needs confirmation.'
+        : 'Google session expired. Tap Sign in to reconnect Sheets sync.';
+    }
+
+    normalizedError.googleAuthCode = code;
+    return normalizedError;
+  }
+
+  function shouldRetryInteractiveGoogleAuth(error) {
+    const code = getGoogleAuthErrorCode(error).toLowerCase();
+    return (
+      code.includes('interaction_required')
+      || code.includes('login_required')
+      || code.includes('consent_required')
+      || code.includes('immediate_failed')
+      || (code.includes('account') && code.includes('required'))
+    );
+  }
+
   function extractArxivIdFromUrl(url) {
     if (!url) {
       return '';
@@ -149,20 +192,33 @@
       const cachedSession = loadCachedAuthSession();
       if (!cachedSession) {
         authState.syncMessage = 'Settings and review outcomes stay on this device until you sign in with Google.';
-        return false;
+        return {
+          restored: false,
+          canAttemptSilentSignIn: false,
+        };
       }
 
       if (!cachedSession.accessToken || Date.now() >= Number(cachedSession.tokenExpiresAt || 0) - 60_000) {
+        const grantedScopes = parseGrantedScopes(cachedSession.grantedScopes);
+        const canAttemptSilentSignIn = Boolean(cachedSession.user) || grantedScopes.length > 0;
         clearCachedAuthSession();
-        authState.syncMessage = 'Google session expired. Tap Sign in to reconnect Sheets sync.';
-        return false;
+        authState.syncMessage = canAttemptSilentSignIn
+          ? 'Reconnecting to Google Sheets…'
+          : 'Google session expired. Tap Sign in to reconnect Sheets sync.';
+        return {
+          restored: false,
+          canAttemptSilentSignIn,
+        };
       }
 
       const grantedScopes = parseGrantedScopes(cachedSession.grantedScopes);
       if (!hasRequiredScopes(grantedScopes)) {
         clearCachedAuthSession();
         authState.syncMessage = 'Google permissions changed. Tap Sign in to grant Drive and Sheets access again.';
-        return false;
+        return {
+          restored: false,
+          canAttemptSilentSignIn: false,
+        };
       }
 
       authState.user = cachedSession.user || null;
@@ -171,7 +227,10 @@
       authState.grantedScopes = grantedScopes;
       authState.sheetId = cachedSession.sheetId || '';
       authState.syncMessage = 'Using cached Google session from this browser.';
-      return true;
+      return {
+        restored: true,
+        canAttemptSilentSignIn: false,
+      };
     }
 
     function updateAuthUi() {
@@ -221,29 +280,50 @@
       return remoteTime > localTime;
     }
 
-    function requestGoogleAccessToken({ interactive }) {
+    function requestGoogleAccessToken({ prompt = '' } = {}) {
       return new Promise((resolve, reject) => {
         if (!authState.tokenClient) {
           reject(new Error('Google token client is not ready.'));
           return;
         }
 
+        const interactive = prompt !== 'none';
+
         authState.tokenClient.callback = (response) => {
           if (response?.error) {
-            reject(new Error(response.error));
+            reject(createGoogleAuthError(response, { interactive }));
             return;
           }
           resolve(response);
         };
 
         authState.tokenClient.error_callback = (error) => {
-          reject(error instanceof Error ? error : new Error(error?.type || 'Google login failed.'));
+          reject(createGoogleAuthError(error, { interactive }));
         };
 
-        authState.tokenClient.requestAccessToken({
-          prompt: interactive ? 'consent' : '',
-        });
+        authState.tokenClient.requestAccessToken({ prompt });
       });
+    }
+
+    function clearActiveAuthSession() {
+      clearCachedAuthSession();
+      authState.user = null;
+      authState.accessToken = '';
+      authState.tokenExpiresAt = 0;
+      authState.grantedScopes = [];
+      authState.sheetId = '';
+    }
+
+    function applyGoogleAccessTokenResponse(response) {
+      if (!response?.access_token) {
+        throw new Error('Google login did not return an access token.');
+      }
+
+      authState.accessToken = response.access_token;
+      authState.tokenExpiresAt = Date.now() + Number(response.expires_in || 3600) * 1000;
+      authState.grantedScopes = parseGrantedScopes(response.scope || getGoogleConfig().scopes.join(' '));
+      saveCachedAuthSession();
+      return authState.accessToken;
     }
 
     async function ensureValidAccessToken({ interactive, force = false }) {
@@ -254,26 +334,36 @@
         return authState.accessToken;
       }
 
+      const needsConsent = force || (hasFreshToken && !tokenHasRequiredScopes);
+
       if (!interactive) {
-        clearCachedAuthSession();
-        authState.user = null;
-        authState.accessToken = '';
-        authState.tokenExpiresAt = 0;
-        authState.grantedScopes = [];
-        authState.sheetId = '';
-        throw new Error(
-          hasFreshToken && !tokenHasRequiredScopes
-            ? 'Google token is missing Drive or Sheets access. Tap Sign in to grant permissions again.'
-            : 'Google session expired. Tap Sign in to reconnect Sheets sync.',
-        );
+        if (needsConsent) {
+          clearActiveAuthSession();
+          throw new Error('Google token is missing Drive or Sheets access. Tap Sign in to grant permissions again.');
+        }
+
+        try {
+          const response = await requestGoogleAccessToken({ prompt: 'none' });
+          return applyGoogleAccessTokenResponse(response);
+        } catch (error) {
+          clearActiveAuthSession();
+          throw new Error('Google session expired. Tap Sign in to reconnect Sheets sync.');
+        }
       }
 
-      const response = await requestGoogleAccessToken({ interactive: true });
-      authState.accessToken = response.access_token;
-      authState.tokenExpiresAt = Date.now() + Number(response.expires_in || 3600) * 1000;
-      authState.grantedScopes = parseGrantedScopes(response.scope || getGoogleConfig().scopes.join(' '));
-      saveCachedAuthSession();
-      return authState.accessToken;
+      try {
+        const response = await requestGoogleAccessToken({
+          prompt: needsConsent ? 'consent' : '',
+        });
+        return applyGoogleAccessTokenResponse(response);
+      } catch (error) {
+        if (!needsConsent && shouldRetryInteractiveGoogleAuth(error)) {
+          const response = await requestGoogleAccessToken({ prompt: 'consent' });
+          return applyGoogleAccessTokenResponse(response);
+        }
+
+        throw error;
+      }
     }
 
     async function loadGoogleProfile() {
@@ -774,6 +864,39 @@
       return true;
     }
 
+    async function resumeGoogleSessionSilently() {
+      if (!authState.configured || authState.user || authState.busy) {
+        return false;
+      }
+
+      authState.busy = true;
+      authState.error = '';
+      authState.syncMessage = 'Reconnecting to Google Sheets…';
+      updateAuthUi();
+
+      try {
+        await ensureValidAccessToken({ interactive: false });
+        await loadGoogleProfile();
+        const settingsSynced = await syncSettingsFromCloud({ interactive: false });
+        const decisionsSynced = await syncDecisionsFromCloud({ interactive: false });
+        return Boolean(settingsSynced && decisionsSynced);
+      } catch (error) {
+        const message = error?.message || '';
+        if (message.includes('session expired') || message.includes('missing Drive or Sheets access')) {
+          authState.error = '';
+          authState.syncInProgress = false;
+          authState.syncMessage = message;
+          return false;
+        }
+
+        handleCloudSyncError(error);
+        return false;
+      } finally {
+        authState.busy = false;
+        updateAuthUi();
+      }
+    }
+
     async function signInWithGoogle() {
       if (!authState.configured) {
         return;
@@ -813,25 +936,9 @@
       authState.busy = true;
       updateAuthUi();
 
-      try {
-        if (authState.accessToken) {
-          await new Promise((resolve) => {
-            window.google.accounts.oauth2.revoke(authState.accessToken, () => resolve());
-          });
-        }
-      } catch (error) {
-        handleCloudSyncError(error);
-        return;
-      }
-
       clearDecisionSyncTimer();
-      clearCachedAuthSession();
+      clearActiveAuthSession();
       authState.busy = false;
-      authState.user = null;
-      authState.accessToken = '';
-      authState.tokenExpiresAt = 0;
-      authState.grantedScopes = [];
-      authState.sheetId = '';
       authState.error = '';
       authState.syncInProgress = false;
       authState.syncMessage = 'Signed out. Your settings and review outcomes remain saved on this device.';
@@ -880,12 +987,14 @@
           error_callback: () => {},
         });
 
-        restoreCachedAuthSession();
+        const restoredSession = restoreCachedAuthSession();
         updateAuthUi();
 
         if (authState.user && authState.accessToken) {
           syncSettingsFromCloud({ interactive: false });
           syncDecisionsFromCloud({ interactive: false });
+        } else if (restoredSession.canAttemptSilentSignIn) {
+          resumeGoogleSessionSilently();
         }
       } catch (error) {
         handleCloudSyncError(error);

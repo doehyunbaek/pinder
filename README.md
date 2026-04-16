@@ -168,7 +168,9 @@ For backward compatibility, older data in the legacy `decisions` tab is still re
 
 Without Google OAuth config, the app still works locally with device-only settings.
 
-Google auth is cached in the current browser tab/session, so refreshing the page should not require signing in again until the session expires.
+Because Pinder requests Google Drive and Sheets scopes, Google may show extra consent and `Google hasn't verified this app` screens while the OAuth app is still unverified or in testing. That warning cannot be removed in client-side code alone. To remove it, publish or verify the OAuth consent screen, or use an Internal app inside a Google Workspace org.
+
+Returning users should usually reconnect with fewer prompts. Pinder caches auth in the browser and also tries a silent token refresh before asking you to click Sign in again.
 
 ## Test locally
 
