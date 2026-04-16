@@ -160,7 +160,15 @@
 
       <footer class="footer-bar">
         <div class="footer-actions">
-          <button class="secondary-button" id="undoButton" type="button">Undo</button>
+          <button
+            class="secondary-button"
+            id="undoButton"
+            type="button"
+            title="Undo the latest review (U or ⌘/Ctrl+Z)"
+            aria-keyshortcuts="Meta+Z Control+Z U"
+          >
+            Undo
+          </button>
           <button class="secondary-button" id="exportButton" type="button">Export reviews</button>
           <button class="secondary-button danger" id="resetButton" type="button">Resubmit</button>
         </div>
@@ -193,6 +201,6 @@
     <script src="https://accounts.google.com/gsi/client"></script>
     <script src="./scrape.js?v=20260402-16"></script>
     <script src="./auth.js?v=20260415-01"></script>
-    <script src="./app.js?v=20260415-07"></script>
+    <script src="./app.js?v=20260416-01"></script>
   </body>
 </html>

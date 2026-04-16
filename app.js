@@ -1091,8 +1091,13 @@ function onKeyDown(event) {
     return;
   }
 
-  const targetTag = document.activeElement?.tagName;
-  if (targetTag === 'INPUT' || targetTag === 'TEXTAREA') {
+  if (isEditableElement(document.activeElement)) {
+    return;
+  }
+
+  if (isUndoKeyboardShortcut(event)) {
+    event.preventDefault();
+    undoLastDecision();
     return;
   }
 
@@ -1109,10 +1114,28 @@ function onKeyDown(event) {
     return;
   }
 
-  if (event.key.toLowerCase() === 'u') {
+  if (!event.metaKey && !event.ctrlKey && event.key.toLowerCase() === 'u') {
     event.preventDefault();
     undoLastDecision();
   }
+}
+
+function isEditableElement(element) {
+  if (!(element instanceof HTMLElement)) {
+    return false;
+  }
+
+  const tagName = element.tagName;
+  return tagName === 'INPUT' || tagName === 'TEXTAREA' || tagName === 'SELECT' || element.isContentEditable;
+}
+
+function isUndoKeyboardShortcut(event) {
+  if (!event || event.altKey) {
+    return false;
+  }
+
+  const key = String(event.key || '').toLowerCase();
+  return (event.metaKey || event.ctrlKey) && !event.shiftKey && key === 'z';
 }
 
 function onPointerDown(event) {

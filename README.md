@@ -8,6 +8,7 @@ Pinder is a static, client-side paper swiping app for GitHub Pages.
 - ← swipe: weak reject
 - → swipe: weak accept
 - ↑ swipe: accept
+- `U` or `⌘/Ctrl+Z`: undo the latest decision
 - Or tap the on-screen buttons
 - Use the sign-in/sign-out button in the top-right to connect Google Sheets sync
 - Use the settings button in the top-right to hide/show the on-screen buttons and authors
