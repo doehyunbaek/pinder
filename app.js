@@ -1380,16 +1380,15 @@ function exportDecisions() {
 }
 
 function resubmitWeakRejectDecisions() {
-  const weakRejectPaperIds = Object.entries(state.decisions)
-    .filter(([, decisionEntry]) => decisionEntry?.decision === 'weakReject')
-    .map(([paperId]) => paperId);
+  const resubmitScope = getResubmitScope();
+  const weakRejectPaperIds = getResubmittableWeakRejectPaperIds();
 
   if (!weakRejectPaperIds.length) {
-    flashStatus('No weak-reject papers to resubmit.');
+    flashStatus(`No weak-reject papers to resubmit in ${resubmitScope.label}.`);
     return;
   }
 
-  if (!window.confirm(`Resubmit ${weakRejectPaperIds.length} weak-reject paper${weakRejectPaperIds.length === 1 ? '' : 's'}? Other decisions will stay saved.`)) {
+  if (!window.confirm(`Resubmit ${weakRejectPaperIds.length} weak-reject paper${weakRejectPaperIds.length === 1 ? '' : 's'} from ${resubmitScope.label}? Other decisions will stay saved.`)) {
     return;
   }
 
@@ -1404,7 +1403,7 @@ function resubmitWeakRejectDecisions() {
 
   render();
   flashStatus(
-    `Resubmitted ${weakRejectPaperIds.length} weak-reject paper${weakRejectPaperIds.length === 1 ? '' : 's'}.`,
+    `Resubmitted ${weakRejectPaperIds.length} weak-reject paper${weakRejectPaperIds.length === 1 ? '' : 's'} from ${resubmitScope.label}.`,
   );
 }
 
@@ -1418,6 +1417,8 @@ function render() {
   const activeSourcePeriod = getActiveSourcePeriod();
   const activePapers = getPapersForSourcePeriod(activeSourcePeriod);
   const activeCounts = getDecisionCounts(activeSourcePeriod);
+  const resubmitScope = getResubmitScope();
+  const resubmittableWeakRejectPaperIds = getResubmittableWeakRejectPaperIds();
   const waitingForOlderPapers = !currentPaper && canLoadOlderPapers();
 
   let progressTotal = total;
@@ -1433,7 +1434,9 @@ function render() {
   renderStats(activeCounts);
   elements.undoButton.disabled = !reviewedCount;
   elements.exportButton.disabled = !reviewedCount;
-  elements.resetButton.disabled = !totalCounts.weakReject;
+  elements.resetButton.disabled = !resubmittableWeakRejectPaperIds.length;
+  elements.resetButton.title = `Resubmit weak rejects from ${resubmitScope.label}`;
+  elements.resetButton.setAttribute('aria-label', `Resubmit weak rejects from ${resubmitScope.label}`);
 
   if (!currentPaper) {
     closeAbstractModal();
@@ -1589,6 +1592,32 @@ function getDecisionCounts(sourcePeriod = '') {
   });
 
   return counts;
+}
+
+function getResubmitScope() {
+  if (getCurrentSourceMode() === 'icse') {
+    return {
+      papers: state.papers,
+      label: state.sourceLabel || 'current ICSE proceedings',
+    };
+  }
+
+  const activeSourcePeriod = getActiveSourcePeriod();
+  return {
+    papers: getPapersForSourcePeriod(activeSourcePeriod),
+    label: activeSourcePeriod || 'current feed',
+  };
+}
+
+function getResubmittableWeakRejectPaperIds() {
+  const scopePaperIds = new Set(getResubmitScope().papers.map((paper) => paper.id));
+
+  return Object.entries(state.decisions)
+    .filter(([paperId, decisionEntry]) => (
+      decisionEntry?.decision === 'weakReject'
+      && scopePaperIds.has(paperId)
+    ))
+    .map(([paperId]) => paperId);
 }
 
 function formatCustomSourceName(sourceUrl) {
