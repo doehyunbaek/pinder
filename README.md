@@ -21,6 +21,8 @@ Each paper card shows:
 
 Reviews are saved in `localStorage` on the device, so it works without a backend.
 
+To reduce repeat-load latency, Pinder also caches non-current arXiv monthly lists and loaded paper metadata in `localStorage` on a best-effort basis.
+
 ## Files
 
 - `index.html` — app shell

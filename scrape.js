@@ -10,11 +10,396 @@
     (targetUrl) => `https://api.codetabs.com/v1/proxy/?quest=${encodeURIComponent(targetUrl)}`,
     (targetUrl) => `https://api.allorigins.win/raw?url=${encodeURIComponent(targetUrl)}`,
   ];
+  const LOCAL_CACHE_PREFIX = 'pinder-scraper-cache-v1';
+  const LIST_CACHE_PREFIX = `${LOCAL_CACHE_PREFIX}:list:`;
+  const PAPER_DETAILS_CACHE_PREFIX = `${LOCAL_CACHE_PREFIX}:paper:`;
+  const LIST_CACHE_INDEX_KEY = `${LOCAL_CACHE_PREFIX}:list:index`;
+  const PAPER_DETAILS_CACHE_INDEX_KEY = `${LOCAL_CACHE_PREFIX}:paper:index`;
+  const MAX_CACHED_PAPER_LISTS = 36;
+  const MAX_CACHED_PAPER_LIST_BYTES = 1_500_000;
+  const MAX_CACHED_PAPER_DETAILS = 400;
+  const MAX_CACHED_PAPER_DETAILS_BYTES = 3_000_000;
 
   function buildDefaultListUrl(date = new Date()) {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     return `https://arxiv.org/list/cs.SE/${year}-${month}?skip=0&show=2000`;
+  }
+
+  function getCurrentArxivPeriod(date = new Date()) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    return `${year}-${month}`;
+  }
+
+  function getLocalStorageHandle() {
+    try {
+      return window.localStorage;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function estimateSerializedSize(serializedValue = '') {
+    return String(serializedValue || '').length * 2;
+  }
+
+  function buildLocalCacheStorageKey(prefix, cacheKey) {
+    return `${prefix}${encodeURIComponent(cleanUrl(cacheKey))}`;
+  }
+
+  function loadLocalCacheIndex(indexKey) {
+    const storage = getLocalStorageHandle();
+    if (!storage) {
+      return {};
+    }
+
+    try {
+      const parsedIndex = JSON.parse(storage.getItem(indexKey) || '{}');
+      return parsedIndex && typeof parsedIndex === 'object' ? parsedIndex : {};
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function saveLocalCacheIndex(indexKey, index) {
+    const storage = getLocalStorageHandle();
+    if (!storage) {
+      return false;
+    }
+
+    try {
+      storage.setItem(indexKey, JSON.stringify(index));
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function removeLocalCacheEntry({ prefix, indexKey, cacheKey, index = loadLocalCacheIndex(indexKey) }) {
+    const storage = getLocalStorageHandle();
+    const normalizedCacheKey = cleanUrl(cacheKey);
+    if (!normalizedCacheKey) {
+      return index;
+    }
+
+    try {
+      storage?.removeItem(buildLocalCacheStorageKey(prefix, normalizedCacheKey));
+    } catch (error) {
+      // Ignore cache cleanup errors. Local caching is best-effort only.
+    }
+
+    delete index[normalizedCacheKey];
+    return index;
+  }
+
+  function compareCacheEntriesForEviction(leftEntry, rightEntry) {
+    const leftMeta = leftEntry?.[1] || {};
+    const rightMeta = rightEntry?.[1] || {};
+    const leftTime = Date.parse(leftMeta.accessedAt || leftMeta.updatedAt || '') || 0;
+    const rightTime = Date.parse(rightMeta.accessedAt || rightMeta.updatedAt || '') || 0;
+    return leftTime - rightTime;
+  }
+
+  function pruneLocalCacheNamespace({
+    prefix,
+    indexKey,
+    maxEntries,
+    maxBytes,
+    incomingCacheKey = '',
+    incomingSize = 0,
+  }) {
+    const index = loadLocalCacheIndex(indexKey);
+    const protectedCacheKey = cleanUrl(incomingCacheKey);
+    const evictionCandidates = Object.entries(index)
+      .filter(([cacheKey]) => cacheKey !== protectedCacheKey)
+      .sort(compareCacheEntriesForEviction);
+
+    let totalEntries = evictionCandidates.length + (protectedCacheKey ? 1 : 0);
+    let totalBytes = incomingSize + evictionCandidates.reduce((sum, [, meta]) => sum + Number(meta?.size || 0), 0);
+
+    while (evictionCandidates.length && (totalEntries > maxEntries || totalBytes > maxBytes)) {
+      const [cacheKey, meta] = evictionCandidates.shift();
+      removeLocalCacheEntry({ prefix, indexKey, cacheKey, index });
+      totalEntries -= 1;
+      totalBytes -= Number(meta?.size || 0);
+    }
+
+    return index;
+  }
+
+  function loadLocalCacheValue({ prefix, indexKey, cacheKey, normalize = (value) => value }) {
+    const storage = getLocalStorageHandle();
+    const normalizedCacheKey = cleanUrl(cacheKey);
+    if (!storage || !normalizedCacheKey) {
+      return null;
+    }
+
+    const storageKey = buildLocalCacheStorageKey(prefix, normalizedCacheKey);
+
+    try {
+      const rawValue = storage.getItem(storageKey);
+      if (!rawValue) {
+        const index = removeLocalCacheEntry({ prefix, indexKey, cacheKey: normalizedCacheKey });
+        saveLocalCacheIndex(indexKey, index);
+        return null;
+      }
+
+      const parsedValue = JSON.parse(rawValue);
+      const normalizedValue = typeof normalize === 'function' ? normalize(parsedValue) : parsedValue;
+      if (!normalizedValue) {
+        const index = removeLocalCacheEntry({ prefix, indexKey, cacheKey: normalizedCacheKey });
+        saveLocalCacheIndex(indexKey, index);
+        return null;
+      }
+
+      const index = loadLocalCacheIndex(indexKey);
+      index[normalizedCacheKey] = {
+        size: estimateSerializedSize(rawValue),
+        updatedAt: index[normalizedCacheKey]?.updatedAt || new Date().toISOString(),
+        accessedAt: new Date().toISOString(),
+      };
+      saveLocalCacheIndex(indexKey, index);
+      return normalizedValue;
+    } catch (error) {
+      const index = removeLocalCacheEntry({ prefix, indexKey, cacheKey: normalizedCacheKey });
+      saveLocalCacheIndex(indexKey, index);
+      return null;
+    }
+  }
+
+  function saveLocalCacheValue({
+    prefix,
+    indexKey,
+    cacheKey,
+    value,
+    maxEntries,
+    maxBytes,
+  }) {
+    const storage = getLocalStorageHandle();
+    const normalizedCacheKey = cleanUrl(cacheKey);
+    if (!storage || !normalizedCacheKey || value === undefined) {
+      return false;
+    }
+
+    let serializedValue = '';
+    try {
+      serializedValue = JSON.stringify(value);
+    } catch (error) {
+      return false;
+    }
+
+    const serializedSize = estimateSerializedSize(serializedValue);
+    const index = pruneLocalCacheNamespace({
+      prefix,
+      indexKey,
+      maxEntries,
+      maxBytes,
+      incomingCacheKey: normalizedCacheKey,
+      incomingSize: serializedSize,
+    });
+    const timestamp = new Date().toISOString();
+    index[normalizedCacheKey] = {
+      size: serializedSize,
+      updatedAt: timestamp,
+      accessedAt: timestamp,
+    };
+
+    try {
+      storage.setItem(buildLocalCacheStorageKey(prefix, normalizedCacheKey), serializedValue);
+      if (!saveLocalCacheIndex(indexKey, index)) {
+        throw new Error('Could not store cache index.');
+      }
+      return true;
+    } catch (error) {
+      try {
+        storage.removeItem(buildLocalCacheStorageKey(prefix, normalizedCacheKey));
+      } catch (cleanupError) {
+        // Ignore cleanup failures. Local caching is best-effort only.
+      }
+      delete index[normalizedCacheKey];
+      saveLocalCacheIndex(indexKey, index);
+      return false;
+    }
+  }
+
+  function shouldPersistPaperList(listUrl) {
+    const parsedListUrl = describeListUrl(listUrl);
+    return Boolean(parsedListUrl && parsedListUrl.period !== getCurrentArxivPeriod());
+  }
+
+  function getPersistentListCacheKey(listUrl) {
+    const parsedListUrl = describeListUrl(listUrl);
+    if (parsedListUrl) {
+      return buildListUrl(parsedListUrl);
+    }
+
+    try {
+      return new URL(listUrl, window.location.href).href;
+    } catch (error) {
+      return cleanUrl(listUrl);
+    }
+  }
+
+  function looksLikeArxivAbsUrl(url) {
+    return /^(?:https?:\/\/)?arxiv\.org\/abs\//i.test(cleanUrl(url));
+  }
+
+  function looksLikeArxivPaperId(paperId) {
+    return /^\d{4}\.\d{4,5}(v\d+)?$/i.test(cleanText(paperId || ''))
+      || /^[a-z.-]+\/\d{7}(v\d+)?$/i.test(cleanText(paperId || ''));
+  }
+
+  function normalizeCacheablePaperId(rawPaperId, absUrl = '') {
+    const cleanedPaperId = cleanText(rawPaperId || '');
+    if (looksLikeArxivAbsUrl(absUrl) || looksLikeArxivPaperId(cleanedPaperId)) {
+      return normalizePaperId(cleanedPaperId || absUrl);
+    }
+
+    return cleanedPaperId || cleanUrl(absUrl);
+  }
+
+  function getPaperCacheKey(paper) {
+    const absUrl = cleanUrl(paper?.absUrl || '');
+    return absUrl || normalizeCacheablePaperId(paper?.id, absUrl);
+  }
+
+  function normalizeCachedPaperListPaper(paper) {
+    if (!paper || typeof paper !== 'object') {
+      return null;
+    }
+
+    const paperId = normalizeCacheablePaperId(paper.id, paper.absUrl);
+    if (!paperId) {
+      return null;
+    }
+
+    const authors = Array.isArray(paper.authors)
+      ? paper.authors.map((author) => cleanText(author)).filter(Boolean)
+      : extractAuthorsFromText(paper.authorsText);
+
+    return {
+      ...createPaperStub(paperId),
+      title: cleanText(paper.title || '') || `arXiv:${paperId}`,
+      authors,
+      authorsText: cleanText(paper.authorsText || authors.join(', ')),
+    };
+  }
+
+  function normalizeCachedPaperListPayload(payload, fallbackSourceUrl = '') {
+    if (!payload || typeof payload !== 'object') {
+      return null;
+    }
+
+    const papers = Array.isArray(payload.papers)
+      ? payload.papers.map((paper) => normalizeCachedPaperListPaper(paper)).filter(Boolean)
+      : [];
+
+    if (!papers.length) {
+      return null;
+    }
+
+    return {
+      sourceUrl: cleanUrl(payload.sourceUrl || fallbackSourceUrl),
+      papers,
+    };
+  }
+
+  function loadCachedPaperList(listUrl) {
+    if (!shouldPersistPaperList(listUrl)) {
+      return null;
+    }
+
+    return loadLocalCacheValue({
+      prefix: LIST_CACHE_PREFIX,
+      indexKey: LIST_CACHE_INDEX_KEY,
+      cacheKey: getPersistentListCacheKey(listUrl),
+      normalize: (cachedPayload) => normalizeCachedPaperListPayload(cachedPayload, listUrl),
+    });
+  }
+
+  function saveCachedPaperList(listUrl, payload) {
+    if (!shouldPersistPaperList(listUrl)) {
+      return false;
+    }
+
+    const normalizedPayload = normalizeCachedPaperListPayload(payload, listUrl);
+    if (!normalizedPayload) {
+      return false;
+    }
+
+    return saveLocalCacheValue({
+      prefix: LIST_CACHE_PREFIX,
+      indexKey: LIST_CACHE_INDEX_KEY,
+      cacheKey: getPersistentListCacheKey(listUrl),
+      value: normalizedPayload,
+      maxEntries: MAX_CACHED_PAPER_LISTS,
+      maxBytes: MAX_CACHED_PAPER_LIST_BYTES,
+    });
+  }
+
+  function normalizeCachedPaperDetails(paper) {
+    if (!paper || typeof paper !== 'object') {
+      return null;
+    }
+
+    const normalizedPaperId = normalizeCacheablePaperId(paper.id, paper.absUrl);
+    const cacheKey = getPaperCacheKey({
+      id: normalizedPaperId || paper.id,
+      absUrl: paper.absUrl,
+    });
+    if (!cacheKey) {
+      return null;
+    }
+
+    const authors = Array.isArray(paper.authors)
+      ? paper.authors.map((author) => cleanText(author)).filter(Boolean)
+      : extractAuthorsFromText(paper.authorsText);
+    const absUrl = cleanUrl(paper.absUrl || (looksLikeArxivPaperId(normalizedPaperId) ? `https://arxiv.org/abs/${normalizedPaperId}` : ''));
+
+    return {
+      id: normalizedPaperId || cleanText(paper.id || ''),
+      title: cleanText(paper.title || '') || (normalizedPaperId ? `arXiv:${normalizedPaperId}` : 'Paper'),
+      authors,
+      authorsText: cleanText(paper.authorsText || authors.join(', ')),
+      abstract: cleanText(paper.abstract || ''),
+      absUrl,
+      pdfUrl: normalizePdfUrl(cleanUrl(paper.pdfUrl || absUrl)),
+      loaded: true,
+      loading: false,
+      error: '',
+    };
+  }
+
+  function loadCachedPaperDetails(paper) {
+    const cacheKey = getPaperCacheKey(paper);
+    if (!cacheKey) {
+      return null;
+    }
+
+    return loadLocalCacheValue({
+      prefix: PAPER_DETAILS_CACHE_PREFIX,
+      indexKey: PAPER_DETAILS_CACHE_INDEX_KEY,
+      cacheKey,
+      normalize: normalizeCachedPaperDetails,
+    });
+  }
+
+  function saveCachedPaperDetails(paper) {
+    const cacheKey = getPaperCacheKey(paper);
+    const normalizedPaper = normalizeCachedPaperDetails(paper);
+    if (!cacheKey || !normalizedPaper) {
+      return false;
+    }
+
+    return saveLocalCacheValue({
+      prefix: PAPER_DETAILS_CACHE_PREFIX,
+      indexKey: PAPER_DETAILS_CACHE_INDEX_KEY,
+      cacheKey,
+      value: normalizedPaper,
+      maxEntries: MAX_CACHED_PAPER_DETAILS,
+      maxBytes: MAX_CACHED_PAPER_DETAILS_BYTES,
+    });
   }
 
   function describeListUrl(listUrl) {
@@ -110,6 +495,12 @@
       return payload;
     }
 
+    const cachedPaperList = loadCachedPaperList(listUrl);
+    if (cachedPaperList) {
+      onProgress('Loading cached paper list…');
+      return cachedPaperList;
+    }
+
     onProgress('Fetching paper list from arXiv…');
     const html = await fetchThroughProxy(listUrl);
     const papers = parseListPage(html);
@@ -118,10 +509,16 @@
       throw new Error('Could not parse any papers from the arXiv list page.');
     }
 
-    return {
+    const payload = {
       sourceUrl: listUrl,
       papers,
     };
+
+    if (papers.length) {
+      saveCachedPaperList(listUrl, payload);
+    }
+
+    return payload;
   }
 
   async function ensurePaperLoaded(paper, { onProgress = () => {} } = {}) {
@@ -133,24 +530,43 @@
       return paper;
     }
 
-    if (PAPER_CACHE.has(paper.id)) {
-      const cachedPaper = await PAPER_CACHE.get(paper.id);
+    const paperCacheKey = getPaperCacheKey(paper);
+
+    if (paperCacheKey && PAPER_CACHE.has(paperCacheKey)) {
+      const cachedPaper = await PAPER_CACHE.get(paperCacheKey);
       Object.assign(paper, cachedPaper, { loaded: true, loading: false, error: '' });
+      return paper;
+    }
+
+    const persistedPaper = loadCachedPaperDetails(paper);
+    if (persistedPaper) {
+      if (paperCacheKey) {
+        PAPER_CACHE.set(paperCacheKey, Promise.resolve(persistedPaper));
+      }
+      Object.assign(paper, persistedPaper, { loaded: true, loading: false, error: '' });
       return paper;
     }
 
     paper.loading = true;
     onProgress(`Loading ${paper.id}…`);
 
-    const fetchPromise = fetchAndParsePaper(paper);
-    PAPER_CACHE.set(paper.id, fetchPromise);
+    const fetchPromise = fetchAndParsePaper(paper).then((loadedPaper) => {
+      saveCachedPaperDetails(loadedPaper);
+      return loadedPaper;
+    });
+
+    if (paperCacheKey) {
+      PAPER_CACHE.set(paperCacheKey, fetchPromise);
+    }
 
     try {
       const loadedPaper = await fetchPromise;
       Object.assign(paper, loadedPaper, { loaded: true, loading: false, error: '' });
       return paper;
     } catch (error) {
-      PAPER_CACHE.delete(paper.id);
+      if (paperCacheKey) {
+        PAPER_CACHE.delete(paperCacheKey);
+      }
       paper.loading = false;
       paper.error = error.message || 'Could not load paper details.';
       paper.title = paper.title || String(paper.id || 'Paper');
