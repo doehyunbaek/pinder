@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>pinder</title>
-    <link rel="stylesheet" href="./styles.css?v=20260415-05" />
+    <link rel="stylesheet" href="./styles.css?v=20260426-09" />
   </head>
   <body>
     <main class="app-shell">
@@ -41,7 +41,7 @@
                 </button>
                 <button class="source-menu-option" id="sourceIcseOption" type="button" role="menuitem">
                   <span class="source-menu-option-title">ICSE accepted papers</span>
-                  <span class="source-menu-option-hint">Browse ICSE 2018–2026</span>
+                  <span class="source-menu-option-hint">Browse ICSE 1976–2026</span>
                 </button>
               </div>
             </div>
@@ -55,7 +55,42 @@
             </div>
           </div>
 
+          <div class="topbar-search" id="topbarSearch">
+            <button
+              class="topbar-search-filter"
+              id="filterButton"
+              type="button"
+              aria-label="Open author filter"
+              aria-controls="filterMenu"
+              aria-expanded="false"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z" />
+              </svg>
+            </button>
+            <input
+              type="text"
+              id="searchInput"
+              class="topbar-search-input"
+              placeholder="Search papers… (title: abstract: author:)"
+              aria-label="Search papers by title, abstract, or author"
+              autocomplete="off"
+            />
+            <button type="button" class="topbar-search-clear hidden" id="searchClearButton" aria-label="Clear search">&times;</button>
+
+            <div class="settings-menu hidden" id="filterMenu">
+              <p class="settings-title">Authors</p>
+              <input type="text" id="authorSearchInput" placeholder="Search authors..." class="author-search-input" />
+              <div class="author-filter-actions">
+                <button type="button" class="secondary-button" id="selectAllAuthorsButton">Select all</button>
+                <button type="button" class="secondary-button" id="clearAllAuthorsButton">Clear all</button>
+              </div>
+              <div class="author-list" id="authorList"></div>
+            </div>
+          </div>
+
           <div class="topbar-actions">
+            <button class="secondary-button hidden" id="modeToggleButton" type="button">Explore Map</button>
             <button class="auth-button" id="topAuthButton" type="button">Sign in</button>
 
             <button
@@ -103,6 +138,29 @@
           <div class="stats" id="stats"></div>
         </div>
       </header>
+
+      <details class="icse-visualization hidden" id="icseVisualization" open>
+        <summary class="icse-visualization-summary">
+          <div class="icse-visualization-summary-copy">
+            <p class="eyebrow">ICSE map</p>
+            <p class="icse-visualization-title">One square per paper</p>
+          </div>
+          <div class="icse-visualization-summary-meta">
+            <p class="icse-visualization-summary-text" id="icseVisualizationSummary"></p>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 10l5 5 5-5" />
+            </svg>
+          </div>
+        </summary>
+
+        <div class="icse-visualization-body">
+          <div class="icse-visualization-legend" id="icseVisualizationLegend" aria-label="Decision color legend"></div>
+          <p class="icse-visualization-hover" id="icseVisualizationHover">
+            Sorted left to right: Accept → Weak accept → Weak reject → Reject → Unreviewed. Hover a square to preview its title; click to open the abstract.
+          </p>
+          <div class="icse-paper-map" id="icsePaperMap"></div>
+        </div>
+      </details>
 
       <section class="board" aria-live="polite">
         <div class="status-panel hidden" id="statusPanel"></div>
@@ -170,7 +228,6 @@
             Undo
           </button>
           <button class="secondary-button" id="exportButton" type="button">Export reviews</button>
-          <button class="secondary-button danger" id="resetButton" type="button">Resubmit</button>
         </div>
       </footer>
 
@@ -187,7 +244,7 @@
         <div class="abstract-modal-sheet" id="abstractModalSheet" tabindex="-1">
           <div class="abstract-modal-header">
             <p class="section-label">Abstract</p>
-            <p class="abstract-modal-hint">Tap outside to close</p>
+            <p class="abstract-modal-hint" id="abstractModalHint">Arrow keys rate · Esc or tap outside closes</p>
           </div>
           <h2 class="abstract-modal-title" id="abstractModalTitle"></h2>
           <div class="abstract-modal-body" id="abstractModalBody">
@@ -197,10 +254,17 @@
       </div>
     </main>
 
+    <div
+      class="icse-visualization-tooltip hidden"
+      id="icseVisualizationTooltip"
+      role="tooltip"
+      aria-hidden="true"
+    ></div>
+
     <script src="./google-api-config.js?v=20260402-16"></script>
     <script src="https://accounts.google.com/gsi/client"></script>
-    <script src="./scrape.js?v=20260416-02"></script>
+    <script src="./scrape.js?v=20260426-02"></script>
     <script src="./auth.js?v=20260416-02"></script>
-    <script src="./app.js?v=20260416-01"></script>
+    <script src="./app.js?v=20260426-09"></script>
   </body>
 </html>

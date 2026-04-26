@@ -638,12 +638,16 @@
       const trackOptions = tracks
         .map((track, index) => buildJsonTrackOption(track, index))
         .filter(Boolean);
+      const icseVisualizationTracks = tracks
+        .map((track, index) => buildJsonTrackVisualization(track, index))
+        .filter(Boolean);
 
       return {
         sourceUrl: cleanUrl(sourceUrl),
         sourceLabel: cleanText(selectedTrack.sourceLabel || payload.sourceLabel || payload.title || ''),
         selectedTrackKey: cleanText(buildJsonTrackOption(selectedTrack)?.key || ''),
         trackOptions,
+        icseVisualizationTracks,
         papers: trackPapers
           .map((paper, index) => normalizeJsonPaper(paper, index))
           .filter(Boolean),
@@ -712,10 +716,39 @@
       return null;
     }
 
+    const paperCount = Number(track.paperCount);
+
     return {
       key,
       year,
       label: cleanText(track.sourceLabel || `Track ${index + 1}`),
+      paperCount: Number.isFinite(paperCount)
+        ? paperCount
+        : (Array.isArray(track.papers) ? track.papers.length : 0),
+    };
+  }
+
+  function buildJsonTrackVisualization(track, index = 0) {
+    const trackOption = buildJsonTrackOption(track, index);
+    if (!trackOption) {
+      return null;
+    }
+
+    const papers = (Array.isArray(track.papers) ? track.papers : [])
+      .map((paper, paperIndex) => normalizeJsonPaper(paper, paperIndex))
+      .filter(Boolean)
+      .map((paper) => ({
+        ...paper,
+        year: trackOption.year,
+        trackKey: trackOption.key,
+        sourceLabel: trackOption.label,
+      }));
+
+    return {
+      ...trackOption,
+      sourceLabel: trackOption.label,
+      paperCount: trackOption.paperCount || papers.length,
+      papers,
     };
   }
 

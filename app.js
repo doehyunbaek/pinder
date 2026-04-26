@@ -34,6 +34,7 @@ const SETTINGS_STORAGE_KEY = 'pinder-settings-v1';
 const LAST_ARXIV_SOURCE_STORAGE_KEY = 'pinder-last-arxiv-source-v1';
 const LAST_ICSE_TRACK_STORAGE_KEY = 'pinder-last-icse-track-v1';
 const ICSE_COLLECTION_SOURCE = 'data/icse.json';
+
 const PAPER_DETAILS_PREFETCH_COUNT = 4;
 const OLDER_MONTH_PREFETCH_TRIGGER_REMAINING = 24;
 const OLDER_MONTH_APPEND_TRIGGER_REMAINING = 10;
@@ -50,6 +51,7 @@ const state = {
   settingsOpen: false,
   sourceMenuOpen: false,
   abstractModalOpen: false,
+  abstractModalPaper: null,
   undoStack: [],
   drag: null,
   animating: false,
@@ -66,6 +68,14 @@ const state = {
   olderMonthLoading: false,
   olderMonthExhausted: false,
   olderMonthError: '',
+  icseVisualizationTracks: [],
+  icseVisualizationPaperByKey: new Map(),
+  icseVisualizationStructureKey: '',
+  icseVisualizationHoveredPaperKey: '',
+  uncheckedAuthors: new Set(),
+  authorFilterOpen: false,
+  searchQuery: '',
+  viewMode: 'swipe',
 };
 
 const elements = {
@@ -78,6 +88,15 @@ const elements = {
   topbarBrand: document.getElementById('topbarBrand'),
   trackPickerWrap: document.getElementById('trackPickerWrap'),
   trackPicker: document.getElementById('trackPicker'),
+  filterButton: document.getElementById('filterButton'),
+  searchInput: document.getElementById('searchInput'),
+  searchClearButton: document.getElementById('searchClearButton'),
+  filterMenu: document.getElementById('filterMenu'),
+  authorSearchInput: document.getElementById('authorSearchInput'),
+  selectAllAuthorsButton: document.getElementById('selectAllAuthorsButton'),
+  clearAllAuthorsButton: document.getElementById('clearAllAuthorsButton'),
+  authorList: document.getElementById('authorList'),
+  modeToggleButton: document.getElementById('modeToggleButton'),
   topAuthButton: document.getElementById('topAuthButton'),
   settingsButton: document.getElementById('settingsButton'),
   settingsMenu: document.getElementById('settingsMenu'),
@@ -104,6 +123,7 @@ const elements = {
   abstractModalBackdrop: document.getElementById('abstractModalBackdrop'),
   abstractModalSheet: document.getElementById('abstractModalSheet'),
   abstractModalBody: document.getElementById('abstractModalBody'),
+  abstractModalHint: document.getElementById('abstractModalHint'),
   abstractModalTitle: document.getElementById('abstractModalTitle'),
   abstractModalText: document.getElementById('abstractModalText'),
   nextTitle: document.getElementById('nextTitle'),
@@ -112,9 +132,14 @@ const elements = {
   emptySummary: document.getElementById('emptySummary'),
   summaryGrid: document.getElementById('summaryGrid'),
   stats: document.getElementById('stats'),
+  icseVisualization: document.getElementById('icseVisualization'),
+  icseVisualizationSummary: document.getElementById('icseVisualizationSummary'),
+  icseVisualizationLegend: document.getElementById('icseVisualizationLegend'),
+  icseVisualizationHover: document.getElementById('icseVisualizationHover'),
+  icsePaperMap: document.getElementById('icsePaperMap'),
+  icseVisualizationTooltip: document.getElementById('icseVisualizationTooltip'),
   undoButton: document.getElementById('undoButton'),
   exportButton: document.getElementById('exportButton'),
-  resetButton: document.getElementById('resetButton'),
   actionGrid: document.getElementById('actionGrid'),
   actionButtons: Array.from(document.querySelectorAll('.action-button')),
 };
@@ -160,8 +185,10 @@ async function init() {
     initializeFeedState(resolvedSourceUrl, payload.sourceLabel || '', {
       trackOptions: payload.trackOptions || [],
       selectedTrackKey: payload.selectedTrackKey || '',
+      icseVisualizationTracks: payload.icseVisualizationTracks || [],
     });
     appendPaperBatch(resolvedSourceUrl, payload.papers || []);
+
 
     if (!state.papers.length) {
       throw new Error('No papers were found in the selected source.');
@@ -192,11 +219,21 @@ function getSourceTrackFromQuery() {
   return new URLSearchParams(window.location.search).get('track') || '';
 }
 
-function initializeFeedState(sourceUrl, sourceLabel = '', { trackOptions = [], selectedTrackKey = '' } = {}) {
+
+function initializeFeedState(sourceUrl, sourceLabel = '', {
+  trackOptions = [],
+  selectedTrackKey = '',
+  icseVisualizationTracks = [],
+} = {}) {
   state.sourceUrl = sourceUrl;
   state.sourceLabel = sourceLabel;
   state.trackOptions = Array.isArray(trackOptions) ? trackOptions : [];
   state.selectedTrackKey = selectedTrackKey || '';
+  state.icseVisualizationTracks = Array.isArray(icseVisualizationTracks) ? icseVisualizationTracks : [];
+  state.icseVisualizationPaperByKey = new Map();
+  state.icseVisualizationStructureKey = '';
+  state.icseVisualizationHoveredPaperKey = '';
+  state.uncheckedAuthors = new Set();
   state.papers = [];
   state.loadedSourceUrls = [];
   state.loadedPaperIds = new Set();
@@ -204,6 +241,10 @@ function initializeFeedState(sourceUrl, sourceLabel = '', { trackOptions = [], s
   state.olderMonthPromise = null;
   state.olderMonthLoading = false;
   state.olderMonthError = '';
+  state.abstractModalPaper = null;
+  if (elements.authorSearchInput) {
+    elements.authorSearchInput.value = '';
+  }
 
   const sourceInfo = describeListUrl(sourceUrl);
   state.feedArchive = sourceInfo?.archive || '';
@@ -266,6 +307,11 @@ function appendPaperBatch(sourceUrl, papers) {
 
 function updateSourceLabel() {
   elements.sourceLabel.textContent = formatSourceLabel();
+  const isIcse = getCurrentSourceMode() === 'icse';
+  elements.modeToggleButton.classList.toggle('hidden', !isIcse);
+  if (!isIcse && state.viewMode === 'explore') {
+    state.viewMode = 'swipe';
+  }
 }
 
 function updateSourceMenu() {
@@ -276,6 +322,7 @@ function updateSourceMenu() {
 
 function openSourceMenu() {
   closeSettingsMenu();
+  closeFilterMenu();
   state.sourceMenuOpen = true;
   updateSourceMenu();
   elements.sourceMenu.classList.remove('hidden');
@@ -615,6 +662,15 @@ function getMissingDomRequirements() {
     'topbarBrand',
     'trackPickerWrap',
     'trackPicker',
+    'filterButton',
+    'searchInput',
+    'searchClearButton',
+    'filterMenu',
+    'authorSearchInput',
+    'selectAllAuthorsButton',
+    'clearAllAuthorsButton',
+    'authorList',
+    'modeToggleButton',
     'topAuthButton',
     'settingsButton',
     'settingsMenu',
@@ -641,6 +697,7 @@ function getMissingDomRequirements() {
     'abstractModalBackdrop',
     'abstractModalSheet',
     'abstractModalBody',
+    'abstractModalHint',
     'abstractModalTitle',
     'abstractModalText',
     'nextTitle',
@@ -649,9 +706,14 @@ function getMissingDomRequirements() {
     'emptySummary',
     'summaryGrid',
     'stats',
+    'icseVisualization',
+    'icseVisualizationSummary',
+    'icseVisualizationLegend',
+    'icseVisualizationHover',
+    'icsePaperMap',
+    'icseVisualizationTooltip',
     'undoButton',
     'exportButton',
-    'resetButton',
     'actionGrid',
   ];
 
@@ -902,7 +964,148 @@ function applySettings() {
   elements.nextAuthors.classList.toggle('hidden', !showAuthors);
 }
 
+function openFilterMenu() {
+  closeSettingsMenu();
+  closeSourceMenu();
+  state.authorFilterOpen = true;
+  elements.filterMenu.classList.remove('hidden');
+  elements.filterButton.setAttribute('aria-expanded', 'true');
+  renderAuthorFilter();
+}
+
+function closeFilterMenu() {
+  state.authorFilterOpen = false;
+  elements.filterMenu.classList.add('hidden');
+  elements.filterButton.setAttribute('aria-expanded', 'false');
+}
+
+function toggleViewMode() {
+  state.viewMode = state.viewMode === 'explore' ? 'swipe' : 'explore';
+  elements.modeToggleButton.textContent = state.viewMode === 'explore' ? 'Swipe mode' : 'Explore Map';
+  render();
+}
+
+function toggleFilterMenu() {
+  if (state.authorFilterOpen) {
+    closeFilterMenu();
+    return;
+  }
+  openFilterMenu();
+}
+
+function onSearchInputChange(event) {
+  state.searchQuery = (event.target.value || '').trim();
+  if (state.searchQuery) {
+    elements.searchClearButton.classList.remove('hidden');
+  } else {
+    elements.searchClearButton.classList.add('hidden');
+  }
+  render();
+}
+
+function onSearchClear() {
+  state.searchQuery = '';
+  elements.searchInput.value = '';
+  elements.searchClearButton.classList.add('hidden');
+  elements.searchInput.focus();
+  render();
+}
+
+function onAuthorSearchInput(event) {
+  renderAuthorFilter(event.target.value);
+}
+
+function getPaperAuthorsList(paper) {
+  if (Array.isArray(paper.authors) && paper.authors.length) {
+    return paper.authors;
+  }
+  const authorsText = String(paper?.authorsText || '').trim();
+  if (!authorsText || /^unknown authors$/i.test(authorsText)) {
+    return [];
+  }
+  return authorsText.split(/\s*,\s*/).filter(Boolean);
+}
+
+function getAllKnownPapers() {
+  const all = new Map();
+  state.papers.forEach(p => all.set(p.id, p));
+  if (state.icseVisualizationTracks) {
+    state.icseVisualizationTracks.forEach(track => {
+      if (Array.isArray(track.papers)) {
+        track.papers.forEach(p => all.set(p.id, p));
+      }
+    });
+  }
+  return Array.from(all.values());
+}
+
+function renderAuthorFilter(searchQuery = elements.authorSearchInput.value) {
+  const query = (searchQuery || '').trim().toLowerCase();
+
+  const authorCounts = new Map();
+  getAllKnownPapers().forEach((paper) => {
+    const authors = getPaperAuthorsList(paper);
+    authors.forEach((author) => {
+      authorCounts.set(author, (authorCounts.get(author) || 0) + 1);
+    });
+  });
+
+  const sortedAuthors = Array.from(authorCounts.entries())
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+
+  const fragment = document.createDocumentFragment();
+
+  sortedAuthors.forEach(([author, count]) => {
+    if (query && !author.toLowerCase().includes(query)) {
+      return;
+    }
+
+    const label = document.createElement('label');
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.value = author;
+    checkbox.checked = !state.uncheckedAuthors.has(author);
+
+    const text = document.createElement('span');
+    text.textContent = `${author} (${count})`;
+
+    label.append(checkbox, text);
+    fragment.appendChild(label);
+  });
+
+  elements.authorList.replaceChildren(fragment);
+}
+
+function selectAllAuthors() {
+  state.uncheckedAuthors.clear();
+  renderAuthorFilter();
+  render();
+}
+
+function clearAllAuthors() {
+  const allAuthors = new Set();
+  getAllKnownPapers().forEach((paper) => {
+    getPaperAuthorsList(paper).forEach((author) => allAuthors.add(author));
+  });
+  state.uncheckedAuthors = allAuthors;
+  renderAuthorFilter();
+  render();
+}
+
+function onAuthorCheckboxChange(event) {
+  if (event.target.type === 'checkbox') {
+    const author = event.target.value;
+    if (event.target.checked) {
+      state.uncheckedAuthors.delete(author);
+    } else {
+      state.uncheckedAuthors.add(author);
+    }
+    render();
+  }
+}
+
 function openSettingsMenu() {
+  closeFilterMenu();
   closeSourceMenu();
   state.settingsOpen = true;
   elements.settingsMenu.classList.remove('hidden');
@@ -970,6 +1173,14 @@ function onDocumentClick(event) {
   }
 
   if (
+    state.authorFilterOpen
+    && !elements.filterMenu.contains(event.target)
+    && !elements.filterButton.contains(event.target)
+  ) {
+    closeFilterMenu();
+  }
+
+  if (
     state.sourceMenuOpen
     && !elements.sourceMenu.contains(event.target)
     && !elements.sourceSwitcherButton.contains(event.target)
@@ -984,12 +1195,27 @@ function bindEvents() {
   elements.currentCard.addEventListener('pointerup', onPointerUp);
   elements.currentCard.addEventListener('pointercancel', onPointerCancel);
   elements.abstractModal.addEventListener('click', onAbstractModalClick);
+  elements.icsePaperMap.addEventListener('click', onIcsePaperMapClick);
+  elements.icsePaperMap.addEventListener('mouseover', onIcsePaperMapMouseOver);
+  elements.icsePaperMap.addEventListener('mousemove', onIcsePaperMapMouseMove);
+  elements.icsePaperMap.addEventListener('mouseout', onIcsePaperMapMouseOut);
+  elements.icsePaperMap.addEventListener('scroll', hideIcseVisualizationTooltip, { passive: true });
+  elements.icsePaperMap.addEventListener('focusin', onIcsePaperMapFocusIn);
+  elements.icsePaperMap.addEventListener('focusout', onIcsePaperMapFocusOut);
 
+  elements.modeToggleButton.addEventListener('click', toggleViewMode);
   elements.topAuthButton.addEventListener('click', auth.onTopAuthButtonClick);
   elements.sourceSwitcherButton.addEventListener('click', toggleSourceMenu);
   elements.sourceArxivOption.addEventListener('click', () => switchSourceMode('arxiv'));
   elements.sourceIcseOption.addEventListener('click', () => switchSourceMode('icse'));
   elements.settingsButton.addEventListener('click', toggleSettingsMenu);
+  elements.filterButton.addEventListener('click', toggleFilterMenu);
+  elements.searchInput.addEventListener('input', onSearchInputChange);
+  elements.searchClearButton.addEventListener('click', onSearchClear);
+  elements.authorSearchInput.addEventListener('input', onAuthorSearchInput);
+  elements.selectAllAuthorsButton.addEventListener('click', selectAllAuthors);
+  elements.clearAllAuthorsButton.addEventListener('click', clearAllAuthors);
+  elements.authorList.addEventListener('change', onAuthorCheckboxChange);
   elements.showButtonsToggle.addEventListener('change', onShowButtonsToggleChange);
   elements.showTitleToggle.addEventListener('change', onShowTitleToggleChange);
   elements.showAuthorsToggle.addEventListener('change', onShowAuthorsToggleChange);
@@ -1006,10 +1232,109 @@ function bindEvents() {
 
   elements.undoButton.addEventListener('click', undoLastDecision);
   elements.exportButton.addEventListener('click', exportDecisions);
-  elements.resetButton.addEventListener('click', resubmitWeakRejectDecisions);
 
   document.addEventListener('click', onDocumentClick);
   document.addEventListener('keydown', onKeyDown);
+}
+
+function getIcsePaperMapButtonFromTarget(target) {
+  if (!(target instanceof Element)) {
+    return null;
+  }
+
+  const button = target.closest('.icse-paper-square');
+  return button && elements.icsePaperMap.contains(button) ? button : null;
+}
+
+function getIcseVisualizationPaperFromButton(button) {
+  if (!button) {
+    return null;
+  }
+
+  return state.icseVisualizationPaperByKey.get(String(button.dataset.paperKey || '').trim()) || null;
+}
+
+function onIcsePaperMapClick(event) {
+  const button = getIcsePaperMapButtonFromTarget(event.target);
+  if (!button) {
+    return;
+  }
+
+  const paper = getIcseVisualizationPaperFromButton(button);
+  if (!paper) {
+    return;
+  }
+
+  openAbstractModal(paper);
+}
+
+function onIcsePaperMapMouseOver(event) {
+  const button = getIcsePaperMapButtonFromTarget(event.target);
+  if (!button) {
+    return;
+  }
+
+  setIcseVisualizationHoverFromButton(button, {
+    clientX: event.clientX,
+    clientY: event.clientY,
+  });
+}
+
+function onIcsePaperMapMouseMove(event) {
+  const button = getIcsePaperMapButtonFromTarget(event.target);
+  if (!button) {
+    return;
+  }
+
+  if (
+    state.icseVisualizationHoveredPaperKey !== String(button.dataset.paperKey || '').trim()
+    || elements.icseVisualizationTooltip.classList.contains('hidden')
+  ) {
+    setIcseVisualizationHoverFromButton(button, {
+      clientX: event.clientX,
+      clientY: event.clientY,
+    });
+    return;
+  }
+
+  positionIcseVisualizationTooltip(event.clientX, event.clientY);
+}
+
+function onIcsePaperMapMouseOut(event) {
+  const button = getIcsePaperMapButtonFromTarget(event.target);
+  if (!button) {
+    return;
+  }
+
+  const nextButton = getIcsePaperMapButtonFromTarget(event.relatedTarget);
+  if (nextButton) {
+    return;
+  }
+
+  clearIcseVisualizationHover(button.dataset.paperKey);
+}
+
+function onIcsePaperMapFocusIn(event) {
+  const button = getIcsePaperMapButtonFromTarget(event.target);
+  if (!button) {
+    return;
+  }
+
+  setIcseVisualizationHoverFromButton(button);
+}
+
+function onIcsePaperMapFocusOut(event) {
+  const button = getIcsePaperMapButtonFromTarget(event.target);
+  if (!button) {
+    return;
+  }
+
+  const nextButton = getIcsePaperMapButtonFromTarget(event.relatedTarget);
+  if (nextButton) {
+    return;
+  }
+
+  clearIcseVisualizationHover(button.dataset.paperKey);
 }
 
 function onAbstractModalClick(event) {
@@ -1027,14 +1352,25 @@ function toggleAbstractModal() {
   openAbstractModal();
 }
 
-function openAbstractModal() {
-  const paper = getCurrentPaper();
+function openAbstractModal(paper = getCurrentPaper()) {
   if (!paper) {
     return;
   }
 
-  updateAbstractModalContent(paper);
+  state.icseVisualizationHoveredPaperKey = '';
+  hideIcseVisualizationTooltip();
+  state.abstractModalPaper = paper;
+  updateAbstractModalContent();
   state.abstractModalOpen = true;
+
+  if (!paper.loaded && !paper.loading) {
+    loadPaperDetails(paper)
+      .then(() => updateAbstractModalContent())
+      .catch((error) => {
+        console.warn('Could not load abstract for modal.', error);
+        updateAbstractModalContent();
+      });
+  }
   elements.abstractModal.classList.remove('hidden');
   elements.abstractModal.setAttribute('aria-hidden', 'false');
   elements.abstractModalBody.scrollTop = 0;
@@ -1047,19 +1383,22 @@ function openAbstractModal() {
 
 function closeAbstractModal() {
   if (!state.abstractModalOpen) {
+    state.abstractModalPaper = null;
     return;
   }
 
   state.abstractModalOpen = false;
+  state.abstractModalPaper = null;
   elements.abstractModal.classList.add('hidden');
   elements.abstractModal.setAttribute('aria-hidden', 'true');
   document.body.classList.remove('modal-open');
 }
 
-function updateAbstractModalContent(paper = getCurrentPaper()) {
+function updateAbstractModalContent(paper = state.abstractModalPaper || getCurrentPaper()) {
   if (!paper) {
     elements.abstractModalTitle.textContent = '';
     elements.abstractModalText.textContent = '';
+    elements.abstractModalHint.textContent = 'Arrow keys rate · Esc or tap outside closes';
     return;
   }
 
@@ -1067,9 +1406,22 @@ function updateAbstractModalContent(paper = getCurrentPaper()) {
   elements.abstractModalText.textContent = !paper.loaded
     ? 'Loading abstract…'
     : (paper.abstract || paper.error || 'No abstract available.');
+  elements.abstractModalHint.textContent = getAbstractModalHintText(paper);
+}
+
+function getAbstractModalHintText(paper) {
+  const decisionKey = getDecisionKeyForPaper(paper);
+  const decisionLabel = decisionKey ? DECISIONS[decisionKey].label : 'Unreviewed';
+  return `Current: ${decisionLabel} · Arrow keys rate · Esc or tap outside closes`;
 }
 
 function onKeyDown(event) {
+  if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+    event.preventDefault();
+    elements.searchInput.focus();
+    return;
+  }
+
   if (event.key === 'Escape') {
     if (state.abstractModalOpen) {
       closeAbstractModal();
@@ -1081,13 +1433,18 @@ function onKeyDown(event) {
       return;
     }
 
+    if (state.authorFilterOpen) {
+      closeFilterMenu();
+      return;
+    }
+
     if (state.sourceMenuOpen) {
       closeSourceMenu();
       return;
     }
   }
 
-  if (state.settingsOpen || state.sourceMenuOpen || state.abstractModalOpen) {
+  if (state.settingsOpen || state.sourceMenuOpen || state.authorFilterOpen) {
     return;
   }
 
@@ -1107,6 +1464,21 @@ function onKeyDown(event) {
     ArrowRight: 'weakAccept',
     ArrowUp: 'accept',
   };
+
+  if (state.abstractModalOpen) {
+    if (keyMap[event.key]) {
+      event.preventDefault();
+      rateAbstractModalPaper(keyMap[event.key]);
+      return;
+    }
+
+    if (!event.metaKey && !event.ctrlKey && event.key.toLowerCase() === 'u') {
+      event.preventDefault();
+      undoLastDecision();
+      updateAbstractModalContent();
+    }
+    return;
+  }
 
   if (keyMap[event.key]) {
     event.preventDefault();
@@ -1283,6 +1655,17 @@ function rateCurrent(decisionKey) {
   animateDecision(decisionKey);
 }
 
+function rateAbstractModalPaper(decisionKey) {
+  const paper = state.abstractModalPaper;
+  if (!paper || !DECISIONS[decisionKey]) {
+    return;
+  }
+
+  recordDecision(paper, decisionKey);
+  updateAbstractModalContent(paper);
+  render();
+}
+
 function animateDecision(decisionKey, dx = 0, dy = 0) {
   const paper = getCurrentPaper();
   if (!paper) {
@@ -1379,47 +1762,19 @@ function exportDecisions() {
   flashStatus('Exported reviews as JSON.');
 }
 
-function resubmitWeakRejectDecisions() {
-  const resubmitScope = getResubmitScope();
-  const weakRejectPaperIds = getResubmittableWeakRejectPaperIds();
-
-  if (!weakRejectPaperIds.length) {
-    flashStatus(`No weak-reject papers to resubmit in ${resubmitScope.label}.`);
-    return;
-  }
-
-  if (!window.confirm(`Resubmit ${weakRejectPaperIds.length} weak-reject paper${weakRejectPaperIds.length === 1 ? '' : 's'} from ${resubmitScope.label}? Other decisions will stay saved.`)) {
-    return;
-  }
-
-  weakRejectPaperIds.forEach((paperId) => {
-    delete state.decisions[paperId];
-  });
-
-  const weakRejectIdSet = new Set(weakRejectPaperIds);
-  state.undoStack = state.undoStack.filter((paperId) => !weakRejectIdSet.has(paperId));
-  saveDecisions();
-  scheduleDecisionSync();
-
-  render();
-  flashStatus(
-    `Resubmitted ${weakRejectPaperIds.length} weak-reject paper${weakRejectPaperIds.length === 1 ? '' : 's'} from ${resubmitScope.label}.`,
-  );
-}
-
 function render() {
+  const visiblePapers = state.papers.filter(isPaperVisible);
+  const undecidedPapers = state.papers.filter((paper) => !state.decisions[paper.id]);
   const remainingPapers = getRemainingPapers();
   const currentPaper = remainingPapers[0] || null;
   const nextPaper = remainingPapers[1] || null;
-  const total = state.papers.length;
+  const total = visiblePapers.length;
   const reviewedCount = total - remainingPapers.length;
   const totalCounts = getDecisionCounts();
   const activeSourcePeriod = getActiveSourcePeriod();
   const activePapers = getPapersForSourcePeriod(activeSourcePeriod);
   const activeCounts = getDecisionCounts(activeSourcePeriod);
-  const resubmitScope = getResubmitScope();
-  const resubmittableWeakRejectPaperIds = getResubmittableWeakRejectPaperIds();
-  const waitingForOlderPapers = !currentPaper && canLoadOlderPapers();
+  const waitingForOlderPapers = !currentPaper && !undecidedPapers.length && canLoadOlderPapers();
 
   let progressTotal = total;
   let progressReviewed = reviewedCount;
@@ -1432,22 +1787,25 @@ function render() {
   updateSourceLabel();
 
   renderStats(activeCounts);
+  renderIcseVisualization();
   elements.undoButton.disabled = !reviewedCount;
   elements.exportButton.disabled = !reviewedCount;
-  elements.resetButton.disabled = !resubmittableWeakRejectPaperIds.length;
-  elements.resetButton.title = `Resubmit weak rejects from ${resubmitScope.label}`;
-  elements.resetButton.setAttribute('aria-label', `Resubmit weak rejects from ${resubmitScope.label}`);
 
-  if (!currentPaper) {
-    closeAbstractModal();
-  }
-
+  const isExplore = state.viewMode === 'explore';
+  document.body.classList.toggle('explore-mode', isExplore);
+  
+  elements.progressPanel.classList.toggle('hidden', isExplore);
   elements.currentCard.classList.toggle('hidden', !currentPaper);
   elements.nextCard.classList.toggle('hidden', !currentPaper);
-  elements.cardStack.classList.toggle('hidden', !currentPaper);
-  elements.emptyState.classList.toggle('hidden', Boolean(currentPaper) || waitingForOlderPapers);
+  elements.cardStack.classList.toggle('hidden', isExplore || !currentPaper);
+  elements.emptyState.classList.toggle('hidden', isExplore || Boolean(currentPaper) || waitingForOlderPapers);
+  
+  const footerActions = document.querySelector('.footer-actions');
+  if (footerActions) {
+    footerActions.classList.toggle('hidden', isExplore);
+  }
 
-  if (currentPaper) {
+  if (!isExplore && currentPaper) {
     renderCurrentPaper(currentPaper);
     renderNextPaper(nextPaper);
     prefetchVisiblePapersSoon();
@@ -1496,7 +1854,7 @@ function renderCurrentPaper(paper) {
     : (paper.abstract || paper.error || 'No abstract available.');
   elements.absLink.href = paper.absUrl;
   elements.pdfLink.href = paper.pdfUrl;
-  updateAbstractModalContent(paper);
+  updateAbstractModalContent();
 }
 
 function renderNextPaper(paper) {
@@ -1528,6 +1886,385 @@ function renderStats(counts) {
   elements.progressPanel.setAttribute('aria-label', `Review progress. ${statsText}`);
 }
 
+function renderIcseVisualization() {
+  const data = getIcseVisualizationData();
+  const showVisualization = Boolean(data) && state.viewMode === 'explore';
+  elements.icseVisualization.classList.toggle('hidden', !showVisualization);
+
+  if (!showVisualization) {
+    state.icseVisualizationHoveredPaperKey = '';
+    hideIcseVisualizationTooltip();
+    return;
+  }
+
+  elements.icseVisualizationSummary.textContent = data.summaryText;
+  renderIcseVisualizationLegend(data.decisionCounts, data.totalPaperCount);
+  renderIcsePaperMap(data);
+}
+
+function renderIcseVisualizationLegend(decisionCounts, totalPaperCount) {
+  const legendItems = [
+    {
+      label: 'Unreviewed',
+      className: 'undecided',
+      value: totalPaperCount - getReviewedCount(decisionCounts),
+    },
+    {
+      label: 'Accept',
+      className: DECISIONS.accept.className,
+      value: decisionCounts.accept,
+    },
+    {
+      label: 'Weak accept',
+      className: DECISIONS.weakAccept.className,
+      value: decisionCounts.weakAccept,
+    },
+    {
+      label: 'Weak reject',
+      className: DECISIONS.weakReject.className,
+      value: decisionCounts.weakReject,
+    },
+    {
+      label: 'Reject',
+      className: DECISIONS.reject.className,
+      value: decisionCounts.reject,
+    },
+  ];
+
+  const fragment = document.createDocumentFragment();
+  legendItems.forEach((item) => {
+    const chip = document.createElement('div');
+    chip.className = 'icse-legend-chip';
+
+    const swatch = document.createElement('span');
+    swatch.className = `icse-legend-swatch ${item.className}`;
+    swatch.setAttribute('aria-hidden', 'true');
+
+    const label = document.createElement('span');
+    label.className = 'icse-legend-label';
+    label.textContent = `${item.label} ${formatStatNumber(item.value)}`;
+
+    chip.append(swatch, label);
+    fragment.appendChild(chip);
+  });
+
+  elements.icseVisualizationLegend.replaceChildren(fragment);
+}
+
+function renderIcsePaperMap(data) {
+  const structureKey = data.tracks
+    .map((track) => `${track.key}:${track.paperCount}`)
+    .join('|');
+
+  if (state.icseVisualizationStructureKey !== structureKey) {
+    const fragment = document.createDocumentFragment();
+    const paperByKey = new Map();
+
+    data.tracks.forEach((track) => {
+      const row = document.createElement('section');
+      row.className = 'icse-paper-map-row';
+      row.dataset.trackKey = track.key;
+
+      const meta = document.createElement('div');
+      meta.className = 'icse-paper-map-meta';
+
+      const year = document.createElement('p');
+      year.className = 'icse-paper-map-year';
+      year.textContent = `${track.year || ''} - ${formatStatNumber(track.paperCount)}`;
+
+      meta.append(year);
+
+      const squares = document.createElement('div');
+      squares.className = 'icse-paper-map-squares';
+      squares.setAttribute('role', 'list');
+      squares.setAttribute('aria-label', `${track.label || `ICSE ${track.year}`}. ${track.paperCount} papers.`);
+
+      track.papers.forEach((paper, index) => {
+        const paperKey = buildIcseVisualizationPaperKey(track, paper, index);
+        paperByKey.set(paperKey, paper);
+
+        const square = document.createElement('button');
+        square.type = 'button';
+        square.className = 'icse-paper-square';
+        square.dataset.paperKey = paperKey;
+        square.dataset.paperId = paper.id || '';
+        updateIcsePaperSquareState(square, paper);
+        squares.appendChild(square);
+      });
+
+      row.append(meta, squares);
+      fragment.appendChild(row);
+    });
+
+    state.icseVisualizationPaperByKey = paperByKey;
+    state.icseVisualizationStructureKey = structureKey;
+    elements.icsePaperMap.replaceChildren(fragment);
+  }
+
+  syncIcsePaperMapSelection(data.selectedTrackKey);
+  syncIcsePaperMapDecisions(data.tracks);
+}
+
+function syncIcsePaperMapSelection(selectedTrackKey) {
+  Array.from(elements.icsePaperMap.querySelectorAll('.icse-paper-map-row')).forEach((row) => {
+    row.classList.toggle('selected', row.dataset.trackKey === selectedTrackKey);
+  });
+}
+
+function syncIcsePaperMapDecisions(tracks = []) {
+  const trackByKey = new Map(
+    tracks.map((track) => [String(track.key || '').trim(), track]),
+  );
+
+  Array.from(elements.icsePaperMap.querySelectorAll('.icse-paper-map-row')).forEach((row) => {
+    const trackKey = String(row.dataset.trackKey || '').trim();
+    const track = trackByKey.get(trackKey);
+    if (!track) {
+      return;
+    }
+
+    const squares = row.querySelector('.icse-paper-map-squares');
+    if (!(squares instanceof HTMLElement)) {
+      return;
+    }
+
+    const buttonByKey = new Map(
+      Array.from(squares.querySelectorAll('.icse-paper-square'))
+        .map((button) => [String(button.dataset.paperKey || '').trim(), button]),
+    );
+
+    getSortedIcseVisualizationTrackPaperEntries(track).forEach(({ key, paper }) => {
+      const button = buttonByKey.get(key);
+      if (!button) {
+        return;
+      }
+
+      updateIcsePaperSquareState(button, paper);
+      squares.appendChild(button);
+    });
+  });
+}
+
+function updateIcsePaperSquareState(square, paper) {
+  const decisionKey = getDecisionKeyForPaper(paper);
+  square.classList.remove('undecided');
+  Object.values(DECISIONS).forEach((decision) => {
+    square.classList.remove(decision.className);
+  });
+
+  square.classList.add(decisionKey ? DECISIONS[decisionKey].className : 'undecided');
+  square.setAttribute('aria-label', buildIcseVisualizationPaperAriaLabel(paper, decisionKey));
+}
+
+function getSortedIcseVisualizationTrackPaperEntries(track) {
+  return track.papers
+    .map((paper, index) => ({
+      key: buildIcseVisualizationPaperKey(track, paper, index),
+      paper,
+      index,
+    }))
+    .sort((left, right) => (
+      getIcseVisualizationDecisionSortOrder(left.paper) - getIcseVisualizationDecisionSortOrder(right.paper)
+      || left.index - right.index
+    ));
+}
+
+function getIcseVisualizationDecisionSortOrder(paper) {
+  switch (getDecisionKeyForPaper(paper)) {
+    case 'accept':
+      return 0;
+    case 'weakAccept':
+      return 1;
+    case 'weakReject':
+      return 2;
+    case 'reject':
+      return 3;
+    default:
+      return 4;
+  }
+}
+
+function getIcseVisualizationData() {
+  if (getCurrentSourceMode() !== 'icse' || !state.icseVisualizationTracks.length) {
+    return null;
+  }
+
+  const tracks = state.icseVisualizationTracks
+    .map((track) => {
+      const papers = (Array.isArray(track.papers) ? track.papers : []).filter(isPaperVisible);
+      return {
+        ...track,
+        key: String(track.key || '').trim(),
+        label: String(track.label || track.sourceLabel || '').trim(),
+        year: Number(track.year),
+        paperCount: Number(track.paperCount),
+        papers,
+      };
+    })
+    .filter((track) => track.key && Number.isFinite(track.year) && track.papers.length)
+    .map((track) => ({
+      ...track,
+      paperCount: track.papers.length,
+    }))
+    .sort((a, b) => b.year - a.year);
+
+  if (!tracks.length) {
+    return null;
+  }
+
+  const selectedTrackKey = String(state.selectedTrackKey || tracks[0].key || '').trim();
+  const selectedTrack = tracks.find((track) => track.key === selectedTrackKey) || tracks[0];
+  const allPapers = tracks.flatMap((track) => track.papers);
+  const totalPaperCount = allPapers.length;
+  const decisionCounts = getDecisionCountsForPaperList(allPapers);
+  const reviewedCount = getReviewedCount(decisionCounts);
+
+  return {
+    tracks,
+    selectedTrackKey: selectedTrack.key,
+    totalPaperCount,
+    decisionCounts,
+    reviewedCount,
+    summaryText: `${formatStatNumber(totalPaperCount)} papers · ${formatStatNumber(tracks.length)} ICSE editions · ${formatStatNumber(reviewedCount)} reviewed`,
+  };
+}
+
+function getDecisionCountsForPaperList(papers) {
+  const counts = {
+    accept: 0,
+    weakAccept: 0,
+    weakReject: 0,
+    reject: 0,
+  };
+
+  papers.forEach((paper) => {
+    const decisionKey = getDecisionKeyForPaper(paper);
+    if (decisionKey && counts[decisionKey] !== undefined) {
+      counts[decisionKey] += 1;
+    }
+  });
+
+  return counts;
+}
+
+function getReviewedCount(counts) {
+  return counts.accept + counts.weakAccept + counts.weakReject + counts.reject;
+}
+
+function getDecisionKeyForPaper(paper) {
+  const decisionKey = state.decisions[paper?.id]?.decision;
+  return DECISIONS[decisionKey] ? decisionKey : '';
+}
+
+function buildIcseVisualizationPaperKey(track, paper, index) {
+  return `${track.key}::${paper.id || 'paper'}::${index + 1}`;
+}
+
+function buildIcseVisualizationPaperAriaLabel(paper, decisionKey = getDecisionKeyForPaper(paper)) {
+  const title = paper?.title || paper?.id || 'Paper';
+  const year = String(paper?.year || '').trim();
+  const decisionLabel = decisionKey ? DECISIONS[decisionKey].label : 'Unreviewed';
+  const trackLabel = paper?.sourceLabel || (year ? `ICSE ${year}` : 'ICSE');
+  return `${trackLabel}. ${title}. ${decisionLabel}. Activate to open abstract.`;
+}
+
+function formatIcseTrackRowLabel(track) {
+  const rawLabel = String(track?.label || track?.sourceLabel || '').trim();
+  const normalizedLabel = rawLabel
+    .replace(/^ICSE\s+\d{4}\s*/i, '')
+    .replace(/^ICSE\s*/i, '')
+    .trim();
+
+  return normalizedLabel || 'Proceedings';
+}
+
+function setIcseVisualizationHoverFromButton(button, position = null) {
+  const paperKey = String(button?.dataset.paperKey || '').trim();
+  if (!paperKey) {
+    return;
+  }
+
+  const paper = getIcseVisualizationPaperFromButton(button);
+  if (!paper) {
+    return;
+  }
+
+  state.icseVisualizationHoveredPaperKey = paperKey;
+  showIcseVisualizationTooltip(paper);
+
+  if (position?.clientX !== undefined && position?.clientY !== undefined) {
+    positionIcseVisualizationTooltip(position.clientX, position.clientY);
+    return;
+  }
+
+  positionIcseVisualizationTooltipFromElement(button);
+}
+
+function clearIcseVisualizationHover(paperKey = '') {
+  if (paperKey && state.icseVisualizationHoveredPaperKey !== String(paperKey).trim()) {
+    return;
+  }
+
+  state.icseVisualizationHoveredPaperKey = '';
+  hideIcseVisualizationTooltip();
+}
+
+function showIcseVisualizationTooltip(paper) {
+  elements.icseVisualizationTooltip.textContent = paper?.title || paper?.id || 'Paper';
+  elements.icseVisualizationTooltip.classList.remove('hidden');
+  elements.icseVisualizationTooltip.setAttribute('aria-hidden', 'false');
+}
+
+function hideIcseVisualizationTooltip() {
+  elements.icseVisualizationTooltip.classList.add('hidden');
+  elements.icseVisualizationTooltip.setAttribute('aria-hidden', 'true');
+}
+
+function positionIcseVisualizationTooltipFromElement(element) {
+  if (!(element instanceof Element)) {
+    return;
+  }
+
+  const rect = element.getBoundingClientRect();
+  positionIcseVisualizationTooltip(rect.left + rect.width / 2, rect.bottom);
+}
+
+function positionIcseVisualizationTooltip(clientX, clientY) {
+  if (elements.icseVisualizationTooltip.classList.contains('hidden')) {
+    return;
+  }
+
+  const offsetX = 12;
+  const offsetY = 18;
+  const viewportPadding = 12;
+  let left = clientX + offsetX;
+  let top = clientY + offsetY;
+
+  elements.icseVisualizationTooltip.style.left = `${Math.round(left)}px`;
+  elements.icseVisualizationTooltip.style.top = `${Math.round(top)}px`;
+
+  const rect = elements.icseVisualizationTooltip.getBoundingClientRect();
+  if (left + rect.width > window.innerWidth - viewportPadding) {
+    left = Math.max(viewportPadding, window.innerWidth - rect.width - viewportPadding);
+  }
+  if (top + rect.height > window.innerHeight - viewportPadding) {
+    top = Math.max(viewportPadding, clientY - rect.height - 14);
+  }
+
+  elements.icseVisualizationTooltip.style.left = `${Math.round(left)}px`;
+  elements.icseVisualizationTooltip.style.top = `${Math.round(top)}px`;
+}
+
+function formatStatNumber(value, maximumFractionDigits = 0) {
+  if (!Number.isFinite(value)) {
+    return '—';
+  }
+
+  return new Intl.NumberFormat('en-US', {
+    maximumFractionDigits,
+  }).format(value);
+}
+
 function summaryCardMarkup(label, value) {
   return `
     <div class="summary-card">
@@ -1541,8 +2278,73 @@ function getCurrentPaper() {
   return getRemainingPapers()[0] || null;
 }
 
+function isPaperVisibleByAuthors(paper) {
+  if (state.uncheckedAuthors.size === 0) {
+    return true;
+  }
+
+  const authors = getPaperAuthorsList(paper);
+  if (!authors.length) {
+    return true;
+  }
+
+  return authors.some((author) => !state.uncheckedAuthors.has(author));
+}
+
+
+function isPaperVisibleBySearch(paper) {
+  if (!state.searchQuery) {
+    return true;
+  }
+
+  const query = state.searchQuery.toLowerCase();
+  let searchScope = 'all';
+  let searchTerm = query;
+
+  if (query.startsWith('title:')) {
+    searchScope = 'title';
+    searchTerm = query.slice(6).trim();
+  } else if (query.startsWith('abstract:')) {
+    searchScope = 'abstract';
+    searchTerm = query.slice(9).trim();
+  } else if (query.startsWith('author:')) {
+    searchScope = 'author';
+    searchTerm = query.slice(7).trim();
+  }
+
+  if (!searchTerm) {
+    return true;
+  }
+
+  const title = String(paper?.title || '').toLowerCase();
+  const abstract = String(paper?.abstract || '').toLowerCase();
+  const authorsText = String(paper?.authorsText || '').toLowerCase();
+  const authorsList = getPaperAuthorsList(paper).map((a) => a.toLowerCase());
+
+  if (searchScope === 'title') {
+    return title.includes(searchTerm);
+  }
+
+  if (searchScope === 'abstract') {
+    return abstract.includes(searchTerm);
+  }
+
+  if (searchScope === 'author') {
+    return authorsText.includes(searchTerm) || authorsList.some((a) => a.includes(searchTerm));
+  }
+
+  return title.includes(searchTerm) || abstract.includes(searchTerm) || authorsText.includes(searchTerm) || authorsList.some((a) => a.includes(searchTerm));
+}
+
+function isPaperVisible(paper) {
+  return (
+    isPaperVisibleByAuthors(paper)
+    && isPaperVisibleBySearch(paper)
+  );
+}
+
 function getRemainingPapers() {
-  return state.papers.filter((paper) => !state.decisions[paper.id]);
+  return state.papers.filter((paper) => !state.decisions[paper.id] && isPaperVisible(paper));
 }
 
 function getReviewedPapers() {
@@ -1571,9 +2373,10 @@ function getActiveSourcePeriod() {
 }
 
 function getPapersForSourcePeriod(sourcePeriod = '') {
+  const visiblePapers = state.papers.filter(isPaperVisible);
   return sourcePeriod
-    ? state.papers.filter((paper) => paper.sourcePeriod === sourcePeriod)
-    : state.papers;
+    ? visiblePapers.filter((paper) => paper.sourcePeriod === sourcePeriod)
+    : visiblePapers;
 }
 
 function getDecisionCounts(sourcePeriod = '') {
@@ -1592,32 +2395,6 @@ function getDecisionCounts(sourcePeriod = '') {
   });
 
   return counts;
-}
-
-function getResubmitScope() {
-  if (getCurrentSourceMode() === 'icse') {
-    return {
-      papers: state.papers,
-      label: state.sourceLabel || 'current ICSE proceedings',
-    };
-  }
-
-  const activeSourcePeriod = getActiveSourcePeriod();
-  return {
-    papers: getPapersForSourcePeriod(activeSourcePeriod),
-    label: activeSourcePeriod || 'current feed',
-  };
-}
-
-function getResubmittableWeakRejectPaperIds() {
-  const scopePaperIds = new Set(getResubmitScope().papers.map((paper) => paper.id));
-
-  return Object.entries(state.decisions)
-    .filter(([paperId, decisionEntry]) => (
-      decisionEntry?.decision === 'weakReject'
-      && scopePaperIds.has(paperId)
-    ))
-    .map(([paperId]) => paperId);
 }
 
 function formatCustomSourceName(sourceUrl) {
@@ -1643,7 +2420,8 @@ function formatSourceLabel() {
   const sourceInfo = describeListUrl(state.sourceUrl);
   const archive = state.feedArchive || sourceInfo?.archive || '';
   const activeSourcePeriod = getActiveSourcePeriod();
-  const count = getPapersForSourcePeriod(activeSourcePeriod).length || state.papers.length;
+  const visibleCount = state.papers.filter(isPaperVisible).length;
+  const count = getPapersForSourcePeriod(activeSourcePeriod).length || visibleCount;
 
   if (!archive || !activeSourcePeriod) {
     return `${formatCustomSourceName(state.sourceUrl)} · ${count} papers loaded`;

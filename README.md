@@ -10,6 +10,7 @@ Pinder is a static, client-side paper swiping app for GitHub Pages.
 - ↑ swipe: accept
 - `U` or `⌘/Ctrl+Z`: undo the latest decision
 - Or tap the on-screen buttons
+- Inside the abstract modal, use the arrow keys to rate the open paper
 - Use the sign-in/sign-out button in the top-right to connect Google Sheets sync
 - Use the settings button in the top-right to hide/show the on-screen buttons and authors
 
@@ -96,6 +97,10 @@ If `track` is omitted, Pinder uses the collection's `defaultTrack`.
 Tap the source label in the header to switch between the default arXiv feed and the ICSE collection.
 
 When an ICSE collection is loaded, the UI also shows an `ICSE year` dropdown in the header so you can switch years without editing the URL manually.
+
+A collapsible `ICSE map` panel also appears above the card stack with one square per ICSE paper across all tracked years, colored by your review decision. Within each ICSE row, squares are sorted left-to-right as accept, weak accept, weak reject, reject, and unreviewed. Hovering a square shows a floating title tooltip near the cursor, and clicking it opens the abstract modal.
+
+The top-right filter menu supports author filtering.
 
 ## Regenerating the ICSE datasets
 
