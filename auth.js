@@ -119,6 +119,7 @@
         settingsSheetTitle: config.settingsSheetTitle || 'settings',
         arxivSheetTitle: config.arxivSheetTitle || 'arxiv',
         icseSheetTitle: config.icseSheetTitle || 'icse',
+        fseSheetTitle: config.fseSheetTitle || 'fse',
         legacyDecisionsSheetTitle: config.decisionsSheetTitle || 'decisions',
         scopes: config.scopes || [
           'https://www.googleapis.com/auth/drive.file',
@@ -135,18 +136,30 @@
     }
 
     function normalizeDecisionSyncTarget(syncTarget) {
-      return syncTarget === 'icse' ? 'icse' : 'arxiv';
+      return ['icse', 'fse'].includes(syncTarget) ? syncTarget : 'arxiv';
     }
 
     function getDecisionSheetTitle(syncTarget) {
       const config = getGoogleConfig();
-      return normalizeDecisionSyncTarget(syncTarget) === 'icse'
-        ? config.icseSheetTitle
-        : config.arxivSheetTitle;
+      const normalizedSyncTarget = normalizeDecisionSyncTarget(syncTarget);
+      if (normalizedSyncTarget === 'icse') {
+        return config.icseSheetTitle;
+      }
+      if (normalizedSyncTarget === 'fse') {
+        return config.fseSheetTitle;
+      }
+      return config.arxivSheetTitle;
     }
 
     function getDecisionSheetLabel(syncTarget) {
-      return normalizeDecisionSyncTarget(syncTarget) === 'icse' ? 'ICSE' : 'arXiv';
+      const normalizedSyncTarget = normalizeDecisionSyncTarget(syncTarget);
+      if (normalizedSyncTarget === 'icse') {
+        return 'ICSE';
+      }
+      if (normalizedSyncTarget === 'fse') {
+        return 'FSE';
+      }
+      return 'arXiv';
     }
 
     function loadCachedAuthSession() {
@@ -472,6 +485,11 @@
             {
               properties: {
                 title: config.icseSheetTitle,
+              },
+            },
+            {
+              properties: {
+                title: config.fseSheetTitle,
               },
             },
           ],

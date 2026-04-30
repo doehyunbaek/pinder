@@ -33,7 +33,25 @@ const STORAGE_KEY = 'pinder-decisions-v1';
 const SETTINGS_STORAGE_KEY = 'pinder-settings-v1';
 const LAST_ARXIV_SOURCE_STORAGE_KEY = 'pinder-last-arxiv-source-v1';
 const LAST_ICSE_TRACK_STORAGE_KEY = 'pinder-last-icse-track-v1';
+const LAST_FSE_TRACK_STORAGE_KEY = 'pinder-last-fse-track-v1';
 const ICSE_COLLECTION_SOURCE = 'data/icse.json';
+const FSE_COLLECTION_SOURCE = 'data/fse.json';
+const CONFERENCE_SOURCE_CONFIGS = {
+  icse: {
+    mode: 'icse',
+    label: 'ICSE',
+    source: ICSE_COLLECTION_SOURCE,
+    lastTrackStorageKey: LAST_ICSE_TRACK_STORAGE_KEY,
+    fileName: 'icse.json',
+  },
+  fse: {
+    mode: 'fse',
+    label: 'FSE',
+    source: FSE_COLLECTION_SOURCE,
+    lastTrackStorageKey: LAST_FSE_TRACK_STORAGE_KEY,
+    fileName: 'fse.json',
+  },
+};
 
 const PAPER_DETAILS_PREFETCH_COUNT = 4;
 const OLDER_MONTH_PREFETCH_TRIGGER_REMAINING = 24;
@@ -85,8 +103,10 @@ const elements = {
   sourceMenu: document.getElementById('sourceMenu'),
   sourceArxivOption: document.getElementById('sourceArxivOption'),
   sourceIcseOption: document.getElementById('sourceIcseOption'),
+  sourceFseOption: document.getElementById('sourceFseOption'),
   topbarBrand: document.getElementById('topbarBrand'),
   trackPickerWrap: document.getElementById('trackPickerWrap'),
+  trackPickerLabel: document.getElementById('trackPickerLabel'),
   trackPicker: document.getElementById('trackPicker'),
   filterButton: document.getElementById('filterButton'),
   searchInput: document.getElementById('searchInput'),
@@ -134,6 +154,7 @@ const elements = {
   stats: document.getElementById('stats'),
   icseVisualization: document.getElementById('icseVisualization'),
   icseVisualizationSummary: document.getElementById('icseVisualizationSummary'),
+  conferenceMapEyebrow: document.getElementById('conferenceMapEyebrow'),
   icseVisualizationLegend: document.getElementById('icseVisualizationLegend'),
   icseVisualizationHover: document.getElementById('icseVisualizationHover'),
   icsePaperMap: document.getElementById('icsePaperMap'),
@@ -307,9 +328,9 @@ function appendPaperBatch(sourceUrl, papers) {
 
 function updateSourceLabel() {
   elements.sourceLabel.textContent = formatSourceLabel();
-  const isIcse = getCurrentSourceMode() === 'icse';
-  elements.modeToggleButton.classList.toggle('hidden', !isIcse);
-  if (!isIcse && state.viewMode === 'explore') {
+  const isConference = isConferenceSourceMode(getCurrentSourceMode());
+  elements.modeToggleButton.classList.toggle('hidden', !isConference);
+  if (!isConference && state.viewMode === 'explore') {
     state.viewMode = 'swipe';
   }
 }
@@ -318,6 +339,7 @@ function updateSourceMenu() {
   const currentSourceMode = getCurrentSourceMode();
   elements.sourceArxivOption.classList.toggle('active', currentSourceMode === 'arxiv');
   elements.sourceIcseOption.classList.toggle('active', currentSourceMode === 'icse');
+  elements.sourceFseOption.classList.toggle('active', currentSourceMode === 'fse');
 }
 
 function openSourceMenu() {
@@ -345,21 +367,37 @@ function toggleSourceMenu() {
 }
 
 function getCurrentSourceMode() {
-  return isIcseCollectionSource(state.sourceUrl) ? 'icse' : 'arxiv';
+  return getConferenceSourceMode(state.sourceUrl) || 'arxiv';
 }
 
-function isIcseCollectionSource(sourceUrl) {
+function isConferenceSourceMode(sourceMode) {
+  return Boolean(CONFERENCE_SOURCE_CONFIGS[sourceMode]);
+}
+
+function getConferenceSourceConfig(sourceMode = getCurrentSourceMode()) {
+  return CONFERENCE_SOURCE_CONFIGS[sourceMode] || null;
+}
+
+function getConferenceSourceMode(sourceUrl) {
   if (!sourceUrl) {
-    return false;
+    return '';
   }
+
+  const normalizedSourceUrl = String(sourceUrl || '').trim();
 
   try {
     const parsedUrl = new URL(sourceUrl, window.location.href);
-    return parsedUrl.pathname.endsWith('/icse.json') || parsedUrl.pathname === '/icse.json';
+    const pathname = parsedUrl.pathname;
+    return Object.values(CONFERENCE_SOURCE_CONFIGS)
+      .find((config) => pathname.endsWith(`/${config.fileName}`) || pathname === `/${config.fileName}`)?.mode || '';
   } catch (error) {
-    const normalizedSourceUrl = String(sourceUrl || '').trim();
-    return normalizedSourceUrl === ICSE_COLLECTION_SOURCE || normalizedSourceUrl.endsWith('/icse.json');
+    return Object.values(CONFERENCE_SOURCE_CONFIGS)
+      .find((config) => normalizedSourceUrl === config.source || normalizedSourceUrl.endsWith(`/${config.fileName}`))?.mode || '';
   }
+}
+
+function isIcseCollectionSource(sourceUrl) {
+  return getConferenceSourceMode(sourceUrl) === 'icse';
 }
 
 function saveLastSourcePreference(storageKey, value) {
@@ -381,8 +419,9 @@ function loadLastSourcePreference(storageKey) {
 }
 
 function rememberCurrentSourceSelection() {
-  if (getCurrentSourceMode() === 'icse') {
-    saveLastSourcePreference(LAST_ICSE_TRACK_STORAGE_KEY, state.selectedTrackKey || '');
+  const conferenceConfig = getConferenceSourceConfig();
+  if (conferenceConfig) {
+    saveLastSourcePreference(conferenceConfig.lastTrackStorageKey, state.selectedTrackKey || '');
     return;
   }
 
@@ -402,9 +441,10 @@ function switchSourceMode(nextSourceMode) {
 
   const nextUrl = new URL(window.location.href);
 
-  if (nextSourceMode === 'icse') {
-    nextUrl.searchParams.set('source', ICSE_COLLECTION_SOURCE);
-    const preferredTrackKey = state.selectedTrackKey || loadLastSourcePreference(LAST_ICSE_TRACK_STORAGE_KEY);
+  const conferenceConfig = getConferenceSourceConfig(nextSourceMode);
+  if (conferenceConfig) {
+    nextUrl.searchParams.set('source', conferenceConfig.source);
+    const preferredTrackKey = loadLastSourcePreference(conferenceConfig.lastTrackStorageKey);
     if (preferredTrackKey) {
       nextUrl.searchParams.set('track', preferredTrackKey);
     } else {
@@ -415,7 +455,7 @@ function switchSourceMode(nextSourceMode) {
     nextUrl.searchParams.delete('track');
   }
 
-  showStatus(nextSourceMode === 'icse' ? 'Switching to ICSE…' : 'Switching to arXiv…');
+  showStatus(conferenceConfig ? `Switching to ${conferenceConfig.label}…` : 'Switching to arXiv…');
   window.location.assign(nextUrl.toString());
 }
 
@@ -423,8 +463,13 @@ function updateTrackPicker() {
   const trackOptions = Array.isArray(state.trackOptions) ? state.trackOptions : [];
   const showTrackPicker = trackOptions.length > 1;
 
+  const conferenceConfig = getConferenceSourceConfig();
   elements.trackPickerWrap.classList.toggle('hidden', !showTrackPicker);
   elements.trackPicker.disabled = !showTrackPicker;
+  if (elements.trackPickerLabel) {
+    elements.trackPickerLabel.textContent = conferenceConfig ? `${conferenceConfig.label} year` : 'Conference year';
+  }
+  elements.trackPicker.setAttribute('aria-label', conferenceConfig ? `Choose ${conferenceConfig.label} year` : 'Choose conference year');
 
   if (!showTrackPicker) {
     elements.trackPicker.replaceChildren();
@@ -447,8 +492,8 @@ function formatTrackPickerOptionLabel(trackOption = {}) {
   const rawLabel = String(trackOption.label || '').trim();
   const year = String(trackOption.year || '').trim();
   const suffix = rawLabel
-    .replace(/^ICSE\s+\d{4}\s*/i, '')
-    .replace(/^ICSE\s*/i, '')
+    .replace(/^(?:ICSE|FSE)\s+\d{4}\s*/i, '')
+    .replace(/^(?:ICSE|FSE)\s*/i, '')
     .trim();
 
   if (year && suffix) {
@@ -467,7 +512,7 @@ function onTrackPickerChange(event) {
   const nextUrl = new URL(window.location.href);
   nextUrl.searchParams.set('source', getSourceUrlFromQuery());
   nextUrl.searchParams.set('track', nextTrackKey);
-  showStatus('Switching ICSE track…');
+  showStatus(`Switching ${getConferenceSourceConfig()?.label || 'conference'} track…`);
   window.location.assign(nextUrl.toString());
 }
 
@@ -659,8 +704,10 @@ function getMissingDomRequirements() {
     'sourceMenu',
     'sourceArxivOption',
     'sourceIcseOption',
+    'sourceFseOption',
     'topbarBrand',
     'trackPickerWrap',
+    'trackPickerLabel',
     'trackPicker',
     'filterButton',
     'searchInput',
@@ -708,6 +755,7 @@ function getMissingDomRequirements() {
     'stats',
     'icseVisualization',
     'icseVisualizationSummary',
+    'conferenceMapEyebrow',
     'icseVisualizationLegend',
     'icseVisualizationHover',
     'icsePaperMap',
@@ -823,7 +871,7 @@ function getDecisionAbsUrl(paperId, decisionEntry = {}) {
 
 function inferDecisionSourceType(decisionEntry = {}, paperId = '') {
   const explicitSourceType = String(decisionEntry.sourceType || '').trim();
-  if (explicitSourceType === 'arxiv' || explicitSourceType === 'icse') {
+  if (explicitSourceType === 'arxiv' || isConferenceSourceMode(explicitSourceType)) {
     return explicitSourceType;
   }
 
@@ -833,8 +881,9 @@ function inferDecisionSourceType(decisionEntry = {}, paperId = '') {
   }
 
   const paper = resolvedPaperId ? getPaperById(resolvedPaperId) : null;
-  if (paper?.sourceUrl && isIcseCollectionSource(paper.sourceUrl)) {
-    return 'icse';
+  const paperConferenceMode = getConferenceSourceMode(paper?.sourceUrl || '');
+  if (paperConferenceMode) {
+    return paperConferenceMode;
   }
 
   const absUrl = getDecisionAbsUrl(resolvedPaperId, decisionEntry);
@@ -842,19 +891,23 @@ function inferDecisionSourceType(decisionEntry = {}, paperId = '') {
     return 'arxiv';
   }
 
+  if (/fseconference\.org|esec-fse\.org/i.test(absUrl)) {
+    return 'fse';
+  }
+
   if (/researchr\.org|icse-conferences\.org/i.test(absUrl)) {
-    return 'icse';
+    return getConferenceSourceMode(state.sourceUrl || getSourceUrlFromQuery()) || 'icse';
   }
 
   return 'arxiv';
 }
 
 function getDecisionSyncTarget() {
-  return isIcseCollectionSource(state.sourceUrl || getSourceUrlFromQuery()) ? 'icse' : 'arxiv';
+  return getConferenceSourceMode(state.sourceUrl || getSourceUrlFromQuery()) || 'arxiv';
 }
 
 function getDecisionsForSyncTarget(syncTarget = getDecisionSyncTarget()) {
-  const normalizedSyncTarget = syncTarget === 'icse' ? 'icse' : 'arxiv';
+  const normalizedSyncTarget = isConferenceSourceMode(syncTarget) ? syncTarget : 'arxiv';
   return Object.fromEntries(
     Object.entries(normalizeDecisionMap(state.decisions)).filter(([paperId, decisionEntry]) => (
       inferDecisionSourceType(decisionEntry, paperId) === normalizedSyncTarget
@@ -1208,6 +1261,7 @@ function bindEvents() {
   elements.sourceSwitcherButton.addEventListener('click', toggleSourceMenu);
   elements.sourceArxivOption.addEventListener('click', () => switchSourceMode('arxiv'));
   elements.sourceIcseOption.addEventListener('click', () => switchSourceMode('icse'));
+  elements.sourceFseOption.addEventListener('click', () => switchSourceMode('fse'));
   elements.settingsButton.addEventListener('click', toggleSettingsMenu);
   elements.filterButton.addEventListener('click', toggleFilterMenu);
   elements.searchInput.addEventListener('input', onSearchInputChange);
@@ -1702,7 +1756,7 @@ function recordDecision(paper, decisionKey) {
     decision: decisionKey,
     decidedAt: new Date().toISOString(),
     absUrl: paper.absUrl,
-    sourceType: isIcseCollectionSource(paper?.sourceUrl || state.sourceUrl) ? 'icse' : 'arxiv',
+    sourceType: getConferenceSourceMode(paper?.sourceUrl || state.sourceUrl) || 'arxiv',
   };
 
   state.undoStack.push(paper.id);
@@ -1897,6 +1951,9 @@ function renderIcseVisualization() {
     return;
   }
 
+  if (elements.conferenceMapEyebrow) {
+    elements.conferenceMapEyebrow.textContent = `${data.conferenceLabel || 'Conference'} map`;
+  }
   elements.icseVisualizationSummary.textContent = data.summaryText;
   renderIcseVisualizationLegend(data.decisionCounts, data.totalPaperCount);
   renderIcsePaperMap(data);
@@ -1977,7 +2034,7 @@ function renderIcsePaperMap(data) {
       const squares = document.createElement('div');
       squares.className = 'icse-paper-map-squares';
       squares.setAttribute('role', 'list');
-      squares.setAttribute('aria-label', `${track.label || `ICSE ${track.year}`}. ${track.paperCount} papers.`);
+      squares.setAttribute('aria-label', `${track.label || `${data.conferenceLabel || 'Conference'} ${track.year}`}. ${track.paperCount} papers.`);
 
       track.papers.forEach((paper, index) => {
         const paperKey = buildIcseVisualizationPaperKey(track, paper, index);
@@ -2085,7 +2142,8 @@ function getIcseVisualizationDecisionSortOrder(paper) {
 }
 
 function getIcseVisualizationData() {
-  if (getCurrentSourceMode() !== 'icse' || !state.icseVisualizationTracks.length) {
+  const conferenceConfig = getConferenceSourceConfig();
+  if (!conferenceConfig || !state.icseVisualizationTracks.length) {
     return null;
   }
 
@@ -2125,7 +2183,8 @@ function getIcseVisualizationData() {
     totalPaperCount,
     decisionCounts,
     reviewedCount,
-    summaryText: `${formatStatNumber(totalPaperCount)} papers · ${formatStatNumber(tracks.length)} ICSE editions · ${formatStatNumber(reviewedCount)} reviewed`,
+    summaryText: `${formatStatNumber(totalPaperCount)} papers · ${formatStatNumber(tracks.length)} ${conferenceConfig.label} editions · ${formatStatNumber(reviewedCount)} reviewed`,
+    conferenceLabel: conferenceConfig.label,
   };
 }
 
@@ -2164,15 +2223,16 @@ function buildIcseVisualizationPaperAriaLabel(paper, decisionKey = getDecisionKe
   const title = paper?.title || paper?.id || 'Paper';
   const year = String(paper?.year || '').trim();
   const decisionLabel = decisionKey ? DECISIONS[decisionKey].label : 'Unreviewed';
-  const trackLabel = paper?.sourceLabel || (year ? `ICSE ${year}` : 'ICSE');
+  const conferenceLabel = getConferenceSourceConfig()?.label || 'Conference';
+  const trackLabel = paper?.sourceLabel || (year ? `${conferenceLabel} ${year}` : conferenceLabel);
   return `${trackLabel}. ${title}. ${decisionLabel}. Activate to open abstract.`;
 }
 
 function formatIcseTrackRowLabel(track) {
   const rawLabel = String(track?.label || track?.sourceLabel || '').trim();
   const normalizedLabel = rawLabel
-    .replace(/^ICSE\s+\d{4}\s*/i, '')
-    .replace(/^ICSE\s*/i, '')
+    .replace(/^(?:ICSE|FSE)\s+\d{4}\s*/i, '')
+    .replace(/^(?:ICSE|FSE)\s*/i, '')
     .trim();
 
   return normalizedLabel || 'Proceedings';
@@ -2422,6 +2482,11 @@ function formatSourceLabel() {
   const activeSourcePeriod = getActiveSourcePeriod();
   const visibleCount = state.papers.filter(isPaperVisible).length;
   const count = getPapersForSourcePeriod(activeSourcePeriod).length || visibleCount;
+  const conferenceConfig = getConferenceSourceConfig();
+
+  if (conferenceConfig) {
+    return `${state.sourceLabel || conferenceConfig.label} · ${count} papers loaded`;
+  }
 
   if (!archive || !activeSourcePeriod) {
     return `${formatCustomSourceName(state.sourceUrl)} · ${count} papers loaded`;

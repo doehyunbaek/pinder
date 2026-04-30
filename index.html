@@ -43,6 +43,10 @@
                   <span class="source-menu-option-title">ICSE accepted papers</span>
                   <span class="source-menu-option-hint">Browse ICSE 1976–2026</span>
                 </button>
+                <button class="source-menu-option" id="sourceFseOption" type="button" role="menuitem">
+                  <span class="source-menu-option-title">FSE accepted papers</span>
+                  <span class="source-menu-option-hint">Browse FSE 1983–2026</span>
+                </button>
               </div>
             </div>
             <div class="topbar-brand" id="topbarBrand">
@@ -50,8 +54,8 @@
               <p class="subhead">Swipe like tinder, but for papers.</p>
             </div>
             <div class="track-picker-wrap hidden" id="trackPickerWrap">
-              <label class="track-picker-label" for="trackPicker">ICSE year</label>
-              <select class="track-picker" id="trackPicker" aria-label="Choose ICSE year"></select>
+              <label class="track-picker-label" for="trackPicker" id="trackPickerLabel">Conference year</label>
+              <select class="track-picker" id="trackPicker" aria-label="Choose conference year"></select>
             </div>
           </div>
 
@@ -142,7 +146,7 @@
       <details class="icse-visualization hidden" id="icseVisualization" open>
         <summary class="icse-visualization-summary">
           <div class="icse-visualization-summary-copy">
-            <p class="eyebrow">ICSE map</p>
+            <p class="eyebrow" id="conferenceMapEyebrow">Conference map</p>
             <p class="icse-visualization-title">One square per paper</p>
           </div>
           <div class="icse-visualization-summary-meta">
