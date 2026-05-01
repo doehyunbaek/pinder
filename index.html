@@ -129,7 +129,7 @@
               <div class="settings-divider"></div>
 
               <p class="settings-title">Account</p>
-              <p class="settings-auth-status" id="authStatus">Checking Google Sheets sync…</p>
+              <p class="settings-auth-status" id="authStatus">Checking Firebase sync…</p>
               <p class="settings-sync-status" id="syncStatus"></p>
             </div>
           </div>
@@ -265,10 +265,12 @@
       aria-hidden="true"
     ></div>
 
-    <script src="./google-api-config.js?v=20260402-16"></script>
-    <script src="https://accounts.google.com/gsi/client"></script>
+    <script src="./google-api-config.js?v=20260501-02"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
     <script src="./scrape.js?v=20260426-02"></script>
-    <script src="./auth.js?v=20260416-02"></script>
+    <script src="./auth.js?v=20260501-02"></script>
     <script src="./app.js?v=20260426-09"></script>
   </body>
 </html>

@@ -1,6 +1,4 @@
 (() => {
-  const AUTH_STORAGE_KEY = 'pinder-google-auth-session-v1';
-
   function createInitialAuthState() {
     return {
       configured: false,
@@ -9,81 +7,50 @@
       syncMessage: '',
       error: '',
       user: null,
-      accessToken: '',
-      tokenExpiresAt: 0,
-      grantedScopes: [],
-      tokenClient: null,
-      sheetId: '',
+      firebaseApp: null,
+      firebaseAuth: null,
+      firestore: null,
+      googleProvider: null,
+      authReadyPromise: null,
     };
   }
 
-  function parseGrantedScopes(scopeValue) {
-    if (Array.isArray(scopeValue)) {
-      return scopeValue.map((scope) => String(scope).trim()).filter(Boolean);
+  function getFirebaseAuthErrorMessage(error) {
+    const code = String(error?.code || error?.message || '').toLowerCase();
+
+    if (code.includes('popup-closed-by-user') || code.includes('cancelled-popup-request')) {
+      return 'Google sign-in was closed before it finished.';
+    }
+    if (code.includes('popup-blocked')) {
+      return 'Browser blocked the Google sign-in popup. Allow popups and try again.';
+    }
+    if (code.includes('unauthorized-domain')) {
+      return 'Firebase Authentication is not configured for this domain.';
+    }
+    if (code.includes('configuration-not-found')) {
+      return 'Firebase Authentication is not enabled or Google sign-in is not configured.';
+    }
+    if (code.includes('permission-denied')) {
+      return 'Firestore permission denied. Check your Firestore security rules.';
+    }
+    if (code.includes('unavailable')) {
+      return 'Firestore is temporarily unavailable. Try again shortly.';
     }
 
-    return String(scopeValue || '')
-      .split(/\s+/)
-      .map((scope) => scope.trim())
-      .filter(Boolean);
+    return error?.message || 'Firebase sync failed.';
   }
 
-  function getGoogleAuthErrorCode(error) {
-    return String(error?.googleAuthCode || error?.error || error?.type || error?.message || '').trim();
-  }
-
-  function createGoogleAuthError(error, { interactive = false } = {}) {
-    const code = getGoogleAuthErrorCode(error).toLowerCase();
-    const normalizedError = new Error(code || 'Google login failed.');
-
-    if (code.includes('popup_closed')) {
-      normalizedError.message = 'Google sign-in was closed before it finished.';
-    } else if (code.includes('popup_failed_to_open')) {
-      normalizedError.message = 'Browser blocked the Google sign-in popup. Allow popups and try again.';
-    } else if (code.includes('access_denied')) {
-      normalizedError.message = interactive
-        ? 'Google sign-in was cancelled.'
-        : 'Google session expired. Tap Sign in to reconnect Sheets sync.';
-    } else if (
-      code.includes('interaction_required')
-      || code.includes('login_required')
-      || code.includes('consent_required')
-      || code.includes('immediate_failed')
-      || (code.includes('account') && code.includes('required'))
-    ) {
-      normalizedError.message = interactive
-        ? 'Google sign-in needs confirmation.'
-        : 'Google session expired. Tap Sign in to reconnect Sheets sync.';
+  function getFirebaseUserProfile(firebaseUser) {
+    if (!firebaseUser) {
+      return null;
     }
 
-    normalizedError.googleAuthCode = code;
-    return normalizedError;
-  }
-
-  function shouldRetryInteractiveGoogleAuth(error) {
-    const code = getGoogleAuthErrorCode(error).toLowerCase();
-    return (
-      code.includes('interaction_required')
-      || code.includes('login_required')
-      || code.includes('consent_required')
-      || code.includes('immediate_failed')
-      || (code.includes('account') && code.includes('required'))
-    );
-  }
-
-  function extractArxivIdFromUrl(url) {
-    if (!url) {
-      return '';
-    }
-
-    try {
-      const parsed = new URL(url, window.location.href);
-      const match = parsed.pathname.match(/\/abs\/([^/?#]+)/);
-      return match?.[1] || '';
-    } catch (error) {
-      const match = String(url).match(/\/abs\/([^/?#]+)/);
-      return match?.[1] || '';
-    }
+    return {
+      id: firebaseUser.uid,
+      email: firebaseUser.email || '',
+      name: firebaseUser.displayName || firebaseUser.email || '',
+      picture: firebaseUser.photoURL || '',
+    };
   }
 
   function createController(deps) {
@@ -94,9 +61,6 @@
       normalizeSettings,
       normalizeDecisionMap,
       mergeDecisionMaps,
-      getDecisionAbsUrl,
-      getDecisionSyncTarget,
-      getDecisionsForSyncTarget,
       getSettings,
       setSettings,
       saveSettings,
@@ -108,47 +72,16 @@
       closeSettingsMenu,
       flashStatus,
       clearDecisionSyncTimer,
+      getDecisionSyncTarget,
+      getDecisionsForSyncTarget,
     } = deps;
 
-    function getGoogleConfig() {
-      const config = window.PINDER_GOOGLE_CONFIG || {};
-
-      return {
-        clientId: config.clientId || '',
-        sheetTitle: config.sheetTitle || 'Pinder Sync',
-        settingsSheetTitle: config.settingsSheetTitle || 'settings',
-        arxivSheetTitle: config.arxivSheetTitle || 'arxiv',
-        icseSheetTitle: config.icseSheetTitle || 'icse',
-        fseSheetTitle: config.fseSheetTitle || 'fse',
-        legacyDecisionsSheetTitle: config.decisionsSheetTitle || 'decisions',
-        scopes: config.scopes || [
-          'https://www.googleapis.com/auth/drive.file',
-          'https://www.googleapis.com/auth/spreadsheets',
-          'https://www.googleapis.com/auth/userinfo.email',
-          'https://www.googleapis.com/auth/userinfo.profile',
-        ],
-      };
-    }
-
-    function hasRequiredScopes(grantedScopes = []) {
-      const grantedScopeSet = new Set(grantedScopes);
-      return getGoogleConfig().scopes.every((scope) => grantedScopeSet.has(scope));
+    function getConfig() {
+      return window.PINDER_GOOGLE_CONFIG || {};
     }
 
     function normalizeDecisionSyncTarget(syncTarget) {
       return ['icse', 'fse'].includes(syncTarget) ? syncTarget : 'arxiv';
-    }
-
-    function getDecisionSheetTitle(syncTarget) {
-      const config = getGoogleConfig();
-      const normalizedSyncTarget = normalizeDecisionSyncTarget(syncTarget);
-      if (normalizedSyncTarget === 'icse') {
-        return config.icseSheetTitle;
-      }
-      if (normalizedSyncTarget === 'fse') {
-        return config.fseSheetTitle;
-      }
-      return config.arxivSheetTitle;
     }
 
     function getDecisionSheetLabel(syncTarget) {
@@ -162,94 +95,10 @@
       return 'arXiv';
     }
 
-    function loadCachedAuthSession() {
-      try {
-        return JSON.parse(window.localStorage.getItem(AUTH_STORAGE_KEY) || 'null');
-      } catch (error) {
-        console.warn('Could not read cached Google auth session.', error);
-        return null;
-      }
-    }
-
-    function saveCachedAuthSession() {
-      try {
-        if (!authState.user || !authState.accessToken || !authState.tokenExpiresAt) {
-          window.localStorage.removeItem(AUTH_STORAGE_KEY);
-          return;
-        }
-
-        window.localStorage.setItem(
-          AUTH_STORAGE_KEY,
-          JSON.stringify({
-            user: authState.user,
-            accessToken: authState.accessToken,
-            tokenExpiresAt: authState.tokenExpiresAt,
-            grantedScopes: authState.grantedScopes,
-            sheetId: authState.sheetId,
-          }),
-        );
-      } catch (error) {
-        console.warn('Could not cache Google auth session.', error);
-      }
-    }
-
-    function clearCachedAuthSession() {
-      try {
-        window.localStorage.removeItem(AUTH_STORAGE_KEY);
-      } catch (error) {
-        console.warn('Could not clear cached Google auth session.', error);
-      }
-    }
-
-    function restoreCachedAuthSession() {
-      const cachedSession = loadCachedAuthSession();
-      if (!cachedSession) {
-        authState.syncMessage = 'Settings and review outcomes stay on this device until you sign in with Google.';
-        return {
-          restored: false,
-          canAttemptSilentSignIn: false,
-        };
-      }
-
-      if (!cachedSession.accessToken || Date.now() >= Number(cachedSession.tokenExpiresAt || 0) - 60_000) {
-        const grantedScopes = parseGrantedScopes(cachedSession.grantedScopes);
-        const canAttemptSilentSignIn = Boolean(cachedSession.user) || grantedScopes.length > 0;
-        clearCachedAuthSession();
-        authState.syncMessage = canAttemptSilentSignIn
-          ? 'Reconnecting to Google Sheets…'
-          : 'Google session expired. Tap Sign in to reconnect Sheets sync.';
-        return {
-          restored: false,
-          canAttemptSilentSignIn,
-        };
-      }
-
-      const grantedScopes = parseGrantedScopes(cachedSession.grantedScopes);
-      if (!hasRequiredScopes(grantedScopes)) {
-        clearCachedAuthSession();
-        authState.syncMessage = 'Google permissions changed. Tap Sign in to grant Drive and Sheets access again.';
-        return {
-          restored: false,
-          canAttemptSilentSignIn: false,
-        };
-      }
-
-      authState.user = cachedSession.user || null;
-      authState.accessToken = cachedSession.accessToken;
-      authState.tokenExpiresAt = Number(cachedSession.tokenExpiresAt || 0);
-      authState.grantedScopes = grantedScopes;
-      authState.sheetId = cachedSession.sheetId || '';
-      authState.syncMessage = 'Using cached Google session from this browser.';
-      return {
-        restored: true,
-        canAttemptSilentSignIn: false,
-      };
-    }
-
     function updateAuthUi() {
       if (!authState.configured) {
-        elements.authStatus.textContent = 'Google Sheets sync unavailable';
-        elements.syncStatus.textContent = authState.error || 'Add Google OAuth config to enable login and sheet sync.';
+        elements.authStatus.textContent = 'Cloud sync unavailable';
+        elements.syncStatus.textContent = authState.error || 'Add Firebase config to enable login and Firestore sync.';
         elements.topAuthButton.textContent = 'Sync unavailable';
         elements.topAuthButton.disabled = true;
         elements.topAuthButton.classList.remove('connected');
@@ -272,9 +121,9 @@
       if (authState.error) {
         elements.syncStatus.textContent = authState.error;
       } else if (authState.syncInProgress) {
-        elements.syncStatus.textContent = 'Syncing settings and review outcomes with Google Sheets…';
+        elements.syncStatus.textContent = 'Syncing settings and review outcomes with Firestore…';
       } else {
-        elements.syncStatus.textContent = authState.syncMessage || 'Settings and review outcomes will sync to your Google Sheet.';
+        elements.syncStatus.textContent = authState.syncMessage || 'Settings and review outcomes will sync with Firebase Firestore.';
       }
     }
 
@@ -285,514 +134,86 @@
       if (!Number.isFinite(remoteTime)) {
         return false;
       }
-
       if (!Number.isFinite(localTime)) {
         return true;
       }
-
       return remoteTime > localTime;
     }
 
-    function requestGoogleAccessToken({ prompt = '' } = {}) {
-      return new Promise((resolve, reject) => {
-        if (!authState.tokenClient) {
-          reject(new Error('Google token client is not ready.'));
-          return;
-        }
-
-        const interactive = prompt !== 'none';
-
-        authState.tokenClient.callback = (response) => {
-          if (response?.error) {
-            reject(createGoogleAuthError(response, { interactive }));
-            return;
-          }
-          resolve(response);
-        };
-
-        authState.tokenClient.error_callback = (error) => {
-          reject(createGoogleAuthError(error, { interactive }));
-        };
-
-        authState.tokenClient.requestAccessToken({ prompt });
-      });
-    }
-
-    function clearActiveAuthSession() {
-      clearCachedAuthSession();
-      authState.user = null;
-      authState.accessToken = '';
-      authState.tokenExpiresAt = 0;
-      authState.grantedScopes = [];
-      authState.sheetId = '';
-    }
-
-    function applyGoogleAccessTokenResponse(response) {
-      if (!response?.access_token) {
-        throw new Error('Google login did not return an access token.');
+    function requireSignedInFirestore() {
+      if (!authState.user || !authState.firestore) {
+        throw new Error('Sign in to sync with Firestore.');
       }
-
-      authState.accessToken = response.access_token;
-      authState.tokenExpiresAt = Date.now() + Number(response.expires_in || 3600) * 1000;
-      authState.grantedScopes = parseGrantedScopes(response.scope || getGoogleConfig().scopes.join(' '));
-      saveCachedAuthSession();
-      return authState.accessToken;
+      return authState.firestore.collection('users').doc(authState.user.id);
     }
 
-    async function ensureValidAccessToken({ interactive, force = false }) {
-      const hasFreshToken = authState.accessToken && Date.now() < authState.tokenExpiresAt - 60_000;
-      const tokenHasRequiredScopes = hasRequiredScopes(authState.grantedScopes);
-
-      if (!force && hasFreshToken && tokenHasRequiredScopes) {
-        return authState.accessToken;
-      }
-
-      const needsConsent = force || (hasFreshToken && !tokenHasRequiredScopes);
-
-      if (!interactive) {
-        if (needsConsent) {
-          clearActiveAuthSession();
-          throw new Error('Google token is missing Drive or Sheets access. Tap Sign in to grant permissions again.');
-        }
-
-        try {
-          const response = await requestGoogleAccessToken({ prompt: 'none' });
-          return applyGoogleAccessTokenResponse(response);
-        } catch (error) {
-          clearActiveAuthSession();
-          throw new Error('Google session expired. Tap Sign in to reconnect Sheets sync.');
-        }
-      }
-
-      try {
-        const response = await requestGoogleAccessToken({
-          prompt: needsConsent ? 'consent' : '',
-        });
-        return applyGoogleAccessTokenResponse(response);
-      } catch (error) {
-        if (!needsConsent && shouldRetryInteractiveGoogleAuth(error)) {
-          const response = await requestGoogleAccessToken({ prompt: 'consent' });
-          return applyGoogleAccessTokenResponse(response);
-        }
-
-        throw error;
-      }
+    function settingsDocRef() {
+      return requireSignedInFirestore().collection('sync').doc('settings');
     }
 
-    async function loadGoogleProfile() {
-      const accessToken = await ensureValidAccessToken({ interactive: false });
-      const response = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`Could not load Google profile (${response.status})`);
-      }
-
-      const profile = await response.json();
-      authState.user = {
-        id: profile.sub,
-        email: profile.email,
-        name: profile.name,
-        picture: profile.picture,
-      };
-      saveCachedAuthSession();
-      updateAuthUi();
-      return authState.user;
+    function decisionsDocRef(syncTarget) {
+      return requireSignedInFirestore()
+        .collection('decisions')
+        .doc(normalizeDecisionSyncTarget(syncTarget));
     }
 
-    async function googleApiFetch(url, options = {}) {
-      const interactive = Boolean(options.interactive);
-      const accessToken = await ensureValidAccessToken({ interactive });
-      const response = await fetch(url, {
-        method: options.method || 'GET',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          ...(options.body ? { 'Content-Type': 'application/json' } : {}),
-          ...(options.headers || {}),
-        },
-        body: options.body,
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-
-        if (response.status === 403 && errorText.includes('ACCESS_TOKEN_SCOPE_INSUFFICIENT')) {
-          clearCachedAuthSession();
-          authState.accessToken = '';
-          authState.tokenExpiresAt = 0;
-          authState.grantedScopes = [];
-
-          if (interactive && !options._retriedAfterScopeUpgrade) {
-            await ensureValidAccessToken({ interactive: true, force: true });
-            return googleApiFetch(url, {
-              ...options,
-              _retriedAfterScopeUpgrade: true,
-            });
-          }
-
-          throw new Error('Google token is missing Drive or Sheets access. Tap Sign in to grant permissions again.');
-        }
-
-        throw new Error(`Google API ${response.status}: ${errorText}`);
-      }
-
-      return response;
+    async function readRemoteSettings() {
+      const snapshot = await settingsDocRef().get();
+      return snapshot.exists ? normalizeSettings(snapshot.data() || {}) : null;
     }
 
-    async function ensureSyncSpreadsheet({ interactive = false } = {}) {
-      if (authState.sheetId) {
-        return authState.sheetId;
-      }
-
-      const query = encodeURIComponent(
-        "trashed = false and mimeType = 'application/vnd.google-apps.spreadsheet' and appProperties has { key='pinderApp' and value='settings' }",
-      );
-      const searchResponse = await googleApiFetch(
-        `https://www.googleapis.com/drive/v3/files?q=${query}&pageSize=10&fields=files(id,name,modifiedTime)&orderBy=modifiedTime desc`,
-        { interactive },
-      );
-      const searchPayload = await searchResponse.json();
-      const existingFile = searchPayload.files?.[0];
-
-      if (existingFile?.id) {
-        authState.sheetId = existingFile.id;
-        saveCachedAuthSession();
-        return authState.sheetId;
-      }
-
-      const config = getGoogleConfig();
-      const createResponse = await googleApiFetch('https://sheets.googleapis.com/v4/spreadsheets', {
-        method: 'POST',
-        interactive,
-        body: JSON.stringify({
-          properties: {
-            title: config.sheetTitle,
-          },
-          sheets: [
-            {
-              properties: {
-                title: config.settingsSheetTitle,
-              },
-            },
-            {
-              properties: {
-                title: config.arxivSheetTitle,
-              },
-            },
-            {
-              properties: {
-                title: config.icseSheetTitle,
-              },
-            },
-            {
-              properties: {
-                title: config.fseSheetTitle,
-              },
-            },
-          ],
-        }),
-      });
-      const createPayload = await createResponse.json();
-      authState.sheetId = createPayload.spreadsheetId;
-      saveCachedAuthSession();
-
-      await googleApiFetch(`https://www.googleapis.com/drive/v3/files/${authState.sheetId}`, {
-        method: 'PATCH',
-        interactive,
-        body: JSON.stringify({
-          appProperties: {
-            pinderApp: 'settings',
-          },
-        }),
-      });
-
-      return authState.sheetId;
-    }
-
-    async function ensureSettingsSheetTab(spreadsheetId, { interactive = false } = {}) {
-      const config = getGoogleConfig();
-      const response = await googleApiFetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}?fields=sheets.properties`,
-        { interactive },
-      );
-      const payload = await response.json();
-      const hasSettingsSheet = payload.sheets?.some(
-        (sheet) => sheet.properties?.title === config.settingsSheetTitle,
-      );
-
-      if (hasSettingsSheet) {
-        return;
-      }
-
-      await googleApiFetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}:batchUpdate`, {
-        method: 'POST',
-        interactive,
-        body: JSON.stringify({
-          requests: [
-            {
-              addSheet: {
-                properties: {
-                  title: config.settingsSheetTitle,
-                },
-              },
-            },
-          ],
-        }),
-      });
-    }
-
-    async function ensureDecisionSheetTab(spreadsheetId, sheetTitle, { interactive = false } = {}) {
-      const response = await googleApiFetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}?fields=sheets.properties`,
-        { interactive },
-      );
-      const payload = await response.json();
-      const hasDecisionSheet = payload.sheets?.some(
-        (sheet) => sheet.properties?.title === sheetTitle,
-      );
-
-      if (hasDecisionSheet) {
-        return;
-      }
-
-      await googleApiFetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}:batchUpdate`, {
-        method: 'POST',
-        interactive,
-        body: JSON.stringify({
-          requests: [
-            {
-              addSheet: {
-                properties: {
-                  title: sheetTitle,
-                },
-              },
-            },
-          ],
-        }),
-      });
-    }
-
-    function parseRemoteSettings(values) {
-      const parsed = {};
-
-      values.slice(1).forEach((row) => {
-        const [key, value, updatedAt] = row;
-        if (!key) {
-          return;
-        }
-
-        if (key === 'showActionButtons') {
-          parsed.showActionButtons = String(value).toLowerCase() !== 'false';
-          parsed.updatedAt = updatedAt || parsed.updatedAt;
-        }
-
-        if (key === 'showTitleTagline') {
-          parsed.showTitleTagline = String(value).toLowerCase() !== 'false';
-          parsed.updatedAt = updatedAt || parsed.updatedAt;
-        }
-
-        if (key === 'showAuthors') {
-          parsed.showAuthors = String(value).toLowerCase() !== 'false';
-          parsed.updatedAt = updatedAt || parsed.updatedAt;
-        }
-      });
-
-      return Object.keys(parsed).length ? normalizeSettings(parsed) : null;
-    }
-
-    async function readRemoteSettings({ interactive = false } = {}) {
-      const spreadsheetId = await ensureSyncSpreadsheet({ interactive });
-      await ensureSettingsSheetTab(spreadsheetId, { interactive });
-      const range = encodeURIComponent(`${getGoogleConfig().settingsSheetTitle}!A:C`);
-      const response = await googleApiFetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}`,
-        { interactive },
-      );
-      const payload = await response.json();
-      return parseRemoteSettings(payload.values || []);
-    }
-
-    async function writeRemoteSettings({ interactive = false } = {}) {
-      const spreadsheetId = await ensureSyncSpreadsheet({ interactive });
-      await ensureSettingsSheetTab(spreadsheetId, { interactive });
+    async function writeRemoteSettings() {
       const settings = normalizeSettings(getSettings());
-      const values = [
-        ['key', 'value', 'updatedAt'],
-        ['showActionButtons', settings.showActionButtons ? 'true' : 'false', settings.updatedAt || ''],
-        ['showTitleTagline', settings.showTitleTagline ? 'true' : 'false', settings.updatedAt || ''],
-        ['showAuthors', settings.showAuthors ? 'true' : 'false', settings.updatedAt || ''],
-      ];
-      const rangeName = `${getGoogleConfig().settingsSheetTitle}!A1:C${values.length}`;
-      const range = encodeURIComponent(rangeName);
-
-      await googleApiFetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?valueInputOption=RAW`,
-        {
-          method: 'PUT',
-          interactive,
-          body: JSON.stringify({
-            range: rangeName,
-            majorDimension: 'ROWS',
-            values,
-          }),
-        },
-      );
+      await settingsDocRef().set(settings, { merge: true });
     }
 
-    function parseRemoteDecisions(values, syncTarget) {
-      const parsed = {};
+    async function readRemoteDecisions({ syncTarget } = {}) {
+      const snapshot = await decisionsDocRef(syncTarget).get();
+      const payload = snapshot.exists ? snapshot.data() : null;
+      return normalizeDecisionMap(payload?.decisions || {});
+    }
+
+    async function writeRemoteDecisions({ syncTarget } = {}) {
       const normalizedSyncTarget = normalizeDecisionSyncTarget(syncTarget);
-
-      values.slice(1).forEach((row) => {
-        const [absUrl, decision, decidedAt, paperIdFromSheet] = row;
-        const paperId = paperIdFromSheet || extractArxivIdFromUrl(absUrl);
-        if (!paperId || !decision) {
-          return;
-        }
-
-        parsed[paperId] = {
-          absUrl,
-          decision,
-          decidedAt,
-          sourceType: normalizedSyncTarget,
-        };
+      await decisionsDocRef(normalizedSyncTarget).set({
+        updatedAt: new Date().toISOString(),
+        decisions: normalizeDecisionMap(getDecisionsForSyncTarget(normalizedSyncTarget)),
       });
-
-      return normalizeDecisionMap(parsed);
-    }
-
-    async function readDecisionSheetValues(spreadsheetId, sheetTitle, { interactive = false } = {}) {
-      const range = encodeURIComponent(`${sheetTitle}!A:D`);
-      const response = await googleApiFetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}`,
-        { interactive },
-      );
-      const payload = await response.json();
-      return payload.values || [];
-    }
-
-    async function readRemoteDecisions({ interactive = false, syncTarget } = {}) {
-      const normalizedSyncTarget = normalizeDecisionSyncTarget(syncTarget);
-      const spreadsheetId = await ensureSyncSpreadsheet({ interactive });
-      const decisionSheetTitle = getDecisionSheetTitle(normalizedSyncTarget);
-      await ensureDecisionSheetTab(spreadsheetId, decisionSheetTitle, { interactive });
-
-      const parsedDecisionMaps = [
-        parseRemoteDecisions(
-          await readDecisionSheetValues(spreadsheetId, decisionSheetTitle, { interactive }),
-          normalizedSyncTarget,
-        ),
-      ];
-
-      if (normalizedSyncTarget === 'arxiv') {
-        const legacySheetTitle = getGoogleConfig().legacyDecisionsSheetTitle;
-        if (legacySheetTitle && legacySheetTitle !== decisionSheetTitle) {
-          try {
-            const legacyValues = await readDecisionSheetValues(spreadsheetId, legacySheetTitle, { interactive });
-            parsedDecisionMaps.push(parseRemoteDecisions(legacyValues, 'arxiv'));
-          } catch (error) {
-            // Ignore missing legacy tab. Old users may not have it, and new users should not need it.
-          }
-        }
-      }
-
-      return parsedDecisionMaps.reduce(
-        (mergedDecisions, decisionMap) => mergeDecisionMaps(mergedDecisions, decisionMap),
-        {},
-      );
-    }
-
-    async function writeRemoteDecisions({ interactive = false, syncTarget } = {}) {
-      const normalizedSyncTarget = normalizeDecisionSyncTarget(syncTarget);
-      const spreadsheetId = await ensureSyncSpreadsheet({ interactive });
-      const decisionSheetTitle = getDecisionSheetTitle(normalizedSyncTarget);
-      await ensureDecisionSheetTab(spreadsheetId, decisionSheetTitle, { interactive });
-      const clearRangeName = `${decisionSheetTitle}!A:D`;
-      const clearRange = encodeURIComponent(clearRangeName);
-
-      await googleApiFetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${clearRange}:clear`,
-        {
-          method: 'POST',
-          interactive,
-          body: JSON.stringify({}),
-        },
-      );
-
-      const rows = [
-        ['absUrl', 'decision', 'decidedAt', 'paperId'],
-        ...Object.entries(normalizeDecisionMap(getDecisionsForSyncTarget(normalizedSyncTarget)))
-          .sort(([, leftEntry], [, rightEntry]) => new Date(leftEntry.decidedAt) - new Date(rightEntry.decidedAt))
-          .map(([paperId, decisionEntry]) => [
-            getDecisionAbsUrl(paperId, decisionEntry),
-            decisionEntry.decision,
-            decisionEntry.decidedAt || '',
-            paperId,
-          ]),
-      ];
-
-      const rangeName = `${decisionSheetTitle}!A1:D${rows.length}`;
-      const range = encodeURIComponent(rangeName);
-      await googleApiFetch(
-        `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${range}?valueInputOption=RAW`,
-        {
-          method: 'PUT',
-          interactive,
-          body: JSON.stringify({
-            range: rangeName,
-            majorDimension: 'ROWS',
-            values: rows,
-          }),
-        },
-      );
     }
 
     function handleCloudSyncError(error) {
       console.error(error);
-      const message = error?.message || 'Google Sheets sync failed.';
-
-      if (message.includes('session expired') || message.includes('missing Drive or Sheets access')) {
-        clearCachedAuthSession();
-        authState.user = null;
-        authState.accessToken = '';
-        authState.tokenExpiresAt = 0;
-        authState.grantedScopes = [];
-        authState.sheetId = '';
-      }
-
       authState.busy = false;
       authState.syncInProgress = false;
-      authState.error = message;
+      authState.error = getFirebaseAuthErrorMessage(error);
       updateAuthUi();
     }
 
-    async function syncSettingsFromCloud({ interactive = false } = {}) {
+    async function syncSettingsFromCloud() {
       if (!authState.user) {
         return false;
       }
 
       authState.syncInProgress = true;
-      authState.syncMessage = 'Checking Google Sheet…';
+      authState.syncMessage = 'Checking Firestore settings…';
       updateAuthUi();
 
       try {
-        const remoteSettings = await readRemoteSettings({ interactive });
+        const remoteSettings = await readRemoteSettings();
         const localSettings = normalizeSettings(getSettings());
 
         if (remoteSettings && isRemoteSettingsNewer(remoteSettings.updatedAt, localSettings.updatedAt)) {
           setSettings(remoteSettings);
           saveSettings();
           applySettings();
-          authState.syncMessage = 'Settings downloaded from Google Sheets.';
+          authState.syncMessage = 'Settings downloaded from Firestore.';
           authState.syncInProgress = false;
+          authState.error = '';
           updateAuthUi();
           return true;
         }
 
-        await syncSettingsToCloud({ interactive });
+        await syncSettingsToCloud();
         return true;
       } catch (error) {
         handleCloudSyncError(error);
@@ -800,7 +221,7 @@
       }
     }
 
-    async function syncSettingsToCloud({ interactive = false } = {}) {
+    async function syncSettingsToCloud() {
       if (!authState.user) {
         return false;
       }
@@ -815,9 +236,9 @@
       updateAuthUi();
 
       try {
-        await writeRemoteSettings({ interactive });
+        await writeRemoteSettings();
         authState.error = '';
-        authState.syncMessage = 'Settings synced to Google Sheets.';
+        authState.syncMessage = 'Settings synced to Firestore.';
       } catch (error) {
         handleCloudSyncError(error);
         return false;
@@ -828,7 +249,7 @@
       return true;
     }
 
-    async function syncDecisionsFromCloud({ interactive = false } = {}) {
+    async function syncDecisionsFromCloud() {
       if (!authState.user) {
         return false;
       }
@@ -836,18 +257,18 @@
       const syncTarget = getDecisionSyncTarget();
       const decisionSheetLabel = getDecisionSheetLabel(syncTarget);
       authState.syncInProgress = true;
-      authState.syncMessage = `Checking Google Sheet for ${decisionSheetLabel} review outcomes…`;
+      authState.syncMessage = `Checking Firestore for ${decisionSheetLabel} review outcomes…`;
       updateAuthUi();
 
       try {
-        const remoteDecisions = await readRemoteDecisions({ interactive, syncTarget });
+        const remoteDecisions = await readRemoteDecisions({ syncTarget });
         const mergedDecisions = mergeDecisionMaps(normalizeDecisionMap(getDecisions()), remoteDecisions);
         setDecisions(mergedDecisions);
         saveDecisions();
         renderIfReady();
 
-        await syncDecisionsToCloud({ interactive });
-        authState.syncMessage = `Settings and ${decisionSheetLabel} review outcomes synced to Google Sheets.`;
+        await syncDecisionsToCloud();
+        authState.syncMessage = `Settings and ${decisionSheetLabel} review outcomes synced to Firestore.`;
       } catch (error) {
         handleCloudSyncError(error);
         return false;
@@ -858,7 +279,7 @@
       return true;
     }
 
-    async function syncDecisionsToCloud({ interactive = false } = {}) {
+    async function syncDecisionsToCloud() {
       if (!authState.user) {
         return false;
       }
@@ -869,9 +290,9 @@
       updateAuthUi();
 
       try {
-        await writeRemoteDecisions({ interactive, syncTarget });
+        await writeRemoteDecisions({ syncTarget });
         authState.error = '';
-        authState.syncMessage = `${decisionSheetLabel} review outcomes synced to Google Sheets.`;
+        authState.syncMessage = `${decisionSheetLabel} review outcomes synced to Firestore.`;
       } catch (error) {
         handleCloudSyncError(error);
         return false;
@@ -882,37 +303,10 @@
       return true;
     }
 
-    async function resumeGoogleSessionSilently() {
-      if (!authState.configured || authState.user || authState.busy) {
-        return false;
-      }
-
-      authState.busy = true;
-      authState.error = '';
-      authState.syncMessage = 'Reconnecting to Google Sheets…';
-      updateAuthUi();
-
-      try {
-        await ensureValidAccessToken({ interactive: false });
-        await loadGoogleProfile();
-        const settingsSynced = await syncSettingsFromCloud({ interactive: false });
-        const decisionsSynced = await syncDecisionsFromCloud({ interactive: false });
-        return Boolean(settingsSynced && decisionsSynced);
-      } catch (error) {
-        const message = error?.message || '';
-        if (message.includes('session expired') || message.includes('missing Drive or Sheets access')) {
-          authState.error = '';
-          authState.syncInProgress = false;
-          authState.syncMessage = message;
-          return false;
-        }
-
-        handleCloudSyncError(error);
-        return false;
-      } finally {
-        authState.busy = false;
-        updateAuthUi();
-      }
+    async function syncFromCloud() {
+      const settingsSynced = await syncSettingsFromCloud();
+      const decisionsSynced = await syncDecisionsFromCloud();
+      return Boolean(settingsSynced && decisionsSynced);
     }
 
     async function signInWithGoogle() {
@@ -926,17 +320,11 @@
       updateAuthUi();
 
       try {
-        await ensureValidAccessToken({ interactive: true });
-        await loadGoogleProfile();
-        const settingsSynced = await syncSettingsFromCloud({ interactive: true });
-        const decisionsSynced = await syncDecisionsFromCloud({ interactive: true });
-
-        if (!settingsSynced || !decisionsSynced) {
-          return;
-        }
-
+        const result = await authState.firebaseAuth.signInWithPopup(authState.googleProvider);
+        authState.user = getFirebaseUserProfile(result.user);
+        await syncFromCloud();
         closeSettingsMenu();
-        flashStatus('Signed in with Google Sheets sync.');
+        flashStatus('Signed in with Firebase sync.');
       } catch (error) {
         handleCloudSyncError(error);
         return;
@@ -954,15 +342,22 @@
       authState.busy = true;
       updateAuthUi();
 
-      clearDecisionSyncTimer();
-      clearActiveAuthSession();
+      try {
+        clearDecisionSyncTimer();
+        await authState.firebaseAuth.signOut();
+        authState.user = null;
+        authState.error = '';
+        authState.syncInProgress = false;
+        authState.syncMessage = 'Signed out. Your settings and review outcomes remain saved on this device.';
+        closeSettingsMenu();
+        flashStatus('Signed out from Firebase sync.');
+      } catch (error) {
+        handleCloudSyncError(error);
+        return;
+      }
+
       authState.busy = false;
-      authState.error = '';
-      authState.syncInProgress = false;
-      authState.syncMessage = 'Signed out. Your settings and review outcomes remain saved on this device.';
       updateAuthUi();
-      closeSettingsMenu();
-      flashStatus('Signed out from Google Sheets sync.');
     }
 
     async function onTopAuthButtonClick() {
@@ -981,39 +376,50 @@
     function initialize() {
       updateAuthUi();
 
-      const config = getGoogleConfig();
-      if (!config.clientId) {
-        authState.error = 'Google Sheets sync is not configured for this copy of Pinder yet.';
+      const config = getConfig();
+      if (!config.firebaseConfig?.apiKey || !config.firebaseConfig?.authDomain || !config.firebaseConfig?.projectId) {
+        authState.error = 'Firestore sync is not configured. Add Firebase web app config to google-api-config.js.';
         updateAuthUi();
         return;
       }
 
-      if (!window.google?.accounts?.oauth2?.initTokenClient) {
-        authState.error = 'Google Identity Services could not be loaded, so Sheets sync is unavailable.';
+      if (!window.firebase?.initializeApp || !window.firebase?.auth || !window.firebase?.firestore) {
+        authState.error = 'Firebase Auth or Firestore could not be loaded, so cloud sync is unavailable.';
         updateAuthUi();
         return;
       }
 
       try {
+        authState.firebaseApp = window.firebase.apps?.length
+          ? window.firebase.app()
+          : window.firebase.initializeApp(config.firebaseConfig);
+        authState.firebaseAuth = window.firebase.auth(authState.firebaseApp);
+        authState.firestore = window.firebase.firestore(authState.firebaseApp);
+        authState.firebaseAuth.setPersistence(window.firebase.auth.Auth.Persistence.LOCAL);
+
+        authState.googleProvider = new window.firebase.auth.GoogleAuthProvider();
+        authState.googleProvider.addScope('profile');
+        authState.googleProvider.addScope('email');
+        authState.googleProvider.setCustomParameters({ prompt: 'select_account' });
+
         authState.configured = true;
         authState.error = '';
-        authState.syncMessage = 'Not signed in. Tap Sign in to sync settings and review outcomes to your own sheet.';
-        authState.tokenClient = window.google.accounts.oauth2.initTokenClient({
-          client_id: config.clientId,
-          scope: config.scopes.join(' '),
-          callback: () => {},
-          error_callback: () => {},
-        });
-
-        const restoredSession = restoreCachedAuthSession();
+        authState.syncMessage = 'Not signed in. Tap Sign in to sync settings and review outcomes with Firestore.';
         updateAuthUi();
 
-        if (authState.user && authState.accessToken) {
-          syncSettingsFromCloud({ interactive: false });
-          syncDecisionsFromCloud({ interactive: false });
-        } else if (restoredSession.canAttemptSilentSignIn) {
-          resumeGoogleSessionSilently();
-        }
+        authState.authReadyPromise = new Promise((resolve) => {
+          authState.firebaseAuth.onAuthStateChanged((firebaseUser) => {
+            authState.user = getFirebaseUserProfile(firebaseUser);
+            authState.error = '';
+            updateAuthUi();
+
+            if (firebaseUser) {
+              syncFromCloud();
+            }
+
+            resolve(firebaseUser);
+          });
+        });
       } catch (error) {
         handleCloudSyncError(error);
       }

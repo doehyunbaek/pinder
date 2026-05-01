@@ -11,7 +11,7 @@ Pinder is a static, client-side paper swiping app for GitHub Pages.
 - `U` or `⌘/Ctrl+Z`: undo the latest decision
 - Or tap the on-screen buttons
 - Inside the abstract modal, use the arrow keys to rate the open paper
-- Use the sign-in/sign-out button in the top-right to connect Google Sheets sync
+- Use the sign-in/sign-out button in the top-right to connect Firebase sync
 - Use the settings button in the top-right to hide/show the on-screen buttons and authors
 
 Each paper card shows:
@@ -29,8 +29,8 @@ To reduce repeat-load latency, Pinder also caches non-current arXiv monthly list
 - `index.html` — app shell
 - `styles.css` — mobile-friendly styling for iPhone and desktop
 - `app.js` — swipe logic, local saving, export, undo
-- `auth.js` — Google Sheets auth and sync logic
-- `google-api-config.js` — Google OAuth client config for Sheets sync
+- `auth.js` — Firebase Authentication backed sign-in and Firestore sync logic
+- `google-api-config.js` — Firebase web app config for Auth and Firestore sync
 - `scrape.js` — client-side paper source fetcher/parser used by the app, plus reusable Researchr and DBLP conference scrapers used for ICSE datasets
 - `data/icse.json` — hardcoded ICSE 1976–2026 sources together with the scraped paper data
 - `scripts/scrape-icse-tracks.js` — Playwright-based collector that opens each ICSE source page and refreshes `data/icse.json`
@@ -147,37 +147,42 @@ node scripts/enrich-legacy-acm-abstracts.js 1976 1978 1979
 
 The ACM enrichment pass is intentionally low-volume and may still stop early if ACM starts returning block pages.
 
-## Google login + Google Sheets sync
+## Firebase login + Firestore sync
 
-Pinder can optionally use Google login and the user's own Google Sheet to sync settings and review outcomes across devices while still being a static GitHub Pages app.
+Pinder can optionally use Firebase Authentication and Cloud Firestore to sync settings and review outcomes across devices while still being a static GitHub Pages app.
 
-The app creates or reuses a spreadsheet named `Pinder Sync` in the signed-in user's Google Drive and stores:
+The app stores data under the signed-in Firebase user:
 
-- settings in the `settings` tab
-- arXiv review outcomes in the `arxiv` tab
-- ICSE review outcomes in the `icse` tab
+- `users/{uid}/sync/settings`
+- `users/{uid}/decisions/arxiv`
+- `users/{uid}/decisions/icse`
+- `users/{uid}/decisions/fse`
 
-Review outcomes are stored with each paper's URL and paper ID. For arXiv feeds, this uses the paper's arXiv abstract URL.
+Each decisions document contains a `decisions` map keyed by paper ID.
 
-For backward compatibility, older data in the legacy `decisions` tab is still read as arXiv data and then synced into the `arxiv` tab.
+Setup:
 
-1. Open Google Cloud Console
-2. Create or choose a project
-3. Enable these APIs:
-   - Google Sheets API
-   - Google Drive API
-4. Configure the OAuth consent screen
-5. Create an OAuth 2.0 Client ID for a web application
-6. Add authorized JavaScript origins, including:
-   - `http://localhost:3000`
-   - your GitHub Pages origin, e.g. `https://yourname.github.io`
-7. Edit `google-api-config.js` and fill in `clientId`
+1. Create a Firebase project.
+2. Add a web app and paste its config into `google-api-config.js`.
+3. Enable Authentication → Google sign-in.
+4. Create a Firestore database.
+5. Add Firestore rules that restrict each user to their own data:
 
-Without Google OAuth config, the app still works locally with device-only settings.
+```js
+rules_version = '2';
 
-Because Pinder requests Google Drive and Sheets scopes, Google may show extra consent and `Google hasn't verified this app` screens while the OAuth app is still unverified or in testing. That warning cannot be removed in client-side code alone. To remove it, publish or verify the OAuth consent screen, or use an Internal app inside a Google Workspace org.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId}/{document=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
+```
 
-Returning users should usually reconnect with fewer prompts. Pinder caches auth in the browser and also tries a silent token refresh before asking you to click Sign in again.
+Without Firebase config, the app still works locally with device-only settings.
+
+Firebase Auth persists the user session in the browser and Firestore uses that session automatically, so this does not require Google Sheets or Drive OAuth scopes.
 
 ## Test locally
 

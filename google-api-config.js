@@ -1,14 +1,11 @@
 window.PINDER_GOOGLE_CONFIG = {
-  clientId: '53785424506-cg6gqv0v8h5mb1nahrvarmk4iqovrseq.apps.googleusercontent.com',
-  sheetTitle: 'Pinder Sync',
-  settingsSheetTitle: 'settings',
-  arxivSheetTitle: 'arxiv',
-  icseSheetTitle: 'icse',
-  decisionsSheetTitle: 'decisions',
-  scopes: [
-    'https://www.googleapis.com/auth/drive.file',
-    'https://www.googleapis.com/auth/spreadsheets',
-    'https://www.googleapis.com/auth/userinfo.email',
-    'https://www.googleapis.com/auth/userinfo.profile',
-  ],
+  firebaseConfig: {
+    apiKey: "AIzaSyB14v5K8JluDBKH2lM2WLuB14nT9GKQ5a4",
+    authDomain: "pinder-492111.firebaseapp.com",
+    projectId: "pinder-492111",
+    storageBucket: "pinder-492111.firebasestorage.app",
+    messagingSenderId: "53785424506",
+    appId: "1:53785424506:web:9f9910d3c51480b6e901c3"
+  },
+  scopes: ['profile', 'email'],
 };
