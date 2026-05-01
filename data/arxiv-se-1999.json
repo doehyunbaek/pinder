@@ -1,0 +1,240 @@
+{
+  "title": "arXiv cs.SE 1999",
+  "sourceLabel": "arXiv cs.SE 1999",
+  "sourceUrl": "https://arxiv.org/list/cs.SE/1999",
+  "archive": "cs.SE",
+  "year": 1999,
+  "updatedAt": "2026-05-01T19:46:44.557Z",
+  "months": [
+    {
+      "period": "1999-01",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1999-01?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "1999-02",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1999-02?skip=0&show=2000",
+      "paperCount": 1
+    },
+    {
+      "period": "1999-03",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1999-03?skip=0&show=2000",
+      "paperCount": 2
+    },
+    {
+      "period": "1999-04",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1999-04?skip=0&show=2000",
+      "paperCount": 1
+    },
+    {
+      "period": "1999-05",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1999-05?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "1999-06",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1999-06?skip=0&show=2000",
+      "paperCount": 4
+    },
+    {
+      "period": "1999-07",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1999-07?skip=0&show=2000",
+      "paperCount": 1
+    },
+    {
+      "period": "1999-08",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1999-08?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "1999-09",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1999-09?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "1999-10",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1999-10?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "1999-11",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1999-11?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "1999-12",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1999-12?skip=0&show=2000",
+      "paperCount": 1
+    }
+  ],
+  "papers": [
+    {
+      "id": "cs/9912018",
+      "title": "Computation in an algebra of test selection criteria",
+      "authors": [
+        "Jan Pachl",
+        "Shmuel Zaks"
+      ],
+      "authorsText": "Jan Pachl, Shmuel Zaks",
+      "abstract": "One of the key concepts in testing is that of adequate test sets. A test selection criterion decides which test sets are adequate. In this paper, a language schema for specifying a large class of test selection criteria is developed; the schema is based on two operations for building complex criteria from simple ones. Basic algebraic properties of the two operations are derived.\nIn the second part of the paper, a simple language-an instance of the general schema-is studied in detail, with the goal of generating small adequate test sets automatically. It is shown that one version of the problem is intractable, while another is solvable by an efficient algorithm. An implementation of the algorithm is described.",
+      "absUrl": "https://arxiv.org/abs/cs/9912018v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/9912018v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "1999-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/9907019",
+      "title": "A Reasonable C++ Wrappered Java Native Interface",
+      "authors": [
+        "Craig Bordelon"
+      ],
+      "authorsText": "Craig Bordelon",
+      "abstract": "A reasonable C++ Java Native Interface (JNI) technique termed C++ Wrappered JNI (C++WJ) is presented. The technique simplifies current error-prone JNI development by wrappering JNI calls. Provided development is done with the aid of a C++ compiler, C++WJ offers type checking and behind the scenes caching. A tool (jH) patterned on javah automates the creation of C++WJ classes.\nThe paper presents the rationale behind the choices that led to C++WJ. Handling of Java class and interface hierarchy including Java type downcasts is discussed. Efficiency considerations in the C++WJ lead to two flavors of C++ classes: jtypes and Jtypes. A jtype is a lightweight less than full wrapper of a JNI object reference. A Jtype is a heavyweight full wrapper of a JNI object reference.",
+      "absUrl": "https://arxiv.org/abs/cs/9907019v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/9907019v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "1999-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/9906032",
+      "title": "Formal Modeling in a Commercial Setting: A Case Study",
+      "authors": [
+        "A. Wong",
+        "M. Chechik"
+      ],
+      "authorsText": "A. Wong, M. Chechik",
+      "abstract": "This paper describes a case study conducted in collaboration with Nortel to demonstrate the feasibility of applying formal modeling techniques to telecommunication systems. A formal description language, SDL, was chosen by our qualitative CASE tool evaluation to model a multimedia-messaging system described by an 80-page natural language specification. Our model was used to identify errors in the software requirements document and to derive test suites, shadowing the existing development process and keeping track of a variety of productivity data.",
+      "absUrl": "https://arxiv.org/abs/cs/9906032v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/9906032v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "1999-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/9906031",
+      "title": "Events in Linear-Time Properties",
+      "authors": [
+        "D. Paun",
+        "M. Chechik"
+      ],
+      "authorsText": "D. Paun, M. Chechik",
+      "abstract": "For over a decade, researchers in formal methods tried to create formalisms that permit natural specification of systems and allow mathematical reasoning about their correctness. The availability of fully-automated reasoning tools enables more non-specialists to use formal methods effectively --- their responsibility reduces to just specifying the model and expressing the desired properties. Thus, it is essential that these properties be represented in a language that is easy to use and sufficiently expressive.\nLinear-time temporal logic is a formalism that has been extensively used by researchers for specifying properties of systems. When such properties are closed under stuttering, i.e. their interpretation is not modified by transitions that leave the system in the same state, verification tools can utilize a partial-order reduction technique to reduce the size of the model and thus analyze larger systems. If LTL formulas do not contain the ``next'' operator, the formulas are closed under stuttering, but the resulting language is not expressive enough to capture many important properties, e.g., properties involving events. Determining if an arbitrary LTL formula is closed under stuttering is hard --- it has been proven to be PSPACE-complete.\nIn this paper we relax the restriction on LTL that guarantees closure under stuttering, introduce the notion of edges in the context of LTL, and provide theorems that enable syntactic reasoning about closure under stuttering of LTL formulas.",
+      "absUrl": "https://arxiv.org/abs/cs/9906031v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/9906031v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "1999-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/9906030",
+      "title": "SCR3: towards usability of formal methods",
+      "authors": [
+        "M. Chechik"
+      ],
+      "authorsText": "M. Chechik",
+      "abstract": "This paper gives an overview of SCR3 -- a toolset designed to increase the usability of formal methods for software development. Formal requirements are specified in SCR3 in an easy to use and review format, and then used in checking requirements for correctness and in verifying consistency between annotated code and requirements.\nIn this paper we discuss motivations behind this work, describe several tools which are part of SCR3, and illustrate their operation on an example of a Cruise Control system.",
+      "absUrl": "https://arxiv.org/abs/cs/9906030v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/9906030v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "1999-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/9906029",
+      "title": "Events in Property Patterns",
+      "authors": [
+        "M.Chechik",
+        "D.Pain"
+      ],
+      "authorsText": "M.Chechik, D.Pain",
+      "abstract": "A pattern-based approach to the presentation, codification and reuse of property specifications for finite-state verification was proposed by Dwyer and his collegues. The patterns enable non-experts to read and write formal specifications for realistic systems and facilitate easy conversion of specifications between formalisms, such as LTL. CTL, QRE. In this paper, we extend the pattern system with events - changes of values of variables in the context of LTL.",
+      "absUrl": "https://arxiv.org/abs/cs/9906029v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/9906029v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "1999-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/9904017",
+      "title": "A Machine-Independent Debugger--Revisited",
+      "authors": [
+        "David R. Hanson"
+      ],
+      "authorsText": "David R. Hanson",
+      "abstract": "Most debuggers are notoriously machine-dependent, but some recent research prototypes achieve varying degrees of machine-independence with novel designs. Cdb, a simple source-level debugger for C, is completely independent of its target architecture. This independence is achieved by embedding symbol tables and debugging code in the target program, which costs both time and space. This paper describes a revised design and implementation of cdb that reduces the space cost by nearly one-half and the time cost by 13% by storing symbol tables in external files. A symbol table is defined by a 31-line grammar in the Abstract Syntax Description Language (ASDL). ASDL is a domain-specific language for specifying tree data structures. The ASDL tools accept an ASDL grammar and generate code to construct, read, and write these data structures. Using ASDL automates implementing parts of the debugger, and the grammar documents the symbol table concisely. Using ASDL also suggested simplifications to the interface between the debugger and the target program. Perhaps most important, ASDL emphasizes that symbol tables are data structures, not file formats. Many of the pitfalls of working with low-level file formats can be avoided by focusing instead on high-level data structures and automating the implementation details.",
+      "absUrl": "https://arxiv.org/abs/cs/9904017v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/9904017v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "1999-04",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/9903018",
+      "title": "LuaJava - A Scripting Tool for Java",
+      "authors": [
+        "Carlos Cassino",
+        "Roberto Ierusalimschy",
+        "Noemi Rodriguez"
+      ],
+      "authorsText": "Carlos Cassino, Roberto Ierusalimschy, Noemi Rodriguez",
+      "abstract": "Scripting languages are becoming more and more important as a tool for software development, as they provide great flexibility for rapid prototyping and for configuring componentware applications. In this paper we present LuaJava, a scripting tool for Java. LuaJava adopts Lua, a dynamically typed interpreted language, as its script language. Great emphasis is given to the transparency of the integration between the two languages, so that objects from one language can be used inside the other like native objects. The final result of this integration is a tool that allows the construction of configurable Java applications, using off-the-shelf components, in a high abstraction level.",
+      "absUrl": "https://arxiv.org/abs/cs/9903018v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/9903018v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "1999-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/9903002",
+      "title": "An Algebraic Programming Style for Numerical Software and its Optimization",
+      "authors": [
+        "T. B. Dinesh",
+        "M. Haveraaen",
+        "J. Heering"
+      ],
+      "authorsText": "T. B. Dinesh, M. Haveraaen, J. Heering",
+      "abstract": "The abstract mathematical theory of partial differential equations (PDEs) is formulated in terms of manifolds, scalar fields, tensors, and the like, but these algebraic structures are hardly recognizable in actual PDE solvers. The general aim of the Sophus programming style is to bridge the gap between theory and practice in the domain of PDE solvers. Its main ingredients are a library of abstract datatypes corresponding to the algebraic structures used in the mathematical theory and an algebraic expression style similar to the expression style used in the mathematical theory. Because of its emphasis on abstract datatypes, Sophus is most naturally combined with object-oriented languages or other languages supporting abstract datatypes. The resulting source code patterns are beyond the scope of current compiler optimizations, but are sufficiently specific for a dedicated source-to-source optimizer. The limited, domain-specific, character of Sophus is the key to success here. This kind of optimization has been tested on computationally intensive Sophus style code with promising results. The general approach may be useful for other styles and in other application domains as well.",
+      "absUrl": "https://arxiv.org/abs/cs/9903002v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/9903002v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "1999-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/9902008",
+      "title": "Managing Object-Oriented Integration and Regression Testing",
+      "authors": [
+        "Mario Winter"
+      ],
+      "authorsText": "Mario Winter",
+      "abstract": "Systematic testing of object-oriented software turned out to be much more complex than testing conventional software. Especially the highly incremental and iterative development cycle demands both many more changes and partially implemented resp. re-implemented classes. Much more integration and regression testing has to be done to reach stable stages during the development. In this presentation we propose a diagram capturing all possible dependencies and interactions in an object-oriented program. Then we give algorithms and coverage criteria to identify integration resp. regression test strategys and all test cases to be executed after some implementation resp. modification activities. Finally, we summarize some practical experiences and heuristics.",
+      "absUrl": "https://arxiv.org/abs/cs/9902008v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/9902008v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "1999-02",
+      "sourceVersion": "v1"
+    }
+  ]
+}

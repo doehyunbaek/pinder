@@ -1,0 +1,478 @@
+{
+  "title": "arXiv cs.SE 2002",
+  "sourceLabel": "arXiv cs.SE 2002",
+  "sourceUrl": "https://arxiv.org/list/cs.SE/2002",
+  "archive": "cs.SE",
+  "year": 2002,
+  "updatedAt": "2026-05-01T19:47:06.825Z",
+  "months": [
+    {
+      "period": "2002-01",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2002-01?skip=0&show=2000",
+      "paperCount": 3
+    },
+    {
+      "period": "2002-02",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2002-02?skip=0&show=2000",
+      "paperCount": 3
+    },
+    {
+      "period": "2002-03",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2002-03?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "2002-04",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2002-04?skip=0&show=2000",
+      "paperCount": 4
+    },
+    {
+      "period": "2002-05",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2002-05?skip=0&show=2000",
+      "paperCount": 1
+    },
+    {
+      "period": "2002-06",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2002-06?skip=0&show=2000",
+      "paperCount": 1
+    },
+    {
+      "period": "2002-07",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2002-07?skip=0&show=2000",
+      "paperCount": 10
+    },
+    {
+      "period": "2002-08",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2002-08?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "2002-09",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2002-09?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "2002-10",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2002-10?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "2002-11",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2002-11?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "2002-12",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2002-12?skip=0&show=2000",
+      "paperCount": 1
+    }
+  ],
+  "papers": [
+    {
+      "id": "cs/0212046",
+      "title": "Confluent Drawings: Visualizing Non-planar Diagrams in a Planar Way",
+      "authors": [
+        "Matthew Dickerson",
+        "David Eppstein",
+        "Michael T. Goodrich",
+        "Jeremy Meng"
+      ],
+      "authorsText": "Matthew Dickerson, David Eppstein, Michael T. Goodrich, Jeremy Meng",
+      "abstract": "In this paper, we introduce a new approach for drawing diagrams that have applications in software visualization. Our approach is to use a technique we call confluent drawing for visualizing non-planar diagrams in a planar way. This approach allows us to draw, in a crossing-free manner, graphs--such as software interaction diagrams--that would normally have many crossings. The main idea of this approach is quite simple: we allow groups of edges to be merged together and drawn as \"tracks\" (similar to train tracks). Producing such confluent diagrams automatically from a graph with many crossings is quite challenging, however, so we offer two heuristic algorithms to test if a non-planar graph can be drawn efficiently in a confluent way. In addition, we identify several large classes of graphs that can be completely categorized as being either confluently drawable or confluently non-drawable.",
+      "absUrl": "https://arxiv.org/abs/cs/0212046v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0212046v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0207054",
+      "title": "Enhancing Usefulness of Declarative Programming Frameworks through Complete Integration",
+      "authors": [
+        "Goran Falkman",
+        "Olof Torgersson"
+      ],
+      "authorsText": "Goran Falkman, Olof Torgersson",
+      "abstract": "The Gisela framework for declarative programming was developed with the specific aim of providing a tool that would be useful for knowledge representation and reasoning within real-world applications. To achieve this, a complete integration into an object-oriented application development environment was used. The framework and methodology developed provide two alternative application programming interfaces (APIs): Programming using objects or programming using a traditional equational declarative style. In addition to providing complete integration, Gisela also allows extensions and modifications due to the general computation model and well-defined APIs. We give a brief overview of the declarative model underlying Gisela and we present the methodology proposed for building applications together with some real examples.",
+      "absUrl": "https://arxiv.org/abs/cs/0207054v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0207054v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0207053",
+      "title": "An Architecture for Making Object-Oriented Systems Available from Prolog",
+      "authors": [
+        "Jan Wielemaker",
+        "Anjo Anjewierden"
+      ],
+      "authorsText": "Jan Wielemaker, Anjo Anjewierden",
+      "abstract": "It is next to impossible to develop real-life applications in just pure Prolog. With XPCE we realised a mechanism for integrating Prolog with an external object-oriented system that turns this OO system into a natural extension to Prolog. We describe the design and how it can be applied to other external OO systems.",
+      "absUrl": "https://arxiv.org/abs/cs/0207053v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0207053v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0207052",
+      "title": "Proceedings of the 12th International Workshop on Logic Programming Environments",
+      "authors": [
+        "Alexandre Tessier"
+      ],
+      "authorsText": "Alexandre Tessier",
+      "abstract": "The twelfth Workshop on Logic Programming Environments, WLPE 2002, is one in a series of international workshops held in the topic area. The workshops facilitate the exchange ideas and results among researchers and system developers on all aspects of environments for logic programming. Relevant topics for these workshops include user interfaces, human engineering, execution visualization, development tools, providing for new paradigms, and interfacing to language system tools and external systems. This twelfth workshop held in Copenhaguen. It follows the successful eleventh Workshop on Logic Programming Environments held in Cyprus in December, 2001.\nWLPE 2002 features ten presentations. The presentations involve, in some way, constraint logic programming, object-oriented programming and abstract interpretation. Topics areas addressed include tools for software development, execution visualization, software maintenance, instructional aids.\nThis workshop was a post-conference workshop at ICLP 2002.\nAlexandre Tessier, Program Chair, WLPE 2002, June 2002.",
+      "absUrl": "https://arxiv.org/abs/cs/0207052v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0207052v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0207051",
+      "title": "Exporting Prolog source code",
+      "authors": [
+        "Nicos Angelopoulos"
+      ],
+      "authorsText": "Nicos Angelopoulos",
+      "abstract": "In this paper we present a simple source code configuration tool. ExLibris operates on libraries and can be used to extract from local libraries all code relevant to a particular project. Our approach is not designed to address problems arising in code production lines, but rather, to support the needs of individual or small teams of researchers who wish to communicate their Prolog programs. In the process, we also wish to accommodate and encourage the writing of reusable code. Moreover, we support and propose ways of dealing with issues arising in the development of code that can be run on a variety of like-minded Prolog systems. With consideration to these aims we have made the following decisions: (i) support file-based source development, (ii) require minimal program transformation, (iii) target simplicity of usage, and (iv) introduce minimum number of new primitives.",
+      "absUrl": "https://arxiv.org/abs/cs/0207051v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0207051v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0207050",
+      "title": "Value withdrawal explanations: a theoretical tool for programming environments",
+      "authors": [
+        "Willy Lesaint"
+      ],
+      "authorsText": "Willy Lesaint",
+      "abstract": "Constraint logic programming combines declarativity and efficiency thanks to constraint solvers implemented for specific domains. Value withdrawal explanations have been efficiently used in several constraints programming environments but there does not exist any formalization of them. This paper is an attempt to fill this lack. Furthermore, we hope that this theoretical tool could help to validate some programming environments. A value withdrawal explanation is a tree describing the withdrawal of a value during a domain reduction by local consistency notions and labeling. Domain reduction is formalized by a search tree using two kinds of operators: operators for local consistency notions and operators for labeling. These operators are defined by sets of rules. Proof trees are built with respect to these rules. For each removed value, there exists such a proof tree which is the withdrawal explanation of this value.",
+      "absUrl": "https://arxiv.org/abs/cs/0207050v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0207050v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0207049",
+      "title": "More Precise Yet Efficient Type Inference for Logic Programs",
+      "authors": [
+        "Claudio Vaucheret",
+        "Francisco Bueno"
+      ],
+      "authorsText": "Claudio Vaucheret, Francisco Bueno",
+      "abstract": "Type analyses of logic programs which aim at inferring the types of the program being analyzed are presented in a unified abstract interpretation-based framework. This covers most classical abstract interpretation-based type analyzers for logic programs, built on either top-down or bottom-up interpretation of the program. In this setting, we discuss the widening operator, arguably a crucial one. We present a new widening which is more precise than those previously proposed. Practical results with our analysis domain are also presented, showing that it also allows for efficient analysis.",
+      "absUrl": "https://arxiv.org/abs/cs/0207049v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0207049v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0207048",
+      "title": "CLPGUI: a generic graphical user interface for constraint logic programming over finite domains",
+      "authors": [
+        "Francois Fages"
+      ],
+      "authorsText": "Francois Fages",
+      "abstract": "CLPGUI is a graphical user interface for visualizing and interacting with constraint logic programs over finite domains. In CLPGUI, the user can control the execution of a CLP program through several views of constraints, of finite domain variables and of the search tree. CLPGUI is intended to be used both for teaching purposes, and for debugging and improving complex programs of realworld scale. It is based on a client-server architecture for connecting the CLP process to a Java-based GUI process. Communication by message passing provides an open architecture which facilitates the reuse of graphical components and the porting to different constraint programming systems. Arbitrary constraints and goals can be posted incrementally from the GUI. We propose several dynamic 2D and 3D visualizations of the search tree and of the evolution of finite domain variables. We argue that the 3D representation of search trees proposed in this paper provides the most appropriate visualization of large search trees. We describe the current implementation of the annotations and of the interactive execution model in GNU-Prolog, and report some evaluation results.",
+      "absUrl": "https://arxiv.org/abs/cs/0207048v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0207048v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0207047",
+      "title": "Tracing and Explaining Execution of CLP(FD) Programs",
+      "authors": [
+        "Magnus Agren",
+        "Tamas Szeredi",
+        "Nicolas Beldiceanu",
+        "Mats Carlsson"
+      ],
+      "authorsText": "Magnus Agren, Tamas Szeredi, Nicolas Beldiceanu, Mats Carlsson",
+      "abstract": "Previous work in the area of tracing CLP(FD) programs mainly focuses on providing information about control of execution and domain modification. In this paper, we present a trace structure that provides information about additional important aspects. We incorporate explanations in the trace structure, i.e. reasons for why certain solver actions occur. Furthermore, we come up with a format for describing the execution of the filtering algorithms of global constraints. Some new ideas about the design of the trace are also presented. For example, we have modeled our trace as a nested block structure in order to achieve a hierarchical view. Also, new ways about how to represent and identify different entities such as constraints and domain variables are presented.",
+      "absUrl": "https://arxiv.org/abs/cs/0207047v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0207047v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0207046",
+      "title": "COINS: a constraint-based interactive solving system",
+      "authors": [
+        "Samir Ouis",
+        "Narendra Jussien",
+        "Patrice Boizumault"
+      ],
+      "authorsText": "Samir Ouis, Narendra Jussien, Patrice Boizumault",
+      "abstract": "This paper describes the COINS (COnstraint-based INteractive Solving) system: a conflict-based constraint solver. It helps understanding inconsistencies, simulates constraint additions and/or retractions (without any propagation), determines if a given constraint belongs to a conflict and provides diagnosis tools (e.g. why variable v cannot take value val). COINS also uses user-friendly representation of conflicts and explanations.",
+      "absUrl": "https://arxiv.org/abs/cs/0207046v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0207046v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0207044",
+      "title": "Declarative program development in Prolog with GUPU",
+      "authors": [
+        "Ulrich Neumerkel",
+        "Stefan Kral"
+      ],
+      "authorsText": "Ulrich Neumerkel, Stefan Kral",
+      "abstract": "We present the side-effect free programming course environment GUPU that seamlessly guides and supports students during all phases of program development covering specification, implementation, and program debugging. GUPU features several innovations in this area. The specification phase is supported by reference implementations augmented with diagnostic facilities. During implementation, immediate feedback from test cases and visualization tools helps the programmer's program understanding. A set of slicing techniques is used to narrow down programming errors. Finally, the whole process is guided by a marking system.",
+      "absUrl": "https://arxiv.org/abs/cs/0207044v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0207044v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0206021",
+      "title": "The analysis of the IFPUG method sensitivity",
+      "authors": [
+        "R. Asensio Monge",
+        "F. Sanchis Marco",
+        "F. Torre Cervigon"
+      ],
+      "authorsText": "R. Asensio Monge, F. Sanchis Marco, F. Torre Cervigon",
+      "abstract": "J. Albrecht`s Function Point Analysis (FPA) is a method to determine the functional size of software products. An organization called International Function Point Users Group (IPFUG), considers the FPA as a standard in the software functional size measurement. The Albrechts method is followed by IPFUG method which includes some modifications in order to improve it. A limitation of the method refers to the fact that FPA is not sensitive enough to differentiate the functional size in small enhancements. That affects the productivity analysis, where the software product functional size is required. To provide more power to the functional size measurement, A. Abran, M. Maya and H. Nguyeckim have proposed some modifications to improve it. The IPFUG v 4.1 method which includes these modifications is named IFPUG v 4.1 extended. In this work we set the conditions to delimiting granular from non granular functions and we calculate the static calibration and sensitivity graphs for the measurements of a set of projects with a high percentage of granular functions, all of then measured with the IFPUG v 4.1 method and the IFPUG v 4.1 extended. Finally, we introduce a statistic analysis in order to determine whether significant differences exist between both methods or not.",
+      "absUrl": "https://arxiv.org/abs/cs/0206021v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0206021v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0205052",
+      "title": "Three-Tiered Specification of Micro-Architectures",
+      "authors": [
+        "Vasu Alagar",
+        "Ralf Laemmel"
+      ],
+      "authorsText": "Vasu Alagar, Ralf Laemmel",
+      "abstract": "A three-tiered specification approach is developed to formally specify collections of collaborating objects, say micro-architectures. (i) The structural properties to be maintained in the collaboration are specified in the lowest tier. (ii) The behaviour of the object methods in the classes is specified in the middle tier. (iii) The interaction of the objects in the micro-architecture is specified in the third tier. The specification approach is based on Larch and accompanying notations and tools. The approach enables the unambiguous and complete specification of reusable collections of collaborating objects. The layered, formal approach is compared to other approaches including the mainstream UML approach.",
+      "absUrl": "https://arxiv.org/abs/cs/0205052v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0205052v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0204036",
+      "title": "Semantic Component Composition",
+      "authors": [
+        "Joseph R. Kiniry"
+      ],
+      "authorsText": "Joseph R. Kiniry",
+      "abstract": "Building complex software systems necessitates the use of component-based architectures. In theory, of the set of components needed for a design, only some small portion of them are \"custom\"; the rest are reused or refactored existing pieces of software. Unfortunately, this is an idealized situation. Just because two components should work together does not mean that they will work together.\nThe \"glue\" that holds components together is not just technology. The contracts that bind complex systems together implicitly define more than their explicit type. These \"conceptual contracts\" describe essential aspects of extra-system semantics: e.g., object models, type systems, data representation, interface action semantics, legal and contractual obligations, and more.\nDesigners and developers spend inordinate amounts of time technologically duct-taping systems to fulfill these conceptual contracts because system-wide semantics have not been rigorously characterized or codified. This paper describes a formal characterization of the problem and discusses an initial implementation of the resulting theoretical system.",
+      "absUrl": "https://arxiv.org/abs/cs/0204036v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0204036v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-04",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0204035",
+      "title": "Semantic Properties for Lightweight Specification in Knowledgeable Development Environments",
+      "authors": [
+        "Joseph R. Kiniry"
+      ],
+      "authorsText": "Joseph R. Kiniry",
+      "abstract": "Semantic properties are domain-specific specification constructs used to augment an existing language with richer semantics. These properties are taken advantage of in system analysis, design, implementation, testing, and maintenance through the use of documentation and source-code transformation tools. Semantic properties are themselves specified at two levels: loosely with precise natural language, and formally within the problem domain. The refinement relationships between these specification levels, as well as between a semantic property's use and its realization in program code via tools, is specified with a new formal method for reuse called kind theory.",
+      "absUrl": "https://arxiv.org/abs/cs/0204035v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0204035v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-04",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0204034",
+      "title": "Monitoring and Debugging Concurrent and Distributed Object-Oriented Systems",
+      "authors": [
+        "Joseph R. Kiniry"
+      ],
+      "authorsText": "Joseph R. Kiniry",
+      "abstract": "A major part of debugging, testing, and analyzing a complex software system is understanding what is happening within the system at run-time. Some developers advocate running within a debugger to better understand the system at this level. Others embed logging statements, even in the form of hard-coded calls to print functions, throughout the code. These techniques are all general, rough forms of what we call system monitoring, and, while they have limited usefulness in simple, sequential systems, they are nearly useless in complex, concurrent ones. We propose a set of new mechanisms, collectively known as a monitoring system, for understanding such complex systems, and we describe an example implementation of such a system, called IDebug, for the Java programming language.",
+      "absUrl": "https://arxiv.org/abs/cs/0204034v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0204034v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-04",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0204014",
+      "title": "An Assessment of the Consistency for Software Measurement Methods",
+      "authors": [
+        "R. Asensio Monge",
+        "F. Sanchis Marco",
+        "F. Torre Cervigon"
+      ],
+      "authorsText": "R. Asensio Monge, F. Sanchis Marco, F. Torre Cervigon",
+      "abstract": "Consistency, defined as the requirement that a series of measurements of the same project carried out by different raters using the same method should produce similar results, is one of the most important aspects to be taken into account in the measurement methods of the software. In spite of this, there is a widespread view that many measurement methods introduce an undesirable amount of subjectivity in the measurement process. This perception has made several organizations develop revisions of the standard methods whose main aim is to improve their consistency by introducing some suitable modifications of those aspects which are believed to introduce a greater degree of subjectivity.Each revision of a method must be empirically evaluated to determine to what extent is the aim of improving its consistency achieved. In this article we will define an homogeneous statistic intended to describe the consistency level of a method, and we will develop the statistical analysis which should be carried out in order to conclude whether or not a measurement method is more consistent than other one.",
+      "absUrl": "https://arxiv.org/abs/cs/0204014v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0204014v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-04",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0202027",
+      "title": "BSML: A Binding Schema Markup Language for Data Interchange in Problem Solving Environments (PSEs)",
+      "authors": [
+        "Alex Verstak",
+        "Naren Ramakrishnan",
+        "Layne T. Watson",
+        "Jian He",
+        "Clifford A. Shaffer",
+        "Kyung Kyoon Bae",
+        "Jing Jiang",
+        "William H. Tranter",
+        "Theodore S. Rappaport"
+      ],
+      "authorsText": "Alex Verstak, Naren Ramakrishnan, Layne T. Watson, Jian He, Clifford A. Shaffer, Kyung Kyoon Bae, Jing Jiang, William H. Tranter, Theodore S. Rappaport",
+      "abstract": "We describe a binding schema markup language (BSML) for describing data interchange between scientific codes. Such a facility is an important constituent of scientific problem solving environments (PSEs). BSML is designed to integrate with a PSE or application composition system that views model specification and execution as a problem of managing semistructured data. The data interchange problem is addressed by three techniques for processing semistructured data: validation, binding, and conversion. We present BSML and describe its application to a PSE for wireless communications system design.",
+      "absUrl": "https://arxiv.org/abs/cs/0202027v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0202027v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0202006",
+      "title": "Approximate Computation of Reach Sets in Hybrid Systems",
+      "authors": [
+        "D. Ravi",
+        "R. K. Shyamasundar"
+      ],
+      "authorsText": "D. Ravi, R. K. Shyamasundar",
+      "abstract": "One of the most important problems in hybrid systems is the {\\em reachability problem}. The reachability problem has been shown to be undecidable even for a subclass of {\\em linear} hybrid systems. In view of this, the main focus in the area of hybrid systems has been to find {\\em effective} semi-decision procedures for this problem. Such an algorithmic approach involves finding methods of computation and representation of reach sets of the continuous variables within a discrete state of a hybrid system. In this paper, after presenting a brief introduction to hybrid systems and reachability problem, we propose a computational method for obtaining the reach sets of continuous variables in a hybrid system. In addition to this, we also describe a new algorithm to over-approximate with polyhedra the reach sets of the continuous variables with linear dynamics and polyhedral initial set. We illustrate these algorithms with typical interesting examples.",
+      "absUrl": "https://arxiv.org/abs/cs/0202006v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0202006v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0202002",
+      "title": "A Refinement Calculus for Logic Programs",
+      "authors": [
+        "Ian Hayes",
+        "Robert Colvin",
+        "David Hemer",
+        "Paul Strooper",
+        "Ray Nickson"
+      ],
+      "authorsText": "Ian Hayes, Robert Colvin, David Hemer, Paul Strooper, Ray Nickson",
+      "abstract": "Existing refinement calculi provide frameworks for the stepwise development of imperative programs from specifications. This paper presents a refinement calculus for deriving logic programs. The calculus contains a wide-spectrum logic programming language, including executable constructs such as sequential conjunction, disjunction, and existential quantification, as well as specification constructs such as general predicates, assumptions and universal quantification. A declarative semantics is defined for this wide-spectrum language based on executions. Executions are partial functions from states to states, where a state is represented as a set of bindings. The semantics is used to define the meaning of programs and specifications, including parameters and recursion. To complete the calculus, a notion of correctness-preserving refinement over programs in the wide-spectrum language is defined and refinement laws for developing programs are introduced. The refinement calculus is illustrated using example derivations and prototype tool support is discussed.",
+      "absUrl": "https://arxiv.org/abs/cs/0202002v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0202002v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0201028",
+      "title": "Software Validation using Power Profiles",
+      "authors": [
+        "Raimondas Lencevicius",
+        "Edu Metz",
+        "Alexander Ran"
+      ],
+      "authorsText": "Raimondas Lencevicius, Edu Metz, Alexander Ran",
+      "abstract": "The validation of modern software systems incorporates both functional and quality requirements. This paper proposes a validation approach for software quality requirement - its power consumption. This approach validates whether the software produces the desired results with a minimum expenditure of energy. We present energy requirements and an approach for their validation using a power consumption model, test-case specification, software traces, and power measurements. Three different approaches for power data gathering are described. The power consumption of mobile phone applications is obtained and matched against the power consumption model.",
+      "absUrl": "https://arxiv.org/abs/cs/0201028v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0201028v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0201023",
+      "title": "Model-Based Software Engineering and Ada: Synergy for the Development of Safety-Critical Systems",
+      "authors": [
+        "Andree Blotz",
+        "Franz Huber",
+        "Heiko Loetzbeyer",
+        "Alexander Pretschner",
+        "Oscar Slotosch",
+        "Hans-Peter Zaengerl"
+      ],
+      "authorsText": "Andree Blotz, Franz Huber, Heiko Loetzbeyer, Alexander Pretschner, Oscar Slotosch, Hans-Peter Zaengerl",
+      "abstract": "In this paper we outline a software development process for safety-critical systems that aims at combining some of the specific strengths of model-based development with those of programming language based development using safety-critical subsets of Ada. Model-based software development and model-based test case generation techniques are combined with code generation techniques and tools providing a transition from model to code both for a system itself and for its test cases. This allows developers to combine domain-oriented, model-based techniques with source code based validation techniques, as required for conformity with standards for the development of safety-critical software, such as the avionics standard RTCA/DO-178B. We introduce the AutoFocus and Validator modeling and validation toolset and sketch its usage for modeling, test case generation, and code generation in a combined approach, which is further illustrated by a simplified leading edge aerospace model with built-in fault tolerance.",
+      "absUrl": "https://arxiv.org/abs/cs/0201023v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0201023v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0201011",
+      "title": "A Backward Analysis for Constraint Logic Programs",
+      "authors": [
+        "Andy King",
+        "Lunjin Lu"
+      ],
+      "authorsText": "Andy King, Lunjin Lu",
+      "abstract": "One recurring problem in program development is that of understanding how to re-use code developed by a third party. In the context of (constraint) logic programming, part of this problem reduces to figuring out how to query a program. If the logic program does not come with any documentation, then the programmer is forced to either experiment with queries in an ad hoc fashion or trace the control-flow of the program (backward) to infer the modes in which a predicate must be called so as to avoid an instantiation error. This paper presents an abstract interpretation scheme that automates the latter technique. The analysis presented in this paper can infer moding properties which if satisfied by the initial query, come with the guarantee that the program and query can never generate any moding or instantiation errors. Other applications of the analysis are discussed. The paper explains how abstract domains with certain computational properties (they condense) can be used to trace control-flow backward (right-to-left) to infer useful properties of initial queries. A correctness argument is presented and an implementation is reported.",
+      "absUrl": "https://arxiv.org/abs/cs/0201011v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0201011v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2002-01",
+      "sourceVersion": "v1"
+    }
+  ]
+}

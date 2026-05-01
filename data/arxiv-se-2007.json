@@ -1,0 +1,1083 @@
+{
+  "title": "arXiv cs.SE 2007",
+  "sourceLabel": "arXiv cs.SE 2007",
+  "sourceUrl": "https://arxiv.org/list/cs.SE/2007",
+  "archive": "cs.SE",
+  "year": 2007,
+  "updatedAt": "2026-05-01T18:47:28.103Z",
+  "months": [
+    {
+      "period": "2007-01",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2007-01?skip=0&show=2000",
+      "paperCount": 5
+    },
+    {
+      "period": "2007-02",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2007-02?skip=0&show=2000",
+      "paperCount": 2
+    },
+    {
+      "period": "2007-03",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2007-03?skip=0&show=2000",
+      "paperCount": 5
+    },
+    {
+      "period": "2007-04",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2007-04?skip=0&show=2000",
+      "paperCount": 2
+    },
+    {
+      "period": "2007-05",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2007-05?skip=0&show=2000",
+      "paperCount": 2
+    },
+    {
+      "period": "2007-06",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2007-06?skip=0&show=2000",
+      "paperCount": 4
+    },
+    {
+      "period": "2007-07",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2007-07?skip=0&show=2000",
+      "paperCount": 5
+    },
+    {
+      "period": "2007-08",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2007-08?skip=0&show=2000",
+      "paperCount": 1
+    },
+    {
+      "period": "2007-09",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2007-09?skip=0&show=2000",
+      "paperCount": 1
+    },
+    {
+      "period": "2007-10",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2007-10?skip=0&show=2000",
+      "paperCount": 10
+    },
+    {
+      "period": "2007-11",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2007-11?skip=0&show=2000",
+      "paperCount": 10
+    },
+    {
+      "period": "2007-12",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2007-12?skip=0&show=2000",
+      "paperCount": 10
+    }
+  ],
+  "papers": [
+    {
+      "id": "cs/0703080",
+      "title": "A Systematic Approach to Web-Application Development",
+      "authors": [
+        "Joy Dutta",
+        "Paul Fodor"
+      ],
+      "authorsText": "Joy Dutta, Paul Fodor",
+      "abstract": "Designing a web-application from a specification involves a series of well-planned and well executed steps leading to the final product. This often involves critical changes in design while testing the application, which itself is slow and cumbersome. Traditional approaches either fully automate the web-application development process, or let developers write everything from scratch. Our approach is based on a middle-ground, with precise control on the workflow and usage of a set of custom-made software tools to automate a significant part of code generation.",
+      "absUrl": "https://arxiv.org/abs/cs/0703080v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0703080v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0703069",
+      "title": "Portlet Wrappers using JavaScript",
+      "authors": [
+        "Paul Ioan Fodor"
+      ],
+      "authorsText": "Paul Ioan Fodor",
+      "abstract": "In this paper, we extend the classic portal design using dynamic JavaScript portlets with HTML DOM Web clipping on the client browser: the portal server supplies the user/passwords for all services through https and the client browser retrieves web pages and cuts/selects/changes the desired parts. This operation brings along a set of advantages: a dynamic wrapping of existing legacy websites in the client browser, the reloading of only changed portlets instead of whole portal, low bandwidth on the server, the elimination of re-writing the URL links in the portal, and last but not least, a support for Java applets in portlets by putting the login cookies on the client. Our solution is compliant with JSR168 Portlet Specification allowing portability across all vendor platforms.",
+      "absUrl": "https://arxiv.org/abs/cs/0703069v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0703069v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0703042",
+      "title": "Recommender System for Online Dating Service",
+      "authors": [
+        "Lukas Brozovsky",
+        "Vaclav Petricek"
+      ],
+      "authorsText": "Lukas Brozovsky, Vaclav Petricek",
+      "abstract": "Users of online dating sites are facing information overload that requires them to manually construct queries and browse huge amount of matching user profiles. This becomes even more problematic for multimedia profiles. Although matchmaking is frequently cited as a typical application for recommender systems, there is a surprising lack of work published in this area. In this paper we describe a recommender system we implemented and perform a quantitative comparison of two collaborative filtering (CF) and two global algorithms. Results show that collaborative filtering recommenders significantly outperform global algorithms that are currently used by dating sites. A blind experiment with real users also confirmed that users prefer CF based recommendations to global popularity recommendations. Recommender systems show a great potential for online dating where they could improve the value of the service to users and improve monetization of the service.",
+      "absUrl": "https://arxiv.org/abs/cs/0703042v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0703042v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0703021",
+      "title": "Addressing Components' Evolvement and Execution Behavior to Measure Component-Based Software Reliability",
+      "authors": [
+        "Wen-Li Wang",
+        "Mei-Huei Tang"
+      ],
+      "authorsText": "Wen-Li Wang, Mei-Huei Tang",
+      "abstract": "Software reliability is an important quality attrib-ute, often evaluated as either a function of time or of system structures. The goal of this study is to have this metric cover both for component-based software, be-cause its reliability strongly depends on the quality of constituent components and their interactions. To achieve this, we apply a convolution modeling ap-proach, based on components' execution behavior, to integrate their individual reliability evolvement and simultaneously address failure fixes in the time do-main. Modeling at the component level can be more economical to accommodate software evolution, be-cause the reliability metric can be evaluated by reus-ing the quality measures of unaffected components and adapting only to the affected ones to save cost. The adaptation capability also supports the incremental software development processes that constantly add in new components over time. Experiments were con-ducted to discuss the usefulness of this approach.",
+      "absUrl": "https://arxiv.org/abs/cs/0703021v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0703021v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0703012",
+      "title": "Pre-Requirement Specification Traceability: Bridging the Complexity Gap through Capabilities",
+      "authors": [
+        "Ramya Ravichandar",
+        "James D. Arthur",
+        "Manuel Pérez-Quiñones"
+      ],
+      "authorsText": "Ramya Ravichandar, James D. Arthur, Manuel Pérez-Quiñones",
+      "abstract": "Pre-Requirement Specification traceability is the activity of capturing relations between requirements and their sources, in particular user needs. Requirements are formal technical specifications in the solution space; needs are natural language expressions codifying user expectations in the problem space. Current traceability techniques are challenged by the complexity gap that results from the disparity between the spaces, and thereby, often neglect traceability to and from requirements. We identify the existence of an intermediary region -- the transition space -- which structures the progression from needs to requirements. More specifically, our approach to developing change-tolerant systems, termed Capabilities Engineering, identifies highly cohesive, minimally coupled, optimized functional abstractions called Capabilities in the transition space. These Capabilities link the problem and solution spaces through directives (entities derived from user needs). Directives connect the problem and transition spaces; Capabilities link the transition and solution spaces. Furthermore, the process of Capabilities Engineering addresses specific traceability challenges. It supports the evolution of traces, provides semantic and structural information about dependencies, incorporates human factors, generates traceability relations with negligible overhead, and thereby, fosters pre-Requirement Specification traceability.",
+      "absUrl": "https://arxiv.org/abs/cs/0703012v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0703012v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0702145",
+      "title": "Designing a Resource Broker for Heterogeneous Grids",
+      "authors": [
+        "Srikumar Venugopal",
+        "Krishna Nadiminti",
+        "Hussein Gibbins",
+        "Rajkumar Buyya"
+      ],
+      "authorsText": "Srikumar Venugopal, Krishna Nadiminti, Hussein Gibbins, Rajkumar Buyya",
+      "abstract": "Grids provide uniform access to aggregations of heterogeneous resources and services such as computers, networks and storage owned by multiple organizations. However, such a dynamic environment poses many challenges for application composition and deployment. In this paper, we present the design of the Gridbus Grid resource broker that allows users to create applications and specify different objectives through different interfaces without having to deal with the complexity of Grid infrastructure. We present the unique requirements that motivated our design and discuss how these provide flexibility in extending the functionality of the broker to support different low-level middlewares and user interfaces. We evaluate the broker with different job profiles and Grid middleware and conclude with the lessons learnt from our development experience.",
+      "absUrl": "https://arxiv.org/abs/cs/0702145v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0702145v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0702083",
+      "title": "Improving Prolog programs: Refactoring for Prolog",
+      "authors": [
+        "Alexander Serebrenik",
+        "Tom Schrijvers",
+        "Bart Demoen"
+      ],
+      "authorsText": "Alexander Serebrenik, Tom Schrijvers, Bart Demoen",
+      "abstract": "Refactoring is an established technique from the object-oriented (OO) programming community to restructure code: it aims at improving software readability, maintainability and extensibility. Although refactoring is not tied to the OO-paradigm in particular, its ideas have not been applied to Logic Programming until now.\nThis paper applies the ideas of refactoring to Prolog programs. A catalogue is presented listing refactorings classified according to scope. Some of the refactorings have been adapted from the OO-paradigm, while others have been specifically designed for Prolog. The discrepancy between intended and operational semantics in Prolog is also addressed by some of the refactorings.\nIn addition, ViPReSS, a semi-automatic refactoring browser, is discussed and the experience with applying ViPReSS to a large Prolog legacy system is reported. The main conclusion is that refactoring is both a viable technique in Prolog and a rather desirable one.",
+      "absUrl": "https://arxiv.org/abs/cs/0702083v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0702083v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0701200",
+      "title": "Reasoning from a schema and from an analog in software code reuse",
+      "authors": [
+        "Françoise Detienne"
+      ],
+      "authorsText": "Françoise Detienne",
+      "abstract": "The activity of design involves the decomposition of problems into subproblems and the development and evaluation of solutions. In many cases, solution development is not done from scratch. Designers often evoke and adapt solutions developed in the past. These solutions may come from an internal source, i.e. the memory of the designers, and/or from an external source. The goal of this paper is to analyse the characteristics of the cognitive mechanisms, the knowledge and the representations involved in the code reuse activity performed by experienced programmers. More generally, the focus is the control structure of the reuse activity. Data collected in an experiment in which programmers had to design programs are analyzed. Two code reuse situations are distinguished depending on whether or not the processes involved in reuse start before the elaboration of what acts as a source-solution. Our analysis highlights the use of reasoning from a schema and from an analog in the code reuse activity.",
+      "absUrl": "https://arxiv.org/abs/cs/0701200v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0701200v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0701175",
+      "title": "On the Software and Knowledge Engineering Aspects of the Educational Process",
+      "authors": [
+        "Th. Hadzilacos",
+        "D. Kalles",
+        "M. Pouliopoulou"
+      ],
+      "authorsText": "Th. Hadzilacos, D. Kalles, M. Pouliopoulou",
+      "abstract": "The Hellenic Open University has embarked on a large-scale effort to enhance its textbook-based material with content that demonstrably supports the basic tenets of distance learning. The challenge is to set up a framework that allows for the production-level creation, distribution and consumption of content, and at the same time, evaluate the effort in terms of technological, educational and organizational knowledge gained. This paper presents a model of the educational process that is used as a development backbone and argues about its conceptual and technical practicality at large.",
+      "absUrl": "https://arxiv.org/abs/cs/0701175v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0701175v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0701132",
+      "title": "Certifying controls and systems software",
+      "authors": [
+        "Eric Feron",
+        "Mardavij Roozbehani"
+      ],
+      "authorsText": "Eric Feron, Mardavij Roozbehani",
+      "abstract": "Software system certification presents itself with many challenges, including the necessity to certify the system at the level of functional requirements, code and binary levels, the need to chase down run-time errors, and the need for proving timing properties of the eventual, compiled system. This paper illustrates possible approaches for certifying code that arises from control systems requirements as far as stability properties are concerned. The relative simplicity of the certification process should encourage the development of systematic procedures for certifying control system codes for more complex environments.",
+      "absUrl": "https://arxiv.org/abs/cs/0701132v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0701132v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0701081",
+      "title": "Fingerprinting Logic Programs",
+      "authors": [
+        "Alexander Serebrenik",
+        "Wim Vanhoof"
+      ],
+      "authorsText": "Alexander Serebrenik, Wim Vanhoof",
+      "abstract": "In this work we present work in progress on functionality duplication detection in logic programs. Eliminating duplicated functionality recently became prominent in context of refactoring. We describe a quantitative approach that allows to measure the ``similarity'' between two predicate definitions. Moreover, we show how to compute a so-called ``fingerprint'' for every predicate. Fingerprints capture those characteristics of the predicate that are significant when searching for duplicated functionality. Since reasoning on fingerprints is much easier than reasoning on predicate definitions, comparing the fingerprints is a promising direction in automated code duplication in logic programs.",
+      "absUrl": "https://arxiv.org/abs/cs/0701081v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0701081v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0701010",
+      "title": "Determining the Applicability of Agile Practices to Mission and Life-critical Systems",
+      "authors": [
+        "Ahmed Sidky",
+        "James Arthur"
+      ],
+      "authorsText": "Ahmed Sidky, James Arthur",
+      "abstract": "Adopting agile practices brings about many benefits and improvements to the system being developed. However, in mission and life-critical systems, adopting an inappropriate agile practice has detrimental impacts on the system in various phases of its lifecycle as well as precludes desired qualities from being actualized. This paper presents a three-stage process that provides guidance to organizations on how to identify the agile practices they can benefit from without causing any impact to the mission and life critical system being developed.",
+      "absUrl": "https://arxiv.org/abs/cs/0701010v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0701010v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0712.3925",
+      "title": "QIS-XML: A metadata specification for Quantum Information Science",
+      "authors": [
+        "Pascal Heus",
+        "Richard Gomez"
+      ],
+      "authorsText": "Pascal Heus, Richard Gomez",
+      "abstract": "While Quantum Information Science (QIS) is still in its infancy, the ability for quantum based hardware or computers to communicate and integrate with their classical counterparts will be a major requirement towards their success. Little attention however has been paid to this aspect of QIS. To manage and exchange information between systems, today's classic Information Technology (IT) commonly uses the eXtensible Markup Language (XML) and its related tools. XML is composed of numerous specifications related to various fields of expertise. No such global specification however has been defined for quantum computers. QIS-XML is a proposed XML metadata specification for the description of fundamental components of QIS (gates & circuits) and a platform for the development of a hardware independent low level pseudo-code for quantum algorithms. This paper lays out the general characteristics of the QIS-XML specification and outlines practical applications through prototype use cases.",
+      "absUrl": "https://arxiv.org/abs/0712.3925v1",
+      "pdfUrl": "https://arxiv.org/pdf/0712.3925v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0712.3128",
+      "title": "Software (Re-)Engineering with PSF III: an IDE for PSF",
+      "authors": [
+        "Bob Diertens"
+      ],
+      "authorsText": "Bob Diertens",
+      "abstract": "We describe the design of an integrated development environment (IDE) for PSF. In the software engineering process we used process algebra in the form of PSF for the specification of the architecture of the IDE. This specification is refined to a PSF specification of the IDE system as a ToolBus application, by applying vertical and horizontal implementation techniques. We implemented the various tools as specified and connected them with a ToolBus script extracted from the system specification.",
+      "absUrl": "https://arxiv.org/abs/0712.3128v1",
+      "pdfUrl": "https://arxiv.org/pdf/0712.3128v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0712.3116",
+      "title": "Proceedings of the 17th Workshop on Logic-based methods in Programming Environments (WLPE 2007)",
+      "authors": [
+        "Patricia Hill",
+        "Wim Vanhoof"
+      ],
+      "authorsText": "Patricia Hill, Wim Vanhoof",
+      "abstract": "This volume contains the papers presented at WLPE 2007: the 17th Workshop on Logic-based Methods in Programming Environments on 13th September, 2007 in Porto, Portugal. It was held as a satellite workshop of ICLP 2007, the 23th International Conference on Logic Programming.",
+      "absUrl": "https://arxiv.org/abs/0712.3116v1",
+      "pdfUrl": "https://arxiv.org/pdf/0712.3116v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0712.3115",
+      "title": "Software (Re-)Engineering with PSF II: from architecture to implementation",
+      "authors": [
+        "Bob Diertens"
+      ],
+      "authorsText": "Bob Diertens",
+      "abstract": "This paper presents ongoing research on the application of PSF in the field of software engineering and reengineering. We build a new implementation for the simulator of the PSF Toolkit starting from the specification in PSF of the architecture of a simple simulator and extend it with features to obtain the architecture of a full simulator. We apply refining and constraining techniques on the specification of the architecture to obtain a specification low enough to build an implementation from.",
+      "absUrl": "https://arxiv.org/abs/0712.3115v1",
+      "pdfUrl": "https://arxiv.org/pdf/0712.3115v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0712.3113",
+      "title": "Optimizing Queries in a Logic-based Information Integration System",
+      "authors": [
+        "András Gyorgy Békés",
+        "Péter Szeredi"
+      ],
+      "authorsText": "András Gyorgy Békés, Péter Szeredi",
+      "abstract": "The SINTAGMA information integration system is an infrastructure for accessing several different information sources together. Besides providing a uniform interface to the information sources (databases, web services, web sites, RDF resources, XML files), semantic integration is also needed. Semantic integration is carried out by providing a high-level model and the mappings to the models of the sources. When executing a query of the high level model, a query is transformed to a low-level query plan, which is a piece of Prolog code that answers the high-level query. This transformation is done in two phases. First, the Query Planner produces a plan as a logic formula expressing the low-level query. Next, the Query Optimizer transforms this formula to executable Prolog code and optimizes it according to structural and statistical information about the information sources.\nThis article discusses the main ideas of the optimization algorithm and its implementation.",
+      "absUrl": "https://arxiv.org/abs/0712.3113v1",
+      "pdfUrl": "https://arxiv.org/pdf/0712.3113v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0712.2943",
+      "title": "Software (Re-)Engineering with PSF",
+      "authors": [
+        "Bob Diertens"
+      ],
+      "authorsText": "Bob Diertens",
+      "abstract": "This paper investigates the usefulness of PSF in software engineering and reengineering. PSF is based on ACP (Algebra of Communicating Processes) and as some architectural description languages are based on process algebra, we investigate whether PSF can be used at the software architecture level, but we also use PSF at lower abstract levels. As a case study we reengineer the compiler from the Toolkit of PSF.",
+      "absUrl": "https://arxiv.org/abs/0712.2943v1",
+      "pdfUrl": "https://arxiv.org/pdf/0712.2943v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0712.2737",
+      "title": "Experiments with a Convex Polyhedral Analysis Tool for Logic Programs",
+      "authors": [
+        "Kim Henriksen",
+        "Gourinath Banda",
+        "John Gallagher"
+      ],
+      "authorsText": "Kim Henriksen, Gourinath Banda, John Gallagher",
+      "abstract": "Convex polyhedral abstractions of logic programs have been found very useful in deriving numeric relationships between program arguments in order to prove program properties and in other areas such as termination and complexity analysis. We present a tool for constructing polyhedral analyses of (constraint) logic programs. The aim of the tool is to make available, with a convenient interface, state-of-the-art techniques for polyhedral analysis such as delayed widening, narrowing, \"widening up-to\", and enhanced automatic selection of widening points. The tool is accessible on the web, permits user programs to be uploaded and analysed, and is integrated with related program transformations such as size abstractions and query-answer transformation. We then report some experiments using the tool, showing how it can be conveniently used to analyse transition systems arising from models of embedded systems, and an emulator for a PIC microcontroller which is used for example in wearable computing systems. We discuss issues including scalability, tradeoffs of precision and computation time, and other program transformations that can enhance the results of analysis.",
+      "absUrl": "https://arxiv.org/abs/0712.2737v1",
+      "pdfUrl": "https://arxiv.org/pdf/0712.2737v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0712.2591",
+      "title": "A Typical Model Audit Approach: Spreadsheet Audit Methodologies in the City of London",
+      "authors": [
+        "Grenville J. Croll"
+      ],
+      "authorsText": "Grenville J. Croll",
+      "abstract": "Spreadsheet audit and review procedures are an essential part of almost all City of London financial transactions. Structured processes are used to discover errors in large financial spreadsheets underpinning major transactions of all types. Serious errors are routinely found and are fed back to model development teams generally under conditions of extreme time urgency. Corrected models form the essence of the completed transaction and firms undertaking model audit and review expose themselves to significant financial liability in the event of any remaining significant error. It is noteworthy that in the United Kingdom, the management of spreadsheet error is almost unheard of outside of the City of London despite the commercial ubiquity of the spreadsheet.",
+      "absUrl": "https://arxiv.org/abs/0712.2591v1",
+      "pdfUrl": "https://arxiv.org/pdf/0712.2591v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0712.1189",
+      "title": "Implementation, Compilation, Optimization of Object-Oriented Languages, Programs and Systems - Report on the Workshop ICOOOLPS'2007 at ECOOP'07",
+      "authors": [
+        "Olivier Zendra",
+        "Eric Jul",
+        "Roland Ducournau",
+        "Etienne Gagnon",
+        "Richard E. Jones",
+        "Chandra Krintz",
+        "Philippe Mulet",
+        "Jan Vitek"
+      ],
+      "authorsText": "Olivier Zendra, Eric Jul, Roland Ducournau, Etienne Gagnon, Richard E. Jones, Chandra Krintz, Philippe Mulet, Jan Vitek",
+      "abstract": "ICOOOLPS'2007 was the second edition of the ECOOP-ICOOOLPS workshop. ICOOOLPS intends to bring researchers and practitioners both from academia and industry together, with a spirit of openness, to try and identify and begin to address the numerous and very varied issues of optimization. After a first successful edition, this second one put a stronger emphasis on exchanges and discussions amongst the participants, progressing on the bases set last year in Nantes. The workshop attendance was a success, since the 30-people limit we had set was reached about 2 weeks before the workshop itself. Some of the discussions (e.g. annotations) were so successful that they would required even more time than we were able to dedicate to them. That's one area we plan to further improve for the next edition.",
+      "absUrl": "https://arxiv.org/abs/0712.1189v1",
+      "pdfUrl": "https://arxiv.org/pdf/0712.1189v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0712.0109",
+      "title": "Recommended Practices for Spreadsheet Testing",
+      "authors": [
+        "Raymond R. Panko"
+      ],
+      "authorsText": "Raymond R. Panko",
+      "abstract": "This paper presents the authors recommended practices for spreadsheet testing. Documented spreadsheet error rates are unacceptable in corporations today. Although improvements are needed throughout the systems development life cycle, credible improvement programs must include comprehensive testing. Several forms of testing are possible, but logic inspection is recommended for module testing. Logic inspection appears to be feasible for spreadsheet developers to do, and logic inspection appears to be safe and effective.",
+      "absUrl": "https://arxiv.org/abs/0712.0109v1",
+      "pdfUrl": "https://arxiv.org/pdf/0712.0109v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0711.4309",
+      "title": "Knowware: the third star after Hardware and Software",
+      "authors": [
+        "Ruqian Lu"
+      ],
+      "authorsText": "Ruqian Lu",
+      "abstract": "This book proposes to separate knowledge from software and to make it a commodity that is called knowware. The architecture, representation and function of Knowware are discussed. The principles of knowware engineering and its three life cycle models: furnace model, crystallization model and spiral model are proposed and analyzed. Techniques of software/knowware co-engineering are introduced. A software component whose knowledge is replaced by knowware is called mixware. An object and component oriented development schema of mixware is introduced. In particular, the tower model and ladder model for mixware development are proposed and discussed. Finally, knowledge service and knowware based Web service are introduced and compared with Web service. In summary, knowware, software and hardware should be considered as three equally important underpinnings of IT industry.\nRuqian Lu is a professor of computer science of the Institute of Mathematics, Academy of Mathematics and System Sciences. He is a fellow of Chinese Academy of Sciences. His research interests include artificial intelligence, knowledge engineering and knowledge based software engineering. He has published more than 100 papers and 10 books. He has won two first class awards from the Academia Sinica and a National second class prize from the Ministry of Science and Technology. He has also won the sixth Hua Loo-keng Mathematics Prize.",
+      "absUrl": "https://arxiv.org/abs/0711.4309v1",
+      "pdfUrl": "https://arxiv.org/pdf/0711.4309v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0711.1669",
+      "title": "Applying Software Defect Estimations: Using a Risk Matrix for Tuning Test Effort",
+      "authors": [
+        "James Cusick"
+      ],
+      "authorsText": "James Cusick",
+      "abstract": "Applying software defect esimation techniques and presenting this information in a compact and impactful decision table can clearly illustrate to collaborative groups how critical this position is in the overall development cycle. The Test Risk Matrix described here has proven to be a valuable addition to the management tools and approaches used in developing large scale software on several releases. Use of this matrix in development planning meetings can clarify the attendant risks and possible consequences of carrying out or bypassing specific test activities.",
+      "absUrl": "https://arxiv.org/abs/0711.1669v1",
+      "pdfUrl": "https://arxiv.org/pdf/0711.1669v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0711.0836",
+      "title": "Machine structure oriented control code logic",
+      "authors": [
+        "J. A. Bergstra",
+        "C. A. Middelburg"
+      ],
+      "authorsText": "J. A. Bergstra, C. A. Middelburg",
+      "abstract": "Control code is a concept that is closely related to a frequently occurring practitioner's view on what is a program: code that is capable of controlling the\\linebreak[3] behaviour of some machine. We present a logical approach to explain issues concerning control codes that are independent of the details of the behaviours that are controlled. Using this approach, such issues can be explained at a very abstract level. We illustrate this among other things by means of an example about the production of a new compiler from an existing one. The approach is based on abstract machine models, called machine structures. We introduce a model of execution environments for the executable codes of machine structures and use it to go into portability of control codes.",
+      "absUrl": "https://arxiv.org/abs/0711.0836v1",
+      "pdfUrl": "https://arxiv.org/pdf/0711.0836v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0711.0618",
+      "title": "PIDoc: Wiki style Literate Programming for Prolog",
+      "authors": [
+        "Jan Wielemaker",
+        "Anjo Anjewierden"
+      ],
+      "authorsText": "Jan Wielemaker, Anjo Anjewierden",
+      "abstract": "This document introduces PlDoc, a literate programming system for Prolog. Starting point for PlDoc was minimal distraction from the programming task and maximal immediate reward, attempting to seduce the programmer to use the system. Minimal distraction is achieved using structured comments that are as closely as possible related to common Prolog documentation practices. Immediate reward is provided by a web interface powered from the Prolog development environment that integrates searching and browsing application and system documentation. When accessed from localhost, it is possible to go from documentation shown in a browser to the source code displayed in the user's editor of choice.",
+      "absUrl": "https://arxiv.org/abs/0711.0618v1",
+      "pdfUrl": "https://arxiv.org/pdf/0711.0618v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0711.0607",
+      "title": "Exploring the Composition of Unit Test Suites",
+      "authors": [
+        "Bart Van Rompaey",
+        "Serge Demeyer"
+      ],
+      "authorsText": "Bart Van Rompaey, Serge Demeyer",
+      "abstract": "In agile software development, test code can considerably contribute to the overall source code size. Being a valuable asset both in terms of verification and documentation, the composition of a test suite needs to be well understood in order to identify opportunities as well as weaknesses for further evolution. In this paper, we argue that the visualization of structural characteristics is a viable means to support the exploration of test suites. Thanks to general agreement on a limited set of key test design principles, such visualizations are relatively easy to interpret. In particular, we present visualizations that support testers in (i) locating test cases; (ii) examining the relation between test code and production code; and (iii) studying the composition of and dependencies within test cases. By means of two case studies, we demonstrate how visual patterns help to identify key test suite characteristics. This approach forms the first step in assisting a developer to build up understanding about test suites beyond code reading.",
+      "absUrl": "https://arxiv.org/abs/0711.0607v1",
+      "pdfUrl": "https://arxiv.org/pdf/0711.0607v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0711.0538",
+      "title": "Spreadsheet Engineering: A Research Framework",
+      "authors": [
+        "Thomas A. Grossman"
+      ],
+      "authorsText": "Thomas A. Grossman",
+      "abstract": "Spreadsheet engineering adapts the lessons of software engineering to spreadsheets, providing eight principles as a framework for organizing spreadsheet programming recommendations. Spreadsheets raise issues inadequately addressed by software engineering. Spreadsheets are a powerful modeling language, allowing strategic rapid model change, and enabling exploratory modeling. Spreadsheets users learn slowly with experience because they focus on the problem domain not programming. The heterogeneity of spreadsheet users requires a taxonomy to guide recommendations. Deployment of best practices is difficult and merits research.",
+      "absUrl": "https://arxiv.org/abs/0711.0538v1",
+      "pdfUrl": "https://arxiv.org/pdf/0711.0538v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0711.0348",
+      "title": "Compiling ER Specifications into Declarative Programs",
+      "authors": [
+        "Bernd Braßel",
+        "Michael Hanus",
+        "Marion Muller"
+      ],
+      "authorsText": "Bernd Braßel, Michael Hanus, Marion Muller",
+      "abstract": "This paper proposes an environment to support high-level database programming in a declarative programming language. In order to ensure safe database updates, all access and update operations related to the database are generated from high-level descriptions in the entity- relationship (ER) model. We propose a representation of ER diagrams in the declarative language Curry so that they can be constructed by various tools and then translated into this representation. Furthermore, we have implemented a compiler from this representation into a Curry program that provides access and update operations based on a high-level API for database programming.",
+      "absUrl": "https://arxiv.org/abs/0711.0348v1",
+      "pdfUrl": "https://arxiv.org/pdf/0711.0348v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0711.0345",
+      "title": "A Prolog-based Environment for Reasoning about Programming Languages (Extended abstract)",
+      "authors": [
+        "Roberto Bagnara",
+        "Patricia Hill",
+        "Enea Zaffanella"
+      ],
+      "authorsText": "Roberto Bagnara, Patricia Hill, Enea Zaffanella",
+      "abstract": "ECLAIR is a Prolog-based prototype system aiming to provide a functionally complete environment for the study, development and evaluation of programming language analysis and implementation tools. In this paper, we sketch the overall structure of the system, outlining the main methodologies and technologies underlying its components. We also discuss the appropriateness of Prolog as the implementation language for the system: besides highlighting its strengths, we also point out a few potential weaknesses, hinting at possible solutions.",
+      "absUrl": "https://arxiv.org/abs/0711.0345v1",
+      "pdfUrl": "https://arxiv.org/pdf/0711.0345v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0711.0344",
+      "title": "Automatic Coding Rule Conformance Checking Using Logic Programs",
+      "authors": [
+        "Guillem Marpons-Ucero",
+        "Julio Mariño",
+        "Ángel Herranz",
+        "Lars-Åke Fredlund",
+        "Manuel Carro",
+        "Juan José Moreno-Navarro"
+      ],
+      "authorsText": "Guillem Marpons-Ucero, Julio Mariño, Ángel Herranz, Lars-Åke Fredlund, Manuel Carro, Juan José Moreno-Navarro",
+      "abstract": "Some approaches to increasing program reliability involve a disciplined use of programming languages so as to minimise the hazards introduced by error-prone features. This is realised by writing code that is constrained to a subset of the a priori admissible programs, and that, moreover, may use only a subset of the language. These subsets are determined by a collection of so-called coding rules.",
+      "absUrl": "https://arxiv.org/abs/0711.0344v1",
+      "pdfUrl": "https://arxiv.org/pdf/0711.0344v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0711.0048",
+      "title": "Declarative Diagnosis of Floundering",
+      "authors": [
+        "Lee Naish"
+      ],
+      "authorsText": "Lee Naish",
+      "abstract": "Many logic programming languages have delay primitives which allow coroutining. This introduces a class of bug symptoms -- computations can flounder when they are intended to succeed or finitely fail. For concurrent logic programs this is normally called deadlock. Similarly, constraint logic programs can fail to invoke certain constraint solvers because variables are insufficiently instantiated or constrained. Diagnosing such faults has received relatively little attention to date. Since delay primitives affect the procedural but not the declarative view of programs, it may be expected that debugging would have to consider the often complex details of interleaved execution. However, recent work on semantics has suggested an alternative approach. In this paper we show how the declarative debugging paradigm can be used to diagnose unexpected floundering, insulating the user from the complexities of the execution.\nKeywords: logic programming, coroutining, delay, debugging, floundering, deadlock, constraints",
+      "absUrl": "https://arxiv.org/abs/0711.0048v1",
+      "pdfUrl": "https://arxiv.org/pdf/0711.0048v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0710.5895",
+      "title": "Source-to-source optimizing transformations of Prolog programs based on abstract interpretation",
+      "authors": [
+        "Francois Gobert",
+        "Baudouin Le Charlier"
+      ],
+      "authorsText": "Francois Gobert, Baudouin Le Charlier",
+      "abstract": "Making a Prolog program more efficient by transforming its source code, without changing its operational semantics, is not an obvious task. It requires the user to have a clear understanding of how the Prolog compiler works, and in particular, of the effects of impure features like the cut. The way a Prolog code is written - e.g., the order of clauses, the order of literals in a clause, the use of cuts or negations - influences its efficiency. Furthermore, different optimization techniques may be redundant or conflicting when they are applied together, depending on the way a procedure is called - e.g., inserting cuts and enabling indexing. We present an optimiser, based on abstract interpretation, that automatically performs safe code transformations of Prolog procedures in the context of some class of input calls. The method is more effective if procedures are annotated with additional information about modes, types, sharing, number of solutions and the like. Thus the approach is similar to Mercury. It applies to any Prolog program, however.",
+      "absUrl": "https://arxiv.org/abs/0710.5895v1",
+      "pdfUrl": "https://arxiv.org/pdf/0710.5895v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0710.4829",
+      "title": "AutoMoDe - Model-Based Development of Automotive Software",
+      "authors": [
+        "Dirk Ziegenbein",
+        "Peter Braun",
+        "Ulrich Freund",
+        "Andreas Bauer",
+        "Jan Romberg",
+        "Bernhard Schatz"
+      ],
+      "authorsText": "Dirk Ziegenbein, Peter Braun, Ulrich Freund, Andreas Bauer, Jan Romberg, Bernhard Schatz",
+      "abstract": "This paper describes first results from the AutoMoDe (Automotive Model-Based Development) project. The overall goal of the project is to develop an integrated methodology for model-based development of automotive control software, based on problem-specific design notations with an explicit formal foundation. Based on the existing AutoFOCUS framework, a tool prototype is being developed in order to illustrate and validate the key elements of our approach.",
+      "absUrl": "https://arxiv.org/abs/0710.4829v1",
+      "pdfUrl": "https://arxiv.org/pdf/0710.4829v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0710.4793",
+      "title": "Unified Modeling of Complex Real-Time Control Systems",
+      "authors": [
+        "He Hai",
+        "Zhong Yi-Fang",
+        "Cai Chi-Lan"
+      ],
+      "authorsText": "He Hai, Zhong Yi-Fang, Cai Chi-Lan",
+      "abstract": "Complex real-time control system is a software dense and algorithms dense system, which needs modern software engineering techniques to design. UML is an object-oriented industrial standard modeling language, used more and more in real-time domain. This paper first analyses the advantages and problems of using UML for real-time control systems design. Then, it proposes an extension of UML-RT to support time-continuous subsystems modeling. So we can unify modeling of complex real-time control systems on UML-RT platform, from requirement analysis, model design, simulation, until generation code.",
+      "absUrl": "https://arxiv.org/abs/0710.4793v1",
+      "pdfUrl": "https://arxiv.org/pdf/0710.4793v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0710.4755",
+      "title": "Model Reuse through Hardware Design Patterns",
+      "authors": [
+        "Fernando Rincon",
+        "Francisco Moya",
+        "Jesus Barba",
+        "Juan Carlos Lopez"
+      ],
+      "authorsText": "Fernando Rincon, Francisco Moya, Jesus Barba, Juan Carlos Lopez",
+      "abstract": "Increasing reuse opportunities is a well-known problem for software designers as well as for hardware designers. Nonetheless, current software and hardware engineering practices have embraced different approaches to this problem. Software designs are usually modelled after a set of proven solutions to recurrent problems called design patterns. This approach differs from the component-based reuse usually found in hardware designs: design patterns do not specify unnecessary implementation details. Several authors have already proposed translating structural design patterns concepts to hardware design. In this paper we extend the discussion to behavioural design patterns. Specifically, we describe how the hardware version of the Iterator can be used to enhance model reuse.",
+      "absUrl": "https://arxiv.org/abs/0710.4755v1",
+      "pdfUrl": "https://arxiv.org/pdf/0710.4755v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0710.4700",
+      "title": "A Decompilation Approach to Partitioning Software for Microprocessor/FPGA Platforms",
+      "authors": [
+        "Greg Stitt",
+        "Frank Vahid"
+      ],
+      "authorsText": "Greg Stitt, Frank Vahid",
+      "abstract": "In this paper, we present a software compilation approach for microprocessor/FPGA platforms that partitions a software binary onto custom hardware implemented in the FPGA. Our approach imposes less restrictions on software tool flow than previous compiler approaches, allowing software designers to use any software language and compiler. Our approach uses a back-end partitioning tool that utilizes decompilation techniques to recover important high-level information, resulting in performance comparable to high-level compiler-based approaches.",
+      "absUrl": "https://arxiv.org/abs/0710.4700v1",
+      "pdfUrl": "https://arxiv.org/pdf/0710.4700v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0710.4682",
+      "title": "Applying UML and MDA to Real Systems Design",
+      "authors": [
+        "Ian Oliver"
+      ],
+      "authorsText": "Ian Oliver",
+      "abstract": "Traditionally system design has been made from a black box/functionality only perspective which forces the developer to concentrate on how the functionality can be decomposed and recomposed into so called components. While this technique is well established and well known it does suffer fromsome drawbacks; namely that the systems produced can often be forced into certain, incompatible architectures, difficult to maintain or reuse and the code itself difficult to debug. Now that ideas such as the OMG's Model Based Architecture (MDA) or Model Based Engineering (MBE) and the ubiquitous modelling language UML are being used (allegedly) and desired we face a number of challenges to existing techniques.",
+      "absUrl": "https://arxiv.org/abs/0710.4682v1",
+      "pdfUrl": "https://arxiv.org/pdf/0710.4682v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0710.4641",
+      "title": "UML 2.0 - Overview and Perspectives in SoC Design",
+      "authors": [
+        "Tim Schattkowsky"
+      ],
+      "authorsText": "Tim Schattkowsky",
+      "abstract": "The design productivity gap requires more efficient design methods. Software systems have faced the same challenge and seem to have mastered it with the introduction of more abstract design methods. The UML has become the standard for software systems modeling and thus the foundation of new design methods. Although the UML is defined as a general purpose modeling language, its application to hardware and hardware/software codesign is very limited. In order to successfully apply the UML at these fields, it is essential to understand its capabilities and to map it to a new domain.",
+      "absUrl": "https://arxiv.org/abs/0710.4641v1",
+      "pdfUrl": "https://arxiv.org/pdf/0710.4641v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0710.2887",
+      "title": "Implementation, Compilation, Optimization of Object-Oriented Languages, Programs and Systems - Report on the Workshop ICOOOLPS'2006 at ECOOP'06",
+      "authors": [
+        "Roland Ducournau",
+        "Etienne Gagnon",
+        "Chandra Krintz",
+        "Philippe Mulet",
+        "Jan Vitek",
+        "Olivier Zendra"
+      ],
+      "authorsText": "Roland Ducournau, Etienne Gagnon, Chandra Krintz, Philippe Mulet, Jan Vitek, Olivier Zendra",
+      "abstract": "ICOOOLPS'2006 was the first edition of ECOOP-ICOOOLPS workshop. It intended to bring researchers and practitioners both from academia and industry together, with a spirit of openness, to try and identify and begin to address the numerous and very varied issues of optimization. This succeeded, as can be seen from the papers, the attendance and the liveliness of the discussions that took place during and after the workshop, not to mention a few new cooperations or postdoctoral contracts. The 22 talented people from different groups who participated were unanimous to appreciate this first edition and recommend that ICOOOLPS be continued next year. A community is thus beginning to form, and should be reinforced by a second edition next year, with all the improvements this first edition made emerge.",
+      "absUrl": "https://arxiv.org/abs/0710.2887v1",
+      "pdfUrl": "https://arxiv.org/pdf/0710.2887v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0710.1772",
+      "title": "Cross-Participants: fostering design-use mediation in an Open Source Software community",
+      "authors": [
+        "Flore Barcellini",
+        "Françoise Détienne",
+        "Jean-Marie Burkhardt"
+      ],
+      "authorsText": "Flore Barcellini, Françoise Détienne, Jean-Marie Burkhardt",
+      "abstract": "Motivation - This research aims at investigating emerging roles and forms of participation fostering design-use mediation during the Open Source Software design process Research approach - We compare online interactions for a successful \"pushed-by-users\" design process with unsuccessful previous proposals. The methodology developed, articulate structural analyses of the discussions (organization of discussions, participation) to actions to the code and documentation made by participants to the project. We focus on the useroriented and the developer-oriented mailing-lists of the Python project. Findings/Design - We find that key-participants, the cross-participants, foster the design process and act as boundary spanners between the users and the developers' communities. Research limitations/Implications - These findings can be reinforced developing software to automate the structural analysis of discussions and actions to the code and documentation. Further analyses, supported by these tools, will be necessary to generalise our results. Originality/Value - The analysis of participation among the three interaction spaces of OSS design (discussion, documentation and implementation) is the main originality of this work compared to other OSS research that mainly analyse one or two spaces. Take away message - Beside the idealistic picture that users may intervene freely in the process, OSS design is boost and framed by some key-participants and specific rules and there can be barriers to users' participation",
+      "absUrl": "https://arxiv.org/abs/0710.1772v1",
+      "pdfUrl": "https://arxiv.org/pdf/0710.1772v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0710.1482",
+      "title": "Heap Reference Analysis for Functional Programs",
+      "authors": [
+        "Amey Karkare",
+        "Amitabha Sanyal",
+        "Uday Khedker"
+      ],
+      "authorsText": "Amey Karkare, Amitabha Sanyal, Uday Khedker",
+      "abstract": "Current garbage collectors leave a lot of garbage uncollected because they conservatively approximate liveness by reachability from program variables. In this paper, we describe a sequence of static analyses that takes as input a program written in a first-order, eager functional programming language, and finds at each program point the references to objects that are guaranteed not to be used in the future. Such references are made null by a transformation pass. If this makes the object unreachable, it can be collected by the garbage collector. This causes more garbage to be collected, resulting in fewer collections. Additionally, for those garbage collectors which scavenge live objects, it makes each collection faster.\nThe interesting aspects of our method are both in the identification of the analyses required to solve the problem and the way they are carried out. We identify three different analyses -- liveness, sharing and accessibility. In liveness and sharing analyses, the function definitions are analyzed independently of the calling context. This is achieved by using a variable to represent the unknown context of the function being analyzed and setting up constraints expressing the effect of the function with respect to the variable. The solution of the constraints is a summary of the function that is parameterized with respect to a calling context and is used to analyze function calls. As a result we achieve context sensitivity at call sites without analyzing the function multiple number of times.",
+      "absUrl": "https://arxiv.org/abs/0710.1482v1",
+      "pdfUrl": "https://arxiv.org/pdf/0710.1482v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0709.2225",
+      "title": "Improved Linear Parallel Interference Cancellers",
+      "authors": [
+        "T. Srikanth",
+        "K. Vishnu Vardhan",
+        "A. Chockalingam",
+        "L. B. Milstein"
+      ],
+      "authorsText": "T. Srikanth, K. Vishnu Vardhan, A. Chockalingam, L. B. Milstein",
+      "abstract": "In this paper, taking the view that a linear parallel interference canceller (LPIC) can be seen as a linear matrix filter, we propose new linear matrix filters that can result in improved bit error performance compared to other LPICs in the literature. The motivation for the proposed filters arises from the possibility of avoiding the generation of certain interference and noise terms in a given stage that would have been present in a conventional LPIC (CLPIC). In the proposed filters, we achieve such avoidance of the generation of interference and noise terms in a given stage by simply making the diagonal elements of a certain matrix in that stage equal to zero. Hence, the proposed filters do not require additional complexity compared to the CLPIC, and they can allow achieving a certain error performance using fewer LPIC stages. We also extend the proposed matrix filter solutions to a multicarrier DS-CDMA system, where we consider two types of receivers. In one receiver (referred to as Type-I receiver), LPIC is performed on each subcarrier first, followed by multicarrier combining (MCC). In the other receiver (called Type-II receiver), MCC is performed first, followed by LPIC. We show that in both Type-I and Type-II receivers, the proposed matrix filters outperform other matrix filters. Also, Type-II receiver performs better than Type-I receiver because of enhanced accuracy of the interference estimates achieved due to frequency diversity offered by MCC.",
+      "absUrl": "https://arxiv.org/abs/0709.2225v1",
+      "pdfUrl": "https://arxiv.org/pdf/0709.2225v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0708.2255",
+      "title": "A Language for Generic Programming in the Large",
+      "authors": [
+        "Jeremy G. Siek",
+        "Andrew Lumsdaine"
+      ],
+      "authorsText": "Jeremy G. Siek, Andrew Lumsdaine",
+      "abstract": "Generic programming is an effective methodology for developing reusable software libraries. Many programming languages provide generics and have features for describing interfaces, but none completely support the idioms used in generic programming. To address this need we developed the language G. The central feature of G is the concept, a mechanism for organizing constraints on generics that is inspired by the needs of modern C++ libraries. G provides modular type checking and separate compilation (even of generics). These characteristics support modular software development, especially the smooth integration of independently developed components. In this article we present the rationale for the design of G and demonstrate the expressiveness of G with two case studies: porting the Standard Template Library and the Boost Graph Library from C++ to G. The design of G shares much in common with the concept extension proposed for the next C++ Standard (the authors participated in its design) but there are important differences described in this article.",
+      "absUrl": "https://arxiv.org/abs/0708.2255v1",
+      "pdfUrl": "https://arxiv.org/pdf/0708.2255v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0707.4166",
+      "title": "Parsimony Principles for Software Components and Metalanguages",
+      "authors": [
+        "Todd L. Veldhuizen"
+      ],
+      "authorsText": "Todd L. Veldhuizen",
+      "abstract": "Software is a communication system. The usual topic of communication is program behavior, as encoded by programs. Domain-specific libraries are codebooks, domain-specific languages are coding schemes, and so forth. To turn metaphor into method, we adapt toolsfrom information theory--the study of efficient communication--to probe the efficiency with which languages and libraries let us communicate programs. In previous work we developed an information-theoretic analysis of software reuse in problem domains. This new paper uses information theory to analyze tradeoffs in the design of components, generators, and metalanguages. We seek answers to two questions: (1) How can we judge whether a component is over- or under-generalized? Drawing on minimum description length principles, we propose that the best component yields the most succinct representation of the use cases. (2) If we view a programming language as an assemblage of metalanguages, each providing a complementary style of abstraction, how can these metalanguages aid or hinder us in efficiently describing software? We describe a complex triangle of interactions between the power of an abstraction mechanism, the amount of reuse it enables, and the cognitive difficulty of its use.",
+      "absUrl": "https://arxiv.org/abs/0707.4166v1",
+      "pdfUrl": "https://arxiv.org/pdf/0707.4166v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0707.2291",
+      "title": "An Integrated Crosscutting Concern Migration Strategy and its Application to JHotDraw",
+      "authors": [
+        "Marius Marin",
+        "Leon Moonen",
+        "Arie van Deursen"
+      ],
+      "authorsText": "Marius Marin, Leon Moonen, Arie van Deursen",
+      "abstract": "In this paper we propose a systematic strategy for migrating crosscutting concerns in existing object-oriented systems to aspect-based solutions. The proposed strategy consists of four steps: mining, exploration, documentation and refactoring of crosscutting concerns. We discuss in detail a new approach to aspect refactoring that is fully integrated with our strategy, and apply the whole strategy to an object-oriented system, namely the JHotDraw framework. The result of this migration is made available as an open-source project, which is the largest aspect refactoring available to date. We report on our experiences with conducting this case study and reflect on the success and challenges of the migration process, as well as on the feasibility of automatic aspect refactoring.",
+      "absUrl": "https://arxiv.org/abs/0707.2291v1",
+      "pdfUrl": "https://arxiv.org/pdf/0707.2291v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0707.1639",
+      "title": "Interface groups and financial transfer architectures",
+      "authors": [
+        "Jan A. Bergstra",
+        "Alban Ponse"
+      ],
+      "authorsText": "Jan A. Bergstra, Alban Ponse",
+      "abstract": "Analytic execution architectures have been proposed by the same authors as a means to conceptualize the cooperation between heterogeneous collectives of components such as programs, threads, states and services. Interface groups have been proposed as a means to formalize interface information concerning analytic execution architectures. These concepts are adapted to organization architectures with a focus on financial transfers. Interface groups (and monoids) now provide a technique to combine interface elements into interfaces with the flexibility to distinguish between directions of flow dependent on entity naming.\nThe main principle exploiting interface groups is that when composing a closed system of a collection of interacting components, the sum of their interfaces must vanish in the interface group modulo reflection. This certainly matters for financial transfer interfaces.\nAs an example of this, we specify an interface group and within it some specific interfaces concerning the financial transfer architecture for a part of our local academic organization.\nFinancial transfer interface groups arise as a special case of more general service architecture interfaces.",
+      "absUrl": "https://arxiv.org/abs/0707.1639v1",
+      "pdfUrl": "https://arxiv.org/pdf/0707.1639v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0707.0808",
+      "title": "The Cyborg Astrobiologist: Porting from a wearable computer to the Astrobiology Phone-cam",
+      "authors": [
+        "Alexandra Bartolo",
+        "Patrick C. McGuire",
+        "Kenneth P. Camilleri",
+        "Christopher Spiteri",
+        "Jonathan C. Borg",
+        "Philip J. Farrugia",
+        "Jens Ormo",
+        "Javier Gomez-Elvira",
+        "Jose Antonio Rodriguez-Manfredi",
+        "Enrique Diaz-Martinez",
+        "Helge Ritter",
+        "Robert Haschke",
+        "Markus Oesker",
+        "Joerg Ontrup"
+      ],
+      "authorsText": "Alexandra Bartolo, Patrick C. McGuire, Kenneth P. Camilleri, Christopher Spiteri, Jonathan C. Borg, Philip J. Farrugia, Jens Ormo, Javier Gomez-Elvira, Jose Antonio Rodriguez-Manfredi, Enrique Diaz-Martinez, Helge Ritter, Robert Haschke, Markus Oesker, Joerg Ontrup",
+      "abstract": "We have used a simple camera phone to significantly improve an `exploration system' for astrobiology and geology. This camera phone will make it much easier to develop and test computer-vision algorithms for future planetary exploration. We envision that the `Astrobiology Phone-cam' exploration system can be fruitfully used in other problem domains as well.",
+      "absUrl": "https://arxiv.org/abs/0707.0808v1",
+      "pdfUrl": "https://arxiv.org/pdf/0707.0808v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0707.0761",
+      "title": "Managing Separation of Concerns in Grid Applications Through Architectural Model Transformations",
+      "authors": [
+        "David Manset",
+        "Herve Verjus",
+        "Richard McClatchey"
+      ],
+      "authorsText": "David Manset, Herve Verjus, Richard McClatchey",
+      "abstract": "Grids enable the aggregation, virtualization and sharing of massive heterogeneous and geographically dispersed resources, using files, applications and storage devices, to solve computation and data intensive problems, across institutions and countries via temporary collaborations called virtual organizations (VO). Most implementations result in complex superposition of software layers, often delivering low quality of service and quality of applications. As a consequence, Grid-based applications design and development is increasingly complex, and the use of most classical engineering practices is unsuccessful. Not only is the development of such applications a time-consuming, error prone and expensive task, but also the resulting applications are often hard-coded for specific Grid configurations, platforms and infra-structures. Having neither guidelines nor rules in the design of a Grid-based application is a paradox since there are many existing architectural approaches for distributed computing, which could ease and promote rigorous engineering methods based on the re-use of software components. It is our belief that ad-hoc and semi-formal engineer-ing approaches, in current use, are insufficient to tackle tomorrows Grid develop-ments requirements. Because Grid-based applications address multi-disciplinary and complex domains (health, military, scientific computation), their engineering requires rigor and control. This paper therefore advocates a formal model-driven engineering process and corresponding design framework and tools for building the next generation of Grids.",
+      "absUrl": "https://arxiv.org/abs/0707.0761v1",
+      "pdfUrl": "https://arxiv.org/pdf/0707.0761v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0706.3984",
+      "title": "A Comparison of Push and Pull Techniques for Ajax",
+      "authors": [
+        "Engin Bozdag",
+        "Ali Mesbah",
+        "Arie van Deursen"
+      ],
+      "authorsText": "Engin Bozdag, Ali Mesbah, Arie van Deursen",
+      "abstract": "Ajax applications are designed to have high user interactivity and low user-perceived latency. Real-time dynamic web data such as news headlines, stock tickers, and auction updates need to be propagated to the users as soon as possible. However, Ajax still suffers from the limitations of the Web's request/response architecture which prevents servers from pushing real-time dynamic web data. Such applications usually use a pull style to obtain the latest updates, where the client actively requests the changes based on a predefined interval. It is possible to overcome this limitation by adopting a push style of interaction where the server broadcasts data when a change occurs on the server side. Both these options have their own trade-offs. This paper explores the fundamental limits of browser-based applications and analyzes push solutions for Ajax technology. It also shows the results of an empirical study comparing push and pull.",
+      "absUrl": "https://arxiv.org/abs/0706.3984v1",
+      "pdfUrl": "https://arxiv.org/pdf/0706.3984v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0706.3159",
+      "title": "Une sémantique observationnelle du modèle des boîtes pour la résolution de programmes logiques (version étendue)",
+      "authors": [
+        "Pierre Deransart",
+        "Mireille Ducassé",
+        "Gérard Ferrand"
+      ],
+      "authorsText": "Pierre Deransart, Mireille Ducassé, Gérard Ferrand",
+      "abstract": "This report specifies an observational semantics and gives an original presentation of the Byrd's box model. The approach accounts for the semantics of Prolog tracers independently of a particular implementation. Traces are, in general, considered as rather obscure and difficult to use. The proposed formal presentation of a trace constitutes a simple and pedagogical approach for teaching Prolog or for implementing Prolog tracers. It constitutes a form of declarative specification for the tracers. Our approach highlights qualities of the box model which made its success, but also its drawbacks and limits. As a matter of fact, the presented semantics is only one example to illustrate general problems relating to tracers and observing processes. Observing processes know, from observed processes, only their traces. The issue is then to be able to reconstitute by the sole analysis of the trace the main part of the observed process, and if possible, without any loss of information.",
+      "absUrl": "https://arxiv.org/abs/0706.3159v1",
+      "pdfUrl": "https://arxiv.org/pdf/0706.3159v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0706.1456",
+      "title": "A Generic Model of Contracts for Embedded Systems",
+      "authors": [
+        "Albert Benveniste",
+        "Benoit Caillaud",
+        "Roberto Passerone"
+      ],
+      "authorsText": "Albert Benveniste, Benoit Caillaud, Roberto Passerone",
+      "abstract": "We present the mathematical foundations of the contract-based model developed in the framework of the SPEEDS project. SPEEDS aims at developing methods and tools to support \"speculative design\", a design methodology in which distributed designers develop different aspects of the overall system, in a concurrent but controlled way. Our generic mathematical model of contract supports this style of development. This is achieved by focusing on behaviors, by supporting the notion of \"rich component\" where diverse (functional and non-functional) aspects of the system can be considered and combined, by representing rich components via their set of associated contracts, and by formalizing the whole process of component composition.",
+      "absUrl": "https://arxiv.org/abs/0706.1456v1",
+      "pdfUrl": "https://arxiv.org/pdf/0706.1456v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0706.0523",
+      "title": "Interpolant-Based Transition Relation Approximation",
+      "authors": [
+        "Ranjit Jhala",
+        "Kenneth L. McMillan"
+      ],
+      "authorsText": "Ranjit Jhala, Kenneth L. McMillan",
+      "abstract": "In predicate abstraction, exact image computation is problematic, requiring in the worst case an exponential number of calls to a decision procedure. For this reason, software model checkers typically use a weak approximation of the image. This can result in a failure to prove a property, even given an adequate set of predicates. We present an interpolant-based method for strengthening the abstract transition relation in case of such failures. This approach guarantees convergence given an adequate set of predicates, without requiring an exact image computation. We show empirically that the method converges more rapidly than an earlier method based on counterexample analysis.",
+      "absUrl": "https://arxiv.org/abs/0706.0523v1",
+      "pdfUrl": "https://arxiv.org/pdf/0706.0523v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0705.4415",
+      "title": "PERCEVAL: a Computer-Driven System for Experimentation on Auditory and Visual Perception",
+      "authors": [
+        "Carine André",
+        "Alain Ghio",
+        "Christian Cavé",
+        "Bernard Teston"
+      ],
+      "authorsText": "Carine André, Alain Ghio, Christian Cavé, Bernard Teston",
+      "abstract": "Since perception tests are highly time-consuming, there is a need to automate as many operations as possible, such as stimulus generation, procedure control, perception testing, and data analysis. The computer-driven system we are presenting here meets these objectives. To achieve large flexibility, the tests are controlled by scripts. The system's core software resembles that of a lexical-syntactic analyzer, which reads and interprets script files sent to it. The execution sequence (trial) is modified in accordance with the commands and data received. This type of operation provides a great deal of flexibility and supports a wide variety of tests such as auditory-lexical decision making, phoneme monitoring, gating, phonetic categorization, word identification, voice quality, etc. To achieve good performance, we were careful about timing accuracy, which is the greatest problem in computerized perception tests.",
+      "absUrl": "https://arxiv.org/abs/0705.4415v1",
+      "pdfUrl": "https://arxiv.org/pdf/0705.4415v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0705.3616",
+      "title": "On How Developers Test Open Source Software Systems",
+      "authors": [
+        "Andy Zaidman",
+        "Bart Van Rompaey",
+        "Serge Demeyer",
+        "Arie van Deursen"
+      ],
+      "authorsText": "Andy Zaidman, Bart Van Rompaey, Serge Demeyer, Arie van Deursen",
+      "abstract": "Engineering software systems is a multidisciplinary activity, whereby a number of artifacts must be created - and maintained - synchronously. In this paper we investigate whether production code and the accompanying tests co-evolve by exploring a project's versioning system, code coverage reports and size-metrics. Three open source case studies teach us that testing activities usually start later on during the lifetime and are more \"phased\", although we did not observe increasing testing activity before releases. Furthermore, we note large differences in the levels of test coverage given the proportion of test code.",
+      "absUrl": "https://arxiv.org/abs/0705.3616v1",
+      "pdfUrl": "https://arxiv.org/pdf/0705.3616v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0704.1294",
+      "title": "A Disciplined Approach to Adopting Agile Practices: The Agile Adoption Framework",
+      "authors": [
+        "Ahmed Sidky",
+        "James Arthur",
+        "Shawn Bohner"
+      ],
+      "authorsText": "Ahmed Sidky, James Arthur, Shawn Bohner",
+      "abstract": "Many organizations aspire to adopt agile processes to take advantage of the numerous benefits that it offers to an organization. Those benefits include, but are not limited to, quicker return on investment, better software quality, and higher customer satisfaction. To date however, there is no structured process (at least in the public domain) that guides organizations in adopting agile practices. To address this problem we present the Agile Adoption Framework. The framework consists of two components: an agile measurement index, and a 4-Stage process, that together guide and assist the agile adoption efforts of organizations. More specifically, the agile measurement index is used to identify the agile potential of projects and organizations. The 4-Stage process, on the other hand, helps determine (a) whether or not organizations are ready for agile adoption, and (b) guided by their potential, what set of agile practices can and should be introduced.",
+      "absUrl": "https://arxiv.org/abs/0704.1294v1",
+      "pdfUrl": "https://arxiv.org/pdf/0704.1294v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-04",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0704.0865",
+      "title": "An architecture-based dependability modeling framework using AADL",
+      "authors": [
+        "Ana-Elena Rugina",
+        "Karama Kanoun",
+        "Mohamed Kaaniche"
+      ],
+      "authorsText": "Ana-Elena Rugina, Karama Kanoun, Mohamed Kaaniche",
+      "abstract": "For efficiency reasons, the software system designers' will is to use an integrated set of methods and tools to describe specifications and designs, and also to perform analyses such as dependability, schedulability and performance. AADL (Architecture Analysis and Design Language) has proved to be efficient for software architecture modeling. In addition, AADL was designed to accommodate several types of analyses. This paper presents an iterative dependency-driven approach for dependability modeling using AADL. It is illustrated on a small example. This approach is part of a complete framework that allows the generation of dependability analysis and evaluation models from AADL models to support the analysis of software and system architectures, in critical application domains.",
+      "absUrl": "https://arxiv.org/abs/0704.0865v1",
+      "pdfUrl": "https://arxiv.org/pdf/0704.0865v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2007-04",
+      "sourceVersion": "v1"
+    }
+  ]
+}

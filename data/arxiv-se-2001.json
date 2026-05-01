@@ -1,0 +1,590 @@
+{
+  "title": "arXiv cs.SE 2001",
+  "sourceLabel": "arXiv cs.SE 2001",
+  "sourceUrl": "https://arxiv.org/list/cs.SE/2001",
+  "archive": "cs.SE",
+  "year": 2001,
+  "updatedAt": "2026-05-01T19:46:58.347Z",
+  "months": [
+    {
+      "period": "2001-01",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2001-01?skip=0&show=2000",
+      "paperCount": 5
+    },
+    {
+      "period": "2001-02",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2001-02?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "2001-03",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2001-03?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "2001-04",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2001-04?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "2001-05",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2001-05?skip=0&show=2000",
+      "paperCount": 5
+    },
+    {
+      "period": "2001-06",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2001-06?skip=0&show=2000",
+      "paperCount": 4
+    },
+    {
+      "period": "2001-07",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2001-07?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "2001-08",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2001-08?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "2001-09",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2001-09?skip=0&show=2000",
+      "paperCount": 1
+    },
+    {
+      "period": "2001-10",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2001-10?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "2001-11",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2001-11?skip=0&show=2000",
+      "paperCount": 15
+    },
+    {
+      "period": "2001-12",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2001-12?skip=0&show=2000",
+      "paperCount": 0
+    }
+  ],
+  "papers": [
+    {
+      "id": "cs/0111046",
+      "title": "HyperPro An integrated documentation environment for CLP",
+      "authors": [
+        "AbdelAli Ed-Dbali",
+        "Pierre Deransart",
+        "Mariza A. S. Bigonha",
+        "Jose de Siqueira",
+        "Roberto da S. Bigonha"
+      ],
+      "authorsText": "AbdelAli Ed-Dbali, Pierre Deransart, Mariza A. S. Bigonha, Jose de Siqueira, Roberto da S. Bigonha",
+      "abstract": "The purpose of this paper is to present some functionalities of the HyperPro System. HyperPro is a hypertext tool which allows to develop Constraint Logic Programming (CLP) together with their documentation. The text editing part is not new and is based on the free software Thot. A HyperPro program is a Thot document written in a report style. The tool is designed for CLP but it can be adapted to other programming paradigms as well. Thot offers navigation and editing facilities and synchronized static document views. HyperPro has new functionalities such as document exportations, dynamic views (projections), indexes and version management. Projection is a mechanism for extracting and exporting relevant pieces of code program or of document according to specific criteria. Indexes are useful to find the references and occurrences of a relation in a document, i.e., where its predicate definition is found and where a relation is used in other programs or document versions and, to translate hyper-texts links into paper references. It still lack importation facilities.",
+      "absUrl": "https://arxiv.org/abs/cs/0111046v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0111046v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0111045",
+      "title": "The Overview of the National Ignition Facility Distributed Computer Control System",
+      "authors": [
+        "L. J. Lagin",
+        "R. C. Bettenhausen",
+        "R. A. Carey",
+        "C. M. Estes",
+        "J. M. Fisher",
+        "J. E. Krammen",
+        "R. K. Reed",
+        "P. J. VanArsdall",
+        "J. P. Woodruff"
+      ],
+      "authorsText": "L. J. Lagin, R. C. Bettenhausen, R. A. Carey, C. M. Estes, J. M. Fisher, J. E. Krammen, R. K. Reed, P. J. VanArsdall, J. P. Woodruff",
+      "abstract": "The Integrated Computer Control System (ICCS) for the National Ignition Facility (NIF) is a layered architecture of 300 front-end processors (FEP) coordinated by supervisor subsystems including automatic beam alignment and wavefront control, laser and target diagnostics, pulse power, and shot control timed to 30 ps. FEP computers incorporate either VxWorks on PowerPC or Solaris on UltraSPARC processors that interface to over 45,000 control points attached to VME-bus or PCI-bus crates respectively. Typical devices are stepping motors, transient digitizers, calorimeters, and photodiodes. The front-end layer is divided into another segment comprised of an additional 14,000 control points for industrial controls including vacuum, argon, synthetic air, and safety interlocks implemented with Allen-Bradley programmable logic controllers (PLCs). The computer network is augmented asynchronous transfer mode (ATM) that delivers video streams from 500 sensor cameras monitoring the 192 laser beams to operator workstations. Software is based on an object-oriented framework using CORBA distribution that incorporates services for archiving, machine configuration, graphical user interface, monitoring, event logging, scripting, alert management, and access control. Software coding using a mixed language environment of Ada95 and Java is one-third complete at over 300 thousand source lines. Control system installation is currently under way for the first 8 beams, with project completion scheduled for 2008.",
+      "absUrl": "https://arxiv.org/abs/cs/0111045v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0111045v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0111043",
+      "title": "Prototyping CLP(FD) Tracers: a Trace Model and an Experimental Validation Environment",
+      "authors": [
+        "Ludovic Langevine",
+        "Pierre Deransart",
+        "Mireille Ducasse",
+        "Erwan Jahier"
+      ],
+      "authorsText": "Ludovic Langevine, Pierre Deransart, Mireille Ducasse, Erwan Jahier",
+      "abstract": "Developing and maintaining CLP programs requires visualization and explanation tools. However, existing tools are built in an ad hoc way. Therefore porting tools from one platform to another is very difficult. We have shown in previous work that, from a fine-grained execution trace, a number of interesting views about logic program executions could be generated by trace analysis.\nIn this article, we propose a trace model for constraint solving by narrowing. This trace model is the first one proposed for CLP(FD) and does not pretend to be the ultimate one. We also propose an instrumented meta-interpreter in order to experiment with the model. Furthermore, we show that the proposed trace model contains the necessary information to build known and useful execution views. This work sets the basis for generic execution analysis of CLP(FD) programs.",
+      "absUrl": "https://arxiv.org/abs/cs/0111043v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0111043v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0111042",
+      "title": "Proceedings of the Eleventh Workshop on Logic Programming Environments (WLPE'01)",
+      "authors": [
+        "Anthony Kusalik"
+      ],
+      "authorsText": "Anthony Kusalik",
+      "abstract": "The Eleventh Workshop on Logic Programming Environments (WLPE'01) was one in a series of international workshops in the topic area. It was held on December 1, 2001 in Paphos, Cyprus as a post-conference workshop at ICLP 2001. Eight refereed papers were presented at the conference. A majority of the papers involved, in some way, constraint logic programming and tools for software development. Other topics areas addressed include execution visualization, instructional aids (for learning users), software maintenance (including debugging), and provisions for new paradigms.",
+      "absUrl": "https://arxiv.org/abs/cs/0111042v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0111042v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0111041",
+      "title": "On the Design of a Tool for Supporting the Construction of Logic Programs",
+      "authors": [
+        "Gustavo A. Ospina",
+        "Baudouin Le Charlier"
+      ],
+      "authorsText": "Gustavo A. Ospina, Baudouin Le Charlier",
+      "abstract": "Environments for systematic construction of logic programs are needed in the academy as well as in the industry. Such environments should support well defined construction methods and should be able to be extended and interact with other programming tools like debuggers and compilers. We present a variant of the Deville methodology for logic program development, and the design of a tool for supporting the methodology. Our aim is to facilitate the learning of logic programming and to set the basis of more sophisticated tools for program development.",
+      "absUrl": "https://arxiv.org/abs/cs/0111041v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0111041v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0111040",
+      "title": "Combining Propagation Information and Search Tree Visualization using ILOG OPL Studio",
+      "authors": [
+        "Christiane Bracchi",
+        "Christophe Gefflot",
+        "Frederic Paulin"
+      ],
+      "authorsText": "Christiane Bracchi, Christophe Gefflot, Frederic Paulin",
+      "abstract": "In this paper we give an overview of the current state of the graphical features provided by ILOG OPL Studio for debugging and performance tuning of OPL programs or external ILOG Solver based applications. This paper focuses on combining propagation and search information using the Search Tree view and the Propagation Spy. A new synthetic view is presented: the Christmas Tree, which combines the Search Tree view with statistics on the efficiency of the domain reduction and on the number of the propagation events triggered.",
+      "absUrl": "https://arxiv.org/abs/cs/0111040v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0111040v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0111039",
+      "title": "An Integrated Development Environment for Declarative Multi-Paradigm Programming",
+      "authors": [
+        "Michael Hanus",
+        "Johannes Koj"
+      ],
+      "authorsText": "Michael Hanus, Johannes Koj",
+      "abstract": "In this paper we present CIDER (Curry Integrated Development EnviRonment), an analysis and programming environment for the declarative multi-paradigm language Curry. CIDER is a graphical environment to support the development of Curry programs by providing integrated tools for the analysis and visualization of programs. CIDER is completely implemented in Curry using libraries for GUI programming (based on Tcl/Tk) and meta-programming. An important aspect of our environment is the possible adaptation of the development environment to other declarative source languages (e.g., Prolog or Haskell) and the extensibility w.r.t. new analysis methods. To support the latter feature, the lazy evaluation strategy of the underlying implementation language Curry becomes quite useful.",
+      "absUrl": "https://arxiv.org/abs/cs/0111039v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0111039v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0111037",
+      "title": "User-friendly explanations for constraint programming",
+      "authors": [
+        "Narendra Jussien",
+        "Samir Ouis"
+      ],
+      "authorsText": "Narendra Jussien, Samir Ouis",
+      "abstract": "In this paper, we introduce a set of tools for providing user-friendly explanations in an explanation-based constraint programming system. The idea is to represent the constraints of a problem as an hierarchy (a tree). Users are then represented as a set of understandable nodes in that tree (a cut). Classical explanations (sets of system constraints) just need to get projected on that representation in order to be understandable by any user. We present here the main interests of this idea.",
+      "absUrl": "https://arxiv.org/abs/cs/0111037v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0111037v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0111036",
+      "title": "Data Access - Experiences Implementing an Object Oriented Library on Various Platforms",
+      "authors": [
+        "R. Lange",
+        "J. Hill"
+      ],
+      "authorsText": "R. Lange, J. Hill",
+      "abstract": "Data Access will be the next generation data abstraction layer for EPICS. Its implementation in C++ brought up a number of issues that are related to object oriented technology's impact on CPU and memory usage.\nWhat is gained by the new abstract interface? What is the price that has to be paid for these gains? What compromises seem applicable and affordable?\nThis paper discusses tests that have been made about performance and memory usage as well as the different measures that have been taken to optimize the situation.",
+      "absUrl": "https://arxiv.org/abs/cs/0111036v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0111036v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0111021",
+      "title": "System Integration of High Level Applications during the Commissioning of the Swiss Light Source",
+      "authors": [
+        "A. Luedeke"
+      ],
+      "authorsText": "A. Luedeke",
+      "abstract": "The commissioning of the Swiss Light Source (SLS) started in Feb. 2000 with the Linac, continued in May 2000 with the booster synchrotron and by Dec. 2000 first light in the storage ring were produced. The first four beam lines had to be operational August 2001. The thorough integration of all subsystems to the control system and a high level of automation was prerequisite to meet the tight time schedule. A careful balanced distribution of functionality into high level and low level applications allowed an optimization of short development cycles and high reliability of the applications. High level applications were implemented as CORBA based server/client applications (tcl/tk and Java based clients, C++ based servers), IDL applications using EZCA, medm/dm2k screens and tcl/tk applications using CDEV. Low level applications were mainly build as EPICS process databases, SNL state machines and customized drivers. Functionality of the high level application was encapsulated and pushed to lower levels whenever it has proven to be adequate. That enabled to reduce machine setups to a handful of physical parameters and allow the usage of standard EPICS tools for display, archiving and processing of complex physical values. High reliability and reproducibility were achieved with that approach.",
+      "absUrl": "https://arxiv.org/abs/cs/0111021v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0111021v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0111019",
+      "title": "Application of digital regulated Power Supplies for Magnet Control at the Swiss Light Source",
+      "authors": [
+        "A. Luedeke"
+      ],
+      "authorsText": "A. Luedeke",
+      "abstract": "The Swiss Light Source (SLS) has in the order of 500 magnet power supplies (PS) installed, ranging from from 3 A/20 V four-quadrant PS to a 950 A/1000 V two-quadrant 3 Hz PS. All magnet PS have a local digital controller for a digital regulation loop and a 5 MHz optical point-to-point link to the VME level. The PS controller is running a pulse width/pulse repetition regulation scheme, optional with multiple slave regulation loops. Many internal regulation parameters and controller diagnostics are readable by the control system. Industry Pack modules with standard VME carrier cards are used as VME hardware interface with the high control density of eight links per VME card. The low level EPICS interface is identical for all 500 magnet PS, including insertion devices. The digital PS have proven to be very stable and reliable during commissioning of the light source. All specifications were met for all PS. The advanced diagnostic for the magnet PS turned out to be very useful not only for the diagnostic of the PS but also to identify problems on the magnets.",
+      "absUrl": "https://arxiv.org/abs/cs/0111019v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0111019v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0111016",
+      "title": "Application Software Structure Enables Nif Operations Kirby W. Fong",
+      "authors": [
+        "Kirby W. Fong",
+        "Christopher M. Estes",
+        "John M. Fisher",
+        "Randy T. Shelton"
+      ],
+      "authorsText": "Kirby W. Fong, Christopher M. Estes, John M. Fisher, Randy T. Shelton",
+      "abstract": "The NIF Integrated Computer Control System (ICCS) application software uses a set of service frameworks that assures uniform behavior spanning the front-end processors (FEPs) and supervisor programs. This uniformity is visible both in the way each program employs shared services and in the flexibility it affords for attaching graphical user interfaces (GUIs). Uniformity of structure across applications is desired for the benefit of programmers who will be maintaining the many programs that constitute the ICCS. In this paper, the framework components that have the greatest impact on the application structure are discussed.",
+      "absUrl": "https://arxiv.org/abs/cs/0111016v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0111016v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0111014",
+      "title": "Visual DCT - Visual EPICS Database Configuration Tool",
+      "authors": [
+        "M. Sekoranja",
+        "S. Hunt",
+        "A. Luedeke"
+      ],
+      "authorsText": "M. Sekoranja, S. Hunt, A. Luedeke",
+      "abstract": "Visual DCT is an EPICS configuration tool completely written in Java and therefore supported in various systems. It was developed to provide features missing in existing configuration tools as Capfast and GDCT. Visually Visual DCT resembles GDCT - records can be created, moved and linked, fields and links can be easily modified. But Visual DCT offers more: using groups, records can be grouped together in a logical block, which allows a hierarchical design. Additionally indication of data flow direction using arrows makes the design easier to understand. Visual DCT has a powerful DB parser, which allows importing existing DB and DBD files. Output file is also DB file, all comments and record order is preserved and visual data saved as comment, which allows DBs to be edited in other tools or manually. Great effort has been taken and many tricks used to optimize the performance in order to compensate for the fact that Java is an interpreted language.",
+      "absUrl": "https://arxiv.org/abs/cs/0111014v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0111014v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0111013",
+      "title": "Quality Control, Testing and Deployment Results in NIF ICCS",
+      "authors": [
+        "John P. Woodruff",
+        "Drew D. Casavant",
+        "Barry D. Cline",
+        "Michael R. Gorvad"
+      ],
+      "authorsText": "John P. Woodruff, Drew D. Casavant, Barry D. Cline, Michael R. Gorvad",
+      "abstract": "The strategy used to develop the NIF Integrated Computer Control System (ICCS) calls for incremental cycles of construction and formal test to deliver a total of 1 million lines of code. Each incremental release takes four to six months to implement specific functionality and culminates when offline tests conducted in the ICCS Integration and Test Facility verify functional, performance, and interface requirements. Tests are then repeated on line to confirm integrated operation in dedicated laser laboratories or ultimately in the NIF. Test incidents along with other change requests are recorded and tracked to closure by the software change control board (SCCB). Annual independent audits advise management on software process improvements. Extensive experience has been gained by integrating controls in the prototype laser preamplifier laboratory. The control system installed in the preamplifier lab contains five of the ten planned supervisory subsystems and seven of sixteen planned front-end processors (FEPs). Beam alignment, timing, diagnosis and laser pulse amplification up to 20 joules was tested through an automated series of shots. Other laboratories have provided integrated testing of six additional FEPs. Process measurements including earned-value, product size, and defect densities provide software project controls and generate confidence that the control system will be successfully deployed.",
+      "absUrl": "https://arxiv.org/abs/cs/0111013v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0111013v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0111005",
+      "title": "Automated Real-Time Testing (ARTT) for Embedded Control Systems (ECS)",
+      "authors": [
+        "Jon Hawkins",
+        "Haung V. Nguyen",
+        "Reginald B. Howard"
+      ],
+      "authorsText": "Jon Hawkins, Haung V. Nguyen, Reginald B. Howard",
+      "abstract": "Developing real-time automated test systems for embedded control systems has been a real problem. Some engineers and scientists have used customized software and hardware as a solution, which can be very expensive and time consuming to develop. We have discovered how to integrate a suite of commercially available off-the-shelf software tools and hardware to develop a scalable test platform that is capable of performing complete black-box testing for a dual-channel real-time Embedded-PLC-based control system (this http URL). We will discuss how the Vali/Test Pro testing methodology was implemented to structure testing for a personnel safety system with large quantities of requirements and test cases.\nThis work was supported by the U.S. Department of Energy, Basic Energy Sciences, under Contract No. W-31-109-Eng-38.",
+      "absUrl": "https://arxiv.org/abs/cs/0111005v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0111005v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0109019",
+      "title": "Tracing Execution of Software for Design Coverage",
+      "authors": [
+        "Raimondas Lencevicius",
+        "Edu Metz",
+        "Alexander Ran"
+      ],
+      "authorsText": "Raimondas Lencevicius, Edu Metz, Alexander Ran",
+      "abstract": "Test suites are designed to validate the operation of a system against requirements. One important aspect of a test suite design is to ensure that system operation logic is tested completely. A test suite should drive a system through all abstract states to exercise all possible cases of its operation. This is a difficult task. Code coverage tools support test suite designers by providing the information about which parts of source code are covered during system execution. Unfortunately, code coverage tools produce only source code coverage information. For a test engineer it is often hard to understand what the noncovered parts of the source code do and how they relate to requirements. We propose a generic approach that provides design coverage of the executed software simplifying the development of new test suites. We demonstrate our approach on common design abstractions such as statecharts, activity diagrams, message sequence charts and structure diagrams. We implement the design coverage using Third Eye tracing and trace analysis framework. Using design coverage, test suites could be created faster by focussing on untested design elements.",
+      "absUrl": "https://arxiv.org/abs/cs/0109019v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0109019v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0106030",
+      "title": "Logic, Individuals and Concepts",
+      "authors": [
+        "Viacheslav Wolfengagen"
+      ],
+      "authorsText": "Viacheslav Wolfengagen",
+      "abstract": "This extended abstract gives a brief outline of the connections between the descriptions and variable concepts. Thus, the notion of a concept is extended to include both the syntax and semantics features. The evaluation map in use is parameterized by a kind of computational environment, the index, giving rise to indexed concepts. The concepts are inhabited into language by the descriptions from the higher order logic. In general the idea of object-as-functor should assist the designer to outline a programming tool in conceptual shell style.",
+      "absUrl": "https://arxiv.org/abs/cs/0106030v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0106030v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0106027",
+      "title": "Event Driven Objects",
+      "authors": [
+        "Viacheslav Wolfengagen"
+      ],
+      "authorsText": "Viacheslav Wolfengagen",
+      "abstract": "A formal consideration in this paper is given for the essential notations to characterize the object that is distinguished in a problem domain. The distinct object is represented by another idealized object, which is a schematic element. When the existence of an element is significant, then a class of these partial elements is dropped down into actual, potential and virtual objects. The potential objects are gathered into the variable domains which are the extended ranges for unbound variables. The families of actual objects are shown to be parameterized with the types and events. The transitions between events are shown to be driven by the scripts. A computational framework arises which is described by the commutative diagrams.",
+      "absUrl": "https://arxiv.org/abs/cs/0106027v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0106027v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0106014",
+      "title": "L.T.Kuzin: Research Program",
+      "authors": [
+        "Viacheslav Wolfengagen"
+      ],
+      "authorsText": "Viacheslav Wolfengagen",
+      "abstract": "Lev T. Kuzin (1928--1997) is one of the founders of modern cybernetics and information science in Russia. He was awarded and honored the USSR State Prize for inspiring vision into the future of technical cybernetics and his invention and innovation of key technologies.\nThe last years he interested in the computational models of geometrical and algebraic nature and their applications in various branches of computer science and information technologies. In the recent years the interest in computation models based on object notion has grown tremendously stimulating an interest to Kuzin's ideas. This year of 50th Anniversary of Cybernetics and on the occasion of his 70th birthday on September 12, 1998 seems especially appropriate for discussing Kuzin's Research Program.",
+      "absUrl": "https://arxiv.org/abs/cs/0106014v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0106014v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0106009",
+      "title": "Model Checking Contractual Protocols",
+      "authors": [
+        "Aspassia Daskalopulu"
+      ],
+      "authorsText": "Aspassia Daskalopulu",
+      "abstract": "This paper discusses how model checking, a technique used for the verification of behavioural requirements of dynamic systems, can be usefully deployed for the verification of contracts. A process view of agreements between parties is taken, whereby a contract is modelled as it evolves over time in terms of actions or more generally events that effect changes in its state. Modelling is done with Petri Nets in the spirit of other research work on the representation of trade procedures. The paper illustrates all the phases of the verification technique through an example and argues that the approach is useful particularly in the context of pre-contractual negotiation and contract drafting. The work reported here is part of a broader project on the development of logic-based tools for the analysis and representation of legal contracts.",
+      "absUrl": "https://arxiv.org/abs/cs/0106009v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0106009v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0105018",
+      "title": "HTTP Cookies: Standards, Privacy, and Politics",
+      "authors": [
+        "David M. Kristol"
+      ],
+      "authorsText": "David M. Kristol",
+      "abstract": "How did we get from a world where cookies were something you ate and where \"non-techies\" were unaware of \"Netscape cookies\" to a world where cookies are a hot-button privacy issue for many computer users? This paper will describe how HTTP \"cookies\" work, and how Netscape's original specification evolved into an IETF Proposed Standard. I will also offer a personal perspective on how what began as a straightforward technical specification turned into a political flashpoint when it tried to address non-technical issues such as privacy.",
+      "absUrl": "https://arxiv.org/abs/cs/0105018v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0105018v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0105010",
+      "title": "On Assessing the Complexity of Software Architectures",
+      "authors": [
+        "Jianjun Zhao"
+      ],
+      "authorsText": "Jianjun Zhao",
+      "abstract": "This paper proposes some new architectural metrics which are appropriate for evaluating the architectural attributes of a software system. The main feature of our approach is to assess the complexity of a software architecture by analyzing various types of architectural dependences in the architecture.",
+      "absUrl": "https://arxiv.org/abs/cs/0105010v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0105010v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0105009",
+      "title": "Using Dependence Analysis to Support Software Architecture Understanding",
+      "authors": [
+        "Jianjun Zhao"
+      ],
+      "authorsText": "Jianjun Zhao",
+      "abstract": "Software architecture is receiving increasingly attention as a critical design level for software systems. As software architecture design resources (in the form of architectural descriptions) are going to be accumulated, the development of techniques and tools to support architectural understanding, testing, reengineering, maintaining, and reusing will become an important issue. In this paper we introduce a new dependence analysis technique, named architectural dependence analysis to support software architecture development. In contrast to traditional dependence analysis, architectural dependence analysis is designed to operate on an architectural description of a software system, rather than the source code of a conventional program. Architectural dependence analysis provides knowledge of dependences for the high-level architecture of a software system, rather than the low-level implementation details of a conventional program.",
+      "absUrl": "https://arxiv.org/abs/cs/0105009v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0105009v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0105008",
+      "title": "Applying Slicing Technique to Software Architectures",
+      "authors": [
+        "Jianjun Zhao"
+      ],
+      "authorsText": "Jianjun Zhao",
+      "abstract": "Software architecture is receiving increasingly attention as a critical design level for software systems. As software architecture design resources (in the form of architectural specifications) are going to be accumulated, the development of techniques and tools to support architectural understanding, testing, reengineering, maintenance, and reuse will become an important issue. This paper introduces a new form of slicing, named architectural slicing, to aid architectural understanding and reuse. In contrast to traditional slicing, architectural slicing is designed to operate on the architectural specification of a software system, rather than the source code of a program. Architectural slicing provides knowledge about the high-level structure of a software system, rather than the low-level implementation details of a program. In order to compute an architectural slice, we present the architecture information flow graph which can be used to represent information flows in a software architecture. Based on the graph, we give a two-phase algorithm to compute an architectural slice.",
+      "absUrl": "https://arxiv.org/abs/cs/0105008v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0105008v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0105006",
+      "title": "Reverse Engineering from Assembler to Formal Specifications via Program Transformations",
+      "authors": [
+        "M. P. Ward"
+      ],
+      "authorsText": "M. P. Ward",
+      "abstract": "The FermaT transformation system, based on research carried out over the last sixteen years at Durham University, De Montfort University and Software Migrations Ltd., is an industrial-strength formal transformation engine with many applications in program comprehension and language migration. This paper is a case study which uses automated plus manually-directed transformations and abstractions to convert an IBM 370 Assembler code program into a very high-level abstract specification.",
+      "absUrl": "https://arxiv.org/abs/cs/0105006v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0105006v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0101009",
+      "title": "Generation of and Debugging with Logical Pre and Postconditions",
+      "authors": [
+        "Angel Herrranz-Nieva Juan Jose Moreno Navarro"
+      ],
+      "authorsText": "Angel Herrranz-Nieva Juan Jose Moreno Navarro",
+      "abstract": "This paper shows the debugging facilities provided by the SLAM system. The SLAM system includes i) a specification language that integrates algebraic specifications and model-based specifications using the object oriented model. Class operations are defined by using rules each of them with logical pre and postconditions but with a functional flavour. ii) A development environment that, among other features, is able to generate readable code in a high level object oriented language. iii) The generated code includes (part of) the pre and postconditions as assertions, that can be automatically checked in the debug mode execution of programs. We focus on this last aspect.\nThe SLAM language is expressive enough to describe many useful properties and these properties are translated into a Prolog program that is linked (via an adequate interface) with the user program. The debugging execution of the program interacts with the Prolog engine which is responsible for checking properties.",
+      "absUrl": "https://arxiv.org/abs/cs/0101009v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0101009v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0101008",
+      "title": "A Knowledge-based Automated Debugger in Learning System",
+      "authors": [
+        "Abdullah Mohd Zin",
+        "Syed Ahmad Aljunid",
+        "Zarina Shukur",
+        "Mohd Jan Nordin"
+      ],
+      "authorsText": "Abdullah Mohd Zin, Syed Ahmad Aljunid, Zarina Shukur, Mohd Jan Nordin",
+      "abstract": "Currently, programming instructors continually face the problem of helping to debug students' programs. Although there currently exist a number of debuggers and debugging tools in various platforms, most of these projects or products are crafted through the needs of software maintenance, and not through the perspective of teaching of programming. Moreover, most debuggers are too general, meant for experts as well as not user-friendly. We propose a new knowledge-based automated debugger to be used as a user-friendly tool by the students to self-debug their own programs. Stereotyped code (cliche) and bugs cliche will be stored as library of plans in the knowledge-base. Recognition of correct code or bugs is based on pattern matching and constraint satisfaction. Given a syntax error-free program and its specification, this debugger called Adil (Automated Debugger in Learning system) will be able locate, pinpoint and explain logical errors of programs. If there are no errors, it will be able to explain the meaning of the program. Adil is based on the design of the Conceiver, an automated program understanding system developed at Universiti Kebangsaan Malaysia.",
+      "absUrl": "https://arxiv.org/abs/cs/0101008v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0101008v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0101007",
+      "title": "Assertion checker for the C programming language based on computations over event traces",
+      "authors": [
+        "Mikhail Auguston"
+      ],
+      "authorsText": "Mikhail Auguston",
+      "abstract": "This paper suggests an approach to the development of software testing and debugging automation tools based on precise program behavior models. The program behavior model is defined as a set of events (event trace) with two basic binary relations over events -- precedence and inclusion, and represents the temporal relationship between actions. A language for the computations over event traces is developed that provides a basis for assertion checking, debugging queries, execution profiles, and performance measurements. The approach is nondestructive, since assertion texts are separated from the target program source code and can be maintained independently. Assertions can capture the dynamic properties of a particular target program and can formalize the general knowledge of typical bugs and debugging strategies. An event grammar provides a sound basis for assertion language implementation via target program automatic instrumentation. An implementation architecture and preliminary experiments with a prototype assertion checker for the C programming language are discussed.",
+      "absUrl": "https://arxiv.org/abs/cs/0101007v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0101007v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0101005",
+      "title": "Slicing Event Traces of Large Software Systems",
+      "authors": [
+        "Raymond Smith",
+        "Bogdan Korel"
+      ],
+      "authorsText": "Raymond Smith, Bogdan Korel",
+      "abstract": "Debugging of large software systems consisting of many processes accessing shared resources is a very difficult task. Many commercial systems record essential events during system execution for post-mortem analysis. However, the event traces of large and long-running systems can be quite voluminous. Analysis of such event traces to identify sources of incorrect behavior can be very tedious, error-prone, and inefficient. In this paper, we propose a novel technique of slicing event traces as a means of reducing the number of events for analysis. This technique identifies events that may have influenced observed incorrect system behavior. In order to recognize influencing events several types of dependencies between events are identified. These dependencies are determined automatically from an event trace. In order to improve the precision of slicing we propose to use additional dependencies, referred to as cause-effect dependencies, which can further reduce the size of sliced event traces. Our initial experience has shown that this slicing technique can significantly reduce the size of event traces for analysis.",
+      "absUrl": "https://arxiv.org/abs/cs/0101005v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0101005v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0101002",
+      "title": "Automated Debugging In Java Using OCL And JDI",
+      "authors": [
+        "David J. Murray",
+        "Dale E. Parson"
+      ],
+      "authorsText": "David J. Murray, Dale E. Parson",
+      "abstract": "Correctness constraints provide a foundation for automated debugging within object-oriented systems. This paper discusses a new approach to incorporating correctness constraints into Java development environments. Our approach uses the Object Constraint Language (\"OCL\") as a specification language and the Java Debug Interface (\"JDI\") as a verification API. OCL provides a standard language for expressing object-oriented constraints that can integrate with Unified Modeling Language (\"UML\") software models. JDI provides a standard Java API capable of supporting type-safe and side effect free runtime constraint evaluation. The resulting correctness constraint mechanism: (1) entails no programming language modifications; (2) requires neither access nor changes to existing source code; and (3) works with standard off-the-shelf Java virtual machines (\"VMs\"). A prototype correctness constraint auditor is presented to demonstrate the utility of this mechanism for purposes of automated debugging.",
+      "absUrl": "https://arxiv.org/abs/cs/0101002v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0101002v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2001-01",
+      "sourceVersion": "v1"
+    }
+  ]
+}

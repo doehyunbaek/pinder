@@ -1,0 +1,422 @@
+{
+  "title": "arXiv cs.SE 2000",
+  "sourceLabel": "arXiv cs.SE 2000",
+  "sourceUrl": "https://arxiv.org/list/cs.SE/2000",
+  "archive": "cs.SE",
+  "year": 2000,
+  "updatedAt": "2026-05-01T19:46:47.055Z",
+  "months": [
+    {
+      "period": "2000-01",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2000-01?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "2000-02",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2000-02?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "2000-03",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2000-03?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "2000-04",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2000-04?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "2000-05",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2000-05?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "2000-06",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2000-06?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "2000-07",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2000-07?skip=0&show=2000",
+      "paperCount": 2
+    },
+    {
+      "period": "2000-08",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2000-08?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "2000-09",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2000-09?skip=0&show=2000",
+      "paperCount": 1
+    },
+    {
+      "period": "2000-10",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2000-10?skip=0&show=2000",
+      "paperCount": 2
+    },
+    {
+      "period": "2000-11",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2000-11?skip=0&show=2000",
+      "paperCount": 8
+    },
+    {
+      "period": "2000-12",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2000-12?skip=0&show=2000",
+      "paperCount": 7
+    }
+  ],
+  "papers": [
+    {
+      "id": "cs/0012022",
+      "title": "Performance and Scalability Models for a Hypergrowth e-Commerce Web Site",
+      "authors": [
+        "Neil J. Gunther"
+      ],
+      "authorsText": "Neil J. Gunther",
+      "abstract": "The performance of successful Web-based e-commerce services has all the allure of a roller-coaster ride: accelerated fiscal growth combined with the ever-present danger of running out of server capacity. This chapter presents a case study based on the author's own capacity planning engagement with one of the hottest e-commerce Web sites in the world. Several spreadsheet techniques are presented for forecasting both short-term and long-term trends in the consumption of server capacity. Two new performance metrics are introduced for site planning and procurement: the effective demand, and the doubling period.",
+      "absUrl": "https://arxiv.org/abs/cs/0012022v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0012022v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2000-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0012014",
+      "title": "Slicing of Constraint Logic Programs",
+      "authors": [
+        "Gyongyi Szilagyi",
+        "Tibor Gyimothy",
+        "Jan Maluszynski"
+      ],
+      "authorsText": "Gyongyi Szilagyi, Tibor Gyimothy, Jan Maluszynski",
+      "abstract": "Slicing is a program analysis technique originally developed for imperative languages. It facilitates understanding of data flow and debugging.\nThis paper discusses slicing of Constraint Logic Programs. Constraint Logic Programming (CLP) is an emerging software technology with a growing number of applications. Data flow in constraint programs is not explicit, and for this reason the concepts of slice and the slicing techniques of imperative languages are not directly applicable.\nThis paper formulates declarative notions of slice suitable for CLP. They provide a basis for defining slicing techniques (both dynamic and static) based on variable sharing. The techniques are further extended by using groundness information.\nA prototype dynamic slicer of CLP programs implementing the presented ideas is briefly described together with the results of some slicing experiments.",
+      "absUrl": "https://arxiv.org/abs/cs/0012014v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0012014v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2000-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0012012",
+      "title": "A brief overview of the MAD debugging activities",
+      "authors": [
+        "Dieter Kranzlmueller",
+        "Christian Schaubschlaeger",
+        "Jens Volkert"
+      ],
+      "authorsText": "Dieter Kranzlmueller, Christian Schaubschlaeger, Jens Volkert",
+      "abstract": "Debugging parallel and distributed programs is a difficult activitiy due to the multiplicity of sequential bugs, the existence of malign effects like race conditions and deadlocks, and the huge amounts of data that have to be processed. These problems are addressed by the Monitoring And Debugging environment MAD, which offers debugging functionality based on a graphical representation of a program's execution. The target applications of MAD are parallel programs applying the standard Message-Passing Interface MPI, which is used extensively in the high-performance computing domain. The highlights of MAD are interactive inspection mechanisms including visualization of distributed arrays, the possibility to graphically place breakpoints, a mechanism for monitor overhead removal, and the evaluation of racing messages occuring due to nondeterminism in the code.",
+      "absUrl": "https://arxiv.org/abs/cs/0012012v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0012012v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2000-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0012009",
+      "title": "Finding Failure Causes through Automated Testing",
+      "authors": [
+        "Holger Cleve",
+        "Andreas Zeller"
+      ],
+      "authorsText": "Holger Cleve, Andreas Zeller",
+      "abstract": "A program fails. Under which circumstances does this failure occur? One single algorithm, the delta debugging algorithm, suffices to determine these failure-inducing circumstances. Delta debugging tests a program systematically and automatically to isolate failure-inducing circumstances such as the program input, changes to the program code, or executed statements.",
+      "absUrl": "https://arxiv.org/abs/cs/0012009v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0012009v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2000-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0012007",
+      "title": "Kima - an Automated Error Correction System for Concurrent Logic Programs",
+      "authors": [
+        "Yasuhiro Ajiro",
+        "Kazunori Ueda"
+      ],
+      "authorsText": "Yasuhiro Ajiro, Kazunori Ueda",
+      "abstract": "We have implemented Kima, an automated error correction system for concurrent logic programs. Kima corrects near-misses such as wrong variable occurrences in the absence of explicit declarations of program properties. Strong moding/typing and constraint-based analysis are turning to play fundamental roles in debugging concurrent logic programs as well as in establishing the consistency of communication protocols and data types. Mode/type analysis of Moded Flat GHC is a constraint satisfaction problem with many simple mode/type constraints, and can be solved efficiently. We proposed a simple and efficient technique which, given a non-well-moded/typed program, diagnoses the ``reasons'' of inconsistency by finding minimal inconsistent subsets of mode/type constraints. Since each constraint keeps track of the symbol occurrence in the program, a minimal subset also tells possible sources of program errors. Kima realizes automated correction by replacing symbol occurrences around the possible sources and recalculating modes and types of the rewritten programs systematically. As long as bugs are near-misses, Kima proposes a rather small number of alternatives that include an intended program.",
+      "absUrl": "https://arxiv.org/abs/cs/0012007v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0012007v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2000-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0012006",
+      "title": "Support for Debugging Automatically Parallelized Programs",
+      "authors": [
+        "Robert Hood",
+        "Gabriele Jost"
+      ],
+      "authorsText": "Robert Hood, Gabriele Jost",
+      "abstract": "We describe a system that simplifies the process of debugging programs produced by computer-aided parallelization tools. The system uses relative debugging techniques to compare serial and parallel executions in order to show where the computations begin to differ. If the original serial code is correct, errors due to parallelization will be isolated by the comparison.\nOne of the primary goals of the system is to minimize the effort required of the user. To that end, the debugging system uses information produced by the parallelization tool to drive the comparison process. In particular, the debugging system relies on the parallelization tool to provide information about where variables may have been modified and how arrays are distributed across multiple processes. User effort is also reduced through the use of dynamic instrumentation. This allows us to modify the program execution without changing the way the user builds the executable.\nThe use of dynamic instrumentation also permits us to compare the executions in a fine-grained fashion and only involve the debugger when a difference has been detected. This reduces the overhead of executing instrumentation.",
+      "absUrl": "https://arxiv.org/abs/cs/0012006v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0012006v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2000-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0012005",
+      "title": "Value Withdrawal Explanation in CSP",
+      "authors": [
+        "Gerard Ferrand",
+        "Willy Lesaint",
+        "Alexandre Tessier"
+      ],
+      "authorsText": "Gerard Ferrand, Willy Lesaint, Alexandre Tessier",
+      "abstract": "This work is devoted to constraint solving motivated by the debugging of constraint logic programs a la GNU-Prolog. The paper focuses only on the constraints. In this framework, constraint solving amounts to domain reduction. A computation is formalized by a chaotic iteration. The computed result is described as a closure. This model is well suited to the design of debugging notions and tools, for example failure explanations or error diagnosis. In this paper we detail an application of the model to an explanation of a value withdrawal in a domain. Some other works have already shown the interest of such a notion of explanation not only for failure analysis.",
+      "absUrl": "https://arxiv.org/abs/cs/0012005v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0012005v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2000-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0011029",
+      "title": "Systematic Debugging of Attribute Grammars",
+      "authors": [
+        "Yohei Ikezoe",
+        "Akira Sasaki",
+        "Yoshiki Ohshima",
+        "Ken Wakita",
+        "Masataka Sassa"
+      ],
+      "authorsText": "Yohei Ikezoe, Akira Sasaki, Yoshiki Ohshima, Ken Wakita, Masataka Sassa",
+      "abstract": "Although attribute grammars are commonly used for compiler construction, little investigation has been conducted on debugging attribute grammars. The paper proposes two types of systematic debugging methods, an algorithmic debugging and slice-based debugging, both tailored for attribute grammars. By means of query-based interaction with the developer, our debugging methods effectively narrow the potential bug space in the attribute grammar description and eventually identify the incorrect attribution rule. We have incorporated this technology in our visual debugging tool called Aki.",
+      "absUrl": "https://arxiv.org/abs/cs/0011029v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0011029v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2000-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0011027",
+      "title": "Extended Abstract - Model-Based Debugging of Java Programs",
+      "authors": [
+        "Cristinel Mateis",
+        "Markus Stumptner",
+        "Dominik Wieland",
+        "Franz Wotawa"
+      ],
+      "authorsText": "Cristinel Mateis, Markus Stumptner, Dominik Wieland, Franz Wotawa",
+      "abstract": "Model-based reasoning is a central concept in current research into intelligent diagnostic systems. It is based on the assumption that sources of incorrect behavior in technical devices can be located and identified via the existence of a model describing the basic properties of components of a certain application domain. When actual data concerning the misbehavior of a system composed from such components is available, a domain-independent diagnosis engine can be used to infer which parts of the system contribute to the observed behavior. This paper describes the application of the model-based approach to the debugging of Java programs written in a subset of Java. We show how a simple dependency model can be derived from a program, demonstrate the use of the model for debugging and reducing the required user interactions, give a comparison of the functional dependency model with program slicing, and finally discuss some current research issues.",
+      "absUrl": "https://arxiv.org/abs/cs/0011027v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0011027v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2000-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0011022",
+      "title": "Apache web server execution tracing using Third Eye",
+      "authors": [
+        "Raimondas Lencevicius",
+        "Alexander Ran",
+        "Rahav Yairi"
+      ],
+      "authorsText": "Raimondas Lencevicius, Alexander Ran, Rahav Yairi",
+      "abstract": "Testing of modern software systems that integrate many components developed by different teams is a difficult task. Third Eye is a framework for tracing and validating software systems using application domain events. We use formal descriptions of the constraints between events to identify violations in execution traces. Third Eye is a flexible and modular framework that can be used in different products. We present the validation of the Apache Web Server access policy implementation. The results indicate that our tool is a helpful addition to software development infrastructure.",
+      "absUrl": "https://arxiv.org/abs/cs/0011022v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0011022v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2000-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0011021",
+      "title": "On-the-fly Query-Based Debugging with Examples",
+      "authors": [
+        "Raimondas Lencevicius"
+      ],
+      "authorsText": "Raimondas Lencevicius",
+      "abstract": "Program errors are hard to find because of the cause-effect gap between the time when an error occurs and the time when the error becomes apparent to the programmer. Although debugging techniques such as conditional and data breakpoints help to find error causes in simple cases, they fail to effectively bridge the cause-effect gap in many situations. Query-based debuggers offer programmers an effective tool that provides instant error alert by continuously checking inter-object relationships while the debugged program is running. To enable the query-based debugger in the middle of program execution in a portable way, we propose efficient Java class file instrumentation and discuss alternative techniques. Although the on-the-fly debugger has a higher overhead than a dynamic query-based debugger, it offers additional interactive power and flexibility while maintaining complete portability. To speed up dynamic query evaluation, our debugger implemented in portable Java uses a combination of program instrumentation, load-time code generation, query optimization, and incremental reevaluation. This paper discusses on-the-fly debugging and demonstrates the query-based debugger application for debugging Java gas tank applet as well as SPECjvm98 suite applications.",
+      "absUrl": "https://arxiv.org/abs/cs/0011021v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0011021v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2000-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0011017",
+      "title": "Automatic Debugging Support for UML Designs",
+      "authors": [
+        "Johann Schumann"
+      ],
+      "authorsText": "Johann Schumann",
+      "abstract": "Design of large software systems requires rigorous application of software engineering methods covering all phases of the software process. Debugging during the early design phases is extremely important, because late bug-fixes are expensive.\nIn this paper, we describe an approach which facilitates debugging of UML requirements and designs. The Unified Modeling Language (UML) is a set of notations for object-orient design of a software system. We have developed an algorithm which translates requirement specifications in the form of annotated sequence diagrams into structured statecharts. This algorithm detects conflicts between sequence diagrams and inconsistencies in the domain knowledge. After synthesizing statecharts from sequence diagrams, these statecharts usually are subject to manual modification and refinement. By using the ``backward'' direction of our synthesis algorithm, we are able to map modifications made to the statechart back into the requirements (sequence diagrams) and check for conflicts there. Fed back to the user conflicts detected by our algorithm are the basis for deductive-based debugging of requirements and domain theory in very early development stages. Our approach allows to generate explanations on why there is a conflict and which parts of the specifications are affected.",
+      "absUrl": "https://arxiv.org/abs/cs/0011017v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0011017v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2000-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0011010",
+      "title": "Extension Language Automation of Embedded System Debugging",
+      "authors": [
+        "Dale Parson",
+        "Bryan Schlieder",
+        "Paul Beatty"
+      ],
+      "authorsText": "Dale Parson, Bryan Schlieder, Paul Beatty",
+      "abstract": "Embedded systems contain several layers of target processing abstraction. These layers include electronic circuit, binary machine code, mnemonic assembly code, and high-level procedural and object-oriented abstractions. Physical and temporal constraints and artifacts within physically embedded systems make it impossible for software engineers to operate at a single layer of processor abstraction. The Luxdbg embedded system debugger exposes these layers to debugger users, and it adds an additional layer, the extension language layer, that allows users to extend both the debugger and its target processor capabilities. Tcl is Luxdbg's extension language. Luxdbg users can apply Tcl to automate interactive debugging steps, to redirect and to interconnect target processor input-output facilities, to schedule multiple processor execution, to log and to react to target processing exceptions, and to automate target system testing. Inclusion of an extension language like Tcl in a debugger promises additional advantages for distributed debugging, where debuggers can pass extension language expressions across computer networks.",
+      "absUrl": "https://arxiv.org/abs/cs/0011010v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0011010v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2000-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0011006",
+      "title": "Execution replay and debugging",
+      "authors": [
+        "Michiel Ronsse",
+        "Koen De Bosschere",
+        "Jacques Chassin de Kergommeaux"
+      ],
+      "authorsText": "Michiel Ronsse, Koen De Bosschere, Jacques Chassin de Kergommeaux",
+      "abstract": "As most parallel and distributed programs are internally non-deterministic -- consecutive runs with the same input might result in a different program flow -- vanilla cyclic debugging techniques as such are useless. In order to use cyclic debugging tools, we need a tool that records information about an execution so that it can be replayed for debugging. Because recording information interferes with the execution, we must limit the amount of information and keep the processing of the information fast. This paper contains a survey of existing execution replay techniques and tools.",
+      "absUrl": "https://arxiv.org/abs/cs/0011006v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0011006v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2000-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0011005",
+      "title": "Non-intrusive on-the-fly data race detection using execution replay",
+      "authors": [
+        "Michiel Ronsse",
+        "Koen De Bosschere"
+      ],
+      "authorsText": "Michiel Ronsse, Koen De Bosschere",
+      "abstract": "This paper presents a practical solution for detecting data races in parallel programs. The solution consists of a combination of execution replay (RecPlay) with automatic on-the-fly data race detection. This combination enables us to perform the data race detection on an unaltered execution (almost no probe effect). Furthermore, the usage of multilevel bitmaps and snooped matrix clocks limits the amount of memory used. As the record phase of RecPlay is highly efficient, there is no need to switch it off, hereby eliminating the possibility of Heisenbugs because tracing can be left on all the time.",
+      "absUrl": "https://arxiv.org/abs/cs/0011005v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0011005v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2000-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0010038",
+      "title": "Collecting Graphical Abstract Views of Mercury Program Executions",
+      "authors": [
+        "Erwan Jahier"
+      ],
+      "authorsText": "Erwan Jahier",
+      "abstract": "A program execution monitor is a program that collects and abstracts information about program executions. The \"collect\" operator is a high level, general purpose primitive which lets users implement their own monitors. \"Collect\" is built on top of the Mercury trace. In previous work, we have demonstrated how this operator can be used to efficiently collect various kinds of statistics about Mercury program executions. In this article we further demonstrate the expressive power and effectiveness of \"collect\" by providing more monitor examples. In particular, we show how to implement monitors that generate graphical abstractions of program executions such as proof trees, control flow graphs and dynamic call graphs. We show how those abstractions can be easily modified and adapted, since those monitors only require several dozens of lines of code. Those abstractions are intended to serve as front-ends of software visualization tools. Although \"collect\" is currently implemented on top of the Mercury trace, none of its underlying concepts depend of Mercury and it can be implemented on top of any tracer for any programming language.",
+      "absUrl": "https://arxiv.org/abs/cs/0010038v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0010038v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2000-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0010035",
+      "title": "Proceedings of the Fourth International Workshop on Automated Debugging (AADEBUG 2000)",
+      "authors": [
+        "M. Ducasse"
+      ],
+      "authorsText": "M. Ducasse",
+      "abstract": "Over the past decades automated debugging has seen major achievements. However, as debugging is by necessity attached to particular programming paradigms, the results are scattered. The aims of the workshop are to gather common themes and solutions across programming communities, and to cross-fertilize ideas. AADEBUG 2000 in Munich follows AADEBUG'93 in Linkoeping, Sweden; AADEBUG'95 in Saint Malo, France; AADEBUG'97 in Linkoeping, Sweden.",
+      "absUrl": "https://arxiv.org/abs/cs/0010035v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0010035v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2000-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0009030",
+      "title": "From Syntactic Theories to Interpreters: A Specification Language and Its Compilation",
+      "authors": [
+        "Yong Xiao",
+        "Zena M. Ariola",
+        "Michel Mauny"
+      ],
+      "authorsText": "Yong Xiao, Zena M. Ariola, Michel Mauny",
+      "abstract": "Recent years have seen an increasing need of high-level specification languages and tools generating code from specifications. In this paper, we introduce a specification language, {\\splname}, which is tailored to the writing of syntactic theories of language semantics. More specifically, the language supports specifying primitive notions such as dynamic constraints, contexts, axioms, and inference rules. We also introduce a system which generates interpreters from {\\splname} specifications. A prototype system is implemented and has been tested on a number of examples, including a syntactic theory for Verilog.",
+      "absUrl": "https://arxiv.org/abs/cs/0009030v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0009030v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2000-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0007008",
+      "title": "Compiling Language Definitions: The ASF+SDF Compiler",
+      "authors": [
+        "M. G. J. van den Brand",
+        "J. Heering",
+        "P. Klint",
+        "P. A. Olivier"
+      ],
+      "authorsText": "M. G. J. van den Brand, J. Heering, P. Klint, P. A. Olivier",
+      "abstract": "The ASF+SDF Meta-Environment is an interactive language development environment whose main application areas are definition of domain-specific languages, generation of program analysis and transformation tools, production of software renovation tools, and general specification and prototyping. It uses conditional rewrite rules to define the dynamic semantics and other tool-oriented aspects of languages, so the effectiveness of the generated tools is critically dependent on the quality of the rewrite rule implementation.\nThe ASF+SDF rewrite rule compiler generates C code, thus taking advantage of C's portability and the sophisticated optimization capabilities of current C compilers as well as avoiding potential abstract machine interface bottlenecks. It can handle large (10 000+ rule) language definitions and uses an efficient run-time storage scheme capable of handling large (1 000 000+ node) terms. Term storage uses maximal subterm sharing (hash-consing), which turns out to be more effective in the case of ASF+SDF than in Lisp or SML. Extensive benchmarking has shown the time and space performance of the generated code to be as good as or better than that of the best current rewrite rule and functional language compilers.",
+      "absUrl": "https://arxiv.org/abs/cs/0007008v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0007008v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2000-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0007006",
+      "title": "DISCO: An object-oriented system for music composition and sound design",
+      "authors": [
+        "Hans G. Kaper",
+        "Sever Tipei",
+        "Jeff M. Wright"
+      ],
+      "authorsText": "Hans G. Kaper, Sever Tipei, Jeff M. Wright",
+      "abstract": "This paper describes an object-oriented approach to music composition and sound design. The approach unifies the processes of music making and instrument building by using similar logic, objects, and procedures. The composition modules use an abstract representation of musical data, which can be easily mapped onto different synthesis languages or a traditionally notated score. An abstract base class is used to derive classes on different time scales. Objects can be related to act across time scales, as well as across an entire piece, and relationships between similar objects can replicate traditional music operations or introduce new ones. The DISCO (Digital Instrument for Sonification and Composition) system is an open-ended work in progress.",
+      "absUrl": "https://arxiv.org/abs/cs/0007006v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0007006v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2000-07",
+      "sourceVersion": "v1"
+    }
+  ]
+}

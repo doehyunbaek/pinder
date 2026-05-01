@@ -1,0 +1,973 @@
+{
+  "title": "arXiv cs.SE 2003",
+  "sourceLabel": "arXiv cs.SE 2003",
+  "sourceUrl": "https://arxiv.org/list/cs.SE/2003",
+  "archive": "cs.SE",
+  "year": 2003,
+  "updatedAt": "2026-05-01T19:47:15.859Z",
+  "months": [
+    {
+      "period": "2003-01",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2003-01?skip=0&show=2000",
+      "paperCount": 1
+    },
+    {
+      "period": "2003-02",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2003-02?skip=0&show=2000",
+      "paperCount": 1
+    },
+    {
+      "period": "2003-03",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2003-03?skip=0&show=2000",
+      "paperCount": 3
+    },
+    {
+      "period": "2003-04",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2003-04?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "2003-05",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2003-05?skip=0&show=2000",
+      "paperCount": 3
+    },
+    {
+      "period": "2003-06",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2003-06?skip=0&show=2000",
+      "paperCount": 18
+    },
+    {
+      "period": "2003-07",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2003-07?skip=0&show=2000",
+      "paperCount": 3
+    },
+    {
+      "period": "2003-08",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2003-08?skip=0&show=2000",
+      "paperCount": 1
+    },
+    {
+      "period": "2003-09",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2003-09?skip=0&show=2000",
+      "paperCount": 8
+    },
+    {
+      "period": "2003-10",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2003-10?skip=0&show=2000",
+      "paperCount": 10
+    },
+    {
+      "period": "2003-11",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2003-11?skip=0&show=2000",
+      "paperCount": 3
+    },
+    {
+      "period": "2003-12",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2003-12?skip=0&show=2000",
+      "paperCount": 0
+    }
+  ],
+  "papers": [
+    {
+      "id": "cs/0311040",
+      "title": "Idempotent I/O for safe time travel",
+      "authors": [
+        "Zoltan Somogyi"
+      ],
+      "authorsText": "Zoltan Somogyi",
+      "abstract": "Debuggers for logic programming languages have traditionally had a capability most other debuggers did not: the ability to jump back to a previous state of the program, effectively travelling back in time in the history of the computation. This ``retry'' capability is very useful, allowing programmers to examine in detail a part of the computation that they previously stepped over. Unfortunately, it also creates a problem: while the debugger may be able to restore the previous values of variables, it cannot restore the part of the program's state that is affected by I/O operations. If the part of the computation being jumped back over performs I/O, then the program will perform these I/O operations twice, which will result in unwanted effects ranging from the benign (e.g. output appearing twice) to the fatal (e.g. trying to close an already closed file). We present a simple mechanism for ensuring that every I/O action called for by the program is executed at most once, even if the programmer asks the debugger to travel back in time from after the action to before the action. The overhead of this mechanism is low enough and can be controlled well enough to make it practical to use it to debug computations that do significant amounts of I/O.",
+      "absUrl": "https://arxiv.org/abs/cs/0311040v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0311040v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0311037",
+      "title": "DUCT: An Interactive Define-Use Chain Navigation Tool for Relative Debugging",
+      "authors": [
+        "Aaron Searle",
+        "John Gough",
+        "David Abramson"
+      ],
+      "authorsText": "Aaron Searle, John Gough, David Abramson",
+      "abstract": "This paper describes an interactive tool that facilitates following define-use chains in large codes. The motivation for the work is to support relative debugging, where it is necessary to iteratively refine a set of asser-tions between different versions of a program. DUCT is novel because it exploits the Microsoft Intermediate Language (MSIL) that underpins the.NET Framework. Accordingly, it works on a wide range of programming languages without any modification. The paper describes the design and implementation of DUCT, and then illustrates its use with a small case study.",
+      "absUrl": "https://arxiv.org/abs/cs/0311037v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0311037v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0311001",
+      "title": "Modeling State in Software Debugging of VHDL-RTL Designs -- A Model-Based Diagnosis Approach",
+      "authors": [
+        "Bernhard Peischl",
+        "Franz Wotawa"
+      ],
+      "authorsText": "Bernhard Peischl, Franz Wotawa",
+      "abstract": "In this paper we outline an approach of applying model-based diagnosis to the field of automatic software debugging of hardware designs. We present our value-level model for debugging VHDL-RTL designs and show how to localize the erroneous component responsible for an observed misbehavior. Furthermore, we discuss an extension of our model that supports the debugging of sequential circuits, not only at a given point in time, but also allows for considering the temporal behavior of VHDL-RTL designs. The introduced model is capable of handling state inherently present in every sequential circuit. The principal applicability of the new model is outlined briefly and we use industrial-sized real world examples from the ISCAS'85 benchmark suite to discuss the scalability of our approach.",
+      "absUrl": "https://arxiv.org/abs/cs/0311001v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0311001v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0310048",
+      "title": "Managing Evolving Business Workflows through the Capture of Descriptive Information",
+      "authors": [
+        "Sebastien Gaspard",
+        "Florida Estrella",
+        "Richard McClatchey",
+        "Regis Dindeleux"
+      ],
+      "authorsText": "Sebastien Gaspard, Florida Estrella, Richard McClatchey, Regis Dindeleux",
+      "abstract": "Business systems these days need to be agile to address the needs of a changing world. In particular the discipline of Enterprise Application Integration requires business process management to be highly reconfigurable with the ability to support dynamic workflows, inter-application integration and process reconfiguration. Basing EAI systems on model-resident or on a so-called description-driven approach enables aspects of flexibility, distribution, system evolution and integration to be addressed in a domain-independent manner. Such a system called CRISTAL is described in this paper with particular emphasis on its application to EAI problem domains. A practical example of the CRISTAL technology in the domain of manufacturing systems, called Agilium, is described to demonstrate the principles of model-driven system evolution and integration. The approach is compared to other model-driven development approaches such as the Model-Driven Architecture of the OMG and so-called Adaptive Object Models.",
+      "absUrl": "https://arxiv.org/abs/cs/0310048v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0310048v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0310042",
+      "title": "Rigorous design of tracers: an experiment for constraint logic programming",
+      "authors": [
+        "Mireille Ducasse",
+        "Ludovic Langevine",
+        "Pierre Deransart"
+      ],
+      "authorsText": "Mireille Ducasse, Ludovic Langevine, Pierre Deransart",
+      "abstract": "In order to design and implement tracers, one must decide what exactly to trace and how to produce this trace. On the one hand, trace designs are too often guided by implementation concerns and are not as useful as they should be. On the other hand, an interesting trace which cannot be produced efficiently, is not very useful either. In this article we propose a methodology which helps to efficiently produce accurate traces. Firstly, design a formal specification of the trace model. Secondly, derive a prototype tracer from this specification. Thirdly, analyze the produced traces. Fourthly, implement an efficient tracer. Lastly, compare the traces of the two tracers. At each step, problems can be found. In that case one has to iterate the process. We have successfully applied the proposed methodology to the design and implementation of a real tracer for constraint logic programming which is able to efficiently generate information required to build interesting graphical views of executions.",
+      "absUrl": "https://arxiv.org/abs/cs/0310042v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0310042v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0310040",
+      "title": "Automated Fault Localization Using Potential Invariants",
+      "authors": [
+        "Brock Pytlik",
+        "Manos Renieris",
+        "Shriram Krishnamurthi",
+        "Steven P. Reiss"
+      ],
+      "authorsText": "Brock Pytlik, Manos Renieris, Shriram Krishnamurthi, Steven P. Reiss",
+      "abstract": "We present a general method for fault localization based on abstracting over program traces, and a tool that implements the method using Ernst's notion of potential invariants. Our experiments so far have been unsatisfactory, suggesting that further research is needed before invariants can be used to locate faults.",
+      "absUrl": "https://arxiv.org/abs/cs/0310040v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0310040v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0310026",
+      "title": "Generalized Systematic Debugging for Attribute Grammars",
+      "authors": [
+        "Akira Sasaki",
+        "Masataka Sassa"
+      ],
+      "authorsText": "Akira Sasaki, Masataka Sassa",
+      "abstract": "Attribute grammars (AGs) are known to be a useful formalism for semantic analysis and translation. However, debugging AGs is complex owing to inherent difficulties of AGs, such as recursive grammar structure and attribute dependency. In this paper, a new systematic method of debugging AGs is proposed. Our approach is, in principle, based on previously proposed algorithmic debugging of AGs, but is more general. This easily enables integration of various query-based systematic debugging methods, including the slice-based method. The proposed method has been implemented in Aki, a debugger for AG description. We evaluated our new approach experimentally using Aki, which demonstrates the usability of our debugging method.",
+      "absUrl": "https://arxiv.org/abs/cs/0310026v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0310026v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0310025",
+      "title": "A Monitoring Language for Run Time and Post-Mortem Behavior Analysis and Visualization",
+      "authors": [
+        "Mikhail Auguston",
+        "Clinton Jeffery",
+        "Scott Underwood"
+      ],
+      "authorsText": "Mikhail Auguston, Clinton Jeffery, Scott Underwood",
+      "abstract": "UFO is a new implementation of FORMAN, a declarative monitoring language, in which rules are compiled into execution monitors that run on a virtual machine supported by the Alamo monitor architecture.",
+      "absUrl": "https://arxiv.org/abs/cs/0310025v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0310025v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0310024",
+      "title": "Availability Guarantee for Deterministic Replay Starting Points in Real-Time Systems",
+      "authors": [
+        "Joel Huselius",
+        "Henrik Thane",
+        "Daniel Sundmark"
+      ],
+      "authorsText": "Joel Huselius, Henrik Thane, Daniel Sundmark",
+      "abstract": "Cyclic debugging requires repeatable executions. As non-deterministic or real-time systems typically do not have the potential to provide this, special methods are required. One such method is replay, a process that requires monitoring of a running system and logging of the data produced by that monitoring. We shall discuss the process of preparing the replay, a part of the process that has not been very well described before.",
+      "absUrl": "https://arxiv.org/abs/cs/0310024v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0310024v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0310016",
+      "title": "Debugging Backwards in Time",
+      "authors": [
+        "Bil Lewis"
+      ],
+      "authorsText": "Bil Lewis",
+      "abstract": "By recording every state change in the run of a program, it is possible to present the programmer every bit of information that might be desired. Essentially, it becomes possible to debug the program by going ``backwards in time,'' vastly simplifying the process of debugging. An implementation of this idea, the ``Omniscient Debugger,'' is used to demonstrate its viability and has been used successfully on a number of large programs. Integration with an event analysis engine for searching and control is presented. Several small-scale user studies provide encouraging results. Finally performance issues and implementation are discussed along with possible optimizations.\nThis paper makes three contributions of interest: the concept and technique of ``going backwards in time,'' the GUI which presents a global view of the program state and has a formal notion of ``navigation through time,'' and the integration with an event analyzer.",
+      "absUrl": "https://arxiv.org/abs/cs/0310016v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0310016v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0310015",
+      "title": "Debugging Tool for Localizing Faulty Processes in Message Passing Programs",
+      "authors": [
+        "Masao Okita",
+        "Fumihiko Ino",
+        "Kenichi Hagihara"
+      ],
+      "authorsText": "Masao Okita, Fumihiko Ino, Kenichi Hagihara",
+      "abstract": "In message passing programs, once a process terminates with an unexpected error, the terminated process can propagate the error to the rest of processes through communication dependencies, resulting in a program failure. Therefore, to locate faults, developers must identify the group of processes involved in the original error and faulty processes that activate faults. This paper presents a novel debugging tool, named MPI-PreDebugger (MPI-PD), for localizing faulty processes in message passing programs. MPI-PD automatically distinguishes the original and the propagated errors by checking communication errors during program execution. If MPI-PD observes any communication errors, it backtraces communication dependencies and points out potential faulty processes in a timeline view. We also introduce three case studies, in which MPI-PD has been shown to play the key role in their debugging. From these studies, we believe that MPI-PD helps developers to locate faults and allows them to concentrate in correcting their programs.",
+      "absUrl": "https://arxiv.org/abs/cs/0310015v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0310015v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0310007",
+      "title": "Event-based Program Analysis with DeWiz",
+      "authors": [
+        "Ch. Schaubschlaeger",
+        "D. Kranzlmueller",
+        "J. Volkert"
+      ],
+      "authorsText": "Ch. Schaubschlaeger, D. Kranzlmueller, J. Volkert",
+      "abstract": "Due to the increased complexity of parallel and distributed programs, debugging of them is considered to be the most difficult and time consuming part of the software lifecycle. Tool support is hence a crucial necessity to hide complexity from the user. However, most existing tools seem inadequate as soon as the program under consideration exploits more than a few processors over a long execution time. This problem is addressed by the novel debugging tool DeWiz (Debugging Wizard), whose focus lies on scalability. DeWiz has a modular, scalable architecture, and uses the event graph model as a representation of the investigated program. DeWiz provides a set of modules, which can be combined to generate, analyze, and visualize event graph data. Within this processing pipeline the toolset tries to extract useful information, which is presented to the user at an arbitrary level of abstraction. Additionally, DeWiz is a framework, which can be used to easily implement arbitrary user-defined modules.",
+      "absUrl": "https://arxiv.org/abs/cs/0310007v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0310007v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0310001",
+      "title": "A Performance Analysis Tool for Nokia Mobile Phone Software",
+      "authors": [
+        "Edu Metz",
+        "Raimondas Lencevicius"
+      ],
+      "authorsText": "Edu Metz, Raimondas Lencevicius",
+      "abstract": "Performance problems are often observed in embedded software systems. The reasons for poor performance are frequently not obvious. Bottlenecks can occur in any of the software components along the execution path. Therefore it is important to instrument and monitor the different components contributing to the runtime behavior of an embedded software system. Performance analysis tools can help locate performance bottlenecks in embedded software systems by monitoring the software's execution and producing easily understandable performance data. We maintain and further develop a tool for analyzing the performance of Nokia mobile phone software. The user can select among four performance analysis reports to be generated: average processor load, processor utilization, task execution time statistics, and task execution timeline. Each of these reports provides important information about where execution time is being spent. The demo will show how the tool helps to identify performance bottlenecks in Nokia mobile phone software and better understand areas of poor performance.",
+      "absUrl": "https://arxiv.org/abs/cs/0310001v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0310001v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0309055",
+      "title": "A mathematical framework for automated bug localization",
+      "authors": [
+        "Tsuyoshi Ohta",
+        "Tadanori Mizuno"
+      ],
+      "authorsText": "Tsuyoshi Ohta, Tadanori Mizuno",
+      "abstract": "In this paper, we propose a mathematical framework for automated bug localization. This framework can be briefly summarized as follows. A program execution can be represented as a rooted acyclic directed graph. We define an execution snapshot by a cut-set on the graph. A program state can be regarded as a conjunction of labels on edges in a cut-set. Then we argue that a debugging task is a pruning process of the execution graph by using cut-sets. A pruning algorithm, i.e., a debugging task, is also presented.",
+      "absUrl": "https://arxiv.org/abs/cs/0309055v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0309055v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0309047",
+      "title": "Causes and Effects in Computer Programs",
+      "authors": [
+        "Andreas Zeller"
+      ],
+      "authorsText": "Andreas Zeller",
+      "abstract": "Debugging is commonly understood as finding and fixing the cause of a problem. But what does ``cause'' mean? How can we find causes? How can we prove that a cause is a cause--or even ``the'' cause? This paper defines common terms in debugging, highlights the principal techniques, their capabilities and limitations.",
+      "absUrl": "https://arxiv.org/abs/cs/0309047v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0309047v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0309037",
+      "title": "Postmortem Object Type Identification",
+      "authors": [
+        "Bryan M. Cantrill"
+      ],
+      "authorsText": "Bryan M. Cantrill",
+      "abstract": "This paper presents a novel technique for the automatic type identification of arbitrary memory objects from a memory dump. Our motivating application is debugging memory corruption problems in optimized, production systems -- a problem domain largely unserved by extant methodologies. We describe our algorithm as applicable to any typed language, and we discuss it with respect to the formidable obstacles posed by C. We describe the heuristics that we have developed to overcome these difficulties and achieve effective type identification on C-based systems. We further describe the implementation of our heuristics on one C-based system -- the Solaris operating system kernel -- and describe the extensions that we have added to the Solaris postmortem debugger to allow for postmortem type identification. We show that our implementation yields a sufficiently high rate of type identification to be useful for debugging memory corruption problems. Finally, we discuss some of the novel automated debugging mechanisms that can be layered upon postmortem type identification.",
+      "absUrl": "https://arxiv.org/abs/cs/0309037v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0309037v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0309032",
+      "title": "Towards declarative diagnosis of constraint programs over finite domains",
+      "authors": [
+        "Gerard Ferrand",
+        "Willy Lesaint",
+        "Alexandre Tessier"
+      ],
+      "authorsText": "Gerard Ferrand, Willy Lesaint, Alexandre Tessier",
+      "abstract": "The paper proposes a theoretical approach of the debugging of constraint programs based on a notion of explanation tree. The proposed approach is an attempt to adapt algorithmic debugging to constraint programming. In this theoretical framework for domain reduction, explanations are proof trees explaining value removals. These proof trees are defined by inductive definitions which express the removals of values as consequences of other value removals. Explanations may be considered as the essence of constraint programming. They are a declarative view of the computation trace. The diagnosis consists in locating an error in an explanation rooted by a symptom.",
+      "absUrl": "https://arxiv.org/abs/cs/0309032v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0309032v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0309031",
+      "title": "Timestamp Based Execution Control for C and Java Programs",
+      "authors": [
+        "Kazutaka Maruyama",
+        "Minoru Terada"
+      ],
+      "authorsText": "Kazutaka Maruyama, Minoru Terada",
+      "abstract": "Many programmers have had to deal with an overwritten variable resulting for example from an aliasing problem. The culprit is obviously the last write-access to that memory location before the manifestation of the bug. The usual technique for removing such bugs starts with the debugger by (1) finding the last write and (2) moving the control point of execution back to that time by re-executing the program from the beginning. We wish to automate this. Step (2) is easy if we can somehow mark the last write found in step (1) and control the execution-point to move it back to this time.\nIn this paper we propose a new concept, position, that is, a point in the program execution trace, as needed for step (2) above. The position enables debuggers to automate the control of program execution to support common debugging activities. We have implemented position in C by modifying GCC and in Java with a bytecode transformer. Measurements show that position can be provided with an acceptable amount of overhead.",
+      "absUrl": "https://arxiv.org/abs/cs/0309031v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0309031v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0309030",
+      "title": "Model-Based Debugging using Multiple Abstract Models",
+      "authors": [
+        "Wolfgang Mayer",
+        "Markus Stumptner"
+      ],
+      "authorsText": "Wolfgang Mayer, Markus Stumptner",
+      "abstract": "This paper introduces an automatic debugging framework that relies on model-based reasoning techniques to locate faults in programs. In particular, model-based diagnosis, together with an abstract interpretation based conflict detection mechanism is used to derive diagnoses, which correspond to possible faults in programs. Design information and partial specifications are applied to guide a model revision process, which allows for automatic detection and correction of structural faults.",
+      "absUrl": "https://arxiv.org/abs/cs/0309030v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0309030v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0309029",
+      "title": "Instrumenting self-modifying code",
+      "authors": [
+        "J. Maebe",
+        "K. De Bosschere"
+      ],
+      "authorsText": "J. Maebe, K. De Bosschere",
+      "abstract": "Adding small code snippets at key points to existing code fragments is called instrumentation. It is an established technique to debug certain otherwise hard to solve faults, such as memory management issues and data races. Dynamic instrumentation can already be used to analyse code which is loaded or even generated at run time.With the advent of environments such as the Java Virtual Machine with optimizing Just-In-Time compilers, a new obstacle arises: self-modifying code. In order to instrument this kind of code correctly, one must be able to detect modifications and adapt the instrumentation code accordingly, preferably without incurring a high penalty speedwise. In this paper we propose an innovative technique that uses the hardware page protection mechanism of modern processors to detect such modifications. We also show how an instrumentor can adapt the instrumented version depending on the kind of modificiations as well as an experimental evaluation of said techniques.",
+      "absUrl": "https://arxiv.org/abs/cs/0309029v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0309029v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0309027",
+      "title": "Proceedings of the Fifth International Workshop on Automated Debugging (AADEBUG 2003)",
+      "authors": [
+        "Michiel Ronsse",
+        "Koen De Bosschere"
+      ],
+      "authorsText": "Michiel Ronsse, Koen De Bosschere",
+      "abstract": "Over the past decades automated debugging has seen major achievements. However, as debugging is by necessity attached to particular programming paradigms, the results are scattered. To alleviate this problem, the Automated and Algorithmic Debugging workshop (AADEBUG for short) was organised in 1993 in Linköping (Sweden). As this workshop proved to be successful, subsequent workshops have been organised in 1995 (Saint-Malo, France), 1997 (again in Linköping, Sweden) and 2000 (Munich, Germany). In 2003, the workshop is organised in Ghent, Belgium, the proceedings of which you are reading right now.",
+      "absUrl": "https://arxiv.org/abs/cs/0309027v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0309027v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0308040",
+      "title": "Open source software and peer review",
+      "authors": [
+        "Sanatan Rai"
+      ],
+      "authorsText": "Sanatan Rai",
+      "abstract": "We compare the open source model of software development to peer review in academia.",
+      "absUrl": "https://arxiv.org/abs/cs/0308040v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0308040v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0307058",
+      "title": "Efficient Instrumentation for Performance Profiling",
+      "authors": [
+        "Edu Metz",
+        "Raimondas Lencevicius"
+      ],
+      "authorsText": "Edu Metz, Raimondas Lencevicius",
+      "abstract": "Performance profiling consists of tracing a software system during execution and then analyzing the obtained traces. However, traces themselves affect the performance of the system distorting its execution. Therefore, there is a need to minimize the effect of the tracing on the underlying system's performance. To achieve this, the trace set needs to be optimized according to the performance profiling problem being solved. Our position is that such minimization can be achieved only by adding the software trace design and implementation to the overall software development process. In such a process, the performance analyst supplies the knowledge of performance measurement requirements, while the software developer supplies the knowledge of the software. Both of these are needed for an optimal trace placement.",
+      "absUrl": "https://arxiv.org/abs/cs/0307058v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0307058v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0307054",
+      "title": "Contributions to the Development and Improvement of a Regulatory and Pre-Regulatory Digitally System for the Tools within Flexible Fabrication Systems",
+      "authors": [
+        "Viorel Putz",
+        "Mihai V. Putz"
+      ],
+      "authorsText": "Viorel Putz, Mihai V. Putz",
+      "abstract": "The paper reports the obtained results for the projection and realization of a digitally system aiming to assist the equipment for a regulatory and pre-regulatory tools and holding tools within the flexible fabrication systems (FFS). Moreover, based on the present results, the same methodology can be applied for assisting tools from the point of view of their integrity and to wear compensation in the FFS framework.",
+      "absUrl": "https://arxiv.org/abs/cs/0307054v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0307054v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0306108",
+      "title": "Web Engineering",
+      "authors": [
+        "Yogesh Deshpande",
+        "San Murugesan",
+        "Athula Ginige",
+        "Steve Hansen",
+        "Daniel Schwabe",
+        "Martin Gaedke",
+        "Bebo White"
+      ],
+      "authorsText": "Yogesh Deshpande, San Murugesan, Athula Ginige, Steve Hansen, Daniel Schwabe, Martin Gaedke, Bebo White",
+      "abstract": "Web Engineering is the application of systematic, disciplined and quantifiable approaches to development, operation, and maintenance of Web-based applications. It is both a pro-active approach and a growing collection of theoretical and empirical research in Web application development. This paper gives an overview of Web Engineering by addressing the questions: a) why is it needed? b) what is its domain of operation? c) how does it help and what should it do to improve Web application development? and d) how should it be incorporated in education and training? The paper discusses the significant differences that exist between Web applications and conventional software, the taxonomy of Web applications, the progress made so far and the research issues and experience of creating a specialisation at the master's level. The paper reaches a conclusion that Web Engineering at this stage is a moving target since Web technologies are constantly evolving, making new types of applications possible, which in turn may require innovations in how they are built, deployed and maintained.",
+      "absUrl": "https://arxiv.org/abs/cs/0306108v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0306108v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0306101",
+      "title": "The DataFlow System of the ATLAS Trigger and DAQ",
+      "authors": [
+        "G. Lehmann"
+      ],
+      "authorsText": "G. Lehmann",
+      "abstract": "The baseline design and implementation of the DataFlow system, to be documented in the ATLAS DAQ/HLT Technical Design Report in summer 2003, will be presented. Empahsis will be placed on the system performance and scalability based on the results from prototyping studies which have maximised the use of commercially available hardware.",
+      "absUrl": "https://arxiv.org/abs/cs/0306101v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0306101v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0306098",
+      "title": "Making refactoring decisions in large-scale Java systems: an empirical stance",
+      "authors": [
+        "Richard Wheeldon",
+        "Steve Counsell"
+      ],
+      "authorsText": "Richard Wheeldon, Steve Counsell",
+      "abstract": "Decisions on which classes to refactor are fraught with difficulty. The problem of identifying candidate classes becomes acute when confronted with large systems comprising hundreds or thousands of classes. In this paper, we describe a metric by which key classes, and hence candidates for refactoring, can be identified. Measures quantifying the usage of two forms of coupling, inheritance and aggregation, together with two other class features (number of methods and attributes) were extracted from the source code of three large Java systems. Our research shows that metrics from other research domains can be adapted to the software engineering process. Substantial differences were found between each of the systems in terms of the key classes identified and hence opportunities for refactoring those classes varied between those systems.",
+      "absUrl": "https://arxiv.org/abs/cs/0306098v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0306098v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0306089",
+      "title": "The StoreGate: a Data Model for the Atlas Software Architecture",
+      "authors": [
+        "P. Calafiura",
+        "C. G. Leggett",
+        "D. R. Quarrie",
+        "H. Ma",
+        "S. Rajagopalan"
+      ],
+      "authorsText": "P. Calafiura, C. G. Leggett, D. R. Quarrie, H. Ma, S. Rajagopalan",
+      "abstract": "The Atlas collaboration at CERN has adopted the Gaudi software architecture which belongs to the blackboard family: data objects produced by knowledge sources (e.g. reconstruction modules) are posted to a common in-memory data base from where other modules can access them and produce new data objects. The StoreGate has been designed, based on the Atlas requirements and the experience of other HENP systems such as Babar, CDF, CLEO, D0 and LHCB, to identify in a simple and efficient fashion (collections of) data objects based on their type and/or the modules which posted them to the Transient Data Store (the blackboard). The developer also has the freedom to use her preferred key class to uniquely identify a data object according to any other criterion. Besides this core functionality, the StoreGate provides the developers with a powerful interface to handle in a coherent fashion persistable references, object lifetimes, memory management and access control policy for the data objects in the Store. It also provides a Handle/Proxy mechanism to define and hide the cache fault mechanism: upon request, a missing Data Object can be transparently created and added to the Transient Store presumably retrieving it from a persistent data-base, or even reconstructing it on demand.",
+      "absUrl": "https://arxiv.org/abs/cs/0306089v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0306089v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0306085",
+      "title": "GANGA: a user-Grid interface for Atlas and LHCb",
+      "authors": [
+        "K. Harrison",
+        "W. T. L. P. Lavrijsen",
+        "P. Mato",
+        "A. Soroko",
+        "C. L. Tan",
+        "C. E. Tull",
+        "N. Brook",
+        "R. W. L. Jones"
+      ],
+      "authorsText": "K. Harrison, W. T. L. P. Lavrijsen, P. Mato, A. Soroko, C. L. Tan, C. E. Tull, N. Brook, R. W. L. Jones",
+      "abstract": "The Gaudi/Athena and Grid Alliance (GANGA) is a front-end for the configuration, submission, monitoring, bookkeeping, output collection, and reporting of computing jobs run on a local batch system or on the grid. In particular, GANGA handles jobs that use applications written for the Gaudi software framework shared by the Atlas and LHCb experiments. GANGA exploits the commonality of Gaudi-based computing jobs, while insulating against grid-, batch- and framework-specific technicalities, to maximize end-user productivity in defining, configuring, and executing jobs. Designed for a python-based component architecture, GANGA has a modular underpinning and is therefore well placed for contributing to, and benefiting from, work in related projects. Its functionality is accessible both from a scriptable command-line interface, for expert users and automated tasks, and through a graphical interface, which simplifies the interaction with GANGA for beginning and c1asual users.\nThis paper presents the GANGA design and implementation, the development of the underlying software bus architecture, and the functionality of the first public GANGA release.",
+      "absUrl": "https://arxiv.org/abs/cs/0306085v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0306085v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0306083",
+      "title": "The Athena Startup Kit",
+      "authors": [
+        "W. T. L. P. Lavrijsen"
+      ],
+      "authorsText": "W. T. L. P. Lavrijsen",
+      "abstract": "The Athena Startup Kit (ASK), is an interactive front-end to the Atlas software framework (ATHENA). Written in python, a very effective \"glue\" language, it is build on top of the, in principle unrelated, code repository, build, configuration, debug, binding, and analysis tools. ASK automates many error-prone tasks that are otherwise left to the end-user, thereby pre-empting a whole category of potential problems. Through the existing tools, which ASK will setup for the user if and as needed, it locates available resources, maintains job coherency, manages the run-time environment, allows for interactivity and debugging, and provides standalone execution scripts. An end-user who wants to run her own analysis algorithms within the standard environment can let ASK generate the appropriate skeleton package, the needed dependencies and run-time, as well as a default job options script. For new and casual users, ASK comes with a graphical user interface; for advanced users, ASK has a scriptable command line interface. Both are built on top of the same set of libraries. ASK does not need to be, and isn't, experiment neutral. Thus it has built-in workarounds for known gotcha's, that would otherwise be a major time-sink for each and every new user. ASK minimizes the overhead for those physicists in Atlas who just want to write and run their analysis code.",
+      "absUrl": "https://arxiv.org/abs/cs/0306083v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0306083v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0306082",
+      "title": "The Community Authorization Service: Status and Future",
+      "authors": [
+        "L. Pearlman",
+        "V. Welch",
+        "I. Foster",
+        "C. Kesselman",
+        "S. Tuecke"
+      ],
+      "authorsText": "L. Pearlman, V. Welch, I. Foster, C. Kesselman, S. Tuecke",
+      "abstract": "Virtual organizations (VOs) are communities of resource providers and users distributed over multiple policy domains. These VOs often wish to define and enforce consistent policies in addition to the policies of their underlying domains. This is challenging, not only because of the problems in distributing the policy to the domains, but also because of the fact that those domains may each have different capabilities for enforcing the policy. The Community Authorization Service (CAS) solves this problem by allowing resource providers to delegate some policy authority to the VO while maintaining ultimate control over their resources. In this paper we describe CAS and our past and current implementations of CAS, and we discuss our plans for CAS-related research.",
+      "absUrl": "https://arxiv.org/abs/cs/0306082v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0306082v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0306080",
+      "title": "BOA: Framework for Automated Builds",
+      "authors": [
+        "N. Ratnikova"
+      ],
+      "authorsText": "N. Ratnikova",
+      "abstract": "Managing large-scale software products is a complex software engineering task. The automation of the software development, release and distribution process is most beneficial in the large collaborations, where the big number of developers, multiple platforms and distributed environment are typical factors. This paper describes Build and Output Analyzer framework and its components that have been developed in CMS to facilitate software maintenance and improve software quality. The system allows to generate, control and analyze various types of automated software builds and tests, such as regular rebuilds of the development code, software integration for releases and installation of the existing versions.",
+      "absUrl": "https://arxiv.org/abs/cs/0306080v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0306080v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0306078",
+      "title": "ROOT Status and Future Developments",
+      "authors": [
+        "Fons Rademakers",
+        "Masaharu Goto",
+        "Philippe Canal",
+        "Rene Brun"
+      ],
+      "authorsText": "Fons Rademakers, Masaharu Goto, Philippe Canal, Rene Brun",
+      "abstract": "In this talk we will review the major additions and improvements made to the ROOT system in the last 18 months and present our plans for future developments. The additons and improvements range from modifications to the I/O sub-system to allow users to save and restore objects of classes that have not been instrumented by special ROOT macros, to the addition of a geometry package designed for building, browsing, tracking and visualizing detector geometries. Other improvements include enhancements to the quick analysis sub-system (TTree::Draw()), the addition of classes that allow inter-file object references (TRef, TRefArray), better support for templated and STL classes, amelioration of the Automatic Script Compiler and the incorporation of new fitting and mathematical tools. Efforts have also been made to increase the modularity of the ROOT system with the introduction of more abstract interfaces and the development of a plug-in manager. In the near future, we intend to continue the development of PROOF and its interfacing with GRID environments. We plan on providing an interface between Geant3, Geant4 and Fluka and the new geometry package. The ROOT GUI classes will finally be available on Windows and we plan to release a GUI inspector and builder. In the last year, ROOT has drawn the endorsement of additional experiments and institutions. It is now officially supported by CERN and used as key I/O component by the LCG project.",
+      "absUrl": "https://arxiv.org/abs/cs/0306078v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0306078v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0306076",
+      "title": "FAYE: A Java Implement of the Frame/Stream/Stop Analysis Model",
+      "authors": [
+        "S. Patton"
+      ],
+      "authorsText": "S. Patton",
+      "abstract": "FAYE, The Frame AnalYsis Executable, is a Java based implementation of the Frame/Stream/Stop model for analyzing data. Unlike traditional Event based analysis models, the Frame/Stream/Stop model has no preference as to which part of any data is to be analyzed, and an Event get as equal treatment as a change in the high voltage. This model means that FAYE is a suitable analysis framework for many different type of data analysis, such as detector trends or as a visualization core. During the design of FAYE the emphasis has been on clearly delineating each of the executable's responsibilities and on keeping their implementations as completely independent as possible. This leads to the large part of FAYE being a generic core which is experiment independent, and smaller section that customizes this core to an experiments own data structures. This customization can even be done in C++, using JNI, while the executable's control remains in Java. This paper reviews the Frame/Stream/Stop model and then looks at how FAYE has approached its implementation, with an emphasis on which responsibilities are handled by the generic core, and which parts an experiment must provide as part of the customization portion of the executable.",
+      "absUrl": "https://arxiv.org/abs/cs/0306076v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0306076v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0306057",
+      "title": "IceCube's Development Environment",
+      "authors": [
+        "S. Patton",
+        "D. Glowacki"
+      ],
+      "authorsText": "S. Patton, D. Glowacki",
+      "abstract": "When the IceCube experiment started serious software development it needed a development environment in which both its developers and clients could work and that would encourage and support a good software development process. Some of the key features that IceCube wanted in such a environment were: the separation of the configuration and build tools; inclusion of an issue tracking system; support for the Unified Change Model; support for unit testing; and support for continuous building. No single, affordable, off the shelf, environment offered all these features. However there are many open source tools that address subsets of these feature, therefore IceCube set about selecting those tools which it could use in developing its own environment and adding its own tools where no suitable tools were found. This paper outlines the tools that where chosen, what are their responsibilities in the development environment and how they fit together. The complete environment will be demonstrated with a walk through of single cycle of the development process.",
+      "absUrl": "https://arxiv.org/abs/cs/0306057v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0306057v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0306054",
+      "title": "OVAL: the CMS Testing Robot",
+      "authors": [
+        "D. Chamont",
+        "C. Charlot"
+      ],
+      "authorsText": "D. Chamont, C. Charlot",
+      "abstract": "Oval is a testing tool which help developers to detect unexpected changes in the behavior of their software. It is able to automatically compile some test programs, to prepare on the fly the needed configuration files, to run the tests within a specified Unix environment, and finally to analyze the output and check expectations. Oval does not provide utility code to help writing the tests, therefore it is quite independant of the programming/scripting language of the software to be tested. It can be seen as a kind of robot which apply the tests and warn about any unexpected change in the output. Oval was developed by the LLR laboratory for the needs of the CMS experiment, and it is now recommended by the CERN LCG project.",
+      "absUrl": "https://arxiv.org/abs/cs/0306054v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0306054v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0306047",
+      "title": "Concrete uses of XML in software development and data analysis",
+      "authors": [
+        "S. Patton"
+      ],
+      "authorsText": "S. Patton",
+      "abstract": "XML is now becoming an industry standard for data description and exchange. Despite this there are still some questions about how or if this technology can be useful in High Energy Physics software development and data analysis. This paper aims to answer these questions by demonstrating how XML is used in the IceCube software development system, data handling and analysis. It does this by first surveying the concepts and tools that make up the XML technology. It then goes on to discuss concrete examples of how these concepts and tools are used to speed up software development in IceCube and what are the benefits of using XML in IceCube's data handling and analysis chain. The overall aim of this paper it to show that XML does have many benefits to bring High Energy Physics software development and data analysis.",
+      "absUrl": "https://arxiv.org/abs/cs/0306047v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0306047v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0306042",
+      "title": "IGUANA Architecture, Framework and Toolkit for Interactive Graphics",
+      "authors": [
+        "George Alverson",
+        "Giulio Eulisse",
+        "Shahzad Muzaffar",
+        "Ianna Osborne",
+        "Lassi A. Tuura",
+        "Lucas Taylor"
+      ],
+      "authorsText": "George Alverson, Giulio Eulisse, Shahzad Muzaffar, Ianna Osborne, Lassi A. Tuura, Lucas Taylor",
+      "abstract": "IGUANA is a generic interactive visualisation framework based on a C++ component model. It provides powerful user interface and visualisation primitives in a way that is not tied to any particular physics experiment or detector design. The article describes interactive visualisation tools built using IGUANA for the CMS and D0 experiments, as well as generic GEANT4 and GEANT3 applications. It covers features of the graphical user interfaces, 3D and 2D graphics, high-quality vector graphics output for print media, various textual, tabular and hierarchical data views, and integration with the application through control panels, a command line and different multi-threading models.",
+      "absUrl": "https://arxiv.org/abs/cs/0306042v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0306042v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0306028",
+      "title": "An Abstract Programming System",
+      "authors": [
+        "David A. Plaisted"
+      ],
+      "authorsText": "David A. Plaisted",
+      "abstract": "The system PL permits the translation of abstract proofs of program correctness into programs in a variety of programming languages. A programming language satisfying certain axioms may be the target of such a translation. The system PL also permits the construction and proof of correctness of programs in an abstract programming language, and permits the translation of these programs into correct programs in a variety of languages. The abstract programming language has an imperative style of programming with assignment statements and side-effects, to allow the efficient generation of code. The abstract programs may be written by humans and then translated, avoiding the need to write the same program repeatedly in different languages or even the same language. This system uses classical logic, is conceptually simple, and permits reasoning about nonterminating programs using Scott-Strachey style denotational semantics.",
+      "absUrl": "https://arxiv.org/abs/cs/0306028v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0306028v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0306005",
+      "title": "The Virtual Monte Carlo",
+      "authors": [
+        "I. Hrivnacova",
+        "D. Adamova",
+        "V. Berejnoi",
+        "R. Brun",
+        "F. Carminati",
+        "A. Fasso",
+        "E. Futo",
+        "A. Gheata",
+        "I. Gonzalez Caballero",
+        "A. Morsch"
+      ],
+      "authorsText": "I. Hrivnacova, D. Adamova, V. Berejnoi, R. Brun, F. Carminati, A. Fasso, E. Futo, A. Gheata, I. Gonzalez Caballero, A. Morsch",
+      "abstract": "The concept of Virtual Monte Carlo (VMC) has been developed by the ALICE Software Project to allow different Monte Carlo simulation programs to run without changing the user code, such as the geometry definition, the detector response simulation or input and output formats. Recently, the VMC classes have been integrated into the ROOT framework, and the other relevant packages have been separated from the AliRoot framework and can be used individually by any other HEP project. The general concept of the VMC and its set of base classes provided in ROOT will be presented. Existing implementations for Geant3, Geant4 and FLUKA and simple examples of usage will be described.",
+      "absUrl": "https://arxiv.org/abs/cs/0306005v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0306005v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0305049",
+      "title": "The Athena Data Dictionary and Description Language",
+      "authors": [
+        "Alain Bazan",
+        "Thierry Bouedo",
+        "Philippe Ghez",
+        "Massimo Marino",
+        "Craig Tull"
+      ],
+      "authorsText": "Alain Bazan, Thierry Bouedo, Philippe Ghez, Massimo Marino, Craig Tull",
+      "abstract": "Athena is the ATLAS off-line software framework, based upon the GAUDI architecture from LHCb. As part of ATLAS' continuing efforts to enhance and customise the architecture to meet our needs, we have developed a data object description tool suite and service for Athena. The aim is to provide a set of tools to describe, manage, integrate and use the Event Data Model at a design level according to the concepts of the Athena framework (use of patterns, relationships,...). Moreover, to ensure stability and reusability this must be fully independent from the implementation details. After an extensive investigation into the many options, we have developed a language grammar based upon a description language (IDL, ODL) to provide support for object integration in Athena. We have then developed a compiler front end based upon this language grammar, JavaCC, and a Java Reflection API-like interface. We have then used these tools to develop several compiler back ends which meet specific needs in ATLAS such as automatic generation of object converters, and data object scripting interfaces. We present here details of our work and experience to date on the Athena Definition Language and Athena Data Dictionary.",
+      "absUrl": "https://arxiv.org/abs/cs/0305049v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0305049v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0305037",
+      "title": "Power Law Distributions in Class Relationships",
+      "authors": [
+        "Richard Wheeldon",
+        "Steve Counsell"
+      ],
+      "authorsText": "Richard Wheeldon, Steve Counsell",
+      "abstract": "Power law distributions have been found in many natural and social phenomena, and more recently in the source code and run-time characteristics of Object-Oriented (OO) systems. A power law implies that small values are extremely common, whereas large values are extremely rare. In this paper, we identify twelve new power laws relating to the static graph structures of Java programs. The graph structures analyzed represented different forms of OO coupling, namely, inheritance, aggregation, interface, parameter type and return type. Identification of these new laws provide the basis for predicting likely features of classes in future developments. The research in this paper ties together work in object-based coupling and World Wide Web structures.",
+      "absUrl": "https://arxiv.org/abs/cs/0305037v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0305037v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0303027",
+      "title": "Numerical Coverage Estimation for the Symbolic Simulation of Real-Time Systems",
+      "authors": [
+        "Farn Wang",
+        "Geng-Dian Hwang",
+        "Fang Yu"
+      ],
+      "authorsText": "Farn Wang, Geng-Dian Hwang, Fang Yu",
+      "abstract": "Three numerical coverage metrics for the symbolic simulation of dense-time systems and their estimation methods are presented. Special techniques to derive numerical estimations of dense-time state-spaces have also been developed. Properties of the metrics are also discussed with respect to four criteria. Implementation and experiments are then reported.",
+      "absUrl": "https://arxiv.org/abs/cs/0303027v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0303027v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0303013",
+      "title": "Extending the code generation capabilities of the Together CASE tool to support Data Definition languages",
+      "authors": [
+        "Massimo Marino"
+      ],
+      "authorsText": "Massimo Marino",
+      "abstract": "Together is the recommended software development tool in the Atlas collaboration. The programmatic API, which provides the capability to use and augment Together's internal functionality, is comprised of three major components - IDE, RWI and SCI. IDE is a read-only interface used to generate custom outputs based on the information contained in a Together model. RWI allows to both extract and write information to a Together model. SCI is the Source Code Interface, as the name implies it allows to work at the level of the source code. Together is extended by writing modules (java classes) extensively making use of the relevant API. We exploited Together extensibility to add support for the Atlas Dictionary Language. ADL is an extended subset of OMG IDL. The implemented module (ADLModule) makes Together to support ADL keywords, enables options and generate ADL object descriptions directly from UML Class diagrams. The module thoroughly accesses a Together reverse engineered C++ project - and/or design only class diagrams - and it is general enough to allow for possibly additional HEP-specific Together tool tailoring.",
+      "absUrl": "https://arxiv.org/abs/cs/0303013v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0303013v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0303010",
+      "title": "Techniques and Applications of Computation Slicing",
+      "authors": [
+        "Neeraj Mittal",
+        "Vijay K. Garg"
+      ],
+      "authorsText": "Neeraj Mittal, Vijay K. Garg",
+      "abstract": "Writing correct distributed programs is hard. In spite of extensive testing and debugging, software faults persist even in commercial grade software. Many distributed systems, especially those employed in safety-critical environments, should be able to operate properly even in the presence of software faults. Monitoring the execution of a distributed system, and, on detecting a fault, initiating the appropriate corrective action is an important way to tolerate such faults. This gives rise to the predicate detection problem which requires finding a consistent cut of a given computation that satisfies a given global predicate, if it exists.\nDetecting a predicate in a computation is, however, an NP-complete problem. To ameliorate the associated combinatorial explosion problem, we introduce the notion of computation slice. Formally, the slice of a computation with respect to a predicate is a (sub)computation with the least number of consistent cuts that contains all consistent cuts of the computation satisfying the predicate. To detect a predicate, rather than searching the state-space of the computation, it is much more efficient to search the state-space of the slice.\nWe prove that the slice exists and is uniquely defined for all predicates. We present efficient slicing algorithms for several useful classes of predicates. We develop efficient heuristic algorithms for computing an approximate slice for predicates for which computing the slice is otherwise provably intractable. Our experimental results show that slicing can lead to an exponential improvement over existing techniques for predicate detection in terms of time and space.",
+      "absUrl": "https://arxiv.org/abs/cs/0303010v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0303010v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0302033",
+      "title": "Experimental Software Schedulability Estimation For Varied Processor Frequencies",
+      "authors": [
+        "Sampsa Fabritius",
+        "Raimondas Lencevicius",
+        "Edu Metz",
+        "Alexander Ran"
+      ],
+      "authorsText": "Sampsa Fabritius, Raimondas Lencevicius, Edu Metz, Alexander Ran",
+      "abstract": "This paper describes a new approach to experimentally estimate the application schedulability for various processor frequencies. We use additional workload generated by an artificial high priority routine to simulate the frequency decrease of a processor. Then we estimate the schedulability of applications at different frequencies. The results of such estimation can be used to determine the frequencies and control algorithms of dynamic voltage scaling/dynamic frequency scaling (DVS/DFS) implementations. The paper presents a general problem description, the proposed schedulability estimation method, its analysis and evaluation.",
+      "absUrl": "https://arxiv.org/abs/cs/0302033v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0302033v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0301032",
+      "title": "Subclassing errors, OOP, and practically checkable rules to prevent them",
+      "authors": [
+        "Oleg Kiselyov"
+      ],
+      "authorsText": "Oleg Kiselyov",
+      "abstract": "This paper considers an example of Object-Oriented Programming (OOP) leading to subtle errors that break separation of interface and implementations. A comprehensive principle that guards against such errors is undecidable. The paper introduces a set of mechanically verifiable rules that prevent these insidious problems. Although the rules seem restrictive, they are powerful and expressive, as we show on several familiar examples. The rules contradict both the spirit and the letter of the OOP. The present examples as well as available theoretical and experimental results pose a question if OOP is conducive to software development at all.",
+      "absUrl": "https://arxiv.org/abs/cs/0301032v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0301032v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cond-mat/0307201",
+      "title": "Punctuated Equilibrium in Software Evolution",
+      "authors": [
+        "A. A. Gorshenev",
+        "Yu. M. Pis'mak"
+      ],
+      "authorsText": "A. A. Gorshenev, Yu. M. Pis'mak",
+      "abstract": "The approach based on paradigm of self-organized criticality proposed for experimental investigation and theoretical modelling of software evolution. The dynamics of modifications studied for three free, open source programs Mozilla, Free-BSD and Emacs using the data from version control systems. Scaling laws typical for the self-organization criticality found. The model of software evolution presenting the natural selection principle is proposed. The results of numerical and analytical investigation of the model are presented. They are in a good agreement with the data collected for the real-world software.",
+      "absUrl": "https://arxiv.org/abs/cond-mat/0307201v1",
+      "pdfUrl": "https://arxiv.org/pdf/cond-mat/0307201v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cond-mat/0306511",
+      "title": "Closed source versus open source in a model of software bug dynamics",
+      "authors": [
+        "Damien Challet",
+        "Yann Le Du"
+      ],
+      "authorsText": "Damien Challet, Yann Le Du",
+      "abstract": "We introduce a model of software bug dynamics where users, programmers and maintainers interact through a given program. When the program is written from scratch, the first phase of development is characterized by a fast decline of the number of bugs, followed by a slow phase where most bugs have been fixed, hence, are hard to find. For a given set of parameters, debugging in open source projects is always faster than in closed source projects. Finally, we determine qualitative lowers bounds to quality of Linux programmers.",
+      "absUrl": "https://arxiv.org/abs/cond-mat/0306511v1",
+      "pdfUrl": "https://arxiv.org/pdf/cond-mat/0306511v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cond-mat/0306509",
+      "title": "Bug propagation and debugging in asymmetric software structures",
+      "authors": [
+        "Damien Challet",
+        "Andrea Lombardoni"
+      ],
+      "authorsText": "Damien Challet, Andrea Lombardoni",
+      "abstract": "We show that software structures are not only scale-free, but characterized by an asymmetry between the incoming and outgoing links distributions. We study how software components are affected by the failure of one of them, and the inverse problem of locating the faulty component and find that software is fragile with respect to the failure of a random single component. Locating a faulty component is easy if failures only affect their nearest neighbor, while it becomes hard if the failure propagates further.",
+      "absUrl": "https://arxiv.org/abs/cond-mat/0306509v1",
+      "pdfUrl": "https://arxiv.org/pdf/cond-mat/0306509v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cond-mat/0305575",
+      "title": "Software systems as complex networks: structure, function, and evolvability of software collaboration graphs",
+      "authors": [
+        "C. R. Myers"
+      ],
+      "authorsText": "C. R. Myers",
+      "abstract": "Software systems emerge from mere keystrokes to form intricate functional networks connecting many collaborating modules, objects, classes, methods, and subroutines. Building on recent advances in the study of complex networks, I have examined software collaboration graphs contained within several open-source software systems, and have found them to reveal scale-free, small-world networks similar to those identified in other technological, sociological, and biological systems. I present several measures of these network topologies, and discuss their relationship to software engineering practices. I also present a simple model of software system evolution based on refactoring processes which captures some of the salient features of the observed systems. Some implications of object-oriented design for questions about network robustness, evolvability, degeneracy, and organization are discussed in the wake of these findings.",
+      "absUrl": "https://arxiv.org/abs/cond-mat/0305575v1",
+      "pdfUrl": "https://arxiv.org/pdf/cond-mat/0305575v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2003-05",
+      "sourceVersion": "v1"
+    }
+  ]
+}
