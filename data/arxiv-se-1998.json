@@ -1,0 +1,263 @@
+{
+  "title": "arXiv cs.SE 1998",
+  "sourceLabel": "arXiv cs.SE 1998",
+  "sourceUrl": "https://arxiv.org/list/cs.SE/1998",
+  "archive": "cs.SE",
+  "year": 1998,
+  "updatedAt": "2026-05-01T19:44:20.982Z",
+  "months": [
+    {
+      "period": "1998-01",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1998-01?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "1998-02",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1998-02?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "1998-03",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1998-03?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "1998-04",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1998-04?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "1998-05",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1998-05?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "1998-06",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1998-06?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "1998-07",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1998-07?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "1998-08",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1998-08?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "1998-09",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1998-09?skip=0&show=2000",
+      "paperCount": 1
+    },
+    {
+      "period": "1998-10",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1998-10?skip=0&show=2000",
+      "paperCount": 7
+    },
+    {
+      "period": "1998-11",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1998-11?skip=0&show=2000",
+      "paperCount": 3
+    },
+    {
+      "period": "1998-12",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/1998-12?skip=0&show=2000",
+      "paperCount": 0
+    }
+  ],
+  "papers": [
+    {
+      "id": "cs/9811014",
+      "title": "Abstract State Machines 1988-1998: Commented ASM Bibliography",
+      "authors": [
+        "Egon Boerger",
+        "James K. Huggins"
+      ],
+      "authorsText": "Egon Boerger, James K. Huggins",
+      "abstract": "An annotated bibliography of papers which deal with or use Abstract State Machines (ASMs), as of January 1998.",
+      "absUrl": "https://arxiv.org/abs/cs/9811014v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/9811014v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "1998-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/9811011",
+      "title": "Case Study in Survivable Network System Analysis",
+      "authors": [
+        "Robert Ellison",
+        "Rick Linger",
+        "Thomas Longstaff",
+        "Nancy Mead"
+      ],
+      "authorsText": "Robert Ellison, Rick Linger, Thomas Longstaff, Nancy Mead",
+      "abstract": "This paper presents a method for analyzing the survivability of distributed network systems and an example of its application.",
+      "absUrl": "https://arxiv.org/abs/cs/9811011v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/9811011v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "1998-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/9811007",
+      "title": "Second Product Line Practice Workshop Report",
+      "authors": [
+        "L. Bass",
+        "G. Chastek",
+        "P. Clements",
+        "L. Northrop",
+        "D. Smith",
+        "J. Withey"
+      ],
+      "authorsText": "L. Bass, G. Chastek, P. Clements, L. Northrop, D. Smith, J. Withey",
+      "abstract": "The second Software Engineering Institute Product Line Practice Workshop was a hands-on meeting held in November 1997 to share industry practices in software product lines and to explore the technical and non-technical issues involved. This report synthesizes the workshop presentations and discussions, which identified factors involved in product line practices and analyzed issues in the areas of software engineering, technical management, and enterprise management.",
+      "absUrl": "https://arxiv.org/abs/cs/9811007v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/9811007v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "1998-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/9810026",
+      "title": "The Railroad Crossing Problem: An Experiment with Instantaneous Actions and Immediate Reactions",
+      "authors": [
+        "Yuri Gurevich",
+        "James K. Huggins"
+      ],
+      "authorsText": "Yuri Gurevich, James K. Huggins",
+      "abstract": "We give an evolving algebra solution for the well-known railroad crossing problem and use the occasion to experiment with agents that perform instantaneous actions in continuous time and in particular with agents that fire at the moment they are enabled.",
+      "absUrl": "https://arxiv.org/abs/cs/9810026v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/9810026v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "1998-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/9810025",
+      "title": "An Offline Partial Evaluator for Evolving Algebras",
+      "authors": [
+        "James K. Huggins"
+      ],
+      "authorsText": "James K. Huggins",
+      "abstract": "We describe the architecture of an evolving algebra partial evaluator, a program which specializes an evolving algebra with respect to a portion of its input. We discuss the particular analysis, specialization, and optimization techniques used and show an example of its use.",
+      "absUrl": "https://arxiv.org/abs/cs/9810025v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/9810025v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "1998-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/9810024",
+      "title": "Evolving Algebras and Partial Evaluation",
+      "authors": [
+        "Yuri Gurevich",
+        "James K. Huggins"
+      ],
+      "authorsText": "Yuri Gurevich, James K. Huggins",
+      "abstract": "We describe an automated partial evaluator for evolving algebras implemented at the University of Michigan.",
+      "absUrl": "https://arxiv.org/abs/cs/9810024v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/9810024v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "1998-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/9810023",
+      "title": "Equivalence is in the Eye of the Beholder",
+      "authors": [
+        "Yuri Gurevich",
+        "James K. Huggins"
+      ],
+      "authorsText": "Yuri Gurevich, James K. Huggins",
+      "abstract": "In a recent provocative paper, Lamport points out \"the insubstantiality of processes\" by proving the equivalence of two different decompositions of the same intuitive algorithm by means of temporal formulas. We point out that the correct equivalence of algorithms is itself in the eye of the beholder. We discuss a number of related issues and, in particular, whether algorithms can be proved equivalent directly.",
+      "absUrl": "https://arxiv.org/abs/cs/9810023v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/9810023v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "1998-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/9810022",
+      "title": "Broy-Lamport Specification Problem: A Gurevich Abstract State Machine Solution",
+      "authors": [
+        "James K. Huggins"
+      ],
+      "authorsText": "James K. Huggins",
+      "abstract": "We apply the Gurevich Abstract State Machine methodology to a benchmark specification problem of Broy and Lamport.",
+      "absUrl": "https://arxiv.org/abs/cs/9810022v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/9810022v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "1998-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/9810013",
+      "title": "Early Experience with ASDL in lcc",
+      "authors": [
+        "David R. Hanson"
+      ],
+      "authorsText": "David R. Hanson",
+      "abstract": "The Abstract Syntax Description Language (ASDL) is a language for specifying the tree data structures often found in compiler intermediate representations. The ASDL generator reads an ASDL specification and generates code to construct, read, and write instances of the trees specified. Using ASDL permits a compiler to be decomposed into semi-independent components that communicate by reading and writing trees. Each component can be written in a different language, because the ASDL generator can emit code in several languages, and the files written by ASDL-generated code are machine- and language-independent. ASDL is part of the National Compiler Infrastructure project, which seeks to reduce dramatically the overhead of computer systems research by making it much easier to build high-quality compilers. This paper describes dividing lcc, a widely used retargetable C compiler, into two components that communicate via trees defined in ASDL. As the first use of ASDL in a `real' compiler, this experience reveals much about the effort required to retrofit an existing compiler to use ASDL, the overheads involved, and the strengths and weaknesses of ASDL itself and, secondarily, of lcc.",
+      "absUrl": "https://arxiv.org/abs/cs/9810013v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/9810013v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "1998-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/9810009",
+      "title": "Object-Oriented Design of Graph Oriented Data Structures",
+      "authors": [
+        "Maurizio Pizzonia",
+        "Giuseppe Di Battista"
+      ],
+      "authorsText": "Maurizio Pizzonia, Giuseppe Di Battista",
+      "abstract": "Applied research in graph algorithms and combinatorial structures needs comprehensive and versatile software libraries. However, the design and the implementation of flexible libraries are challenging activities. Among the other problems involved in such a difficult field, a very special role is played by graph classification issues.\nWe propose new techniques devised to help the designer and the programmer in the development activities. Such techniques are especially suited for dealing with graph classification problems and rely on an extension of the usual object-oriented paradigm. In order to support the usage of our approach, we devised an extension of the C++ programming language and implemented the corresponding pre-compiler.",
+      "absUrl": "https://arxiv.org/abs/cs/9810009v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/9810009v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "1998-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/9809051",
+      "title": "Spoken Language Dialogue Systems and Components: Best practice in development and evaluation (DISC 24823) - Periodic Progress Report 1: Basic Details of the Action",
+      "authors": [
+        "Niels Ole Bernsen",
+        "Laila Dybkjaer",
+        "eds."
+      ],
+      "authorsText": "Niels Ole Bernsen, Laila Dybkjaer, eds.",
+      "abstract": "The DISC project aims to (a) build an in-depth understanding of the state-of-the-art in spoken language dialogue systems (SLDSs) and components development and evaluation with the purpose of (b) developing a first best practice methodology in the field. The methodology will be accompanied by (c) a series of development and evaluation support tools. To the limited extent possible within the duration of the project, the draft versions of the methodology and the tools will be (d) tested by SLDS developers from industry and research, and will be (e) packaged to best suit their needs. In the first year of DISC, (a) has been accomplished, and (b) and (c) have started. A proposal to complete the work proposed above by adding 12 months to the 18 months of the present project, has been submitted to Esprit Long-Term Research in March 1998.",
+      "absUrl": "https://arxiv.org/abs/cs/9809051v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/9809051v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "1998-09",
+      "sourceVersion": "v1"
+    }
+  ]
+}

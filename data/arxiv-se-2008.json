@@ -1,0 +1,1999 @@
+{
+  "title": "arXiv cs.SE 2008",
+  "sourceLabel": "arXiv cs.SE 2008",
+  "sourceUrl": "https://arxiv.org/list/cs.SE/2008",
+  "archive": "cs.SE",
+  "year": 2008,
+  "updatedAt": "2026-05-01T18:47:10.580Z",
+  "months": [
+    {
+      "period": "2008-01",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2008-01?skip=0&show=2000",
+      "paperCount": 9
+    },
+    {
+      "period": "2008-02",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2008-02?skip=0&show=2000",
+      "paperCount": 16
+    },
+    {
+      "period": "2008-03",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2008-03?skip=0&show=2000",
+      "paperCount": 11
+    },
+    {
+      "period": "2008-04",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2008-04?skip=0&show=2000",
+      "paperCount": 8
+    },
+    {
+      "period": "2008-05",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2008-05?skip=0&show=2000",
+      "paperCount": 10
+    },
+    {
+      "period": "2008-06",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2008-06?skip=0&show=2000",
+      "paperCount": 7
+    },
+    {
+      "period": "2008-07",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2008-07?skip=0&show=2000",
+      "paperCount": 11
+    },
+    {
+      "period": "2008-08",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2008-08?skip=0&show=2000",
+      "paperCount": 7
+    },
+    {
+      "period": "2008-09",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2008-09?skip=0&show=2000",
+      "paperCount": 13
+    },
+    {
+      "period": "2008-10",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2008-10?skip=0&show=2000",
+      "paperCount": 3
+    },
+    {
+      "period": "2008-11",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2008-11?skip=0&show=2000",
+      "paperCount": 11
+    },
+    {
+      "period": "2008-12",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2008-12?skip=0&show=2000",
+      "paperCount": 7
+    }
+  ],
+  "papers": [
+    {
+      "id": "0812.4852",
+      "title": "Common sense for concurrency and strong paraconsistency using unstratified inference and reflection",
+      "authors": [
+        "Carl Hewitt"
+      ],
+      "authorsText": "Carl Hewitt",
+      "abstract": "This paper develops a strongly paraconsistent formalism called Direct Logic(TM) that incorporates the mathematics of Computer Science and allows unstratified inference and reflection using mathematical induction for almost all of classical logic to be used. Direct Logic allows mutual reflection among the mutually chock full of inconsistencies code, documentation, and use cases of large software systems thereby overcoming the limitations of the traditional Tarskian framework of stratified metatheories.\nGoedel first formalized and proved that it is not possible to decide all mathematical questions by inference in his first incompleteness theorem. However, the incompleteness theorem (as generalized by Rosser) relies on the assumption of consistency! This paper proves a generalization of the Goedel/Rosser incompleteness theorem: a strongly paraconsistent theory is self-provably incomplete. However, there is a further consequence: Although the semi-classical mathematical fragment of Direct Logic is evidently consistent, since the Goedelian paradoxical proposition is self-provable, every reflective strongly paraconsistent theory in Direct Logic is self-provably inconsistent!\nThis paper also proves that Logic Programming is not computationally universal in that there are concurrent programs for which there is no equivalent in Direct Logic. Consequently the Logic Programming paradigm is strictly less general than the Procedural Embedding of Knowledge paradigm. Thus the paper defines a concurrent programming language ActorScript(TM) that is suitable for expressing massive concurrency in large software systems meta-circularly in terms of itself.",
+      "absUrl": "https://arxiv.org/abs/0812.4852v1",
+      "pdfUrl": "https://arxiv.org/pdf/0812.4852v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0812.4181",
+      "title": "XML Rewriting Attacks: Existing Solutions and their Limitations",
+      "authors": [
+        "Azzedine Benameur",
+        "Faisal Abdul Kadir",
+        "Serge Fenet"
+      ],
+      "authorsText": "Azzedine Benameur, Faisal Abdul Kadir, Serge Fenet",
+      "abstract": "Web Services are web-based applications made available for web users or remote Web-based programs. In order to promote interoperability, they publish their interfaces in the so-called WSDL file and allow remote call over the network. Although Web Services can be used in different ways, the industry standard is the Service Oriented Architecture Web Services that doesn't rely on the implementation details. In this architecture, communication is performed through XML-based messages called SOAP messages. However, those messages are prone to attacks that can lead to code injection, unauthorized accesses, identity theft, etc. This type of attacks, called XML Rewriting Attacks, are all based on unauthorized, yet possible, modifications of SOAP messages. We present in this paper an explanation of this kind of attack, review the existing solutions, and show their limitations. We also propose some ideas to secure SOAP messages, as well as implementation ideas.",
+      "absUrl": "https://arxiv.org/abs/0812.4181v1",
+      "pdfUrl": "https://arxiv.org/pdf/0812.4181v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0812.3836",
+      "title": "Bootstrapping Inductive and Coinductive Types in HasCASL",
+      "authors": [
+        "Lutz Schröder"
+      ],
+      "authorsText": "Lutz Schröder",
+      "abstract": "We discuss the treatment of initial datatypes and final process types in the wide-spectrum language HasCASL. In particular, we present specifications that illustrate how datatypes and process types arise as bootstrapped concepts using HasCASL's type class mechanism, and we describe constructions of types of finite and infinite trees that establish the conservativity of datatype and process type declarations adhering to certain reasonable formats. The latter amounts to modifying known constructions from HOL to avoid unique choice; in categorical terminology, this means that we establish that quasitoposes with an internal natural numbers object support initial algebras and final coalgebras for a range of polynomial functors, thereby partially generalising corresponding results from topos theory. Moreover, we present similar constructions in categories of internal complete partial orders in quasitoposes.",
+      "absUrl": "https://arxiv.org/abs/0812.3836v1",
+      "pdfUrl": "https://arxiv.org/pdf/0812.3836v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0812.3719",
+      "title": "Architecture Logicielles pour des Applications hétérogènes, distribuées et reconfigurables",
+      "authors": [
+        "Christine Louberry",
+        "Marc Dalmau",
+        "Philippe Roose"
+      ],
+      "authorsText": "Christine Louberry, Marc Dalmau, Philippe Roose",
+      "abstract": "The recent apparition of mobile wireless sensor aware to their physical environment and able to process information must allow proposing applications able to take into account their physical context and to react according to the changes of the environment. It suppose to design applications integrating both software and hardware components able to communicate. Applications must use context information from components to measure the quality of the proposed services in order to adapt them in real time. This work is interested in the integration of sensors in distributed applications. It present a service oriented software architecture allowing to manage and to reconfigure applications in heterogeneous environment where entities of different nature collaborate: software components and wireless sensors.",
+      "absUrl": "https://arxiv.org/abs/0812.3719v1",
+      "pdfUrl": "https://arxiv.org/pdf/0812.3719v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0812.3716",
+      "title": "Context-aware adaptation for group communication support applications with dynamic architecture",
+      "authors": [
+        "Ismael Bouassida Rodriguez",
+        "Khalil DRIRA",
+        "Christophe Chassot",
+        "Mohamed Jmaiel"
+      ],
+      "authorsText": "Ismael Bouassida Rodriguez, Khalil DRIRA, Christophe Chassot, Mohamed Jmaiel",
+      "abstract": "In this paper, we propose a refinement-based adaptation approach for the architecture of distributed group communication support applications. Unlike most of previous works, our approach reaches implementable, context-aware and dynamically adaptable architectures. To model the context, we manage simultaneously four parameters that influence Qos provided by the application. These parameters are: the available bandwidth, the exchanged data communication priority, the energy level and the available memory for processing. These parameters make it possible to refine the choice between the various architectural configurations when passing from a given abstraction level to the lower level which implements it. Our approach allows the importance degree associated with each parameter to be adapted dynamically. To implement adaptation, we switch between the various configurations of the same level, and we modify the state of the entities of a given configuration when necessary. We adopt the direct and mediated Producer- Consumer architectural styles and graphs for architecture modelling. In order to validate our approach we elaborate a simulation model.",
+      "absUrl": "https://arxiv.org/abs/0812.3716v1",
+      "pdfUrl": "https://arxiv.org/pdf/0812.3716v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0812.3550",
+      "title": "XML Static Analyzer User Manual",
+      "authors": [
+        "Pierre Geneves",
+        "Nabil Layaida"
+      ],
+      "authorsText": "Pierre Geneves, Nabil Layaida",
+      "abstract": "This document describes how to use the XML static analyzer in practice. It provides informal documentation for using the XML reasoning solver implementation. The solver allows automated verification of properties that are expressed as logical formulas over trees. A logical formula may for instance express structural constraints or navigation properties (like e.g. path existence and node selection) in finite trees. Logical formulas can be expressed using the syntax of XPath expressions, DTD, XML Schemas, and Relax NG definitions.",
+      "absUrl": "https://arxiv.org/abs/0812.3550v1",
+      "pdfUrl": "https://arxiv.org/pdf/0812.3550v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0812.1986",
+      "title": "Control software analysis, part II: Closed-loop analysis",
+      "authors": [
+        "Eric Feron",
+        "Fernando Alegre"
+      ],
+      "authorsText": "Eric Feron, Fernando Alegre",
+      "abstract": "The analysis and proper documentation of the properties of closed-loop control software presents many distinct aspects from the analysis of the same software running open-loop. Issues of physical system representations arise, and it is desired that such representations remain independent from the representations of the control program. For that purpose, a concurrent program representation of the plant and the control processes is proposed, although the closed-loop system is sufficiently serialized to enable a sequential analysis. While dealing with closed-loop system properties, it is also shown by means of examples how special treatment of nonlinearities extends from the analysis of control specifications to code analysis.",
+      "absUrl": "https://arxiv.org/abs/0812.1986v1",
+      "pdfUrl": "https://arxiv.org/pdf/0812.1986v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0811.4364",
+      "title": "Revisiting the Core Ontology and Problem in Requirements Engineering",
+      "authors": [
+        "Ivan Jureta",
+        "John Mylopoulos",
+        "Stephane Faulkner"
+      ],
+      "authorsText": "Ivan Jureta, John Mylopoulos, Stephane Faulkner",
+      "abstract": "In their seminal paper in the ACM Transactions on Software Engineering and Methodology, Zave and Jackson established a core ontology for Requirements Engineering (RE) and used it to formulate the \"requirements problem\", thereby defining what it means to successfully complete RE. Given that stakeholders of the system-to-be communicate the information needed to perform RE, we show that Zave and Jackson's ontology is incomplete. It does not cover all types of basic concerns that the stakeholders communicate. These include beliefs, desires, intentions, and attitudes. In response, we propose a core ontology that covers these concerns and is grounded in sound conceptual foundations resting on a foundational ontology. The new core ontology for RE leads to a new formulation of the requirements problem that extends Zave and Jackson's formulation. We thereby establish new standards for what minimum information should be represented in RE languages and new criteria for determining whether RE has been successfully completed.",
+      "absUrl": "https://arxiv.org/abs/0811.4364v1",
+      "pdfUrl": "https://arxiv.org/pdf/0811.4364v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0811.4324",
+      "title": "Ensuring Query Compatibility with Evolving XML Schemas",
+      "authors": [
+        "Pierre Genevès",
+        "Nabil Layaïda",
+        "Vincent Quint"
+      ],
+      "authorsText": "Pierre Genevès, Nabil Layaïda, Vincent Quint",
+      "abstract": "During the life cycle of an XML application, both schemas and queries may change from one version to another. Schema evolutions may affect query results and potentially the validity of produced data. Nowadays, a challenge is to assess and accommodate the impact of theses changes in rapidly evolving XML applications.\nThis article proposes a logical framework and tool for verifying forward/backward compatibility issues involving schemas and queries. First, it allows analyzing relations between schemas. Second, it allows XML designers to identify queries that must be reformulated in order to produce the expected results across successive schema versions. Third, it allows examining more precisely the impact of schema changes over queries, therefore facilitating their reformulation.",
+      "absUrl": "https://arxiv.org/abs/0811.4324v1",
+      "pdfUrl": "https://arxiv.org/pdf/0811.4324v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0811.4061",
+      "title": "Benchmarking the solar dynamo with Maxima",
+      "authors": [
+        "Valery V. Pipin"
+      ],
+      "authorsText": "Valery V. Pipin",
+      "abstract": "Recently, Jouve et al(A&A, 2008) published the paper that presents the numerical benchmark for the solar dynamo models. Here, I would like to show a way how to get it with help of computer algebra system Maxima. This way was used in our paper (Pipin & Seehafer, A&A 2008, in print) to test some new ideas in the large-scale stellar dynamos. In the present paper I complement the dynamo benchmark with the standard test that address the problem of the free-decay modes in the sphere which is submerged in vacuum.",
+      "absUrl": "https://arxiv.org/abs/0811.4061v1",
+      "pdfUrl": "https://arxiv.org/pdf/0811.4061v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0811.3621",
+      "title": "Description of the CUDF Format",
+      "authors": [
+        "Ralf Treinen",
+        "Stefano Zacchiroli"
+      ],
+      "authorsText": "Ralf Treinen, Stefano Zacchiroli",
+      "abstract": "This document contains several related specifications, together they describe the document formats related to the solver competition which will be organized by Mancoosi. In particular, this document describes: - DUDF (Distribution Upgradeability Description Format), the document format to be used to submit upgrade problem instances from user machines to a (distribution-specific) database of upgrade problems; - CUDF (Common Upgradeability Description Format), the document format used to encode upgrade problems, abstracting over distribution-specific details. Solvers taking part in the competition will be fed with input in CUDF format.",
+      "absUrl": "https://arxiv.org/abs/0811.3621v1",
+      "pdfUrl": "https://arxiv.org/pdf/0811.3621v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0811.3620",
+      "title": "Solving package dependencies: from EDOS to Mancoosi",
+      "authors": [
+        "Ralf Treinen",
+        "Stefano Zacchiroli"
+      ],
+      "authorsText": "Ralf Treinen, Stefano Zacchiroli",
+      "abstract": "Mancoosi (Managing the Complexity of the Open Source Infrastructure) is an ongoing research project funded by the European Union for addressing some of the challenges related to the \"upgrade problem\" of interdependent software components of which Debian packages are prototypical examples. Mancoosi is the natural continuation of the EDOS project which has already contributed tools for distribution-wide quality assurance in Debian and other GNU/Linux distributions. The consortium behind the project consists of several European public and private research institutions as well as some commercial GNU/Linux distributions from Europe and South America. Debian is represented by a small group of Debian Developers who are working in the ranks of the involved universities to drive and integrate back achievements into Debian. This paper presents relevant results from EDOS in dependency management and gives an overview of the Mancoosi project and its objectives, with a particular focus on the prospective benefits for Debian.",
+      "absUrl": "https://arxiv.org/abs/0811.3620v1",
+      "pdfUrl": "https://arxiv.org/pdf/0811.3620v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0811.3492",
+      "title": "Dynamic System Adaptation by Constraint Orchestration",
+      "authors": [
+        "L. P. J. Groenewegen",
+        "E. P. de Vink"
+      ],
+      "authorsText": "L. P. J. Groenewegen, E. P. de Vink",
+      "abstract": "For Paradigm models, evolution is just-in-time specified coordination conducted by a special reusable component McPal. Evolution can be treated consistently and on-the-fly through Paradigm's constraint orchestration, also for originally unforeseen evolution. UML-like diagrams visually supplement such migration, as is illustrated for the case of a critical section solution evolving into a pipeline architecture.",
+      "absUrl": "https://arxiv.org/abs/0811.3492v1",
+      "pdfUrl": "https://arxiv.org/pdf/0811.3492v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0811.3328",
+      "title": "chi2TeX Semi-automatic translation from chiwriter to LaTeX",
+      "authors": [
+        "Justislav Bogevolnov"
+      ],
+      "authorsText": "Justislav Bogevolnov",
+      "abstract": "Semi-automatic translation of math-filled book from obsolete ChiWriter format to LaTeX. Is it possible? Idea of criterion whether to use automatic or hand mode for translation. Illustrations.",
+      "absUrl": "https://arxiv.org/abs/0811.3328v1",
+      "pdfUrl": "https://arxiv.org/pdf/0811.3328v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0811.2578",
+      "title": "Encapsulation theory: the configuration efficiency limit",
+      "authors": [
+        "Edmund Kirwan"
+      ],
+      "authorsText": "Edmund Kirwan",
+      "abstract": "This paper shows how maximum possible configuration efficiency of an indefinitely large software system is constrained by chosing a fixed upper limit to the number of program units per subsystem. It is then shown how the configuration efficiency of an indefinitely large software system depends on the ratio of the total number of informaiton hiding violational software units divided by the total number of program units.",
+      "absUrl": "https://arxiv.org/abs/0811.2578v1",
+      "pdfUrl": "https://arxiv.org/pdf/0811.2578v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0811.2535",
+      "title": "A Transformation--Based Approach for the Design of Parallel/Distributed Scientific Software: the FFT",
+      "authors": [
+        "Harry B. Hunt",
+        "Lenore R. Mullin",
+        "Daniel J. Rosenkrantz",
+        "James E. Raynolds"
+      ],
+      "authorsText": "Harry B. Hunt, Lenore R. Mullin, Daniel J. Rosenkrantz, James E. Raynolds",
+      "abstract": "We describe a methodology for designing efficient parallel and distributed scientific software. This methodology utilizes sequences of mechanizable algebra--based optimizing transformations. In this study, we apply our methodology to the FFT, starting from a high--level algebraic algorithm description. Abstract multiprocessor plans are developed and refined to specify which computations are to be done by each processor. Templates are then created that specify the locations of computations and data on the processors, as well as data flow among processors. Templates are developed in both the MPI and OpenMP programming styles.\nPreliminary experiments comparing code constructed using our methodology with code from several standard scientific libraries show that our code is often competitive and sometimes performs better. Interestingly, our code handled a larger range of problem sizes on one target architecture.",
+      "absUrl": "https://arxiv.org/abs/0811.2535v1",
+      "pdfUrl": "https://arxiv.org/pdf/0811.2535v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0811.1950",
+      "title": "Collaborative process control: Observation of tracks generated by PLM system",
+      "authors": [
+        "Soumaya Elkadiri",
+        "Philippe Pernelle",
+        "Miguel Delattre",
+        "Abdelaziz Bouras"
+      ],
+      "authorsText": "Soumaya Elkadiri, Philippe Pernelle, Miguel Delattre, Abdelaziz Bouras",
+      "abstract": "This paper aims at analyzing the problems related to collaborative work using a PLM system. This research is mainly focused on the organisational aspects of SMEs involved in networks composed of large companies, subcontractors and other industrial partners. From this analysis, we propose the deployment of an approach based on an observation process of tracks generated by PLM system. The specific contributions are of two fold. First is to identify the brake points of collaborative work. The second, thanks to the exploitation of generated tracks, it allows reducing risks by reacting in real time to the incidents or dysfunctions that may occur. The overall system architecture based on services technology and supporting the proposed approach is described, as well as associated prototype developed using an industrial PLM system.",
+      "absUrl": "https://arxiv.org/abs/0811.1950v1",
+      "pdfUrl": "https://arxiv.org/pdf/0811.1950v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0811.1947",
+      "title": "Pilotage des processus collaboratifs dans les systèmes PLM. Quels indicateurs pour quelle évaluation des performances?",
+      "authors": [
+        "Soumaya Elkadiri",
+        "Philippe Pernelle",
+        "Miguel Delattre",
+        "Abdelaziz Bouras"
+      ],
+      "authorsText": "Soumaya Elkadiri, Philippe Pernelle, Miguel Delattre, Abdelaziz Bouras",
+      "abstract": "Les entreprises qui collaborent dans un processus de développement de produit ont besoin de mettre en oeuvre une gestion efficace des activités collaborative. Malgré la mise en place d'un PLM, les activités collaborative sont loin d'être aussi efficace que l'on pourrait s'y attendre. Cet article propose une analyse des problématiques de la collaboration avec un système PLM. A partir de ces analyses, nous proposons la mise en place d'indicateurs et d'actions sur les processus visant à identifier puis atténuer les freins dans le travail collaboratif. ----- Companies that collaborate within the product development processes need to implement an effective management of their collaborative activities. Despite the implementation of a PLM system, the collaborative activities are not efficient as it might be expected. This paper presents an analysis of the problems related to the collaborative work using a PLM system, identified through a survey. From this analysis, we propose an approach for improving collaborative processes within a PLM system, based on monitoring indicators. This approach leads to identify and therefore to mitigate the brakes of the collaborative work.",
+      "absUrl": "https://arxiv.org/abs/0811.1947v1",
+      "pdfUrl": "https://arxiv.org/pdf/0811.1947v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0810.3468",
+      "title": "A Call-Graph Profiler for GNU Octave",
+      "authors": [
+        "Muthiah Annamalai",
+        "Leela Velusamy"
+      ],
+      "authorsText": "Muthiah Annamalai, Leela Velusamy",
+      "abstract": "We report the design and implementation of a call-graph profiler for GNU Octave, a numerical computing platform. GNU Octave simplifies matrix computation for use in modeling or simulation. Our work provides a call-graph profiler, which is an improvement on the flat profiler. We elaborate design constraints of building a profiler for numerical computation, and benchmark the profiler by comparing it to the rudimentary timer start-stop (tic-toc) measurements, for a similar set of programs. The profiler code provides clean interfaces to internals of GNU Octave, for other (newer) profiling tools on GNU Octave.",
+      "absUrl": "https://arxiv.org/abs/0810.3468v1",
+      "pdfUrl": "https://arxiv.org/pdf/0810.3468v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0810.3294",
+      "title": "A static theory of promises",
+      "authors": [
+        "Jan Bergstra",
+        "Mark Burgess"
+      ],
+      "authorsText": "Jan Bergstra, Mark Burgess",
+      "abstract": "We discuss for the concept of promises within a framework that can be applied to either humans or technology. We compare promises to the more established notion of obligations and find promises to be both simpler and more effective at reducing uncertainty in behavioural outcomes.",
+      "absUrl": "https://arxiv.org/abs/0810.3294v1",
+      "pdfUrl": "https://arxiv.org/pdf/0810.3294v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0810.0874",
+      "title": "Software Engineering & Systems Design Nature",
+      "authors": [
+        "Kirill A Sorudeykin"
+      ],
+      "authorsText": "Kirill A Sorudeykin",
+      "abstract": "Main problems of Software Engineering appear as a result of incompatibilities. For example, the quality of organization of production process depends on correspondence with existent resources and on common understanding of project goals by all team members. Software design is another example. Its successfulness rides on architecture's conformity with project's concepts. This is a point of great nicety. All elements should make a single space of interactions. And if the laws of such space are imperfect, missequencing comes and the concept of a software system fails. We must do our best for this not to have happened. To that end having a subtle perception of systems structures is essential. Such knowledge can be based only on a fresh approach to the logical law.",
+      "absUrl": "https://arxiv.org/abs/0810.0874v1",
+      "pdfUrl": "https://arxiv.org/pdf/0810.0874v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0809.4812",
+      "title": "Control software analysis, Part I Open-loop properties",
+      "authors": [
+        "Eric Feron",
+        "Fernando Alegre"
+      ],
+      "authorsText": "Eric Feron, Fernando Alegre",
+      "abstract": "As the digital world enters further into everyday life, questions are raised about the increasing challenges brought by the interaction of real-time software with physical devices. Many accidents and incidents encountered in areas as diverse as medical systems, transportation systems or weapon systems are ultimately attributed to \"software failures\". Since real-time software that interacts with physical systems might as well be called control software, the long litany of accidents due to real-time software failures might be taken as an equally long list of opportunities for control systems engineering. In this paper, we are interested only in run-time errors in those pieces of software that are a direct implementation of control system specifications: For well-defined and well-understood control architectures such as those present in standard textbooks on digital control systems, the current state of theoretical computer science is well-equipped enough to address and analyze control algorithms. It appears that a central element to these analyses is Lyapunov stability theory, which translate into invariant theory in computer implementations.",
+      "absUrl": "https://arxiv.org/abs/0809.4812v1",
+      "pdfUrl": "https://arxiv.org/pdf/0809.4812v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0809.4109",
+      "title": "Software dependability modeling using an industry-standard architecture description language",
+      "authors": [
+        "Ana-Elena Rugina",
+        "Peter H. Feiler",
+        "Karama Kanoun",
+        "Mohamed Kaaniche"
+      ],
+      "authorsText": "Ana-Elena Rugina, Peter H. Feiler, Karama Kanoun, Mohamed Kaaniche",
+      "abstract": "Performing dependability evaluation along with other analyses at architectural level allows both making architectural tradeoffs and predicting the effects of architectural decisions on the dependability of an application. This paper gives guidelines for building architectural dependability models for software systems using the AADL (Architecture Analysis and Design Language). It presents reusable modeling patterns for fault-tolerant applications and shows how the presented patterns can be used in the context of a subsystem of a real-life application.",
+      "absUrl": "https://arxiv.org/abs/0809.4109v1",
+      "pdfUrl": "https://arxiv.org/pdf/0809.4109v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0809.4108",
+      "title": "The ADAPT Tool: From AADL Architectural Models to Stochastic Petri Nets through Model Transformation",
+      "authors": [
+        "Ana E. Rugina",
+        "Karama Kanoun",
+        "Mohamed Kaaniche"
+      ],
+      "authorsText": "Ana E. Rugina, Karama Kanoun, Mohamed Kaaniche",
+      "abstract": "ADAPT is a tool that aims at easing the task of evaluating dependability measures in the context of modern model driven engineering processes based on AADL (Architecture Analysis and Design Language). Hence, its input is an AADL architectural model annotated with dependability-related information. Its output is a dependability evaluation model in the form of a Generalized Stochastic Petri Net (GSPN). The latter can be processed by existing dependability evaluation tools, to compute quantitative measures such as reliability, availability, etc.. ADAPT interfaces OSATE (the Open Source AADL Tool Environment) on the AADL side and SURF-2, on the dependability evaluation side. In addition, ADAPT provides the GSPN in XML/XMI format, which represents a gateway to other dependability evaluation tools, as the processing techniques for XML files allow it to be easily converted to a tool-specific GSPN.",
+      "absUrl": "https://arxiv.org/abs/0809.4108v1",
+      "pdfUrl": "https://arxiv.org/pdf/0809.4108v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0809.3613",
+      "title": "Revisiting the Panko-Halverson Taxonomy of Spreadsheet Errors",
+      "authors": [
+        "Raymond R. Panko"
+      ],
+      "authorsText": "Raymond R. Panko",
+      "abstract": "The purpose of this paper is to revisit the Panko-Halverson taxonomy of spreadsheet errors and suggest revisions. There are several reasons for doing so: First, the taxonomy has been widely used. Therefore, it should have scrutiny; Second, the taxonomy has not been widely available in its original form and most users refer to secondary sources. Consequently, they often equate the taxonomy with the simplified extracts used in particular experiments or field studies; Third, perhaps as a consequence, most users use only a fraction of the taxonomy. In particular, they tend not to use the taxonomy's life-cycle dimension; Fourth, the taxonomy has been tested against spreadsheets in experiments and spreadsheets in operational use. It is time to review how it has fared in these tests; Fifth, the taxonomy was based on the types of spreadsheet errors that were known to the authors in the mid-1990s. Subsequent experience has shown that the taxonomy needs to be extended for situations beyond those original experiences; Sixth, the omission category in the taxonomy has proven to be too narrow. Although this paper will focus on the Panko-Halverson taxonomy, this does not mean that that it is the only possible error taxonomy or even the best error taxonomy.",
+      "absUrl": "https://arxiv.org/abs/0809.3613v1",
+      "pdfUrl": "https://arxiv.org/pdf/0809.3613v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0809.3609",
+      "title": "Information and Data Quality in Spreadsheets",
+      "authors": [
+        "Patrick O'Beirne"
+      ],
+      "authorsText": "Patrick O'Beirne",
+      "abstract": "The quality of the data in spreadsheets is less discussed than the structural integrity of the formulas. Yet it is an area of great interest to the owners and users of the spreadsheet. This paper provides an overview of Information Quality (IQ) and Data Quality (DQ) with specific reference to how data is sourced, structured, and presented in spreadsheets.",
+      "absUrl": "https://arxiv.org/abs/0809.3609v1",
+      "pdfUrl": "https://arxiv.org/pdf/0809.3609v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0809.3587",
+      "title": "Spreadsheet End-User Behaviour Analysis",
+      "authors": [
+        "Brian Bishop",
+        "Kevin McDaid"
+      ],
+      "authorsText": "Brian Bishop, Kevin McDaid",
+      "abstract": "To aid the development of spreadsheet debugging tools, a knowledge of end-users natural behaviour within the Excel environment would be advantageous. This paper details the design and application of a novel data acquisition tool, which can be used for the unobtrusive recording of end-users mouse, keyboard and Excel specific actions during the debugging of Excel spreadsheets. A debugging experiment was conducted using this data acquisition tool, and based on analysis of end-users performance and behaviour data, the authors developed a \"spreadsheet cell coverage feedback\" debugging tool. Results from the debugging experiment are presented in terms of enduser debugging performance and behaviour, and the outcomes of an evaluation experiment with the debugging tool are detailed.",
+      "absUrl": "https://arxiv.org/abs/0809.3587v1",
+      "pdfUrl": "https://arxiv.org/pdf/0809.3587v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0809.3586",
+      "title": "A Primer on Spreadsheet Analytics",
+      "authors": [
+        "Thomas A. Grossman"
+      ],
+      "authorsText": "Thomas A. Grossman",
+      "abstract": "This paper provides guidance to an analyst who wants to extract insight from a spreadsheet model. It discusses the terminology of spreadsheet analytics, how to prepare a spreadsheet model for analysis, and a hierarchy of analytical techniques. These techniques include sensitivity analysis, tornado charts,and backsolving (or goal-seeking). This paper presents native-Excel approaches for automating these techniques, and discusses add-ins that are even more efficient. Spreadsheet optimization and spreadsheet Monte Carlo simulation are briefly discussed. The paper concludes by calling for empirical research, and describing desired features spreadsheet sensitivity analysis and spreadsheet optimization add-ins.",
+      "absUrl": "https://arxiv.org/abs/0809.3586v1",
+      "pdfUrl": "https://arxiv.org/pdf/0809.3586v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0809.3584",
+      "title": "Spreadsheet Components For All",
+      "authors": [
+        "Jocelyn Paine"
+      ],
+      "authorsText": "Jocelyn Paine",
+      "abstract": "We have prototyped a \"spreadsheet component repository\" Web site, from which users can copy \"components\" into their own Excel or Google spreadsheets. Components are collections of cells containing formulae: in real life, they would do useful calculations that many practitioners find hard to program, and would be rigorously tested and documented. Crucially, the user can tell the repository which cells in their spreadsheet to use for a componen's inputs and outputs. The repository will then reshape the component to fit. A single component can therefore be used in many different sizes and shapes of spreadsheet. We hope to set up a spreadsheet equivalent of the high-quality numerical subroutine libraries that revolutionised scientific computing, but where instead of subroutines, the library contains such components.",
+      "absUrl": "https://arxiv.org/abs/0809.3584v1",
+      "pdfUrl": "https://arxiv.org/pdf/0809.3584v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0809.3574",
+      "title": "Spreadsheet modelling for solving combinatorial problems: The vendor selection problem",
+      "authors": [
+        "Pandelis G. Ipsilandis"
+      ],
+      "authorsText": "Pandelis G. Ipsilandis",
+      "abstract": "Spreadsheets have grown up and became very powerful and easy to use tools in applying analytical techniques for solving business problems. Operations managers, production managers, planners and schedulers can work with them in developing solid and practical Do-It-Yourself Decision Support Systems. Small and Medium size organizations, can apply OR methodologies without the presence of specialized software and trained personnel, which in many cases cannot afford anyway. This paper examines an efficient approach in solving combinatorial programming problems with the use of spreadsheets. A practical application, which demonstrates the approach, concerns the development of a spreadsheet-based DSS for the Multi Item Procurement Problem with Fixed Vendor Cost. The DSS has been build using exclusively standard spreadsheet feature and can solve real problems of substantial size. The benefits and limitations of the approach are also discussed.",
+      "absUrl": "https://arxiv.org/abs/0809.3574v1",
+      "pdfUrl": "https://arxiv.org/pdf/0809.3574v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0809.3016",
+      "title": "Automating Spreadsheet Discovery & Risk Assessment",
+      "authors": [
+        "Eric Perry"
+      ],
+      "authorsText": "Eric Perry",
+      "abstract": "There have been many articles and mishaps published about the risks of uncontrolled spreadsheets in today's business environment, including non-compliance, operational risk, errors, and fraud all leading to significant loss events. Spreadsheets fall into the realm of end user developed applications and are often absent the proper safeguards and controls an IT organization would enforce for enterprise applications. There is also an overall lack of software programming discipline enforced in how spreadsheets are developed. However, before an organization can apply proper controls and discipline to critical spreadsheets, an accurate and living inventory of spreadsheets across the enterprise must be created, and all critical spreadsheets must be identified. As such, this paper proposes an automated approach to the initial stages of the spreadsheet management lifecycle - discovery, inventory and risk assessment. Without the use of technology, these phases are often treated as a one-off project. By leveraging technology, they become a sustainable business process.",
+      "absUrl": "https://arxiv.org/abs/0809.3016v1",
+      "pdfUrl": "https://arxiv.org/pdf/0809.3016v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0809.3009",
+      "title": "Metrics-Based Spreadsheet Visualization: Support for Focused Maintenance",
+      "authors": [
+        "Karin Hodnigg",
+        "Roland T. Mittermeir"
+      ],
+      "authorsText": "Karin Hodnigg, Roland T. Mittermeir",
+      "abstract": "Legacy spreadsheets are both, an asset, and an enduring problem concerning spreadsheets in business. To make spreadsheets stay alive and remain correct, comprehension of a given spreadsheet is highly important. Visualization techniques should ease the complex and mindblowing challenges of finding structures in a huge set of spreadsheet cells for building an adequate mental model of spreadsheet programs. Since spreadsheet programs are as diverse as the purpose they are serving and as inhomogeneous as their programmers, to find an appropriate representation or visualization technique for every spreadsheet program seems futile. We thus propose different visualization and representation methods that may ease spreadsheet comprehension but should not be applied with all kind of spreadsheet programs. Therefore, this paper proposes to use (complexity) measures as indicators for proper visualization.",
+      "absUrl": "https://arxiv.org/abs/0809.3009v1",
+      "pdfUrl": "https://arxiv.org/pdf/0809.3009v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0809.1409",
+      "title": "Domain Specific Software Architecture for Design Center Automation",
+      "authors": [
+        "Anshuman Sinha",
+        "Haritha Nandela",
+        "Vijaya Balakrishna"
+      ],
+      "authorsText": "Anshuman Sinha, Haritha Nandela, Vijaya Balakrishna",
+      "abstract": "Domain specific software architecture aims at software reuse through construction of domain architecture reference model. The constructed reference model presents a set of individual components and their interaction points. When starting on a new large software project, the design engineer starts with pre-constructed model, which can be easily browsed and picks up opportunities of use in the new solution design. This report discusses application of domain reference design methods by deriving domain specific reference architecture for a product ordering system in a design center. The product in this case is instock and special order blinds from different manufacturers in a large supply store. The development of mature domain specific reference software architecture for this domain is not the objective of this report. However, this report would like to capture the method used in one such process and that is the primary concern of this report. This report lists subjective details of such a process applied to the domain of ordering custom and instock blinds from a large home construction and goods supply store. This report also describes the detailed process of derivation of knowledge models, unified knowledge models and the reference architecture for this domain. However, this domain model is only partially complete which may not be used for any real applications. This report is a result of a course project undertaken while studying this methodology.",
+      "absUrl": "https://arxiv.org/abs/0809.1409v1",
+      "pdfUrl": "https://arxiv.org/pdf/0809.1409v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0809.0680",
+      "title": "The Prolog Interface to the Unstructured Information Management Architecture",
+      "authors": [
+        "Paul Fodor",
+        "Adam Lally",
+        "David Ferrucci"
+      ],
+      "authorsText": "Paul Fodor, Adam Lally, David Ferrucci",
+      "abstract": "In this paper we describe the design and implementation of the Prolog interface to the Unstructured Information Management Architecture (UIMA) and some of its applications in natural language processing. The UIMA Prolog interface translates unstructured data and the UIMA Common Analysis Structure (CAS) into a Prolog knowledge base, over which, the developers write rules and use resolution theorem proving to search and generate new annotations over the unstructured data. These rules can explore all the previous UIMA annotations (such as, the syntactic structure, parsing statistics) and external Prolog knowledge bases (such as, Prolog WordNet and Extended WordNet) to implement a variety of tasks for the natural language analysis. We also describe applications of this logic programming interface in question analysis (such as, focus detection, answer-type and other constraints detection), shallow parsing (such as, relations in the syntactic structure), and answer selection.",
+      "absUrl": "https://arxiv.org/abs/0809.0680v1",
+      "pdfUrl": "https://arxiv.org/pdf/0809.0680v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0808.3545",
+      "title": "Scientific Workflow Systems for 21st Century e-Science, New Bottle or New Wine?",
+      "authors": [
+        "Yong Zhao",
+        "Ioan Raicu",
+        "Ian Foster"
+      ],
+      "authorsText": "Yong Zhao, Ioan Raicu, Ian Foster",
+      "abstract": "With the advances in e-Sciences and the growing complexity of scientific analyses, more and more scientists and researchers are relying on workflow systems for process coordination, derivation automation, provenance tracking, and bookkeeping. While workflow systems have been in use for decades, it is unclear whether scientific workflows can or even should build on existing workflow technologies, or they require fundamentally new approaches. In this paper, we analyze the status and challenges of scientific workflows, investigate both existing technologies and emerging languages, platforms and systems, and identify the key challenges that must be addressed by workflow systems for e-science in the 21st century.",
+      "absUrl": "https://arxiv.org/abs/0808.3545v1",
+      "pdfUrl": "https://arxiv.org/pdf/0808.3545v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0808.3292",
+      "title": "Network Motifs in Object-Oriented Software Systems",
+      "authors": [
+        "Yutao Ma",
+        "Keqing He",
+        "Jing Liu"
+      ],
+      "authorsText": "Yutao Ma, Keqing He, Jing Liu",
+      "abstract": "Nowadays, software has become a complex piece of work that may be beyond our control. Understanding how software evolves over time plays an important role in controlling software development processes. Recently, a few researchers found the quantitative evidence of structural duplication in software systems or web applications, which is similar to the evolutionary trend found in biological systems. To investigate the principles or rules of software evolution, we introduce the relevant theories and methods of complex networks into structural evolution and change of software systems. According to the results of our experiment on network motifs, we find that the stability of a motif shows positive correlation with its abundance and a motif with high Z score tends to have stable structure. These findings imply that the evolution of software systems is based on functional cloning as well as structural duplication and tends to be structurally stable. So, the work presented in this paper will be useful for the analysis of structural changes of software systems in reverse engineering.",
+      "absUrl": "https://arxiv.org/abs/0808.3292v1",
+      "pdfUrl": "https://arxiv.org/pdf/0808.3292v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0808.2045",
+      "title": "Correctness is not enough",
+      "authors": [
+        "Louise Pryor"
+      ],
+      "authorsText": "Louise Pryor",
+      "abstract": "The usual aim of spreadsheet audit is to verify correctness. There are two problems with this: first, it is often difficult to tell whether the spreadsheets in question are correct, and second, even if they are, they may still give the wrong results. These problems are explained in this paper, which presents the key criteria for judging a spreadsheet and discusses how those criteria can be achieved",
+      "absUrl": "https://arxiv.org/abs/0808.2045v1",
+      "pdfUrl": "https://arxiv.org/pdf/0808.2045v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0808.1721",
+      "title": "Initial Results on the F-logic to OWL Bi-directional Translation on a Tabled Prolog Engine",
+      "authors": [
+        "Paul Fodor"
+      ],
+      "authorsText": "Paul Fodor",
+      "abstract": "In this paper, we show our results on the bi-directional data exchange between the F-logic language supported by the Flora2 system and the OWL language. Most of the TBox and ABox axioms are translated preserving the semantics between the two representations, such as: proper inclusion, individual definition, functional properties, while some axioms and restrictions require a change in the semantics, such as: numbered and qualified cardinality restrictions. For the second case, we translate the OWL definite style inference rules into F-logic style constraints. We also describe a set of reasoning examples using the above translation, including the reasoning in Flora2 of a variety of ABox queries.",
+      "absUrl": "https://arxiv.org/abs/0808.1721v1",
+      "pdfUrl": "https://arxiv.org/pdf/0808.1721v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0808.1508",
+      "title": "Comparison between CPBPV, ESC/Java, CBMC, Blast, EUREKA and Why for Bounded Program Verification",
+      "authors": [
+        "Hélène Collavizza",
+        "Michel Rueher",
+        "Pascal Van Hentenryck"
+      ],
+      "authorsText": "Hélène Collavizza, Michel Rueher, Pascal Van Hentenryck",
+      "abstract": "This report describes experimental results for a set of benchmarks on program verification. It compares the capabilities of CPBVP \"Constraint Programming framework for Bounded Program Verification\" [4] with the following frameworks: ESC/Java, CBMC, Blast, EUREKA and Why.",
+      "absUrl": "https://arxiv.org/abs/0808.1508v1",
+      "pdfUrl": "https://arxiv.org/pdf/0808.1508v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0808.0347",
+      "title": "Towards a Process for Developing Maintenance Tools in Academia",
+      "authors": [
+        "Holger M. Kienle",
+        "Hausi A. Müller"
+      ],
+      "authorsText": "Holger M. Kienle, Hausi A. Müller",
+      "abstract": "Building of tools--from simple prototypes to industrial-strength applications--is a pervasive activity in academic research. When proposing a new technique for software maintenance, effective tool support is typically required to demonstrate the feasibility and effectiveness of the approach. However, even though tool building is both pervasive and requiring significant time and effort, it is still pursued in an ad hoc manner. In this paper, we address these issues by proposing a dedicated development process for tool building that takes the unique characteristics of an academic research environment into account. We first identify process requirements based on a review of the literature and our extensive tool building experience in the domain of maintenance tools. We then outline a process framework based on work products that accommodates the requirements while providing needed flexibility for tailoring the process to account for specific tool building approaches and project constraints. The work products are concrete milestones of the process, tracking progress, rationalizing (design) decisions, and documenting the current state of the tool building project. Thus, the work products provide important input for strategic project decisions and rapid initiation of new team members. Leveraging a dedicated tool building process promises tools that are designed, build, and maintained in a more disciplined, predictable and efficient manner.",
+      "absUrl": "https://arxiv.org/abs/0808.0347v1",
+      "pdfUrl": "https://arxiv.org/pdf/0808.0347v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0808.0055",
+      "title": "Integrating OPC Data into GSN Infrastructures",
+      "authors": [
+        "Olivier Passalacqua",
+        "Eric Benoit",
+        "Marc-Philippe Huget",
+        "Patrice Moreaux"
+      ],
+      "authorsText": "Olivier Passalacqua, Eric Benoit, Marc-Philippe Huget, Patrice Moreaux",
+      "abstract": "This paper presents the design and the implementation of an interface software component between OLE for Process Control (OPC) formatted data and the Global Sensor Network (GSN) framework for management of data from sensors. This interface, named wrapper in the GSN context, communicates in Data Access mode with an OPC server and converts the received data to the internal GSN format, according to several temporal modes. This work is realized in the context of a Ph.D. Thesis about the control of distributed information fusion systems. The developed component allows the injection of OPC data, like measurements or industrial processes states information, into a distributed information fusion system deployed in a GSN framework. The component behaves as a client of the OPC server. Developed in Java and based on the Opensaca Utgard, it can be deployed on any computation node supporting a Java virtual machine. The experiments show the component conformity according to the Data Access 2.05a specification of the OPC standard and to the temporal modes.",
+      "absUrl": "https://arxiv.org/abs/0808.0055v1",
+      "pdfUrl": "https://arxiv.org/pdf/0808.0055v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0807.4912",
+      "title": "Research Challenges in Management and Compliance of Policies on the Web",
+      "authors": [
+        "Holger M. Kienle",
+        "Hausi A. Müller"
+      ],
+      "authorsText": "Holger M. Kienle, Hausi A. Müller",
+      "abstract": "In this paper we argue that policies are an increasing concern for organizations that are operating a web site. Examples of policies that are relevant in the domain of the web address issues such as privacy of personal data, accessibility for the disabled, user conduct, e-commerce, and intellectual property. Web site policies--and the overarching concept of web site governance--are cross-cutting concerns that have to be addressed and implemented at different levels (e.g., policy documents, legal statements, business processes, contracts, auditing, and software systems). For web sites, policies are also reflected in the legal statements that the web site posts, and in the behavior and features that the web site offers to its users. Both policies and software tend to evolve independently, but at the same time they both have to be kept in sync. This is a practical challenge for operators of web sites that is poorly addressed right now and is, we believe, a promising avenue for future research. In this paper, we discuss various challenges that policy poses for web sites with an emphasis on privacy and data protection and identify open issues for future research.",
+      "absUrl": "https://arxiv.org/abs/0807.4912v1",
+      "pdfUrl": "https://arxiv.org/pdf/0807.4912v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0807.4224",
+      "title": "Encapsulation theory fundamentals",
+      "authors": [
+        "Edmund Kirwan"
+      ],
+      "authorsText": "Edmund Kirwan",
+      "abstract": "This paper proposes a theory of encapsulation, establishing a relationship between encapsulation and information hiding through the concept of potential structural complexity (P.S.C.), the maximum possible number of source code dependencies that can exist between program units in a software system. The P.S.C. of various, simple systems is examined in an attempt to demonstrate how P.S.C. changes as program units are encapsulated among different configurations of subsystems.",
+      "absUrl": "https://arxiv.org/abs/0807.4224v1",
+      "pdfUrl": "https://arxiv.org/pdf/0807.4224v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0807.3933",
+      "title": "Interface Matching and Combining Techniques for Services Integration",
+      "authors": [
+        "Frédéric Le Mouël",
+        "Noha Ibrahim",
+        "Stéphane Frénot"
+      ],
+      "authorsText": "Frédéric Le Mouël, Noha Ibrahim, Stéphane Frénot",
+      "abstract": "The development of many highly dynamic environments, like pervasive environments, introduces the possibility to use geographically close-related services. Dynamically integrating and unintegrating these services in running applications is a key challenge for this use. In this article, we classify service integration issues according to interfaces exported by services and internal combining techniques. We also propose a contextual integration service, IntegServ, and an interface, Integrable, for developing services.",
+      "absUrl": "https://arxiv.org/abs/0807.3933v1",
+      "pdfUrl": "https://arxiv.org/pdf/0807.3933v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0807.3187",
+      "title": "When, why and how to test spreadsheets",
+      "authors": [
+        "Louise Pryor"
+      ],
+      "authorsText": "Louise Pryor",
+      "abstract": "Testing is a vital part of software development, and spreadsheets are like any other software in this respect. This paper discusses the testing of spreadsheets in the light of one practitioner's experience. It considers the concept of software testing and how it differs from reviewing, and describes when it might take place. Different types of testing are described, and some techniques for performing them presented. Some of the commonly encountered problems are discussed.",
+      "absUrl": "https://arxiv.org/abs/0807.3187v1",
+      "pdfUrl": "https://arxiv.org/pdf/0807.3187v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0807.3183",
+      "title": "Accuracy in Spreadsheet Modelling Systems",
+      "authors": [
+        "Thomas A. Grossman"
+      ],
+      "authorsText": "Thomas A. Grossman",
+      "abstract": "Accuracy in spreadsheet modelling systems can be reduced due to difficulties with the inputs, the model itself, or the spreadsheet implementation of the model. When the \"true\" outputs from the system are unknowable, accuracy is evaluated subjectively. Less than perfect accuracy can be acceptable depending on the purpose of the model, problems with inputs, or resource constraints. Users build modelling systems iteratively, and choose to allocate limited resources to the inputs, the model, the spreadsheet implementation, and to employing the system for business analysis. When making these choices, users can suffer from expectation bias and diagnosis bias. Existing research results tend to focus on errors in the spreadsheet implementation. Because industry has tolerance for system inaccuracy, errors in spreadsheet implementations may not be a serious concern. Spreadsheet productivity may be of more interest.",
+      "absUrl": "https://arxiv.org/abs/0807.3183v1",
+      "pdfUrl": "https://arxiv.org/pdf/0807.3183v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0807.3168",
+      "title": "Audit and Change Analysis of Spreadsheets",
+      "authors": [
+        "John C. Nash",
+        "Neil Smith",
+        "Andy Adler"
+      ],
+      "authorsText": "John C. Nash, Neil Smith, Andy Adler",
+      "abstract": "Because spreadsheets have a large and growing importance in real-world work, their contents need to be controlled and validated. Generally spreadsheets have been difficult to verify, since data and executable information are stored together. Spreadsheet applications with multiple authors are especially difficult to verify, since controls over access are difficult to enforce. Facing similar problems, traditional software engineering has developed numerous tools and methodologies to control, verify and audit large applications with multiple developers. We present some tools we have developed to enable 1) the audit of selected, filtered, or all changes in a spreadsheet, that is, when a cell was changed, its original and new contents and who made the change, and 2) control of access to the spreadsheet file(s) so that auditing is trustworthy. Our tools apply to OpenOffice.org calc spreadsheets, which can generally be exchanged with Microsoft Excel.",
+      "absUrl": "https://arxiv.org/abs/0807.3168v1",
+      "pdfUrl": "https://arxiv.org/pdf/0807.3168v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0807.2997",
+      "title": "Reducing Spreadsheet Risk with FormulaDataSleuth",
+      "authors": [
+        "Bill Bekenn",
+        "Ray Hooper"
+      ],
+      "authorsText": "Bill Bekenn, Ray Hooper",
+      "abstract": "A new MS Excel application has been developed which seeks to reduce the risks associated with the development, operation and auditing of Excel spreadsheets. FormulaDataSleuth provides a means of checking spreadsheet formulas and data as they are developed or used, enabling the users to identify actual or potential errors quickly and thereby halt their propagation. In this paper, we will describe, with examples, how the application works and how it can be applied to reduce the risks associated with Excel spreadsheets.",
+      "absUrl": "https://arxiv.org/abs/0807.2997v1",
+      "pdfUrl": "https://arxiv.org/pdf/0807.2997v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0807.2383",
+      "title": "CPBVP: A Constraint-Programming Framework for Bounded Program Verification",
+      "authors": [
+        "Hélène Collavizza",
+        "Michel Rueher",
+        "Pascal Van Hentenryck"
+      ],
+      "authorsText": "Hélène Collavizza, Michel Rueher, Pascal Van Hentenryck",
+      "abstract": "This paper studies how to verify the conformity of a program with its specification and proposes a novel constraint-programming framework for bounded program verification (CPBPV). The CPBPV framework uses constraint stores to represent the specification and the program and explores execution paths nondeterministically. The input program is partially correct if each constraint store so produced implies the post-condition. CPBPV does not explore spurious execution paths as it incrementally prunes execution paths early by detecting that the constraint store is not consistent. CPBPV uses the rich language of constraint programming to express the constraint store. Finally, CPBPV is parametrized with a list of solvers which are tried in sequence, starting with the least expensive and less general. Experimental results often produce orders of magnitude improvements over earlier approaches, running times being often independent of the variable domains. Moreover, CPBPV was able to detect subtle errors in some programs while other frameworks based on model checking have failed.",
+      "absUrl": "https://arxiv.org/abs/0807.2383v1",
+      "pdfUrl": "https://arxiv.org/pdf/0807.2383v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0807.1173",
+      "title": "A Counterexample Guided Abstraction-Refinement Framework for Markov Decision Processes",
+      "authors": [
+        "Rohit Chadha",
+        "Mahesh Viswanthan"
+      ],
+      "authorsText": "Rohit Chadha, Mahesh Viswanthan",
+      "abstract": "The main challenge in using abstractions effectively, is to construct a suitable abstraction for the system being verified. One approach that tries to address this problem is that of {\\it counterexample guided abstraction-refinement (CEGAR)}, wherein one starts with a coarse abstraction of the system, and progressively refines it, based on invalid counterexamples seen in prior model checking runs, until either an abstraction proves the correctness of the system or a valid counterexample is generated. While CEGAR has been successfully used in verifying non-probabilistic systems automatically, CEGAR has not been applied in the context of probabilistic systems. The main issues that need to be tackled in order to extend the approach to probabilistic systems is a suitable notion of ``counterexample'', algorithms to generate counterexamples, check their validity, and then automatically refine an abstraction based on an invalid counterexample. In this paper, we address these issues, and present a CEGAR framework for Markov Decision Processes.",
+      "absUrl": "https://arxiv.org/abs/0807.1173v1",
+      "pdfUrl": "https://arxiv.org/pdf/0807.1173v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0807.0161",
+      "title": "Increase of Software Safety",
+      "authors": [
+        "Arkadiy Khandjian"
+      ],
+      "authorsText": "Arkadiy Khandjian",
+      "abstract": "New model of software safety is offered. Distribution of mistakes in program on stages of life cycle is researched. Study of ways of increase of reliability of software at help simulation program is leaded.",
+      "absUrl": "https://arxiv.org/abs/0807.0161v1",
+      "pdfUrl": "https://arxiv.org/pdf/0807.0161v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0807.0070",
+      "title": "Quantitative Paradigm of Software Reliability as Content Relevance",
+      "authors": [
+        "Yuri Arkhipkin"
+      ],
+      "authorsText": "Yuri Arkhipkin",
+      "abstract": "This paper presents a quantitative approach to software reliability and content relevance definitions validated by the systems' potential reliability law.Thus it is argued for the unified math nature or quantitative paradigm of software reliability and content relevance.",
+      "absUrl": "https://arxiv.org/abs/0807.0070v1",
+      "pdfUrl": "https://arxiv.org/pdf/0807.0070v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0806.4553",
+      "title": "Interpolation in local theory extensions",
+      "authors": [
+        "Viorica Sofronie-Stokkermans"
+      ],
+      "authorsText": "Viorica Sofronie-Stokkermans",
+      "abstract": "In this paper we study interpolation in local extensions of a base theory. We identify situations in which it is possible to obtain interpolants in a hierarchical manner, by using a prover and a procedure for generating interpolants in the base theory as black-boxes. We present several examples of theory extensions in which interpolants can be computed this way, and discuss applications in verification, knowledge representation, and modular reasoning in combinations of local theories.",
+      "absUrl": "https://arxiv.org/abs/0806.4553v1",
+      "pdfUrl": "https://arxiv.org/pdf/0806.4553v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0806.3536",
+      "title": "In Pursuit of Spreadsheet Excellence",
+      "authors": [
+        "Grenville J. Croll"
+      ],
+      "authorsText": "Grenville J. Croll",
+      "abstract": "The first fully-documented study into the quantitative impact of errors in operational spreadsheets identified an interesting anomaly. One of the five participating organisations involved in the study contributed a set of five spreadsheets of such quality that they set the organisation apart in a statistical sense. This virtuoso performance gave rise to a simple sampling test - The Clean Sheet Test - which can be used to objectively evaluate if an organisation is in control of the spreadsheets it is using in important processes such as financial reporting.",
+      "absUrl": "https://arxiv.org/abs/0806.3536v1",
+      "pdfUrl": "https://arxiv.org/pdf/0806.3536v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0806.2730",
+      "title": "A Process Algebra Software Engineering Environment",
+      "authors": [
+        "B. Diertens"
+      ],
+      "authorsText": "B. Diertens",
+      "abstract": "In previous work we described how the process algebra based language PSF can be used in software engineering, using the ToolBus, a coordination architecture also based on process algebra, as implementation model. In this article we summarize that work and describe the software development process more formally by presenting the tools we use in this process in a CASE setting, leading to the PSF-ToolBus software engineering environment. We generalize the refine step in this environment towards a process algebra based software engineering workbench of which several instances can be combined to form an environment.",
+      "absUrl": "https://arxiv.org/abs/0806.2730v1",
+      "pdfUrl": "https://arxiv.org/pdf/0806.2730v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0806.1816",
+      "title": "Cardinality heterogeneities in Web service composition: Issues and solutions",
+      "authors": [
+        "M. Mrissa",
+        "Ph. Thiran",
+        "J-M. Jacquet",
+        "D. Benslimane",
+        "Z. Maamar"
+      ],
+      "authorsText": "M. Mrissa, Ph. Thiran, J-M. Jacquet, D. Benslimane, Z. Maamar",
+      "abstract": "Data exchanges between Web services engaged in a composition raise several heterogeneities. In this paper, we address the problem of data cardinality heterogeneity in a composition. Firstly, we build a theoretical framework to describe different aspects of Web services that relate to data cardinality, and secondly, we solve this problem by developing a solution for cardinality mediation based on constraint logic programming.",
+      "absUrl": "https://arxiv.org/abs/0806.1816v1",
+      "pdfUrl": "https://arxiv.org/pdf/0806.1816v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0806.1361",
+      "title": "VPOET: Using a Distributed Collaborative Platform for Semantic Web Applications",
+      "authors": [
+        "Mariano Rico",
+        "David Camacho",
+        "Oscar Corcho"
+      ],
+      "authorsText": "Mariano Rico, David Camacho, Oscar Corcho",
+      "abstract": "This paper describes a distributed collaborative wiki-based platform that has been designed to facilitate the development of Semantic Web applications. The applications designed using this platform are able to build semantic data through the cooperation of different developers and to exploit that semantic data. The paper shows a practical case study on the application VPOET, and how an application based on Google Gadgets has been designed to test VPOET and let human users exploit the semantic data created. This practical example can be used to show how different Semantic Web technologies can be integrated into a particular Web application, and how the knowledge can be cooperatively improved.",
+      "absUrl": "https://arxiv.org/abs/0806.1361v1",
+      "pdfUrl": "https://arxiv.org/pdf/0806.1361v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0806.1100",
+      "title": "Design Patterns for Complex Event Processing",
+      "authors": [
+        "Adrian Paschke"
+      ],
+      "authorsText": "Adrian Paschke",
+      "abstract": "Currently engineering efficient and successful event-driven applications based on the emerging Complex Event Processing (CEP) technology, is a laborious trial and error process. The proposed CEP design pattern approach should support CEP engineers in their design decisions to build robust and efficient CEP solutions with well understood tradeoffs and should enable an interdisciplinary and efficient communication process about successful CEP solutions in different application domains.",
+      "absUrl": "https://arxiv.org/abs/0806.1100v1",
+      "pdfUrl": "https://arxiv.org/pdf/0806.1100v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0806.0314",
+      "title": "GuiLiner: A Configurable and Extensible Graphical User Interface for Scientific Analysis and Simulation Software",
+      "authors": [
+        "N. C. Manoukis",
+        "E. C. Anderson"
+      ],
+      "authorsText": "N. C. Manoukis, E. C. Anderson",
+      "abstract": "The computer programs most users interact with daily are driven by a graphical user interface (GUI). However, many scientific applications are used with a command line interface (CLI) for the ease of development and increased flexibility this mode provides. Scientific application developers would benefit from being able to provide a GUI easily for their CLI programs, thus retaining the advantages of both modes of interaction. GuiLiner is a generic, extensible and flexible front-end designed to ``host'' a wide variety of data analysis or simulation programs. Scientific application developers who produce a correctly formatted XML file describing their program's options and some of its documentation can immediately use GuiLiner to produce a carefully implemented GUI for their analysis or simulation programs.",
+      "absUrl": "https://arxiv.org/abs/0806.0314v1",
+      "pdfUrl": "https://arxiv.org/pdf/0806.0314v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0805.4745",
+      "title": "Pattern-based Model-to-Model Transformation: Long Version",
+      "authors": [
+        "Juan de Lara",
+        "Esther Guerra"
+      ],
+      "authorsText": "Juan de Lara, Esther Guerra",
+      "abstract": "We present a new, high-level approach for the specification of model-to-model transformations based on declarative patterns. These are (atomic or composite) constraints on triple graphs declaring the allowed or forbidden relationships between source and target models. In this way, a transformation is defined by specifying a set of triple graph constraints that should be satisfied by the result of the transformation.\nThe description of the transformation is then compiled into lower-level operational mechanisms to perform forward or backward transformations, as well as to establish mappings between two existent models. In this paper we study one of such mechanisms based on the generation of operational triple graph grammar rules. Moreover, we exploit deduction techniques at the specification level to generate more specialized constraints (preserving the specification semantics) reflecting pattern dependencies, from which additional rules can be derived.\nThis is an extended version of the paper submitted to ICGT'08, with additional definitions and proofs.",
+      "absUrl": "https://arxiv.org/abs/0805.4745v1",
+      "pdfUrl": "https://arxiv.org/pdf/0805.4745v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0805.4236",
+      "title": "Risk Assessment For Spreadsheet Developments: Choosing Which Models to Audit",
+      "authors": [
+        "Raymond J. Butler"
+      ],
+      "authorsText": "Raymond J. Butler",
+      "abstract": "Errors in spreadsheet applications and models are alarmingly common (some authorities, with justification cite spreadsheets containing errors as the norm rather than the exception). Faced with this body of evidence, the auditor can be faced with a huge task - the temptation may be to launch code inspections for every spreadsheet in an organisation. This can be very expensive and time-consuming. This paper describes risk assessment based on the \"SpACE\" audit methodology used by H M Customs & Excise's tax inspectors. This allows the auditor to target resources on the spreadsheets posing the highest risk of error, and justify the deployment of those resources to managers and clients. Since the opposite of audit risk is audit assurance the paper also offers an overview of some elements of good practice in the use of spreadsheets in business.",
+      "absUrl": "https://arxiv.org/abs/0805.4236v1",
+      "pdfUrl": "https://arxiv.org/pdf/0805.4236v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0805.4224",
+      "title": "Classification of Spreadsheet Errors",
+      "authors": [
+        "Kamalasen Rajalingham",
+        "David R. Chadwick",
+        "Brian Knight"
+      ],
+      "authorsText": "Kamalasen Rajalingham, David R. Chadwick, Brian Knight",
+      "abstract": "This paper describes a framework for a systematic classification of spreadsheet errors. This classification or taxonomy of errors is aimed at facilitating analysis and comprehension of the different types of spreadsheet errors. The taxonomy is an outcome of an investigation of the widespread problem of spreadsheet errors and an analysis of specific types of these errors. This paper contains a description of the various elements and categories of the classification and is supported by appropriate examples.",
+      "absUrl": "https://arxiv.org/abs/0805.4224v1",
+      "pdfUrl": "https://arxiv.org/pdf/0805.4224v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0805.4219",
+      "title": "Building Financial Accuracy into Spreadsheets",
+      "authors": [
+        "Andrew Hawker"
+      ],
+      "authorsText": "Andrew Hawker",
+      "abstract": "Students learning how to apply spreadsheets to accounting problems are not always well served by the built-in financial functions. Problems can arise because of differences between UK and US practice, through anomalies in the functions themselves, and because the promptings of Wizards' engender an attitude of filling in the blanks on the screen, and hoping for the best. Some examples of these problems are described, and suggestions are presented for ways of improving the situation. Principally, it is suggested that spreadsheet prompts and 'Help' screens should offer integrated guidance, covering some aspects of financial practice, as well as matters of spreadsheet technique.",
+      "absUrl": "https://arxiv.org/abs/0805.4219v1",
+      "pdfUrl": "https://arxiv.org/pdf/0805.4219v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0805.4218",
+      "title": "A Structured Methodology for Spreadsheet Modelling",
+      "authors": [
+        "Brian Knight",
+        "David Chadwick",
+        "Kamalesen Rajalingham"
+      ],
+      "authorsText": "Brian Knight, David Chadwick, Kamalesen Rajalingham",
+      "abstract": "In this paper, we discuss the problem of the software engineering of a class of business spreadsheet models. A methodology for structured software development is proposed, which is based on structured analysis of data, represented as Jackson diagrams. It is shown that this analysis allows a straightforward modularisation, and that individual modules may be represented with indentation in the block-structured form of structured programs. The benefits of structured format are discussed, in terms of comprehensibility, ease of maintenance, and reduction in errors. The capability of the methodology to provide a modular overview in the model is described, and examples are given. The potential for a reverse-engineering tool, to transform existing spreadsheet models is discussed.",
+      "absUrl": "https://arxiv.org/abs/0805.4218v1",
+      "pdfUrl": "https://arxiv.org/pdf/0805.4218v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0805.4211",
+      "title": "Managing Critical Spreadsheets in a Compliant Environment",
+      "authors": [
+        "Soheil Saadat"
+      ],
+      "authorsText": "Soheil Saadat",
+      "abstract": "The use of uncontrolled financial spreadsheets can expose organizations to unacceptable business and compliance risks, including errors in the financial reporting process, spreadsheet misuse and fraud, or even significant operational errors. These risks have been well documented and thoroughly researched. With the advent of regulatory mandates such as SOX 404 and FDICIA in the U.S., and MiFID, Basel II and Combined Code in the UK and Europe, leading tax and audit firms are now recommending that organizations automate their internal controls over critical spreadsheets and other end-user computing applications, including Microsoft Access databases. At a minimum, auditors mandate version control, change control and access control for operational spreadsheets, with more advanced controls for critical financial spreadsheets. This paper summarises the key issues regarding the establishment and maintenance of control of Business Critical spreadsheets.",
+      "absUrl": "https://arxiv.org/abs/0805.4211v1",
+      "pdfUrl": "https://arxiv.org/pdf/0805.4211v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0805.2749",
+      "title": "State and history in operating systems",
+      "authors": [
+        "Victor Yodaiken"
+      ],
+      "authorsText": "Victor Yodaiken",
+      "abstract": "A method of using recursive functions to describe state change is applied to process switching in UNIX-like operating systems.",
+      "absUrl": "https://arxiv.org/abs/0805.2749v1",
+      "pdfUrl": "https://arxiv.org/pdf/0805.2749v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0805.1740",
+      "title": "Detecting Errors in Spreadsheets",
+      "authors": [
+        "Yirsaw Ayalew",
+        "Markus Clermont",
+        "Roland T. Mittermeir"
+      ],
+      "authorsText": "Yirsaw Ayalew, Markus Clermont, Roland T. Mittermeir",
+      "abstract": "The paper presents two complementary strategies for identifying errors in spreadsheet programs. The strategies presented are grounded on the assumption that spreadsheets are software, albeit of a different nature than conventional procedural software. Correspondingly, strategies for identifying errors have to take into account the inherent properties of spreadsheets as much as they have to recognize that the conceptual models of 'spreadsheet programmers' differ from the conceptual models of conventional programmers. Nevertheless, nobody can and will write a spreadsheet, without having such a conceptual model in mind, be it of numeric nature or be it of geometrical nature focused on some layout.",
+      "absUrl": "https://arxiv.org/abs/0805.1740v1",
+      "pdfUrl": "https://arxiv.org/pdf/0805.1740v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0805.1489",
+      "title": "Graphlet Arrival: Modeling and verifying a broad array of network properties",
+      "authors": [
+        "Zachary M. Saul",
+        "Soumen Roy",
+        "Raissa M. D'Souza",
+        "Premkumar T. Devanbu",
+        "Vladimir Filkov"
+      ],
+      "authorsText": "Zachary M. Saul, Soumen Roy, Raissa M. D'Souza, Premkumar T. Devanbu, Vladimir Filkov",
+      "abstract": "Motivated by widely observed examples in nature, society and software, where groups of already related nodes arrive together and attach to an existing network, we consider network growth via sequential attachment of linked node groups, or graphlets. We analyze the simplest case, attachment of the three node V-graphlet, where, with probability alpha, we attach a peripheral node of the graphlet, and with probability (1-alpha), we attach the central node. Our analytical results and simulations show that tuning alpha produces a wide range in degree distribution and degree assortativity, achieving assortativity values that capture a diverse set of many real-world systems. We introduce a fifteen-dimensional attribute vector derived from seven well-known network properties, which enables comprehensive comparison between any two networks. Principal Component Analysis (PCA) of this attribute vector space shows a significantly larger coverage potential of real-world network properties by a simple extension of the above model when compared against a classic model of network growth.",
+      "absUrl": "https://arxiv.org/abs/0805.1489v1",
+      "pdfUrl": "https://arxiv.org/pdf/0805.1489v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0805.0650",
+      "title": "Plat_Forms -- a contest: The web development platform comparison",
+      "authors": [
+        "Lutz Prechelt"
+      ],
+      "authorsText": "Lutz Prechelt",
+      "abstract": "\"Plat_Forms\" is a competition in which top-class teams of three programmers compete to implement the same requirements for a web-based system within 30 hours, each team using a different technology platform (Java EE,.NET, PHP, Perl, Python, or Ruby on Rails). The results will provide new insights into the real (rather than purported) pros, cons, and emergent properties of each platform. The evaluation will analyze many aspects of each solution, both external (usability, functionality, reliability, performance, etc.) and internal (structure, understandability, flexibility, etc.).",
+      "absUrl": "https://arxiv.org/abs/0805.0650v1",
+      "pdfUrl": "https://arxiv.org/pdf/0805.0650v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0804.4525",
+      "title": "The Complexity of Coverage",
+      "authors": [
+        "Krishnendu Chatterjee",
+        "Luca de Alfaro",
+        "Rupak Majumdar"
+      ],
+      "authorsText": "Krishnendu Chatterjee, Luca de Alfaro, Rupak Majumdar",
+      "abstract": "We study the problem of generating a test sequence that achieves maximal coverage for a reactive system under test. We formulate the problem as a repeated game between the tester and the system, where the system state space is partitioned according to some coverage criterion and the objective of the tester is to maximize the set of partitions (or coverage goals) visited during the game. We show the complexity of the maximal coverage problem for non-deterministic systems is PSPACE-complete, but is NP-complete for deterministic systems. For the special case of non-deterministic systems with a re-initializing ``reset'' action, which represent running a new test input on a re-initialized system, we show that the complexity is again co-NP-complete. Our proof technique for reset games uses randomized testing strategies that circumvent the exponentially large memory requirement in the deterministic case.",
+      "absUrl": "https://arxiv.org/abs/0804.4525v1",
+      "pdfUrl": "https://arxiv.org/pdf/0804.4525v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-04",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0804.4116",
+      "title": "Design and Implementation of a Tracer Driver: Easy and Efficient Dynamic Analyses of Constraint Logic Programs",
+      "authors": [
+        "Ludovic Langevine",
+        "Mireille Ducasse"
+      ],
+      "authorsText": "Ludovic Langevine, Mireille Ducasse",
+      "abstract": "Tracers provide users with useful information about program executions. In this article, we propose a ``tracer driver''. From a single tracer, it provides a powerful front-end enabling multiple dynamic analysis tools to be easily implemented, while limiting the overhead of the trace generation. The relevant execution events are specified by flexible event patterns and a large variety of trace data can be given either systematically or ``on demand''. The proposed tracer driver has been designed in the context of constraint logic programming; experiments have been made within GNU-Prolog. Execution views provided by existing tools have been easily emulated with a negligible overhead. Experimental measures show that the flexibility and power of the described architecture lead to good performance. The tracer driver overhead is inversely proportional to the average time between two traced events. Whereas the principles of the tracer driver are independent of the traced programming language, it is best suited for high-level languages, such as constraint logic programming, where each traced execution event encompasses numerous low-level execution steps. Furthermore, constraint logic programming is especially hard to debug. The current environments do not provide all the useful dynamic analysis tools. They can significantly benefit from our tracer driver which enables dynamic analyses to be integrated at a very low cost.",
+      "absUrl": "https://arxiv.org/abs/0804.4116v1",
+      "pdfUrl": "https://arxiv.org/pdf/0804.4116v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-04",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0804.2852",
+      "title": "Philosophical Smoke Signals: Theory and Practice in Information Systems Design",
+      "authors": [
+        "David King",
+        "Chris Kimble"
+      ],
+      "authorsText": "David King, Chris Kimble",
+      "abstract": "Although the gulf between the theory and practice in Information Systems is much lamented, few researchers have offered a way forward except through a number of (failed) attempts to develop a single systematic theory for Information Systems. In this paper, we encourage researchers to re-examine the practical consequences of their theoretical arguments. By examining these arguments we may be able to form a number of more rigorous theories of Information Systems, allowing us to draw theory and practice together without undertaking yet another attempt at the holy grail of a single unified systematic theory of Information Systems.",
+      "absUrl": "https://arxiv.org/abs/0804.2852v1",
+      "pdfUrl": "https://arxiv.org/pdf/0804.2852v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-04",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0804.1696",
+      "title": "A classification of invasive patterns in AOP",
+      "authors": [
+        "Freddy Munoz",
+        "Benoit Baudry",
+        "Olivier Barais"
+      ],
+      "authorsText": "Freddy Munoz, Benoit Baudry, Olivier Barais",
+      "abstract": "Aspect-Oriented Programming (AOP) improves modularity by encapsulating crosscutting concerns into aspects. Some mechanisms to compose aspects allow invasiveness as a mean to integrate concerns. Invasiveness means that AOP languages have unrestricted access to program properties. Such kind of languages are interesting because they allow performing complex operations and better introduce functionalities. In this report we present a classification of invasive patterns in AOP. This classification characterizes the aspects invasive behavior and allows developers to abstract about the aspect incidence over the program they crosscut.",
+      "absUrl": "https://arxiv.org/abs/0804.1696v1",
+      "pdfUrl": "https://arxiv.org/pdf/0804.1696v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-04",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0804.0943",
+      "title": "The Wall and The Ball: A Study of Domain Referent Spreadsheet Errors",
+      "authors": [
+        "Richard J. Irons"
+      ],
+      "authorsText": "Richard J. Irons",
+      "abstract": "The Cell Error Rate in simple spreadsheets averages about 2% to 5%. This CER has been measured in domain free environments. This paper compares the CERs occurring in domain free and applied domain tasks. The applied domain task requires the application of simple linear algebra to a costing problem. The results show that domain referent knowledge influences participants' approaches to spreadsheet creation and spreadsheet usage. The conclusion is that spreadsheet error making is influenced by domain knowledge and domain perception. Qualitative findings also suggest that spreadsheet error making is a part of overall human behaviour, and ought to be analyzed against this wider canvas.",
+      "absUrl": "https://arxiv.org/abs/0804.0943v1",
+      "pdfUrl": "https://arxiv.org/pdf/0804.0943v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-04",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0804.0941",
+      "title": "Reducing Overconfidence in Spreadsheet Development",
+      "authors": [
+        "Raymond R. Panko"
+      ],
+      "authorsText": "Raymond R. Panko",
+      "abstract": "Despite strong evidence of widespread errors, spreadsheet developers rarely subject their spreadsheets to post-development testing to reduce errors. This may be because spreadsheet developers are overconfident in the accuracy of their spreadsheets. This conjecture is plausible because overconfidence is present in a wide variety of human cognitive domains, even among experts. This paper describes two experiments in overconfidence in spreadsheet development. The first is a pilot study to determine the existence of overconfidence. The second tests a manipulation to reduce overconfidence and errors. The manipulation is modestly successful, indicating that overconfidence reduction is a promising avenue to pursue.",
+      "absUrl": "https://arxiv.org/abs/0804.0941v1",
+      "pdfUrl": "https://arxiv.org/pdf/0804.0941v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-04",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0804.0797",
+      "title": "Sarbanes-Oxley: What About all the Spreadsheets?",
+      "authors": [
+        "Raymond R. Panko",
+        "Nicholas Ordway"
+      ],
+      "authorsText": "Raymond R. Panko, Nicholas Ordway",
+      "abstract": "The Sarbanes-Oxley Act of 2002 has finally forced corporations to examine the validity of their spreadsheets. They are beginning to understand the spreadsheet error literature, including what it tells them about the need for comprehensive spreadsheet testing. However, controlling for fraud will require a completely new set of capabilities, and a great deal of new research will be needed to develop fraud control capabilities. This paper discusses the riskiness of spreadsheets, which can now be quantified to a considerable degree. It then discusses how to use control frameworks to reduce the dangers created by spreadsheets. It focuses especially on testing, which appears to be the most crucial element in spreadsheet controls.",
+      "absUrl": "https://arxiv.org/abs/0804.0797v1",
+      "pdfUrl": "https://arxiv.org/pdf/0804.0797v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-04",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0804.0366",
+      "title": "Merging Object and Process Diagrams for Business Information Modeling",
+      "authors": [
+        "Patrick Chénais"
+      ],
+      "authorsText": "Patrick Chénais",
+      "abstract": "While developing an information system for the University of Bern, we were faced with two major issues: managing software changes and adapting Business Information Models. Software techniques well-suited to software development teams exist, yet the models obtained are often too complex for the business user. We will first highlight the conceptual problems encountered while designing the Business Information Model. We will then propose merging class diagrams and business process modeling to achieve a necessary transparency. We will finally present a modeling tool we developed which, using pilot case studies, helps to show some of the advantages of a dual model approach.",
+      "absUrl": "https://arxiv.org/abs/0804.0366v1",
+      "pdfUrl": "https://arxiv.org/pdf/0804.0366v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-04",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0803.4025",
+      "title": "Structure and Interpretation of Computer Programs",
+      "authors": [
+        "Ganesh M. Narayan",
+        "K. Gopinath",
+        "V. Sridhar"
+      ],
+      "authorsText": "Ganesh M. Narayan, K. Gopinath, V. Sridhar",
+      "abstract": "Call graphs depict the static, caller-callee relation between \"functions\" in a program. With most source/target languages supporting functions as the primitive unit of composition, call graphs naturally form the fundamental control flow representation available to understand/develop software. They are also the substrate on which various interprocedural analyses are performed and are integral part of program comprehension/testing. Given their universality and usefulness, it is imperative to ask if call graphs exhibit any intrinsic graph theoretic features -- across versions, program domains and source languages. This work is an attempt to answer these questions: we present and investigate a set of meaningful graph measures that help us understand call graphs better; we establish how these measures correlate, if any, across different languages and program domains; we also assess the overall, language independent software quality by suitably interpreting these measures.",
+      "absUrl": "https://arxiv.org/abs/0803.4025v1",
+      "pdfUrl": "https://arxiv.org/pdf/0803.4025v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0803.3231",
+      "title": "Archiving: The Overlooked Spreadsheet Risk",
+      "authors": [
+        "Victoria Lemieux"
+      ],
+      "authorsText": "Victoria Lemieux",
+      "abstract": "This paper maintains that archiving has been overlooked as a key spreadsheet internal control. The case of failed Jamaican commercial banks demonstrates how poor archiving can lead to weaknesses in spreadsheet control that contribute to operational risk. In addition, the Sarbanes-0xley Act contains a number of provisions that require tighter control over the archiving of spreadsheets. To mitigate operational risks and achieve compliance with the records-related provisions of Sarbanes-Oxley, the author argues that organisations should introduce records management programmes that provide control over the archiving of spreadsheets. At a minimum, spreadsheet archiving controls should identify and ensure compliance with retention requirements, support document production in the event of regulatory inquiries or litigation, and prevent unauthorised destruction of records.",
+      "absUrl": "https://arxiv.org/abs/0803.3231v1",
+      "pdfUrl": "https://arxiv.org/pdf/0803.3231v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0803.2317",
+      "title": "Lissom, a Source Level Proof Carrying Code Platform",
+      "authors": [
+        "Joao Gomes",
+        "Daniel Martins",
+        "Simao Melo de Sousa",
+        "Jorge Sousa Pinto"
+      ],
+      "authorsText": "Joao Gomes, Daniel Martins, Simao Melo de Sousa, Jorge Sousa Pinto",
+      "abstract": "This paper introduces a proposal for a Proof Carrying Code (PCC) architecture called Lissom. Started as a challenge for final year Computing students, Lissom was thought as a mean to prove to a sceptic community, and in particular to students, that formal verification tools can be put to practice in a realistic environment, and be used to solve complex and concrete problems. The attractiveness of the problems that PCC addresses has already brought students to show interest in this project.",
+      "absUrl": "https://arxiv.org/abs/0803.2317v1",
+      "pdfUrl": "https://arxiv.org/pdf/0803.2317v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0803.2027",
+      "title": "Excelsior: Bringing the Benefits of Modularisation to Excel",
+      "authors": [
+        "Jocelyn Paine"
+      ],
+      "authorsText": "Jocelyn Paine",
+      "abstract": "Excel lacks features for modular design. Had it such features, as do most programming languages, they would save time, avoid unneeded programming, make mistakes less likely, make code-control easier, help organisations adopt a uniform house style, and open business opportunities in buying and selling spreadsheet modules. I present Excelsior, a system for bringing these benefits to Excel.",
+      "absUrl": "https://arxiv.org/abs/0803.2027v1",
+      "pdfUrl": "https://arxiv.org/pdf/0803.2027v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0803.1751",
+      "title": "TellTable Spreadsheet Audit: from Technical Possibility to Operating Prototype",
+      "authors": [
+        "John Nash",
+        "Andy Adler",
+        "Neil Smith"
+      ],
+      "authorsText": "John Nash, Andy Adler, Neil Smith",
+      "abstract": "At the 2003 EuSpRIG meeting, we presented a framework and software infrastructure to generate and analyse an audit trail for a spreadsheet file. This report describes the results of a pilot implementation of this software (now called TellTable; see www.telltable.com), along with developments in the server infrastructure and availability, extensions to other \"Office Suite\" files, integration of the audit tool into the server interface, and related developments, licensing and reports. We continue to seek collaborators and partners in what is primarily an open-source project with some shared-source components.",
+      "absUrl": "https://arxiv.org/abs/0803.1751v1",
+      "pdfUrl": "https://arxiv.org/pdf/0803.1751v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0803.1748",
+      "title": "A Computational Framework for the Near Elimination of Spreadsheet Risk",
+      "authors": [
+        "Yusuf Jafry",
+        "Fredrika Sidoroff",
+        "Roger Chi"
+      ],
+      "authorsText": "Yusuf Jafry, Fredrika Sidoroff, Roger Chi",
+      "abstract": "We present Risk Integrated's Enterprise Spreadsheet Platform (ESP), a technical approach to the near-elimination of spreadsheet risk in the enterprise computing environment, whilst maintaining the full flexibility of spreadsheets for modelling complex financial structures and processes. In its Basic Mode of use, the system comprises a secure and robust centralised spreadsheet management framework. In Advanced Mode, the system can be viewed as a robust computational framework whereby users can \"submit jobs\" to the spreadsheet, and retrieve the results from the computations, but with no direct access to the underlying spreadsheet. An example application, Monte Carlo simulation, is presented to highlight the benefits of this approach with regard to mitigating spreadsheet risk in complex, mission-critical, financial calculations.",
+      "absUrl": "https://arxiv.org/abs/0803.1748v1",
+      "pdfUrl": "https://arxiv.org/pdf/0803.1748v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0803.0666",
+      "title": "An approach to control collaborative processes in PLM systems",
+      "authors": [
+        "Soumaya El Kadiri",
+        "Philippe Pernelle",
+        "Miguel Delattre",
+        "Abdelaziz Bouras"
+      ],
+      "authorsText": "Soumaya El Kadiri, Philippe Pernelle, Miguel Delattre, Abdelaziz Bouras",
+      "abstract": "Companies that collaborate within the product development processes need to implement an effective management of their collaborative activities. Despite the implementation of a PLM system, the collaborative activities are not efficient as it might be expected. This paper presents an analysis of the problems related to the collaborative work using a PLM system. From this analysis, we propose an approach for improving collaborative processes within a PLM system, based on monitoring indicators. This approach leads to identify and therefore to mitigate the brakes of the collaborative work.",
+      "absUrl": "https://arxiv.org/abs/0803.0666v1",
+      "pdfUrl": "https://arxiv.org/pdf/0803.0666v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0803.0164",
+      "title": "Considering Functional Spreadsheet Operator Usage Suggests the Value of Example Driven Modelling for Decision Support Systems",
+      "authors": [
+        "Simon Thorne",
+        "David Ball"
+      ],
+      "authorsText": "Simon Thorne, David Ball",
+      "abstract": "Most spreadsheet surveys both for reporting use and error focus on the practical application of the spreadsheet in a particular industry. Typically these studies will illustrate that a particular percentage of spreadsheets are used for optimisation and a further percentage are used for 'What if' analysis. Much less common is examining the classes of function, as defined by the vendor, used by modellers to build their spreadsheet models. This alternative analysis allows further insight into the programming nature of spreadsheets and may assist researchers in targeting particular structures in spreadsheet software for further investigation. Further, understanding the functional make-up of spreadsheets allows effective evaluation of novel approaches from a programming point of view. It allows greater insight into studies that report what spreadsheets are used for since it is explicit which functional structures are in use in spreadsheets. We conclude that a deeper understanding of the use of operators and the operator's relationship to error would provide fresh insight into the spreadsheet error problem. Considering functional spreadsheet operator usage suggests the value of Example Driven Modelling for Decision Support Systems",
+      "absUrl": "https://arxiv.org/abs/0803.0164v1",
+      "pdfUrl": "https://arxiv.org/pdf/0803.0164v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0803.0163",
+      "title": "Rapid Spreadsheet Reshaping with Excelsior: multiple drastic changes to content and layout are easy when you represent enough structure",
+      "authors": [
+        "Jocelyn Paine",
+        "Emre Tek",
+        "Duncan Williamson"
+      ],
+      "authorsText": "Jocelyn Paine, Emre Tek, Duncan Williamson",
+      "abstract": "Spreadsheets often need changing in ways made tedious and risky by Excel. For example: simultaneously altering many tables' size, orientation, and position; inserting cross-tabulations; moving data between sheets; splitting and merging sheets. A safer, faster restructuring tool is, we claim, Excelsior. The result of a research project into reducing spreadsheet risk, Excelsior is the first ever tool for modularising spreadsheets; i.e. for building them from components which can be independently created, tested, debugged, and updated. It represents spreadsheets in a way that makes these components explicit, separates them from layout, and allows both components and layout to be changed without breaking dependent formulae. Here, we report experiments to test that this does indeed make such changes easier. In one, we automatically generated a cross-tabulation and added it to a spreadsheet. In the other, we generated new versions of a 10,000-cell housing-finance spreadsheet containing many interconnected 20*40 tables. We varied table sizes from 5*10 to 200*2,000; moved tables between sheets; and flipped table orientations. Each change generated a spreadsheet with different structure but identical outputs; each change took just a few minutes.",
+      "absUrl": "https://arxiv.org/abs/0803.0163v1",
+      "pdfUrl": "https://arxiv.org/pdf/0803.0163v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0803.0162",
+      "title": "A Software Development Methodology for Research and Prototyping in Financial Markets",
+      "authors": [
+        "Andrew Kumiega",
+        "Ben Van Vliet"
+      ],
+      "authorsText": "Andrew Kumiega, Ben Van Vliet",
+      "abstract": "The objective of this paper is to develop a standardized methodology for software development in the very unique industry and culture of financial markets. The prototyping process we present allows the development team to deliver for review and comment intermediate-level models based upon clearly defined customer requirements. This spreadsheet development methodology is presented within a larger business context, that of trading system development, the subject of an upcoming book by the authors of this paper.",
+      "absUrl": "https://arxiv.org/abs/0803.0162v1",
+      "pdfUrl": "https://arxiv.org/pdf/0803.0162v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0803.0015",
+      "title": "EuSpRIG 2006 Commercial Spreadsheet Review",
+      "authors": [
+        "Simon Murphy"
+      ],
+      "authorsText": "Simon Murphy",
+      "abstract": "This management summary provides an outline of a commercial spreadsheet review process. The aim of this process is to ensure remedial or enhancement work can safely be undertaken on a spreadsheet with a commercially acceptable level of risk of introducing new errors.",
+      "absUrl": "https://arxiv.org/abs/0803.0015v1",
+      "pdfUrl": "https://arxiv.org/pdf/0803.0015v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0802.3940",
+      "title": "Spreadsheet Structure Discovery with Logic Programming",
+      "authors": [
+        "Jocelyn Paine"
+      ],
+      "authorsText": "Jocelyn Paine",
+      "abstract": "Our term \"structure discovery\" denotes the recovery of structure, such as the grouping of cells, that was intended by a spreadsheet's author but is not explicit in the spreadsheet. We are implementing structure discovery tools in the logic-programming language Prolog for our spreadsheet analysis program Model Master, by writing grammars for spreadsheet structures. The objective is an \"intelligent structure monitor\" to run beside Excel, allowing users to reconfigure spreadsheets to the representational needs of the task at hand. This could revolutionise spreadsheet \"best practice\". We also describe a formulation of spreadsheet reverse-engineering based on \"arrows\".",
+      "absUrl": "https://arxiv.org/abs/0802.3940v1",
+      "pdfUrl": "https://arxiv.org/pdf/0802.3940v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0802.3895",
+      "title": "Complexity Metrics for Spreadsheet Models",
+      "authors": [
+        "Andrej Bregar"
+      ],
+      "authorsText": "Andrej Bregar",
+      "abstract": "Several complexity metrics are described which are related to logic structure, data structure and size of spreadsheet models. They primarily concentrate on the dispersion of cell references and cell paths. Most metrics are newly defined, while some are adapted from traditional software engineering. Their purpose is the identification of cells which are liable to errors. In addition, they can be used to estimate the values of dependent process metrics, such as the development duration and effort, and especially to adjust the cell error rate in accordance with the contents of each individual cell, in order to accurately asses the reliability of a model. Finally, two conceptual constructs - the reference branching condition cell and the condition block - are discussed, aiming at improving the reliability, modifiability, auditability and comprehensibility of logical tests.",
+      "absUrl": "https://arxiv.org/abs/0802.3895v1",
+      "pdfUrl": "https://arxiv.org/pdf/0802.3895v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0802.3789",
+      "title": "Knowledge Technologies",
+      "authors": [
+        "Nick Milton"
+      ],
+      "authorsText": "Nick Milton",
+      "abstract": "Several technologies are emerging that provide new ways to capture, store, present and use knowledge. This book is the first to provide a comprehensive introduction to five of the most important of these technologies: Knowledge Engineering, Knowledge Based Engineering, Knowledge Webs, Ontologies and Semantic Webs. For each of these, answers are given to a number of key questions (What is it? How does it operate? How is a system developed? What can it be used for? What tools are available? What are the main issues?). The book is aimed at students, researchers and practitioners interested in Knowledge Management, Artificial Intelligence, Design Engineering and Web Technologies.\nDuring the 1990s, Nick worked at the University of Nottingham on the application of AI techniques to knowledge management and on various knowledge acquisition projects to develop expert systems for military applications. In 1999, he joined Epistemics where he worked on numerous knowledge projects and helped establish knowledge management programmes at large organisations in the engineering, technology and legal sectors. He is author of the book \"Knowledge Acquisition in Practice\", which describes a step-by-step procedure for acquiring and implementing expertise. He maintains strong links with leading research organisations working on knowledge technologies, such as knowledge-based engineering, ontologies and semantic technologies.",
+      "absUrl": "https://arxiv.org/abs/0802.3789v1",
+      "pdfUrl": "https://arxiv.org/pdf/0802.3789v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0802.3784",
+      "title": "Pattern-Oriented Analysis and Design (POAD) Theory",
+      "authors": [
+        "Jerry Overton"
+      ],
+      "authorsText": "Jerry Overton",
+      "abstract": "Pattern-Oriented Analysis and Design (POAD) is the practice of building complex software by applying proven designs to specific problem domains. Although a great deal of research and practice has been devoted to formalizing existing design patterns and discovering new ones, there has been relatively little research into methods for combining these patterns into software applications. This is partly because the creation of complex software applications is so expensive. This paper proposes a mathematical model of POAD that may allow future research in pattern-oriented techniques to be performed using less expensive formal techniques rather than expensive, complex software development.",
+      "absUrl": "https://arxiv.org/abs/0802.3784v1",
+      "pdfUrl": "https://arxiv.org/pdf/0802.3784v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0802.3628",
+      "title": "Dynamic data models: an application of MOP-based persistence in Common Lisp",
+      "authors": [
+        "Pierre Thierry",
+        "Simon E. B. Thierry"
+      ],
+      "authorsText": "Pierre Thierry, Simon E. B. Thierry",
+      "abstract": "The data model of an application, the nature and format of data stored across executions, is typically a very rigid part of its early specification, even when prototyping, and changing it after code that relies on it was written can prove quite expensive and error-prone.\nCode and data in a running Lisp image can be dynamically modified. A MOP-based persistence library can bring this dynamicity to the data model. This enables to extend the easy prototyping way of development to the storage of data and helps avoiding interruptions of service. This article presents the conditions to do this portably and transparently.",
+      "absUrl": "https://arxiv.org/abs/0802.3628v1",
+      "pdfUrl": "https://arxiv.org/pdf/0802.3628v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0802.3478",
+      "title": "It Ain't What You View, But The Way That You View It: documenting spreadsheets with Excelsior, semantic wikis, and literate programming",
+      "authors": [
+        "Jocelyn Paine"
+      ],
+      "authorsText": "Jocelyn Paine",
+      "abstract": "I describe preliminary experiments in documenting Excelsior versions of spreadsheets using semantic wikis and literate programming. The objective is to create well-structured and comprehensive documentation, easy to use by those unfamiliar with the spreadsheets documented. I discuss why so much documentation is hard to use, and briefly explain semantic wikis and literate programming; although parts of the paper are Excelsior-specific, these sections may be of more general interest.",
+      "absUrl": "https://arxiv.org/abs/0802.3478v1",
+      "pdfUrl": "https://arxiv.org/pdf/0802.3478v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0802.3476",
+      "title": "Fun Boy Three Were Wrong: it is what you do, not the way that you do it",
+      "authors": [
+        "Jocelyn Paine"
+      ],
+      "authorsText": "Jocelyn Paine",
+      "abstract": "I revisit some classic publications on modularity, to show what problems its pioneers wanted to solve. These problems occur with spreadsheets too: to recognise them may help us avoid them.",
+      "absUrl": "https://arxiv.org/abs/0802.3476v1",
+      "pdfUrl": "https://arxiv.org/pdf/0802.3476v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0802.3475",
+      "title": "Spreadsheet Development Methodologies using Resolver: Moving spreadsheets into the 21st Century",
+      "authors": [
+        "Patrick Kemmis",
+        "Giles Thomas"
+      ],
+      "authorsText": "Patrick Kemmis, Giles Thomas",
+      "abstract": "We intend to demonstrate the innate problems with existing spreadsheet products and to show how to tackle these issues using a new type of spreadsheet program called Resolver. It addresses the issues head-on and thereby moves the 1980's \"VisiCalc paradigm\" on to match the advances in computer languages and user requirements. Continuous display of the spreadsheet grid and the equivalent computer program, together with the ability to interact and add code through either interface, provides a number of new methodologies for spreadsheet development.",
+      "absUrl": "https://arxiv.org/abs/0802.3475v1",
+      "pdfUrl": "https://arxiv.org/pdf/0802.3475v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0802.3457",
+      "title": "Spreadsheet Errors: What We Know. What We Think We Can Do",
+      "authors": [
+        "Raymond R. Panko"
+      ],
+      "authorsText": "Raymond R. Panko",
+      "abstract": "Fifteen years of research studies have concluded unanimously that spreadsheet errors are both common and non-trivial. Now we must seek ways to reduce spreadsheet errors. Several approaches have been suggested, some of which are promising and others, while appealing because they are easy to do, are not likely to be effective. To date, only one technique, cell-by-cell code inspection, has been demonstrated to be effective. We need to conduct further research to determine the degree to which other techniques can reduce spreadsheet errors.",
+      "absUrl": "https://arxiv.org/abs/0802.3457v1",
+      "pdfUrl": "https://arxiv.org/pdf/0802.3457v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0802.2932",
+      "title": "A New Approach to Spreadsheet Analytics Management in Financial Markets",
+      "authors": [
+        "Brian Sentence"
+      ],
+      "authorsText": "Brian Sentence",
+      "abstract": "Spreadsheets in financial markets are frequently used as database, calculator and reporting application combined. This paper describes an alternative approach in which spreadsheet design and database technology have been brought together in order to alleviate management and regulatory concerns over the operational risks of spreadsheet usage. In particular, the paper focuses on the rapid creation and centralised deployment of statistical analytics within a software system now in use by major investment banks, and presents a novel technique for the manipulation in spreadsheets of high volumes of intraday market data.",
+      "absUrl": "https://arxiv.org/abs/0802.2932v1",
+      "pdfUrl": "https://arxiv.org/pdf/0802.2932v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0802.2306",
+      "title": "Software graphs and programmer awareness",
+      "authors": [
+        "G. J. Baxter",
+        "M. R. Frean"
+      ],
+      "authorsText": "G. J. Baxter, M. R. Frean",
+      "abstract": "Dependencies between types in object-oriented software can be viewed as directed graphs, with types as nodes and dependencies as edges. The in-degree and out-degree distributions of such graphs have quite different forms, with the former resembling a power-law distribution and the latter an exponential distribution. This effect appears to be independent of application or type relationship. A simple generative model is proposed to explore the proposition that the difference arises because the programmer is aware of the out-degree of a type but not of its in-degree. The model reproduces the two distributions, and compares reasonably well to those observed in 14 different type relationships across 12 different Java applications.",
+      "absUrl": "https://arxiv.org/abs/0802.2306v1",
+      "pdfUrl": "https://arxiv.org/pdf/0802.2306v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0802.2258",
+      "title": "Using Alloy to model-check visual design notations",
+      "authors": [
+        "Anthony J. H. Simons",
+        "Carlos Alberto Fernandez-y-Fernandez"
+      ],
+      "authorsText": "Anthony J. H. Simons, Carlos Alberto Fernandez-y-Fernandez",
+      "abstract": "This paper explores the process of validation for the abstract syntax of a graphical notation. We define an unified specification for five of the UML diagrams used by the Discovery Method and, in this document, we illustrate how diagrams can be represented in Alloy and checked against our specification in order to know if these are valid under the Discovery notation.",
+      "absUrl": "https://arxiv.org/abs/0802.2258v1",
+      "pdfUrl": "https://arxiv.org/pdf/0802.2258v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0802.1586",
+      "title": "Program Promises",
+      "authors": [
+        "Demissies Aredo",
+        "Mark Burgess",
+        "Simen Hagen"
+      ],
+      "authorsText": "Demissies Aredo, Mark Burgess, Simen Hagen",
+      "abstract": "The framework of promise theory offers an alternative way of understanding programming models, especially in distributed systems. We show that promise theory can express some familiar constructs and resolve some problems in program interface design, using fewer and simpler concepts than the Unified Modelling Language (UML).",
+      "absUrl": "https://arxiv.org/abs/0802.1586v1",
+      "pdfUrl": "https://arxiv.org/pdf/0802.1586v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0802.1026",
+      "title": "An Empirical Study of Cache-Oblivious Priority Queues and their Application to the Shortest Path Problem",
+      "authors": [
+        "Benjamin Sach",
+        "Raphaël Clifford"
+      ],
+      "authorsText": "Benjamin Sach, Raphaël Clifford",
+      "abstract": "In recent years the Cache-Oblivious model of external memory computation has provided an attractive theoretical basis for the analysis of algorithms on massive datasets. Much progress has been made in discovering algorithms that are asymptotically optimal or near optimal. However, to date there are still relatively few successful experimental studies. In this paper we compare two different Cache-Oblivious priority queues based on the Funnel and Bucket Heap and apply them to the single source shortest path problem on graphs with positive edge weights. Our results show that when RAM is limited and data is swapping to external storage, the Cache-Oblivious priority queues achieve orders of magnitude speedups over standard internal memory techniques. However, for the single source shortest path problem both on simulated and real world graph data, these speedups are markedly lower due to the time required to access the graph adjacency list itself.",
+      "absUrl": "https://arxiv.org/abs/0802.1026v1",
+      "pdfUrl": "https://arxiv.org/pdf/0802.1026v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0802.0487",
+      "title": "Algorithmically independent sequences",
+      "authors": [
+        "Cristian Calude",
+        "Marius Zimand"
+      ],
+      "authorsText": "Cristian Calude, Marius Zimand",
+      "abstract": "Two objects are independent if they do not affect each other. Independence is well-understood in classical information theory, but less in algorithmic information theory. Working in the framework of algorithmic information theory, the paper proposes two types of independence for arbitrary infinite binary sequences and studies their properties. Our two proposed notions of independence have some of the intuitive properties that one naturally expects. For example, for every sequence $x$, the set of sequences that are independent (in the weaker of the two senses) with $x$ has measure one. For both notions of independence we investigate to what extent pairs of independent sequences, can be effectively constructed via Turing reductions (from one or more input sequences). In this respect, we prove several impossibility results. For example, it is shown that there is no effective way of producing from an arbitrary sequence with positive constructive Hausdorff dimension two sequences that are independent (even in the weaker type of independence) and have super-logarithmic complexity. Finally, a few conjectures and open questions are discussed.",
+      "absUrl": "https://arxiv.org/abs/0802.0487v1",
+      "pdfUrl": "https://arxiv.org/pdf/0802.0487v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0802.0212",
+      "title": "A topological formal treatment for scenario-based software specification of concurrent real-time systems",
+      "authors": [
+        "Miriam C. B. Alves",
+        "Christine C. Dantas",
+        "Nanci N. Arai",
+        "Rovedy B. da Silva"
+      ],
+      "authorsText": "Miriam C. B. Alves, Christine C. Dantas, Nanci N. Arai, Rovedy B. da Silva",
+      "abstract": "Real-time systems are computing systems in which the meeting of their requirements is vital for their correctness. Consequently, if the real-time requirements of these systems are poorly understood and verified, the results can be disastrous and lead to irremediable project failures at the early phases of development. The present work addresses the problem of detecting deadlock situations early in the requirements specification phase of a concurrent real time system, proposing a simple proof-of-concepts prototype that joins scenario-based requirements specifications and techniques based on topology. The efforts are concentrated in the integration of the formal representation of Message Sequence Chart scenarios into the deadlock detection algorithm of Fajstrup et al., based on geometric and algebraic topology.",
+      "absUrl": "https://arxiv.org/abs/0802.0212v1",
+      "pdfUrl": "https://arxiv.org/pdf/0802.0212v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0801.4802",
+      "title": "Investigating the Potential of Test-Driven Development for Spreadsheet Engineering",
+      "authors": [
+        "Alan Rust",
+        "Brian Bishop",
+        "Kevin McDaid"
+      ],
+      "authorsText": "Alan Rust, Brian Bishop, Kevin McDaid",
+      "abstract": "It is widely documented that the absence of a structured approach to spreadsheet engineering is a key factor in the high level of spreadsheet errors. In this paper we propose and investigate the application of Test-Driven Development to the creation of spreadsheets. Test-Driven Development is an emerging development technique in software engineering that has been shown to result in better quality software code. It has also been shown that this code requires less testing and is easier to maintain. Through a pair of case studies we demonstrate that Test-Driven Development can be applied to the development of spreadsheets. We present the detail of these studies preceded by a clear explanation of the technique and its application to spreadsheet engineering. A supporting tool under development by the authors is also documented along with proposed research to determine the effectiveness of the methodology and the associated tool.",
+      "absUrl": "https://arxiv.org/abs/0801.4802v1",
+      "pdfUrl": "https://arxiv.org/pdf/0801.4802v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0801.4775",
+      "title": "Spreadsheet Assurance by \"Control Around\" is a Viable Alternative to the Traditional Approach",
+      "authors": [
+        "Harmen Ettema",
+        "Paul Janssen",
+        "Jacques de Swart"
+      ],
+      "authorsText": "Harmen Ettema, Paul Janssen, Jacques de Swart",
+      "abstract": "The traditional approach to spreadsheet auditing generally consists of auditing every distinct formula within a spreadsheet. Although tools are developed to support auditors during this process, the approach is still very time consuming and therefore relatively expensive. As an alternative to the traditional \"control through\" approach, this paper discusses a \"control around\" approach. Within the proposed approach not all distinct formulas are audited separately, but the relationship between input data and output data of a spreadsheet is audited through comparison with a shadow model developed in a modelling language. Differences between the two models then imply possible errors in the spreadsheet. This paper describes relevant issues regarding the \"control around\" approach and the circumstances in which this approach is preferred above a traditional spreadsheet audit approach.",
+      "absUrl": "https://arxiv.org/abs/0801.4775v1",
+      "pdfUrl": "https://arxiv.org/pdf/0801.4775v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0801.4774",
+      "title": "Source Code Protection for Applications Written in Microsoft Excel and Google Spreadsheet",
+      "authors": [
+        "Thomas A. Grossman"
+      ],
+      "authorsText": "Thomas A. Grossman",
+      "abstract": "Spreadsheets are used to develop application software that is distributed to users. Unfortunately, the users often have the ability to change the programming statements (\"source code\") of the spreadsheet application. This causes a host of problems. By critically examining the suitability of spreadsheet computer programming languages for application development, six \"application development features\" are identified, with source code protection being the most important. We investigate the status of these features and discuss how they might be implemented in the dominant Microsoft Excel spreadsheet and in the new Google Spreadsheet. Although Google Spreadsheet currently provides no source code control, its web-centric delivery model offers technical advantages for future provision of a rich set of features. Excel has a number of tools that can be combined to provide \"pretty good protection\" of source code, but weak passwords reduce its robustness. User access to Excel source code must be considered a programmer choice rather than an attribute of the spreadsheet.",
+      "absUrl": "https://arxiv.org/abs/0801.4774v1",
+      "pdfUrl": "https://arxiv.org/pdf/0801.4774v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0801.4280",
+      "title": "Spreadsheet Debugging",
+      "authors": [
+        "Yirsaw Ayalew",
+        "Roland Mittermeir"
+      ],
+      "authorsText": "Yirsaw Ayalew, Roland Mittermeir",
+      "abstract": "Spreadsheet programs, artifacts developed by non-programmers, are used for a variety of important tasks and decisions. Yet a significant proportion of them have severe quality problems. To address this issue, our previous work presented an interval-based testing methodology for spreadsheets. Interval-based testing rests on the observation that spreadsheets are mainly used for numerical computations. It also incorporates ideas from symbolic testing and interval analysis. This paper addresses the issue of efficiently debugging spreadsheets. Based on the interval-based testing methodology, this paper presents a technique for tracing faults in spreadsheet programs. The fault tracing technique proposed uses the dataflow information and cell marks to identify the most influential faulty cell(s) for a given formula cell containing a propagated fault.",
+      "absUrl": "https://arxiv.org/abs/0801.4280v1",
+      "pdfUrl": "https://arxiv.org/pdf/0801.4280v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0801.4274",
+      "title": "Computational Models of Spreadsheet Development: Basis for Educational Approaches",
+      "authors": [
+        "Karin Hodnigg",
+        "Markus Clermont",
+        "Roland T. Mittermeir"
+      ],
+      "authorsText": "Karin Hodnigg, Markus Clermont, Roland T. Mittermeir",
+      "abstract": "Among the multiple causes of high error rates in spreadsheets, lack of proper training and of deep understanding of the computational model upon which spreadsheet computations rest might not be the least issue. The paper addresses this problem by presenting a didactical model focussing on cell interaction, thus exceeding the atomicity of cell computations. The approach is motivated by an investigation how different spreadsheet systems handle certain computational issues implied from moving cells, copy-paste operations, or recursion.",
+      "absUrl": "https://arxiv.org/abs/0801.4274v1",
+      "pdfUrl": "https://arxiv.org/pdf/0801.4274v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0801.3924",
+      "title": "Increased security through open source",
+      "authors": [
+        "Jaap-Henk Hoepman",
+        "Bart Jacobs"
+      ],
+      "authorsText": "Jaap-Henk Hoepman, Bart Jacobs",
+      "abstract": "In this paper we discuss the impact of open source on both the security and transparency of a software system. We focus on the more technical aspects of this issue, combining and extending arguments developed over the years. We stress that our discussion of the problem only applies to software for general purpose computing systems. For embedded systems, where the software usually cannot easily be patched or upgraded, different considerations may apply.",
+      "absUrl": "https://arxiv.org/abs/0801.3924v1",
+      "pdfUrl": "https://arxiv.org/pdf/0801.3924v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0801.3853",
+      "title": "Comparison of Spreadsheets with other Development Tools (limitations, solutions, workarounds and alternatives)",
+      "authors": [
+        "Simon Murphy"
+      ],
+      "authorsText": "Simon Murphy",
+      "abstract": "The spreadsheet paradigm has some unique risks and challenges that are not present in more traditional development technologies. Many of the recent advances in other branches of software development have bypassed spreadsheets and spreadsheet developers. This paper compares spreadsheets and spreadsheet development to more traditional platforms such as databases and procedural languages. It also considers the fundamental danger introduced in the transition from paper spreadsheets to electronic. Suggestions are made to manage the risks and work around the limitations.",
+      "absUrl": "https://arxiv.org/abs/0801.3853v1",
+      "pdfUrl": "https://arxiv.org/pdf/0801.3853v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0801.2618",
+      "title": "Survey of Technologies for Web Application Development",
+      "authors": [
+        "Barry Doyle",
+        "Cristina Videira Lopes"
+      ],
+      "authorsText": "Barry Doyle, Cristina Videira Lopes",
+      "abstract": "Web-based application developers face a dizzying array of platforms, languages, frameworks and technical artifacts to choose from. We survey, classify, and compare technologies supporting Web application development. The classification is based on (1) foundational technologies; (2)integration with other information sources; and (3) dynamic content generation. We further survey and classify software engineering techniques and tools that have been adopted from traditional programming into Web programming. We conclude that, although the infrastructure problems of the Web have largely been solved, the cacophony of technologies for Web-based applications reflects the lack of a solid model tailored for this domain.",
+      "absUrl": "https://arxiv.org/abs/0801.2618v1",
+      "pdfUrl": "https://arxiv.org/pdf/0801.2618v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "0801.0609",
+      "title": "Applying the CobiT Control Framework to Spreadsheet Developments",
+      "authors": [
+        "Raymond J. Butler"
+      ],
+      "authorsText": "Raymond J. Butler",
+      "abstract": "One of the problems reported by researchers and auditors in the field of spreadsheet risks is that of getting and keeping managements attention to the problem. Since 1996, the Information Systems Audit & Control Foundation and the IT Governance Institute have published CobiT which brings mainstream IT control issues into the corporate governance arena. This paper illustrates how spreadsheet risk and control issues can be mapped onto the CobiT framework and thus brought to managers attention in a familiar format.",
+      "absUrl": "https://arxiv.org/abs/0801.0609v1",
+      "pdfUrl": "https://arxiv.org/pdf/0801.0609v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2008-01",
+      "sourceVersion": "v1"
+    }
+  ]
+}

@@ -1,0 +1,662 @@
+{
+  "title": "arXiv cs.SE 2005",
+  "sourceLabel": "arXiv cs.SE 2005",
+  "sourceUrl": "https://arxiv.org/list/cs.SE/2005",
+  "archive": "cs.SE",
+  "year": 2005,
+  "updatedAt": "2026-05-01T19:47:23.151Z",
+  "months": [
+    {
+      "period": "2005-01",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2005-01?skip=0&show=2000",
+      "paperCount": 4
+    },
+    {
+      "period": "2005-02",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2005-02?skip=0&show=2000",
+      "paperCount": 2
+    },
+    {
+      "period": "2005-03",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2005-03?skip=0&show=2000",
+      "paperCount": 6
+    },
+    {
+      "period": "2005-04",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2005-04?skip=0&show=2000",
+      "paperCount": 1
+    },
+    {
+      "period": "2005-05",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2005-05?skip=0&show=2000",
+      "paperCount": 4
+    },
+    {
+      "period": "2005-06",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2005-06?skip=0&show=2000",
+      "paperCount": 2
+    },
+    {
+      "period": "2005-07",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2005-07?skip=0&show=2000",
+      "paperCount": 1
+    },
+    {
+      "period": "2005-08",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2005-08?skip=0&show=2000",
+      "paperCount": 8
+    },
+    {
+      "period": "2005-09",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2005-09?skip=0&show=2000",
+      "paperCount": 2
+    },
+    {
+      "period": "2005-10",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2005-10?skip=0&show=2000",
+      "paperCount": 1
+    },
+    {
+      "period": "2005-11",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2005-11?skip=0&show=2000",
+      "paperCount": 2
+    },
+    {
+      "period": "2005-12",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2005-12?skip=0&show=2000",
+      "paperCount": 1
+    }
+  ],
+  "papers": [
+    {
+      "id": "physics/0511064",
+      "title": "Logarithmic growth dynamics in software networks",
+      "authors": [
+        "Sergi Valverde",
+        "Ricard V. Sole"
+      ],
+      "authorsText": "Sergi Valverde, Ricard V. Sole",
+      "abstract": "In a recent paper, Krapivsky and Redner (Phys. Rev. E, 71 (2005) 036118) proposed a new growing network model with new nodes being attached to a randomly selected node, as well to all ancestors of the target node. The model leads to a sparse graph with an average degree growing logarithmically with the system size. Here we present compeling evidence for software networks being the result of a similar class of growing dynamics. The predicted pattern of network growth, as well as the stationary in- and out-degree distributions are consistent with the model. Our results confirm the view of large-scale software topology being generated through duplication-rewiring mechanisms. Implications of these findings are outlined.",
+      "absUrl": "https://arxiv.org/abs/physics/0511064v1",
+      "pdfUrl": "https://arxiv.org/pdf/physics/0511064v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "nlin/0505009",
+      "title": "A General Methodology for Designing Self-Organizing Systems",
+      "authors": [
+        "Carlos Gershenson"
+      ],
+      "authorsText": "Carlos Gershenson",
+      "abstract": "This paper presents a conceptual framework for speaking about self-organizing systems. The aim is to provide a methodology useful for designing and controlling systems developed to solve complex problems. A brief introduction to complexity and self-organization is given before introducing the conceptual framework and the methodology. A case study on self-organizing traffic lights illustrates the ideas presented in the paper.",
+      "absUrl": "https://arxiv.org/abs/nlin/0505009v1",
+      "pdfUrl": "https://arxiv.org/pdf/nlin/0505009v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0512019",
+      "title": "Amazing geometry of genetic space or are genetic algorithms convergent?",
+      "authors": [
+        "Marek W. Gutowski"
+      ],
+      "authorsText": "Marek W. Gutowski",
+      "abstract": "There is no proof yet of convergence of Genetic Algorithms. We do not supply it too. Instead, we present some thoughts and arguments to convince the Reader, that Genetic Algorithms are essentially bound for success. For this purpose, we consider only the crossover operators, single- or multiple-point, together with selection procedure. We also give a proof that the soft selection is superior to other selection schemes.",
+      "absUrl": "https://arxiv.org/abs/cs/0512019v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0512019v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0511018",
+      "title": "From General Systems to Soft Systems to Soft Computing: Applications for Large and Complex Real World Systems",
+      "authors": [
+        "Prashant"
+      ],
+      "authorsText": "Prashant",
+      "abstract": "Real world problems are concerned with complex, unstructured, multidisciplinary, large-scale systems, which require acquiring information of the system and its components and environment, introducing changes, and evaluating the affects. What is going on in the dynamics of any system is not merely the manipulation of material, energy and information but a more fundamental aspect, viz. management of complexity, which is measured by variety or degrees of freedom. The hierarchy concept is very central in systems science because it is strongly connected to other concepts such as complexity, synergetic and autonomy.\nThe recent past has witnessed novel models of computation of large and complex systems such as Interpretive Structural Modeling, Options Field Methodology, Metagame Theory, Qualitative Models, Intelligent Knowledge Based Expert Systems, and Soft Computing which seek approximate solutions to precisely or imprecisely formulated problems of real world by invoking one or more of the following models: Fuzzy Sets, Artificial Neural Networks and Evolutionary Algorithms.",
+      "absUrl": "https://arxiv.org/abs/cs/0511018v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0511018v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0510011",
+      "title": "Diophantus' 20th Problem and Fermat's Last Theorem for n=4: Formalization of Fermat's Proofs in the Coq Proof Assistant",
+      "authors": [
+        "David Delahaye",
+        "Micaela Mayero"
+      ],
+      "authorsText": "David Delahaye, Micaela Mayero",
+      "abstract": "We present the proof of Diophantus' 20th problem (book VI of Diophantus' Arithmetica), which consists in wondering if there exist right triangles whose sides may be measured as integers and whose surface may be a square. This problem was negatively solved by Fermat in the 17th century, who used the \"wonderful\" method (ipse dixit Fermat) of infinite descent. This method, which is, historically, the first use of induction, consists in producing smaller and smaller non-negative integer solutions assuming that one exists; this naturally leads to a reductio ad absurdum reasoning because we are bounded by zero. We describe the formalization of this proof which has been carried out in the Coq proof assistant. Moreover, as a direct and no less historical application, we also provide the proof (by Fermat) of Fermat's last theorem for n=4, as well as the corresponding formalization made in Coq.",
+      "absUrl": "https://arxiv.org/abs/cs/0510011v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0510011v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0509094",
+      "title": "Telling Great Stories: An NSDL Content and Communications System for Aggregation, Display, and Distribution of News and Features",
+      "authors": [
+        "Carol Minton Morris"
+      ],
+      "authorsText": "Carol Minton Morris",
+      "abstract": "Education digital libraries contain cataloged resources as well as contextual information about innovations in the use of educational technology, exemplar stories about community activities, and news from various user communities that include teachers, students, scholars, and developers. Long-standing library traditions of service, preservation, democratization of knowledge, rich discourse, equal access, and fair use are evident in library communications models that both pull in and push out contextual information from multiple sources integrated with editorial production processes. This paper argues that a dynamic narrative flow [1] is enabled by effective management of complex content and communications in a decentralized web-based education digital library making publishing objects such as aggregations of resources, or selected parts of objects [4] accessible through a Content and Communications System. Providing services that encourage patrons to reuse, reflect out, and contribute resources back [5] to the Library increases the reach and impact of the National Science Digital Library (NSDL). This system is a model for distributed content development and effective communications for education digital libraries in general.",
+      "absUrl": "https://arxiv.org/abs/cs/0509094v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0509094v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0509066",
+      "title": "A Model-driven Approach for Grid Services Engineering",
+      "authors": [
+        "David Manset",
+        "Richard McClatchey",
+        "Flavio Oquendo",
+        "Herve Verjus"
+      ],
+      "authorsText": "David Manset, Richard McClatchey, Flavio Oquendo, Herve Verjus",
+      "abstract": "As a consequence to the hype of Grid computing, such systems have seldom been designed using formal techniques. The complexity and rapidly growing demand around Grid technologies has favour the use of classical development techniques, resulting in no guidelines or rules and unstructured engineering processes. This paper advocates a formal approach to Grid applications development in an effort to contribute to the rigorous development of Grids software architectures. This approach addresses cross-platform interoperability and quality of service; the model-driven paradigm is applied to a formal architecture-centric engineering method in order to benefit from the formal semantic description power in addition to model-based transformations. The result of such a novel combined concept promotes the re-use of design models and eases developments in Grid computing by providing an adapted development process and ensuring correctness at each design step.",
+      "absUrl": "https://arxiv.org/abs/cs/0509066v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0509066v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0508123",
+      "title": "On Algorithms and Complexity for Sets with Cardinality Constraints",
+      "authors": [
+        "Bruno Marnette",
+        "Viktor Kuncak",
+        "Martin Rinard"
+      ],
+      "authorsText": "Bruno Marnette, Viktor Kuncak, Martin Rinard",
+      "abstract": "Typestate systems ensure many desirable properties of imperative programs, including initialization of object fields and correct use of stateful library interfaces. Abstract sets with cardinality constraints naturally generalize typestate properties: relationships between the typestates of objects can be expressed as subset and disjointness relations on sets, and elements of sets can be represented as sets of cardinality one. Motivated by these applications, this paper presents new algorithms and new complexity results for constraints on sets and their cardinalities. We study several classes of constraints and demonstrate a trade-off between their expressive power and their complexity.\nOur first result concerns a quantifier-free fragment of Boolean Algebra with Presburger Arithmetic. We give a nondeterministic polynomial-time algorithm for reducing the satisfiability of sets with symbolic cardinalities to constraints on constant cardinalities, and give a polynomial-space algorithm for the resulting problem.\nIn a quest for more efficient fragments, we identify several subclasses of sets with cardinality constraints whose satisfiability is NP-hard. Finally, we identify a class of constraints that has polynomial-time satisfiability and entailment problems and can serve as a foundation for efficient program analysis.",
+      "absUrl": "https://arxiv.org/abs/cs/0508123v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0508123v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0508111",
+      "title": "A Generic Framework for the Analysis and Specialization of Logic Programs",
+      "authors": [
+        "German Puebla",
+        "Elvira Albert",
+        "Manuel Hermenegildo"
+      ],
+      "authorsText": "German Puebla, Elvira Albert, Manuel Hermenegildo",
+      "abstract": "The relationship between abstract interpretation and partial deduction has received considerable attention and (partial) integrations have been proposed starting from both the partial deduction and abstract interpretation perspectives. In this work we present what we argue is the first fully described generic algorithm for efficient and precise integration of abstract interpretation and partial deduction. Taking as starting point state-of-the-art algorithms for context-sensitive, polyvariant abstract interpretation and (abstract) partial deduction, we present an algorithm which combines the best of both worlds. Key ingredients include the accurate success propagation inherent to abstract interpretation and the powerful program transformations achievable by partial deduction. In our algorithm, the calls which appear in the analysis graph are not analyzed w.r.t. the original definition of the procedure but w.r.t. specialized definitions of these procedures. Such specialized definitions are obtained by applying both unfolding and abstract executability. Our framework is parametric w.r.t. different control strategies and abstract domains. Different combinations of such parameters correspond to existing algorithms for program analysis and specialization. Simultaneously, our approach opens the door to the efficient computation of strictly more precise results than those achievable by each of the individual techniques. The algorithm is now one of the key components of the CiaoPP analysis and specialization system.",
+      "absUrl": "https://arxiv.org/abs/cs/0508111v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0508111v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0508109",
+      "title": "Enhancing the Alloy Analyzer with Patterns of Analysis",
+      "authors": [
+        "William Heaven",
+        "Alessandra Russo"
+      ],
+      "authorsText": "William Heaven, Alessandra Russo",
+      "abstract": "Formal techniques have been shown to be useful in the development of correct software. But the level of expertise required of practitioners of these techniques prohibits their widespread adoption. Formal techniques need to be tailored to the commercial software developer. Alloy is a lightweight specification language supported by the Alloy Analyzer (AA), a tool based on off-the-shelf SAT technology. The tool allows a user to check interactively whether given properties are consistent or valid with respect to a high-level specification, providing an environment in which the correctness of such a specification may be established. However, Alloy is not particularly suited to expressing program specifications and the feedback provided by AA can be misleading where the specification under analysis or the property being checked contains inconsistencies. In this paper, we address these two shortcomings. Firstly, we present a lightweight language called \"Loy\", tailored to the specification of object-oriented programs. An encoding of Loy into Alloy is provided so that AA can be used for automated analysis of Loy program specifications. Secondly, we present some \"patterns of analysis\" that guide a developer through the analysis of a Loy specification in order to establish its correctness before implementation.",
+      "absUrl": "https://arxiv.org/abs/cs/0508109v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0508109v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0508108",
+      "title": "Proving or Disproving likely Invariants with Constraint Reasoning",
+      "authors": [
+        "Tristan Denmat",
+        "Arnaud Gotlieb",
+        "Mireille Ducasse"
+      ],
+      "authorsText": "Tristan Denmat, Arnaud Gotlieb, Mireille Ducasse",
+      "abstract": "A program invariant is a property that holds for every execution of the program. Recent work suggest to infer likely-only invariants, via dynamic analysis. A likely invariant is a property that holds for some executions but is not guaranteed to hold for all executions. In this paper, we present work in progress addressing the challenging problem of automatically verifying that likely invariants are actual invariants. We propose a constraint-based reasoning approach that is able, unlike other approaches, to both prove or disprove likely invariants. In the latter case, our approach provides counter-examples. We illustrate the approach on a motivating example where automatically generated likely invariants are verified.",
+      "absUrl": "https://arxiv.org/abs/cs/0508108v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0508108v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0508105",
+      "title": "A Tracer Driver for Versatile Dynamic Analyses of Constraint Logic Programs",
+      "authors": [
+        "Ludovic Langevine",
+        "Mireille Ducasse"
+      ],
+      "authorsText": "Ludovic Langevine, Mireille Ducasse",
+      "abstract": "Programs with constraints are hard to debug. In this paper, we describe a general architecture to help develop new debugging tools for constraint programming. The possible tools are fed by a single general-purpose tracer. A tracer-driver is used to adapt the actual content of the trace, according to the needs of the tool. This enables the tools and the tracer to communicate in a client-server scheme. Each tool describes its needs of execution data thanks to event patterns. The tracer driver scrutinizes the execution according to these event patterns and sends only the data that are relevant to the connected tools. Experimental measures show that this approach leads to good performance in the context of constraint logic programming, where a large variety of tools exists and the trace is potentially huge.",
+      "absUrl": "https://arxiv.org/abs/cs/0508105v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0508105v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0508091",
+      "title": "Extending Prolog with Incomplete Fuzzy Information",
+      "authors": [
+        "Susana Munoz-Hernandez",
+        "Claudio Vaucheret"
+      ],
+      "authorsText": "Susana Munoz-Hernandez, Claudio Vaucheret",
+      "abstract": "Incomplete information is a problem in many aspects of actual environments. Furthermore, in many sceneries the knowledge is not represented in a crisp way. It is common to find fuzzy concepts or problems with some level of uncertainty. There are not many practical systems which handle fuzziness and uncertainty and the few examples that we can find are used by a minority. To extend a popular system (which many programmers are using) with the ability of combining crisp and fuzzy knowledge representations seems to be an interesting issue.\nOur first work (Fuzzy Prolog) was a language that models $\\mathcal{B}([0,1])$-valued Fuzzy Logic. In the Borel algebra, $\\mathcal{B}([0,1])$, truth value is represented using unions of intervals of real numbers. This work was more general in truth value representation and propagation than previous works.\nAn interpreter for this language using Constraint Logic Programming over Real numbers (CLP(${\\cal R}$)) was implemented and is available in the Ciao system.\nNow, we enhance our former approach by using default knowledge to represent incomplete information in Logic Programming. We also provide the implementation of this new framework. This new release of Fuzzy Prolog handles incomplete information, it has a complete semantics (the previous one was incomplete as Prolog) and moreover it is able to combine crisp and fuzzy logic in Prolog programs. Therefore, new Fuzzy Prolog is more expressive to represent real world.\nFuzzy Prolog inherited from Prolog its incompleteness. The incorporation of default reasoning to Fuzzy Prolog removes this problem and requires a richer semantics which we discuss.",
+      "absUrl": "https://arxiv.org/abs/cs/0508091v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0508091v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0508078",
+      "title": "Proceedings of the 15th Workshop on Logic-based methods in Programming Environments WLPE'05 -- October 5, 2005 -- Sitges (Barcelona), Spain",
+      "authors": [
+        "Alexander Serebrenik",
+        "Susana Munoz-Hernandez"
+      ],
+      "authorsText": "Alexander Serebrenik, Susana Munoz-Hernandez",
+      "abstract": "The workshop aims at providing an informal meeting for the researchers working on logic-based tools for development and analysis of programs. This year we want to emphasize two aspects: on one hand we want to discuss the presentation, pragmatics and experiences of such tools; on the other one, we want to shift the traditional focus on environment tools for logic programming to logic-based environmental tools for programming in general.",
+      "absUrl": "https://arxiv.org/abs/cs/0508078v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0508078v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0508023",
+      "title": "Software Libraries and Their Reuse: Entropy, Kolmogorov Complexity, and Zipf's Law",
+      "authors": [
+        "Todd L. Veldhuizen"
+      ],
+      "authorsText": "Todd L. Veldhuizen",
+      "abstract": "That software libraries are useful is something of a paradox. Theory tells us almost no programs can be made shorter, and hence reuse of code from libraries -- which shortens programs -- should not be happening on any appreciable scale; yet it is. The paradox arises from two somewhat contradictory notions of compressibility: that of Kolmogorov complexity, and that of information theory. Their interplay leads to some surprising results and a nice characterization of the role libraries play in reducing program size. We identify a parameter $H_0$ of a problem domain that measures the diversity of its programs. This parameter yields upper bounds on code reuse and the scale of components with which we may work. This suggests a way to distinguish the (perhaps rare) problem domains in which the CBSE dream of ``programming-by-composing-components'' may be realized. Along the way we demonstrate a Zipf-style law for the frequencies with which library components are reused, propose that library components are the prime numbers of software, and prove bounds on the amount of code that may be reused from libraries. As a legacy to future generations of library authors, we prove an incompleteness theorem for domain-specific libraries, guaranteeing them continual employment.",
+      "absUrl": "https://arxiv.org/abs/cs/0508023v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0508023v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0507061",
+      "title": "Software Architecture Overview",
+      "authors": [
+        "Andre Adrian"
+      ],
+      "authorsText": "Andre Adrian",
+      "abstract": "What is Software Architecture? The rules, paradigmen, pattern that help to construct, build and test a serious piece of software. It is the practical experience boiled down to abstract level. Software Architecture builds on System Engineering and the scientific method as established by Galileo Galilei: Measure what you can and make measureable what you can not. The experiment (test) is more important then the deduction. Pieces of information about software architecture are all over the internet. This paper uses citation as much as possible. The aim is to bring together an overview, not to rephrase the wording.",
+      "absUrl": "https://arxiv.org/abs/cs/0507061v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0507061v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0506067",
+      "title": "Measuring Woody: The Size of Debian 3.0",
+      "authors": [
+        "Juan Jose Amor",
+        "Gregorio Robles",
+        "Jesus Gonzalez-Barahona"
+      ],
+      "authorsText": "Juan Jose Amor, Gregorio Robles, Jesus Gonzalez-Barahona",
+      "abstract": "Debian is possibly the largest free software distribution, with well over 4,500 source packages in the latest stable release (Debian 3.0) and more than 8,000 source packages in the release currently in preparation. However, we wish to know what these numbers mean. In this paper, we use David A. Wheeler's SLOCCount system to determine the number of physical source lines of code (SLOC) of Debian 3.0 (aka woody). We show that Debian 3.0 includes more than 105,000,000 physical SLOC (almost twice than Red Hat 9, released about 8 months later), showing that the Debian development model (based on the work of a large group of voluntary developers spread around the world) is at least as capable as other development methods (like the more centralized one, based on the work of employees, used by Red Hat or Microsoft) to manage distributions of this size.\nIt is also shown that if Debian had been developed using traditional proprietary methods, the COCOMO model estimates that its cost would be close to $6.1 billion USD to develop Debian 3.0. In addition, we offer both an analysis of the programming languages used in the distribution (C amounts for about 65%, C++ for about 12%, Shell for about 8% and LISP is around 4%, with many others to follow), and the largest packages (The Linux kernel, Mozilla, XFree86, PM3, etc.)",
+      "absUrl": "https://arxiv.org/abs/cs/0506067v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0506067v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0506050",
+      "title": "The Workshop - Implementing Well Structured Enterprise Applications",
+      "authors": [
+        "A. Wiesmaier",
+        "V. Karatsiolis",
+        "M. Lippert",
+        "J. Buchmann"
+      ],
+      "authorsText": "A. Wiesmaier, V. Karatsiolis, M. Lippert, J. Buchmann",
+      "abstract": "We specify an abstraction layer to be used between an enterprise application and the utilized enterprise framework (like J2EE or.NET). This specification is called the Workshop. It provides an intuitive metaphor supporting the programmer in designing easy understandable code. We present an implementation of this specification. It is based upon the J2EE framework and is called the JWorkshop. As a proof of concept we implement a special certification authority called the Key Authority based upon the JWorkshop. The mentioned certification authority runs very successfully in a variety of different real world projects.",
+      "absUrl": "https://arxiv.org/abs/cs/0506050v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0506050v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0505058",
+      "title": "The Cyborg Astrobiologist: Scouting Red Beds for Uncommon Features with Geological Significance",
+      "authors": [
+        "Patrick C. McGuire",
+        "Enrique Diaz-Martinez",
+        "Jens Ormo",
+        "Javier Gomez-Elvira",
+        "Jose A. Rodriguez-Manfredi",
+        "Eduardo Sebastian-Martinez",
+        "Helge Ritter",
+        "Robert Haschke",
+        "Markus Oesker",
+        "Joerg Ontrup"
+      ],
+      "authorsText": "Patrick C. McGuire, Enrique Diaz-Martinez, Jens Ormo, Javier Gomez-Elvira, Jose A. Rodriguez-Manfredi, Eduardo Sebastian-Martinez, Helge Ritter, Robert Haschke, Markus Oesker, Joerg Ontrup",
+      "abstract": "The `Cyborg Astrobiologist' (CA) has undergone a second geological field trial, at a red sandstone site in northern Guadalajara, Spain, near Riba de Santiuste. The Cyborg Astrobiologist is a wearable computer and video camera system that has demonstrated a capability to find uncommon interest points in geological imagery in real-time in the field. The first (of three) geological structures that we studied was an outcrop of nearly homogeneous sandstone, which exhibits oxidized-iron impurities in red and and an absence of these iron impurities in white. The white areas in these ``red beds'' have turned white because the iron has been removed by chemical reduction, perhaps by a biological agent. The computer vision system found in one instance several (iron-free) white spots to be uncommon and therefore interesting, as well as several small and dark nodules. The second geological structure contained white, textured mineral deposits on the surface of the sandstone, which were found by the CA to be interesting. The third geological structure was a 50 cm thick paleosol layer, with fossilized root structures of some plants, which were found by the CA to be interesting. A quasi-blind comparison of the Cyborg Astrobiologist's interest points for these images with the interest points determined afterwards by a human geologist shows that the Cyborg Astrobiologist concurred with the human geologist 68% of the time (true positive rate), with a 32% false positive rate and a 32% false negative rate.\n(abstract has been abridged).",
+      "absUrl": "https://arxiv.org/abs/cs/0505058v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0505058v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0505029",
+      "title": "Automated Improvement for Component Reuse",
+      "authors": [
+        "Muthu Ramachandran"
+      ],
+      "authorsText": "Muthu Ramachandran",
+      "abstract": "Software component reuse is the key to significant gains in productivity. However, the major problem is the lack of identifying and developing potentially reusable components. This paper concentrates on our approach to the development of reusable software components. A prototype tool has been developed, known as the Reuse Assessor and Improver System (RAIS) which can interactively identify, analyse, assess, and modify abstractions, attributes and architectures that support reuse. Practical and objective reuse guidelines are used to represent reuse knowledge and to do domain analysis. It takes existing components, provides systematic reuse assessment which is based on reuse advice and analysis, and produces components that are improved for reuse. Our work on guidelines has been extended to a large scale industrial application.",
+      "absUrl": "https://arxiv.org/abs/cs/0505029v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0505029v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0505004",
+      "title": "Pluggable AOP: Designing Aspect Mechanisms for Third-party Composition",
+      "authors": [
+        "Sergei Kojarski",
+        "David H. Lorenz"
+      ],
+      "authorsText": "Sergei Kojarski, David H. Lorenz",
+      "abstract": "Studies of Aspect-Oriented Programming (AOP) usually focus on a language in which a specific aspect extension is integrated with a base language. Languages specified in this manner have a fixed, non-extensible AOP functionality. In this paper we consider the more general case of integrating a base language with a set of domain specific third-party aspect extensions for that language. We present a general mixin-based method for implementing aspect extensions in such a way that multiple, independently developed, dynamic aspect extensions can be subject to third-party composition and work collaboratively.",
+      "absUrl": "https://arxiv.org/abs/cs/0505004v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0505004v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0504109",
+      "title": "Prototype of Fault Adaptive Embedded Software for Large-Scale Real-Time Systems",
+      "authors": [
+        "Derek Messie",
+        "Mina Jung",
+        "Jae C. Oh",
+        "Shweta Shetty",
+        "Steven Nordstrom",
+        "Michael Haney"
+      ],
+      "authorsText": "Derek Messie, Mina Jung, Jae C. Oh, Shweta Shetty, Steven Nordstrom, Michael Haney",
+      "abstract": "This paper describes a comprehensive prototype of large-scale fault adaptive embedded software developed for the proposed Fermilab BTeV high energy physics experiment. Lightweight self-optimizing agents embedded within Level 1 of the prototype are responsible for proactive and reactive monitoring and mitigation based on specified layers of competence. The agents are self-protecting, detecting cascading failures using a distributed approach. Adaptive, reconfigurable, and mobile objects for reliablility are designed to be self-configuring to adapt automatically to dynamically changing environments. These objects provide a self-healing layer with the ability to discover, diagnose, and react to discontinuities in real-time processing. A generic modeling environment was developed to facilitate design and implementation of hardware resource specifications, application data flow, and failure mitigation strategies. Level 1 of the planned BTeV trigger system alone will consist of 2500 DSPs, so the number of components and intractable fault scenarios involved make it impossible to design an `expert system' that applies traditional centralized mitigative strategies based on rules capturing every possible system state. Instead, a distributed reactive approach is implemented using the tools and methodologies developed by the Real-Time Embedded Systems group.",
+      "absUrl": "https://arxiv.org/abs/cs/0504109v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0504109v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-04",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0503068",
+      "title": "A Survey of Reverse Engineering and Program Comprehension",
+      "authors": [
+        "Michael L. Nelson"
+      ],
+      "authorsText": "Michael L. Nelson",
+      "abstract": "Reverse engineering has been a standard practice in the hardware community for some time. It has only been within the last ten years that reverse engineering, or \"program comprehension\", has grown into the current sub-discipline of software engineering. Traditional software engineering is primarily focused on the development and design of new software. However, most programmers work on software that other people have designed and developed. Up to 50% of a software maintainers time can be spent determining the intent of source code. The growing demand to reevaluate and reimplement legacy software systems, brought on by the proliferation of clientserver and World Wide Web technologies, has underscored the need for reverse engineering tools and techniques. This paper introduces the terminology of reverse engineering and gives some of the obstacles that make reverse engineering difficult. Although reverse engineering remains heavily dependent on the human component, a number of automated tools are presented that aid the reverse engineer.",
+      "absUrl": "https://arxiv.org/abs/cs/0503068v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0503068v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0503050",
+      "title": "Systematic Method for Path-Complete White Box Testing",
+      "authors": [
+        "Hanna Makaruk",
+        "Robert Owczarek",
+        "Nikita Sakhanenko"
+      ],
+      "authorsText": "Hanna Makaruk, Robert Owczarek, Nikita Sakhanenko",
+      "abstract": "A systematic, language-independent method of finding a minimal set of paths covering the code of a sequential program is proposed for application in White Box testing. Execution of all paths from the set ensures also statement coverage. Execution fault marks problematic areas of the code. The method starts from a UML activity diagram of a program. The diagram is transformed into a directed graph: graph's nodes substitute decision and action points; graph's directed edges substitute action arrows.\nThe number of independent paths equals easy-to-compute cyclomatic complexity of the graph. Association of a vector to each path creates a path vector space. Independence of the paths is equivalent to linear independence of the vectors. It is sufficient to test any base of the path space to complete the procedure. An effective algorithm for choosing the base paths is presented.",
+      "absUrl": "https://arxiv.org/abs/cs/0503050v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0503050v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0503015",
+      "title": "A Systematic Aspect-Oriented Refactoring and Testing Strategy, and its Application to JHotDraw",
+      "authors": [
+        "Arie van Deursen",
+        "Marius Marin",
+        "Leon Moonen"
+      ],
+      "authorsText": "Arie van Deursen, Marius Marin, Leon Moonen",
+      "abstract": "Aspect oriented programming aims at achieving better modularization for a system's crosscutting concerns in order to improve its key quality attributes, such as evolvability and reusability. Consequently, the adoption of aspect-oriented techniques in existing (legacy) software systems is of interest to remediate software aging. The refactoring of existing systems to employ aspect-orientation will be considerably eased by a systematic approach that will ensure a safe and consistent migration.\nIn this paper, we propose a refactoring and testing strategy that supports such an approach and consider issues of behavior conservation and (incremental) integration of the aspect-oriented solution with the original system. The strategy is applied to the JHotDraw open source project and illustrated on a group of selected concerns. Finally, we abstract from the case study and present a number of generic refactorings which contribute to an incremental aspect-oriented refactoring process and associate particular types of crosscutting concerns to the model and features of the employed aspect language. The contributions of this paper are both in the area of supporting migration towards aspect-oriented solutions and supporting the development of aspect languages that are better suited for such migrations.",
+      "absUrl": "https://arxiv.org/abs/cs/0503015v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0503015v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0503004",
+      "title": "Effective Requirements Generation: Synchronizing Early Verification & Validation, Methods and Method Selection Criteria",
+      "authors": [
+        "Lester Lobo",
+        "James D. Arthur"
+      ],
+      "authorsText": "Lester Lobo, James D. Arthur",
+      "abstract": "This paper presents an approach for the implementation and execution of an effective requirements generation process. We achieve this goal by providing a well-defined requirements engineering model that includes verification and validation (V&V), and analysis. In addition, we identify focused activity objectives and map popular methods to lower-level activities, and define a criterion based process for optimizing method selection for attendant activities. Our model, unlike other models, addresses the complete requirements generation process and consists of activities defined at more adequate levels of abstraction. Furthermore, our model also incorporates a unique approach to V&V that enhances quality and reduces the cost of generating requirements. Additionally, activity objectives are identified and explicitly stated - not implied as in the current models. To assist in the selection of an appropriate set of methods, we have mapped commonly used methods to activities based on their objectives. Finally, we have identified method selection criteria and prescribed a reduced set of methods that optimize these criteria for each activity in our model. Thus, our approach assists in the task of selecting methods by using selection criteria to reduce a large collection of potential methods to a smaller, manageable set. The model, clear mapping of methods to activity objectives, and the criteria based process, taken together, provide the much needed guidance for the effective implementation and execution of the requirements generation process.",
+      "absUrl": "https://arxiv.org/abs/cs/0503004v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0503004v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0503003",
+      "title": "An Objectives-Driven Process for Selecting Methods to Support Requirements Engineering Activities",
+      "authors": [
+        "Lester Lobo",
+        "James D. Arthur"
+      ],
+      "authorsText": "Lester Lobo, James D. Arthur",
+      "abstract": "This paper presents a framework that guides the requirements engineer in the implementation and execution of an effective requirements generation process. We achieve this goal by providing a well-defined requirements engineering model and a criteria based process for optimizing method selection for attendant activities. Our model, unlike other models, addresses the complete requirements generation process and consists of activities defined at more adequate levels of abstraction. Additionally, activity objectives are identified and explicitly stated - not implied as in the current models. Activity objectives are crucial as they drive the selection of methods for each activity. Our model also incorporates a unique approach to verification and validation that enhances quality and reduces the cost of generating requirements. To assist in the selection of methods, we have mapped commonly used methods to activities based on their objectives. In addition, we have identified method selection criteria and prescribed a reduced set of methods that optimize these criteria for each activity defined by our requirements generation process. Thus, the defined approach assists in the task of selecting methods by using selection criteria to reduce a large collection of potential methods to a smaller, manageable set. The model and the set of methods, taken together, provide the much needed guidance for the effective implementation and execution of the requirements generation process.",
+      "absUrl": "https://arxiv.org/abs/cs/0503003v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0503003v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0503002",
+      "title": "Local and Global Analysis: Complementary Activities for Increasing the Effectiveness of Requirements Verification and Validation",
+      "authors": [
+        "Lester Lobo",
+        "James D. Arthur"
+      ],
+      "authorsText": "Lester Lobo, James D. Arthur",
+      "abstract": "This paper presents a unique approach to connecting requirements engineering (RE) activities into a process framework that can be employed to obtain quality requirements with reduced expenditures of effort and cost. We propose a two-phase model that is novel in that it introduces the concept of verification and validation (V&V) early in the requirements life cycle. In the first phase, we perform V&V immediately following the elicitation of requirements for each individually distinct system function. Because the first phase focuses on capturing smaller sets of related requirements iteratively, each corresponding V&V activity is better focused for detecting and correcting errors in each requirement set. In the second phase, a complementary verification activity is initiated; the corresponding focus is on the quality of linkages between requirements sets rather than on the requirements within the sets. Consequently, this approach reduces the effort in verification and enhances the focus on the verification task. Our approach, unlike other models, has a minimal time delay between the elicitation of requirements and the execution of the V&V activities. Because of this short time gap, the stakeholders have a clearer recollection of the requirements, their context and rationale; this enhances the stakeholder feedback. Furthermore, our model includes activities that closely align with the effective RE processes employed in the software industry. Thus, our approach facilitates a better understanding of the flow of requirements, and provides guidance for the implementation of the RE process.",
+      "absUrl": "https://arxiv.org/abs/cs/0503002v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0503002v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0502040",
+      "title": "Testing Systems of Concurrent Black-boxes--an Automata-Theoretic and Decompositional Approach",
+      "authors": [
+        "Gaoyan Xie",
+        "Zhe Dang"
+      ],
+      "authorsText": "Gaoyan Xie, Zhe Dang",
+      "abstract": "The global testing problem studied in this paper is to seek a definite answer to whether a system of concurrent black-boxes has an observable behavior in a given finite (but could be huge) set \"Bad\". We introduce a novel approach to solve the problem that does not require integration testing. Instead, in our approach, the global testing problem is reduced to testing individual black-boxes in the system one by one in some given order. Using an automata-theoretic approach, test sequences for each individual black-box are generated from the system's description as well as the test results of black-boxes prior to this black-box in the given order. In contrast to the conventional compositional/modular verification/testing approaches, our approach is essentially decompositional.\nAlso, our technique is complete, sound, and can be carried out automatically. Our experiment results show that the total number of tests needed to solve the global testing problem is substantially small even for an extremely large \"Bad\".",
+      "absUrl": "https://arxiv.org/abs/cs/0502040v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0502040v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0502025",
+      "title": "EPspectra: A Formal Toolkit for Developing DSP Software Applications",
+      "authors": [
+        "Hahnsang Kim",
+        "Theirry Turletti",
+        "Amar Bouali"
+      ],
+      "authorsText": "Hahnsang Kim, Theirry Turletti, Amar Bouali",
+      "abstract": "The software approach to developing Digital Signal Processing (DSP) applications brings some great features such as flexibility, re-usability of resources and easy upgrading of applications. However, it requires long and tedious tests and verification phases because of the increasing complexity of the software. This implies the need of a software programming environment capable of putting together DSP modules and providing facilities to debug, verify and validate the code. The objective of the work is to provide such facilities as simulation and verification for developing DSP software applications. This led us to develop an extension toolkit, Epspectra, built upon Pspectra, one of the first toolkits available to design basic software radio applications on standard PC workstations. In this paper, we first present Epspectra, an Esterel-based extension of Pspectra that makes the design and implementation of portable DSP applications easier. It allows drastic reduction of testing and verification time while requiring relatively little expertise in formal verification methods. Second, we demonstrate the use of Epspectra, taking as an example the radio interface part of a GSM base station. We also present the verification procedures for the three safety properties of the implementation programs which have complex control-paths. These have to obey strict scheduling rules. In addition, Epspectra achieves the verification of the targeted application since the same model is used for the executable code generation and for the formal verification.",
+      "absUrl": "https://arxiv.org/abs/cs/0502025v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0502025v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0501070",
+      "title": "Extending Design by Contract for Aspect-Oriented Programming",
+      "authors": [
+        "David H. Lorenz",
+        "Therapon Skotiniotis"
+      ],
+      "authorsText": "David H. Lorenz, Therapon Skotiniotis",
+      "abstract": "Design by Contract (DbC) and runtime enforcement of program assertions enables the construction of more robust software. It also enables the assignment of blame in error reporting. Unfortunately, there is no support for runtime contract enforcement and blame assignment for Aspect-Oriented Programming (AOP). Extending DbC to also cover aspects brings forward a plethora of issues related to the correct order of assertion validation. We show that there is no generally correct execution sequence of object assertions and aspect assertions. A further classification of aspects as agnostic, obedient, or rebellious defines the order of assertion validation that needs to be followed. We describe the application of this classification in a prototyped DbC tool for AOP named Cona, where aspects are used for implementing contracts, and contracts are used for enforcing assertions on aspects.",
+      "absUrl": "https://arxiv.org/abs/cs/0501070v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0501070v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0501060",
+      "title": "Under-approximation of the Greatest Fixpoints in Real-Time System Verification",
+      "authors": [
+        "Farn Wang"
+      ],
+      "authorsText": "Farn Wang",
+      "abstract": "Techniques for the efficient successive under-approximation of the greatest fixpoint in TCTL formulas can be useful in fast refutation of inevitability properties and vacuity checking. We first give an integrated algorithmic framework for both under and over-approximate model-checking. We design the {\\em NZF (Non-Zeno Fairness) predicate}, with a greatest fixpoint formulation, as a unified framework for the evaluation of formulas like $\\exists\\pfrrη_1$, $\\exists\\pfrr\\pevtη_1$, and $\\exists\\pevt\\pfrrη_1$. We then prove the correctness of a new formulation for the characterization of the NZF predicate based on zone search and the least fixpoint evaluation. The new formulation then leads to the design of an evaluation algorithm, with the capability of successive under-approximation, for $\\exists\\pfrrη_1$, $\\exists\\pfrr\\pevtη_1$, and $\\exists\\pevt\\pfrrη_1$. We then present techniques to efficiently search for the zones and to speed up the under-approximate evaluation of those three formulas. Our experiments show that the techniques have significantly enhanced the verification performance against several benchmarks over exact model-checking.",
+      "absUrl": "https://arxiv.org/abs/cs/0501060v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0501060v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0501059",
+      "title": "Under-approximation of the Greatest Fixpoint in Real-Time System Verification",
+      "authors": [
+        "Farn Wang"
+      ],
+      "authorsText": "Farn Wang",
+      "abstract": "Techniques for the efficient successive under-approximation of the greatest fixpoint in TCTL formulas can be useful in fast refutation of inevitability properties and vacuity checking. We first give an integrated algorithmic framework for both under and over-approximate model-checking. We design the {\\em NZF (Non-Zeno Fairness) predicate}, with a greatest fixpoint formulation, as a unified framework for the evaluation of formulas like $\\exists\\pfrrη_1$, $\\exists\\pfrr\\pevtη_1$, and $\\exists\\pevt\\pfrrη_1$. We then prove the correctness of a new formulation for the characterization of the NZF predicate based on zone search and the least fixpoint evaluation. The new formulation then leads to the design of an evaluation algorithm, with the capability of successive under-approximation, for $\\exists\\pfrrη_1$, $\\exists\\pfrr\\pevtη_1$, and $\\exists\\pevt\\pfrrη_1$. We then present techniques to efficiently search for the zones and to speed up the under-approximate evaluation of those three formulas. Our experiments show that the techniques have significantly enhanced the verification performance against several benchmarks over exact model-checking.",
+      "absUrl": "https://arxiv.org/abs/cs/0501059v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0501059v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0501036",
+      "title": "Enabling Agents to Dynamically Select Protocols for Interactions",
+      "authors": [
+        "Jose Ghislain Quenum Samir Aknine"
+      ],
+      "authorsText": "Jose Ghislain Quenum Samir Aknine",
+      "abstract": "in this paper we describe a method which allows agents to dynamically select protocols and roles when they need to execute collaborative tasks",
+      "absUrl": "https://arxiv.org/abs/cs/0501036v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0501036v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2005-01",
+      "sourceVersion": "v1"
+    }
+  ]
+}

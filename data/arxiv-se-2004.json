@@ -1,0 +1,581 @@
+{
+  "title": "arXiv cs.SE 2004",
+  "sourceLabel": "arXiv cs.SE 2004",
+  "sourceUrl": "https://arxiv.org/list/cs.SE/2004",
+  "archive": "cs.SE",
+  "year": 2004,
+  "updatedAt": "2026-05-01T19:47:18.418Z",
+  "months": [
+    {
+      "period": "2004-01",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2004-01?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "2004-02",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2004-02?skip=0&show=2000",
+      "paperCount": 8
+    },
+    {
+      "period": "2004-03",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2004-03?skip=0&show=2000",
+      "paperCount": 0
+    },
+    {
+      "period": "2004-04",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2004-04?skip=0&show=2000",
+      "paperCount": 2
+    },
+    {
+      "period": "2004-05",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2004-05?skip=0&show=2000",
+      "paperCount": 2
+    },
+    {
+      "period": "2004-06",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2004-06?skip=0&show=2000",
+      "paperCount": 3
+    },
+    {
+      "period": "2004-07",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2004-07?skip=0&show=2000",
+      "paperCount": 3
+    },
+    {
+      "period": "2004-08",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2004-08?skip=0&show=2000",
+      "paperCount": 3
+    },
+    {
+      "period": "2004-09",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2004-09?skip=0&show=2000",
+      "paperCount": 2
+    },
+    {
+      "period": "2004-10",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2004-10?skip=0&show=2000",
+      "paperCount": 3
+    },
+    {
+      "period": "2004-11",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2004-11?skip=0&show=2000",
+      "paperCount": 1
+    },
+    {
+      "period": "2004-12",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2004-12?skip=0&show=2000",
+      "paperCount": 1
+    }
+  ],
+  "papers": [
+    {
+      "id": "physics/0405154",
+      "title": "The ATLAS Tile Calorimeter Test Beam Monitoring Program",
+      "authors": [
+        "Paolo Adragna",
+        "Andrea Dotti",
+        "Chiara Roda"
+      ],
+      "authorsText": "Paolo Adragna, Andrea Dotti, Chiara Roda",
+      "abstract": "During 2003 test beam session for ATLAS Tile Calorimeter a monitoring program has been developed to ease the setup of correct running condition and the assessment of data quality. The program has been built using the Online Software services provided by the ATLAS Online Software group. The first part of this note contains a brief overview of these services followed by the full description of Tile Calorimeter monitoring program architecture and features. Performances and future upgrades are discussed in the final part of this note.",
+      "absUrl": "https://arxiv.org/abs/physics/0405154v1",
+      "pdfUrl": "https://arxiv.org/pdf/physics/0405154v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0412092",
+      "title": "Mass Storage Management and the Grid",
+      "authors": [
+        "A. Earl",
+        "P. Clark"
+      ],
+      "authorsText": "A. Earl, P. Clark",
+      "abstract": "The University of Edinburgh has a significant interest in mass storage systems as it is one of the core groups tasked with the roll out of storage software for the UK's particle physics grid, GridPP. We present the results of a development project to provide software interfaces between the SDSC Storage Resource Broker, the EU DataGrid and the Storage Resource Manager. This project was undertaken in association with the eDikt group at the National eScience Centre, the Universities of Bristol and Glasgow, Rutherford Appleton Laboratory and the San Diego Supercomputing Center.",
+      "absUrl": "https://arxiv.org/abs/cs/0412092v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0412092v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0411096",
+      "title": "Inter-Package Dependency Networks in Open-Source Software",
+      "authors": [
+        "Nathan LaBelle",
+        "Eugene Wallingford"
+      ],
+      "authorsText": "Nathan LaBelle, Eugene Wallingford",
+      "abstract": "This research analyzes complex networks in open-source software at the inter-package level, where package dependencies often span across projects and between development groups. We review complex networks identified at ``lower'' levels of abstraction, and then formulate a description of interacting software components at the package level, a relatively ``high'' level of abstraction. By mining open-source software repositories from two sources, we empirically show that the coupling of modules at this granularity creates a small-world and scale-free network in both instances.",
+      "absUrl": "https://arxiv.org/abs/cs/0411096v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0411096v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0410073",
+      "title": "On Spatial Conjunction as Second-Order Logic",
+      "authors": [
+        "Viktor Kuncak",
+        "Martin Rinard"
+      ],
+      "authorsText": "Viktor Kuncak, Martin Rinard",
+      "abstract": "Spatial conjunction is a powerful construct for reasoning about dynamically allocated data structures, as well as concurrent, distributed and mobile computation. While researchers have identified many uses of spatial conjunction, its precise expressive power compared to traditional logical constructs was not previously known. In this paper we establish the expressive power of spatial conjunction. We construct an embedding from first-order logic with spatial conjunction into second-order logic, and more surprisingly, an embedding from full second order logic into first-order logic with spatial conjunction. These embeddings show that the satisfiability of formulas in first-order logic with spatial conjunction is equivalent to the satisfiability of formulas in second-order logic. These results explain the great expressive power of spatial conjunction and can be used to show that adding unrestricted spatial conjunction to a decidable logic leads to an undecidable logic. As one example, we show that adding unrestricted spatial conjunction to two-variable logic leads to undecidability. On the side of decidability, the embedding into second-order logic immediately implies the decidability of first-order logic with a form of spatial conjunction over trees. The embedding into spatial conjunction also has useful consequences: because a restricted form of spatial conjunction in two-variable logic preserves decidability, we obtain that a correspondingly restricted form of second-order quantification in two-variable logic is decidable. The resulting language generalizes the first-order theory of boolean algebra over sets and is useful in reasoning about the contents of data structures in object-oriented languages.",
+      "absUrl": "https://arxiv.org/abs/cs/0410073v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0410073v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0410071",
+      "title": "The Cyborg Astrobiologist: First Field Experience",
+      "authors": [
+        "Patrick C. McGuire",
+        "Jens Ormo",
+        "Enrique Diaz-Martinez",
+        "Jose Antonio Rodriguez-Manfredi",
+        "Javier Gomez-Elvira",
+        "Helge Ritter",
+        "Markus Oesker",
+        "Joerg Ontrup"
+      ],
+      "authorsText": "Patrick C. McGuire, Jens Ormo, Enrique Diaz-Martinez, Jose Antonio Rodriguez-Manfredi, Javier Gomez-Elvira, Helge Ritter, Markus Oesker, Joerg Ontrup",
+      "abstract": "We present results from the first geological field tests of the `Cyborg Astrobiologist', which is a wearable computer and video camcorder system that we are using to test and train a computer-vision system towards having some of the autonomous decision-making capabilities of a field-geologist and field-astrobiologist. The Cyborg Astrobiologist platform has thus far been used for testing and development of these algorithms and systems: robotic acquisition of quasi-mosaics of images, real-time image segmentation, and real-time determination of interesting points in the image mosaics. The hardware and software systems function reliably, and the computer-vision algorithms are adequate for the first field tests. In addition to the proof-of-concept aspect of these field tests, the main result of these field tests is the enumeration of those issues that we can improve in the future, including: first, detection and accounting for shadows caused by 3D jagged edges in the outcrop; second, reincorporation of more sophisticated texture-analysis algorithms into the system; third, creation of hardware and software capabilities to control the camera's zoom lens in an intelligent manner; and fourth, development of algorithms for interpretation of complex geological scenery. Nonetheless, despite these technical inadequacies, this Cyborg Astrobiologist system, consisting of a camera-equipped wearable-computer and its computer-vision algorithms, has demonstrated its ability of finding genuinely interesting points in real-time in the geological scenery, and then gathering more information about these interest points in an automated manner.",
+      "absUrl": "https://arxiv.org/abs/cs/0410071v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0410071v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0410058",
+      "title": "Robust Dialogue Understanding in HERALD",
+      "authors": [
+        "Vincenzo Pallotta",
+        "Afzal Ballim"
+      ],
+      "authorsText": "Vincenzo Pallotta, Afzal Ballim",
+      "abstract": "We tackle the problem of robust dialogue processing from the perspective of language engineering. We propose an agent-oriented architecture that allows us a flexible way of composing robust processors. Our approach is based on Shoham's Agent Oriented Programming (AOP) paradigm. We will show how the AOP agent model can be enriched with special features and components that allow us to deal with classical problems of dialogue understanding.",
+      "absUrl": "https://arxiv.org/abs/cs/0410058v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0410058v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0409016",
+      "title": "Using a hierarchy of Domain Specific Languages in complex software systems design",
+      "authors": [
+        "V. S. Lugovsky"
+      ],
+      "authorsText": "V. S. Lugovsky",
+      "abstract": "A new design methodology is introduced, with some examples on building Domain Specific Languages hierarchy on top of Scheme.",
+      "absUrl": "https://arxiv.org/abs/cs/0409016v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0409016v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0409009",
+      "title": "CrocoPat 2.1 Introduction and Reference Manual",
+      "authors": [
+        "Dirk Beyer",
+        "Andreas Noack"
+      ],
+      "authorsText": "Dirk Beyer, Andreas Noack",
+      "abstract": "CrocoPat is an efficient, powerful and easy-to-use tool for manipulating relations of arbitrary arity, including directed graphs. This manual provides an introduction to and a reference for CrocoPat and its programming language RML. It includes several application examples, in particular from the analysis of structural models of software systems.",
+      "absUrl": "https://arxiv.org/abs/cs/0409009v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0409009v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0408045",
+      "title": "On computing the fixpoint of a set of boolean equations",
+      "authors": [
+        "Viktor Kuncak",
+        "K. Rustan M. Leino"
+      ],
+      "authorsText": "Viktor Kuncak, K. Rustan M. Leino",
+      "abstract": "This paper presents a method for computing a least fixpoint of a system of equations over booleans. The resulting computation can be significantly shorter than the result of iteratively evaluating the entire system until a fixpoint is reached.",
+      "absUrl": "https://arxiv.org/abs/cs/0408045v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0408045v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0408015",
+      "title": "On the Theory of Structural Subtyping",
+      "authors": [
+        "Viktor Kuncak",
+        "Martin Rinard"
+      ],
+      "authorsText": "Viktor Kuncak, Martin Rinard",
+      "abstract": "We show that the first-order theory of structural subtyping of non-recursive types is decidable. Let $Σ$ be a language consisting of function symbols (representing type constructors) and $C$ a decidable structure in the relational language $L$ containing a binary relation $\\leq$. $C$ represents primitive types; $\\leq$ represents a subtype ordering. We introduce the notion of $Σ$-term-power of $C$, which generalizes the structure arising in structural subtyping. The domain of the $Σ$-term-power of $C$ is the set of $Σ$-terms over the set of elements of $C$. We show that the decidability of the first-order theory of $C$ implies the decidability of the first-order theory of the $Σ$-term-power of $C$. Our decision procedure makes use of quantifier elimination for term algebras and Feferman-Vaught theorem. Our result implies the decidability of the first-order theory of structural subtyping of non-recursive types.",
+      "absUrl": "https://arxiv.org/abs/cs/0408015v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0408015v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0408013",
+      "title": "Roles Are Really Great!",
+      "authors": [
+        "Viktor Kuncak",
+        "Patrick Lam",
+        "Martin Rinard"
+      ],
+      "authorsText": "Viktor Kuncak, Patrick Lam, Martin Rinard",
+      "abstract": "We present a new role system for specifying changing referencing relationships of heap objects. The role of an object depends, in large part, on its aliasing relationships with other objects, with the role of each object changing as its aliasing relationships change. Roles therefore capture important object and data structure properties and provide useful information about how the actions of the program interact with these properties. Our role system enables the programmer to specify the legal aliasing relationships that define the set of roles that objects may play, the roles of procedure parameters and object fields, and the role changes that procedures perform while manipulating objects. We present an interprocedural, compositional, and context-sensitive role analysis algorithm that verifies that a program respects the role constraints.",
+      "absUrl": "https://arxiv.org/abs/cs/0408013v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0408013v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0407051",
+      "title": "Bug shallowness in open-source, Macintosh software",
+      "authors": [
+        "G Gordon Worley III"
+      ],
+      "authorsText": "G Gordon Worley III",
+      "abstract": "Central to the power of open-source software is bug shallowness, the relativeease of finding and fixing bugs. The open-source movement began with Unix software, so many users were also programmers capable of finding and fixingbugs given the source code. But as the open-source movement reaches theMacintosh platform, bugs may not be shallow because few Macintosh users are programmers. Based on reports from open-source developers, I, however,conclude that that bugs are as shallow in open-source, Macintosh software as inany other open-source software.",
+      "absUrl": "https://arxiv.org/abs/cs/0407051v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0407051v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0407050",
+      "title": "Modeling and Validating Hybrid Systems Using VDM and Mathematica",
+      "authors": [
+        "Bernhard K. Aichernig",
+        "Reinhold Kainhofer"
+      ],
+      "authorsText": "Bernhard K. Aichernig, Reinhold Kainhofer",
+      "abstract": "Hybrid systems are characterized by the hybrid evolution of their state: A part of the state changes discretely, the other part changes continuously over time. Typically, modern control applications belong to this class of systems, where a digital controller interacts with a physical environment. In this article we illustrate how a combination of the formal method VDM and the computer algebra system Mathematica can be used to model and simulate both aspects: the control logic and the physics involved. A new Mathematica package emulating VDM-SL has been developed that allows the integration of differential equation systems into formal specifications. The SAFER example from Kelly (1997) serves to demonstrate the new simulation capabilities Mathematica adds: After the thruster selection process, the astronaut's actual position and velocity is calculated by numerically solving Euler's and Newton's equations for rotation and translation. Furthermore, interactive validation is supported by a graphical user interface and data animation.",
+      "absUrl": "https://arxiv.org/abs/cs/0407050v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0407050v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0407038",
+      "title": "Model Checking of Statechart Models: Survey and Research Directions",
+      "authors": [
+        "Purandar Bhaduri",
+        "S. Ramesh"
+      ],
+      "authorsText": "Purandar Bhaduri, S. Ramesh",
+      "abstract": "We survey existing approaches to the formal verification of statecharts using model checking. Although the semantics and subset of statecharts used in each approach varies considerably, along with the model checkers and their specification languages, most approaches rely on translating the hierarchical structure into the flat representation of the input language of the model checker. This makes model checking difficult to scale to industrial models, as the state space grows exponentially with flattening. We look at current approaches to model checking hierarchical structures and find that their semantics is significantly different from statecharts. We propose to address the problem of state space explosion using a combination of techniques, which are proposed as directions for further research.",
+      "absUrl": "https://arxiv.org/abs/cs/0407038v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0407038v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0406026",
+      "title": "Improving Prolog Programs: Refactoring for Prolog",
+      "authors": [
+        "Tom Schrijvers",
+        "Alexander Serebrenik"
+      ],
+      "authorsText": "Tom Schrijvers, Alexander Serebrenik",
+      "abstract": "Refactoring is an established technique from the OO-community to restructure code: it aims at improving software readability, maintainability and extensibility. Although refactoring is not tied to the OO-paradigm in particular, its ideas have not been applied to Logic Programming until now.\nThis paper applies the ideas of refactoring to Prolog programs. A catalogue is presented listing refactorings classified according to scope. Some of the refactorings have been adapted from the OO-paradigm, while others have been specifically designed for Prolog. Also the discrepancy between intended and operational semantics in Prolog is addressed by some of the refactorings.\nIn addition, ViPReSS, a semi-automatic refactoring browser, is discussed and the experience with applying \\vipress to a large Prolog legacy system is reported. Our main conclusion is that refactoring is not only a viable technique in Prolog but also a rather desirable one.",
+      "absUrl": "https://arxiv.org/abs/cs/0406026v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0406026v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0406023",
+      "title": "Notions of Equivalence in Software Design",
+      "authors": [
+        "David King",
+        "Chris Kimble"
+      ],
+      "authorsText": "David King, Chris Kimble",
+      "abstract": "Design methods in information systems frequently create software descriptions using formal languages. Nonetheless, most software designers prefer to describe software using natural languages. This distinction is not simply a matter of convenience. Natural languages are not the same as formal languages; in particular, natural languages do not follow the notions of equivalence used by formal languages. In this paper, we show both the existence and coexistence of different notions of equivalence by extending the no-tion of oracles used in formal languages. This allows distinctions to be made between the trustworthy oracles assumed by formal languages and the untrust-worthy oracles used by natural languages. By examin-ing the notion of equivalence, we hope to encourage designers of software to rethink the place of ambiguity in software design.",
+      "absUrl": "https://arxiv.org/abs/cs/0406023v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0406023v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0406022",
+      "title": "Uncovering the epistemological and ontological assumptions of software designers",
+      "authors": [
+        "David King",
+        "Chris Kimble"
+      ],
+      "authorsText": "David King, Chris Kimble",
+      "abstract": "The ontological and epistemological positions adopted by information systems design methods are incommensur-able when pushed to their extremes. Information systems research has therefore tended to focus on the similarities between different positions, usually in search of a single, unifying position. However, by focusing on the similari-ties, the clarity of argument provided by any one philoso-phical position is necessarily diminished. Consequently, researchers often treat the philosophical foundations of design methods as being of only minor importance. In this paper, we have deliberately chosen to focus on the differences between various philosophical positions. From this focus, we believe we can offer a clearer under-standing of the empirical behaviour of software as viewed from particular philosophical positions. Since the em-pirical evidence does not favour any single position, we conclude by arguing for the validity of ad hoc approaches to software design which we believe provides a stronger and more theoretically grounded approach to software design.",
+      "absUrl": "https://arxiv.org/abs/cs/0406022v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0406022v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0405045",
+      "title": "Culture and International Usability Testing: The Effects of Culture in Structured Interviews",
+      "authors": [
+        "Ravikiran Vatrapu",
+        "Manuel A. Perez-Quinones"
+      ],
+      "authorsText": "Ravikiran Vatrapu, Manuel A. Perez-Quinones",
+      "abstract": "The global audience for software products includes members of different countries, religions, and cultures: people who speak different languages, have different life styles, and have different perceptions and expectations of any given product. A major impediment in interface development is that there is inadequate empirical evidence for the effects of culture in the usability engineering methods used for developing user interfaces. This paper presents a controlled study investigating the effects of culture on the effectiveness of structured interviews in usability testing. The experiment consisted of usability testing of a website with two independent groups of Indian participants by two interviewers; one belonging to the Indian culture and the other to the Anglo-American culture. Participants found more usability problems and made more suggestions to an interviewer who was a member of the same (Indian) culture than to the foreign (Anglo-American) interviewer. The results of the study empirically establish that culture significantly affects the efficacy of structured interviews during international user testing. The implications of this work for usability engineering are discussed.",
+      "absUrl": "https://arxiv.org/abs/cs/0405045v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0405045v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0404043",
+      "title": "Benchmarking Blunders and Things That Go Bump in the Night",
+      "authors": [
+        "Neil J. Gunther"
+      ],
+      "authorsText": "Neil J. Gunther",
+      "abstract": "Benchmarking; by which I mean any computer system that is driven by a controlled workload, is the ultimate in performance testing and simulation. Aside from being a form of institutionalized cheating, it also offer countless opportunities for systematic mistakes in the way the workloads are applied and the resulting measurements interpreted. Right test, wrong conclusion is a ubiquitous mistake that happens because test engineers tend to treat data as divine. Such reverence is not only misplaced, it's also a sure ticket to production hell when the application finally goes live. I demonstrate how such mistakes can be avoided by means of two war stories that are real WOPRs. (a) How to resolve benchmark flaws over the psychic hotline and (b) How benchmarks can go flat with too much Java juice. In each case I present simple performance models and show how they can be applied to correctly assess benchmark data.",
+      "absUrl": "https://arxiv.org/abs/cs/0404043v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0404043v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-04",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0404037",
+      "title": "Model-checking Driven Black-box Testing Algorithms for Systems with Unspecified Components",
+      "authors": [
+        "Gaoyan Xie",
+        "Zhe Dang"
+      ],
+      "authorsText": "Gaoyan Xie, Zhe Dang",
+      "abstract": "Component-based software development has posed a serious challenge to system verification since externally-obtained components could be a new source of system failures. This issue can not be completely solved by either model-checking or traditional software testing techniques alone due to several reasons:\n1) externally obtained components are usually unspecified/partially specified; 2)it is generally difficult to establish an adequacy criteria for testing a component; 3)components may be used to dynamically upgrade a system.\nThis paper introduces a new approach (called {\\em model-checking driven black-box testing}) that combines model-checking with traditional black-box software testing to tackle the problem in a complete, sound, and automatic way.\nThe idea is to, with respect to some requirement (expressed in CTL or LTL) about the system, use model-checking techniques to derive a condition (expressed in communication graphs) for an unspecified component such that the system satisfies the requirement iff the condition is satisfied by the component, and which can be established by testing the component with test cases generated from the condition on-the-fly. In this paper, we present model-checking driven black-box testing algorithms to handle both CTL and LTL requirements.\nWe also illustrate the idea through some examples.",
+      "absUrl": "https://arxiv.org/abs/cs/0404037v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0404037v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-04",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0402025",
+      "title": "A perspective on the Healthgrid initiative",
+      "authors": [
+        "V. Breton",
+        "A. E. Solomonides",
+        "R. H. McClatchey"
+      ],
+      "authorsText": "V. Breton, A. E. Solomonides, R. H. McClatchey",
+      "abstract": "This paper presents a perspective on the Healthgrid initiative which involves European projects deploying pioneering applications of grid technology in the health sector. In the last couple of years, several grid projects have been funded on health related issues at national and European levels. A crucial issue is to maximize their cross fertilization in the context of an environment where data of medical interest can be stored and made easily available to the different actors in healthcare, physicians, healthcare centres and administrations, and of course the citizens. The Healthgrid initiative, represented by the Healthgrid association (http://www.healthgrid.org), was initiated to bring the necessary long term continuity, to reinforce and promote awareness of the possibilities and advantages linked to the deployment of GRID technologies in health. Technologies to address the specific requirements for medical applications are under development. Results from the DataGrid and other projects are given as examples of early applications.",
+      "absUrl": "https://arxiv.org/abs/cs/0402025v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0402025v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0402024",
+      "title": "Pattern Reification as the Basis for Description-Driven Systems",
+      "authors": [
+        "Florida Estrella",
+        "Zsolt Kovacs",
+        "Jean-Marie Le Goff",
+        "Richard McClatchey",
+        "Tony Solomonides",
+        "Norbert Toth"
+      ],
+      "authorsText": "Florida Estrella, Zsolt Kovacs, Jean-Marie Le Goff, Richard McClatchey, Tony Solomonides, Norbert Toth",
+      "abstract": "One of the main factors driving object-oriented software development for information systems is the requirement for systems to be tolerant to change. To address this issue in designing systems, this paper proposes a pattern-based, object-oriented, description-driven system (DDS) architecture as an extension to the standard UML four-layer meta-model. A DDS architecture is proposed in which aspects of both static and dynamic systems behavior can be captured via descriptive models and meta-models. The proposed architecture embodies four main elements - firstly, the adoption of a multi-layered meta-modeling architecture and reflective meta-level architecture, secondly the identification of four data modeling relationships that can be made explicit such that they can be modified dynamically, thirdly the identification of five design patterns which have emerged from practice and have proved essential in providing reusable building blocks for data management, and fourthly the encoding of the structural properties of the five design patterns by means of one fundamental pattern, the Graph pattern. A practical example of this philosophy, the CRISTAL project, is used to demonstrate the use of description-driven data objects to handle system evolution.",
+      "absUrl": "https://arxiv.org/abs/cs/0402024v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0402024v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0402023",
+      "title": "A Service-Based Approach for Managing Mammography Data",
+      "authors": [
+        "Florida Estrella",
+        "Richard McClatchey",
+        "Dmitry Rogulina",
+        "Roberto Amendolia",
+        "Tony Solomonides"
+      ],
+      "authorsText": "Florida Estrella, Richard McClatchey, Dmitry Rogulina, Roberto Amendolia, Tony Solomonides",
+      "abstract": "Grid-based technologies are emerging as a potential open-source standards-based solution for managing and collabo-rating distributed resources. In view of these new computing solutions, the Mammogrid project is developing a service-based and Grid-aware application which manages a Euro-pean-wide database of mammograms. Medical conditions such as breast cancer, and mammograms as images, are ex-tremely complex with many dimensions of variability across the population. An effective solution for the management of disparate mammogram data sources is a federation of autonomous multi-centre sites which transcends national boundaries. The Mammogrid solution utilizes the Grid tech-nologies to integrate geographically distributed data sets. The Mammogrid application will explore the potential of the Grid to support effective co-working among radiologists through-out the EU. This paper outlines the Mammogrid service-based approach in managing a federation of grid-connected mam-mography databases.",
+      "absUrl": "https://arxiv.org/abs/cs/0402023v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0402023v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0402015",
+      "title": "A Preliminary Study for the development of an Early Method for the Measurement in Function Points of a Software Product",
+      "authors": [
+        "Ramon Asensio Monge",
+        "Francisco Sanchis Marco",
+        "Fernando Torre Cervigon",
+        "Victor Garcia Garcia",
+        "Gustavo Uria Paino"
+      ],
+      "authorsText": "Ramon Asensio Monge, Francisco Sanchis Marco, Fernando Torre Cervigon, Victor Garcia Garcia, Gustavo Uria Paino",
+      "abstract": "The Function Points Analysis (FPA) of A.J. Albrecht is a method to determine the functional size of software products. The International Function Point Users Group, (IFPUG), establishes the FPA like a standard in the software functional size measurement. The IFPUG [3] [4] method follows the Albrecht's method and incorporates in its succesive versions modifications to the rules and hints with the intention of improving it [7]. The required documentation level to apply the method is the functional specification which corresponds to level I in the Rudolph's clasification [8]. This documentation is avalaible with some difficulty for those companies which are dedicated to develop software for third parties when they have to prepare the appropiate budget for this development. Then, we face the need of developing an early method [6] [9] for measuring the functional size of a software product that we will name to abbreviate it Early Method or EFPM (Early Function Point Method). The required documentation to apply the EFPM would be the User Requirements or some analogous documentations. This is a part of a research work now in process in Oviedo University. In this article we only show the following, results:\nFrom the measurements of a set of projects using the IFPUG method v. 4.1 we obtain the linear correlation coefficients between the total number of Function Points for each project and the counters of the ILFs number, ILFs+EIFs number and EIs+EOs+EQs number.\nUsing the preliminary results we compute the regression functions. This results we will allow us to determine the factors to be considered in the development of EFPM and to estimate the function points.",
+      "absUrl": "https://arxiv.org/abs/cs/0402015v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0402015v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0402009",
+      "title": "Resolving Clinicians Queries Across a Grids Infrastructure",
+      "authors": [
+        "F Estrella",
+        "C del Frate",
+        "T Hauer",
+        "R McClatchey",
+        "M Odeh",
+        "D Rogulin",
+        "S R Amendolia",
+        "D Schottlander",
+        "T Solomonides",
+        "R Warren"
+      ],
+      "authorsText": "F Estrella, C del Frate, T Hauer, R McClatchey, M Odeh, D Rogulin, S R Amendolia, D Schottlander, T Solomonides, R Warren",
+      "abstract": "The past decade has witnessed order of magnitude increases in computing power, data storage capacity and network speed, giving birth to applications which may handle large data volumes of increased complexity, distributed over the Internet. Grids computing promises to resolve many of the difficulties in facilitating medical image analysis to allow radiologists to collaborate without having to co-locate. The EU-funded MammoGrid project aims to investigate the feasibility of developing a Grid-enabled European database of mammograms and provide an information infrastructure which federates multiple mammogram databases. This will enable clinicians to develop new common, collaborative and co-operative approaches to the analysis of mammographic data. This paper focuses on one of the key requirements for large-scale distributed mammogram analysis: resolving queries across a grid-connected federation of images.",
+      "absUrl": "https://arxiv.org/abs/cs/0402009v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0402009v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0402008",
+      "title": "A Use-Case Driven Approach in Requirements Engineering: The Mammogrid Project",
+      "authors": [
+        "Mohammed Odeh",
+        "Tamas Hauer",
+        "Richard McClatchey",
+        "Tony Solomonides"
+      ],
+      "authorsText": "Mohammed Odeh, Tamas Hauer, Richard McClatchey, Tony Solomonides",
+      "abstract": "We report on the application of the use-case modeling technique to identify and specify the user requirements of the MammoGrid project in an incremental and controlled iterative approach. Modeling has been carried out in close collaboration with clinicians and radiologists with no prior experience of use cases. The study reveals the advantages and limitations of applying this technique to requirements specification in the domains of breast cancer screening and mammography research, with implications for medical imaging more generally. In addition, this research has shown a return on investment in use-case modeling in shorter gaps between phases of the requirements engineering process. The qualitative result of this analysis leads us to propose that a use-case modeling approach may result in reducing the cycle of the requirements engineering process for medical imaging.",
+      "absUrl": "https://arxiv.org/abs/cs/0402008v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0402008v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0402007",
+      "title": "An Integrated Approach for Extraction of Objects from XML and Transformation to Heterogeneous Object Oriented Databases",
+      "authors": [
+        "Uzair Ahmad",
+        "Mohammad Waseem Hassan",
+        "Arshad Ali",
+        "Richard McClatchey",
+        "Ian Willers"
+      ],
+      "authorsText": "Uzair Ahmad, Mohammad Waseem Hassan, Arshad Ali, Richard McClatchey, Ian Willers",
+      "abstract": "CERN's (European Organization for Nuclear Research) WISDOM project uses XML for the replication of data between different data repositories in a heterogeneous operating system environment. For exchanging data from Web-resident databases, the data needs to be transformed into XML and back to the database format. Many different approaches are employed to do this transformation. This paper addresses issues that make this job more efficient and robust than existing approaches. It incorporates the World Wide Web Consortium (W3C) XML Schema specification in the database-XML relationship. Incorporation of the XML Schema exhibits significant improvements in XML content usage and reduces the limitations of DTD-based database XML services. Secondly the paper explores the possibility of database independent transformation of data between XML and different databases. It proposes a standard XML format that every serialized object should follow. This makes it possible to use objects of heterogeneous database seamlessly using XML.",
+      "absUrl": "https://arxiv.org/abs/cs/0402007v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0402007v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0402006",
+      "title": "MammoGrid: Large-Scale Distributed Mammogram Analysis",
+      "authors": [
+        "S. Roberto Amendolia",
+        "Michael Brady",
+        "Richard McClatchey",
+        "Miguel Mulet-Parada",
+        "Mohammed Odeh",
+        "Tony Solomonides"
+      ],
+      "authorsText": "S. Roberto Amendolia, Michael Brady, Richard McClatchey, Miguel Mulet-Parada, Mohammed Odeh, Tony Solomonides",
+      "abstract": "Breast cancer as a medical condition and mammograms as images exhibit many dimensions of variability across the population. Similarly, the way diagnostic systems are used and maintained by clinicians varies between imaging centres and breast screening programmes, and so does the appearance of the mammograms generated. A distributed database that reflects the spread of pathologies across the population is an invaluable tool for the epidemiologist and the understanding of the variation in image acquisition protocols is essential to a radiologist in a screening programme. Exploiting emerging grid technology, the aim of the MammoGrid [1] project is to develop a Europe-wide database of mammograms that will be used to investigate a set of important healthcare applications and to explore the potential of the grid to support effective co-working between healthcare professionals.",
+      "absUrl": "https://arxiv.org/abs/cs/0402006v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0402006v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2004-02",
+      "sourceVersion": "v1"
+    }
+  ]
+}

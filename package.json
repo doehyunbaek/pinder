@@ -1,0 +1,13 @@
+{
+  "name": "pinder",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Pinder is a static, client-side paper swiping app for GitHub Pages.",
+  "type": "commonjs",
+  "scripts": {
+    "scrape:icse": "node scripts/scrape-icse-tracks.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.59.1"
+  }
+}

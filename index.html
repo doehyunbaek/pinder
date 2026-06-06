@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>pinder</title>
+    <link rel="stylesheet" href="./styles.css?v=20260426-09" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="topbar-main">
+          <div class="topbar-copy">
+            <div class="source-switcher">
+              <button
+                class="source-switcher-button"
+                id="sourceSwitcherButton"
+                type="button"
+                aria-label="Change paper source"
+                aria-haspopup="menu"
+                aria-controls="sourceMenu"
+                aria-expanded="false"
+              >
+                <span class="eyebrow source-switcher-label" id="sourceLabel">arXiv</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 10l5 5 5-5" />
+                </svg>
+              </button>
+
+              <div class="source-menu hidden" id="sourceMenu" role="menu" aria-label="Paper sources">
+                <button class="source-menu-option" id="sourceArxivOption" type="button" role="menuitem">
+                  <span class="source-menu-option-title">arXiv · cs.SE</span>
+                  <span class="source-menu-option-hint">Live monthly feed</span>
+                </button>
+                <button class="source-menu-option" id="sourceIcseOption" type="button" role="menuitem">
+                  <span class="source-menu-option-title">ICSE accepted papers</span>
+                  <span class="source-menu-option-hint">Browse ICSE 1976–2026</span>
+                </button>
+                <button class="source-menu-option" id="sourceFseOption" type="button" role="menuitem">
+                  <span class="source-menu-option-title">FSE accepted papers</span>
+                  <span class="source-menu-option-hint">Browse FSE 1983–2026</span>
+                </button>
+              </div>
+            </div>
+            <div class="topbar-brand" id="topbarBrand">
+              <h1>pinder</h1>
+              <p class="subhead">Swipe like tinder, but for papers.</p>
+            </div>
+            <div class="track-picker-wrap hidden" id="trackPickerWrap">
+              <label class="track-picker-label" for="trackPicker" id="trackPickerLabel">Conference year</label>
+              <select class="track-picker" id="trackPicker" aria-label="Choose conference year"></select>
+            </div>
+          </div>
+
+          <div class="topbar-search" id="topbarSearch">
+            <button
+              class="topbar-search-filter"
+              id="filterButton"
+              type="button"
+              aria-label="Open author filter"
+              aria-controls="filterMenu"
+              aria-expanded="false"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z" />
+              </svg>
+            </button>
+            <input
+              type="text"
+              id="searchInput"
+              class="topbar-search-input"
+              placeholder="Search papers… (title: abstract: author:)"
+              aria-label="Search papers by title, abstract, or author"
+              autocomplete="off"
+            />
+            <button type="button" class="topbar-search-clear hidden" id="searchClearButton" aria-label="Clear search">&times;</button>
+
+            <div class="settings-menu hidden" id="filterMenu">
+              <p class="settings-title">Authors</p>
+              <input type="text" id="authorSearchInput" placeholder="Search authors..." class="author-search-input" />
+              <div class="author-filter-actions">
+                <button type="button" class="secondary-button" id="selectAllAuthorsButton">Select all</button>
+                <button type="button" class="secondary-button" id="clearAllAuthorsButton">Clear all</button>
+              </div>
+              <div class="author-list" id="authorList"></div>
+            </div>
+          </div>
+
+          <div class="topbar-actions">
+            <button class="secondary-button hidden" id="modeToggleButton" type="button">Explore Map</button>
+            <button class="auth-button" id="topAuthButton" type="button">Sign in</button>
+
+            <button
+              class="icon-button"
+              id="settingsButton"
+              type="button"
+              aria-label="Open settings"
+              aria-controls="settingsMenu"
+              aria-expanded="false"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M19.14 12.94c.04-.31.06-.63.06-.94s-.02-.63-.06-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.03 7.03 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.49-.42h-3.84a.5.5 0 0 0-.49.42l-.36 2.54c-.58.22-1.13.53-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.68 8.84a.5.5 0 0 0 .12.64l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94L2.8 14.52a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.5.4 1.05.72 1.63.94l.36 2.54a.5.5 0 0 0 .49.42h3.84a.5.5 0 0 0 .49-.42l.36-2.54c.58-.22 1.13-.53 1.63-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58ZM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7Z" />
+              </svg>
+            </button>
+
+            <div class="settings-menu hidden" id="settingsMenu">
+              <p class="settings-title">Settings</p>
+              <label class="settings-option" for="showButtonsToggle">
+                <input id="showButtonsToggle" type="checkbox" checked />
+                <span>Show button controls</span>
+              </label>
+              <label class="settings-option" for="showTitleToggle">
+                <input id="showTitleToggle" type="checkbox" checked />
+                <span>Show title and tagline</span>
+              </label>
+              <label class="settings-option" for="showAuthorsToggle">
+                <input id="showAuthorsToggle" type="checkbox" checked />
+                <span>Show authors</span>
+              </label>
+              <p class="settings-hint">Swipes and arrow keys still work when buttons are hidden.</p>
+
+              <div class="settings-divider"></div>
+
+              <p class="settings-title">Account</p>
+              <p class="settings-auth-status" id="authStatus">Checking Firebase sync…</p>
+              <p class="settings-sync-status" id="syncStatus"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress-panel" id="progressPanel" tabindex="0" aria-label="Review progress">
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="stats" id="stats"></div>
+        </div>
+      </header>
+
+      <details class="icse-visualization hidden" id="icseVisualization" open>
+        <summary class="icse-visualization-summary">
+          <div class="icse-visualization-summary-copy">
+            <p class="eyebrow" id="conferenceMapEyebrow">Conference map</p>
+            <p class="icse-visualization-title">One square per paper</p>
+          </div>
+          <div class="icse-visualization-summary-meta">
+            <p class="icse-visualization-summary-text" id="icseVisualizationSummary"></p>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 10l5 5 5-5" />
+            </svg>
+          </div>
+        </summary>
+
+        <div class="icse-visualization-body">
+          <div class="icse-visualization-legend" id="icseVisualizationLegend" aria-label="Decision color legend"></div>
+          <p class="icse-visualization-hover" id="icseVisualizationHover">
+            Sorted left to right: Accept → Weak accept → Weak reject → Reject → Unreviewed. Hover a square to preview its title; click to open the abstract.
+          </p>
+          <div class="icse-paper-map" id="icsePaperMap"></div>
+        </div>
+      </details>
+
+      <section class="board" aria-live="polite">
+        <div class="status-panel hidden" id="statusPanel"></div>
+
+        <div class="card-stack" id="cardStack">
+          <article class="paper-card next-card" id="nextCard" aria-hidden="true">
+            <p class="next-label">Up next</p>
+            <h2 id="nextTitle">Loading…</h2>
+            <p id="nextAuthors"></p>
+          </article>
+
+          <article class="paper-card current-card" id="currentCard">
+            <div class="decision-badge hidden" id="decisionBadge"></div>
+            <div class="paper-card-content" id="paperCardContent">
+              <div class="paper-links">
+                <span class="paper-id" id="paperId"></span>
+                <div class="paper-link-actions">
+                  <a id="absLink" target="_blank" rel="noreferrer noopener">Open arXiv</a>
+                  <a id="pdfLink" target="_blank" rel="noreferrer noopener">PDF</a>
+                </div>
+              </div>
+
+              <section class="paper-section">
+                <p class="section-label">Title</p>
+                <h2 id="paperTitle"></h2>
+              </section>
+
+              <section class="paper-section" id="authorsSection">
+                <p class="section-label">Authors</p>
+                <p id="paperAuthors"></p>
+              </section>
+
+              <section class="paper-section paper-abstract-section">
+                <p class="section-label">Abstract</p>
+                <p id="paperAbstract" class="abstract-preview"></p>
+              </section>
+            </div>
+          </article>
+        </div>
+
+        <section class="empty-state hidden" id="emptyState">
+          <p class="eyebrow">All done</p>
+          <h2>You're out of papers.</h2>
+          <p id="emptySummary">You reviewed everything in this feed.</p>
+          <div class="summary-grid" id="summaryGrid"></div>
+        </section>
+      </section>
+
+      <section class="action-grid" id="actionGrid" aria-label="Rating buttons">
+        <button class="action-button reject" data-decision="reject" type="button">↓ Reject</button>
+        <button class="action-button weak-reject" data-decision="weakReject" type="button">← Weak reject</button>
+        <button class="action-button weak-accept" data-decision="weakAccept" type="button">→ Weak accept</button>
+        <button class="action-button accept" data-decision="accept" type="button">↑ Accept</button>
+      </section>
+
+      <footer class="footer-bar">
+        <div class="footer-actions">
+          <button
+            class="secondary-button"
+            id="undoButton"
+            type="button"
+            title="Undo the latest review (U or ⌘/Ctrl+Z)"
+            aria-keyshortcuts="Meta+Z Control+Z U"
+          >
+            Undo
+          </button>
+          <button class="secondary-button" id="exportButton" type="button">Export reviews</button>
+        </div>
+      </footer>
+
+      <div
+        class="abstract-modal hidden"
+        id="abstractModal"
+        role="dialog"
+        aria-modal="true"
+        aria-hidden="true"
+        aria-labelledby="abstractModalTitle"
+        aria-describedby="abstractModalText"
+      >
+        <div class="abstract-modal-backdrop" id="abstractModalBackdrop"></div>
+        <div class="abstract-modal-sheet" id="abstractModalSheet" tabindex="-1">
+          <div class="abstract-modal-header">
+            <p class="section-label">Abstract</p>
+            <p class="abstract-modal-hint" id="abstractModalHint">Arrow keys rate · Esc or tap outside closes</p>
+          </div>
+          <h2 class="abstract-modal-title" id="abstractModalTitle"></h2>
+          <div class="abstract-modal-body" id="abstractModalBody">
+            <p id="abstractModalText"></p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div
+      class="icse-visualization-tooltip hidden"
+      id="icseVisualizationTooltip"
+      role="tooltip"
+      aria-hidden="true"
+    ></div>
+
+    <script src="./google-api-config.js?v=20260501-02"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+    <script src="./scrape.js?v=20260426-02"></script>
+    <script src="./auth.js?v=20260501-02"></script>
+    <script src="./app.js?v=20260426-09"></script>
+  </body>
+</html>

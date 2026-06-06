@@ -1,0 +1,1171 @@
+{
+  "title": "arXiv cs.SE 2006",
+  "sourceLabel": "arXiv cs.SE 2006",
+  "sourceUrl": "https://arxiv.org/list/cs.SE/2006",
+  "archive": "cs.SE",
+  "year": 2006,
+  "updatedAt": "2026-05-01T19:47:32.124Z",
+  "months": [
+    {
+      "period": "2006-01",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2006-01?skip=0&show=2000",
+      "paperCount": 4
+    },
+    {
+      "period": "2006-02",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2006-02?skip=0&show=2000",
+      "paperCount": 1
+    },
+    {
+      "period": "2006-03",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2006-03?skip=0&show=2000",
+      "paperCount": 5
+    },
+    {
+      "period": "2006-04",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2006-04?skip=0&show=2000",
+      "paperCount": 2
+    },
+    {
+      "period": "2006-05",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2006-05?skip=0&show=2000",
+      "paperCount": 7
+    },
+    {
+      "period": "2006-06",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2006-06?skip=0&show=2000",
+      "paperCount": 7
+    },
+    {
+      "period": "2006-07",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2006-07?skip=0&show=2000",
+      "paperCount": 15
+    },
+    {
+      "period": "2006-08",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2006-08?skip=0&show=2000",
+      "paperCount": 3
+    },
+    {
+      "period": "2006-09",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2006-09?skip=0&show=2000",
+      "paperCount": 7
+    },
+    {
+      "period": "2006-10",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2006-10?skip=0&show=2000",
+      "paperCount": 5
+    },
+    {
+      "period": "2006-11",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2006-11?skip=0&show=2000",
+      "paperCount": 5
+    },
+    {
+      "period": "2006-12",
+      "sourceUrl": "https://arxiv.org/list/cs.SE/2006-12?skip=0&show=2000",
+      "paperCount": 3
+    }
+  ],
+  "papers": [
+    {
+      "id": "cs/0612131",
+      "title": "Architecting Network-Centric Software Systems: From Chaotic Interpretations toward a Formal Characterization",
+      "authors": [
+        "Amine Chigani James D. Arthur Shawn Bohner"
+      ],
+      "authorsText": "Amine Chigani James D. Arthur Shawn Bohner",
+      "abstract": "In recent years, software development has evolved from the traditional platform-centric approach to a network-centric one. This evolution has reached its peak with the introduction of Network-Centric Operations (NCO) by the U.S. Department of Defense. It has also resulted in conflicting interpretations of how to map NCO concepts to the field of software architecture. In this paper, we capture the core concepts and goals of NCO, investigate the implications of these concepts and goals on software architecture, and identify the operational characteristics that distinguish network-centric systems from other systems. More importantly, we use architectural design principles to propose an outline for a network-centric architectural style that helps in characterizing network-centric software systems and that provides a means by which their distinguishing operational characteristics can be realized.",
+      "absUrl": "https://arxiv.org/abs/cs/0612131v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0612131v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0612092",
+      "title": "Agile Adoption Process Framework",
+      "authors": [
+        "Ahmed Sidky",
+        "James Arthur"
+      ],
+      "authorsText": "Ahmed Sidky, James Arthur",
+      "abstract": "Today many organizations aspire to adopt agile processes in hope of overcoming some of the difficulties they are facing with their current software development process. There is no structured framework for the agile adoption process. This paper presents a 3-Stage process framework that assists organization and guides organizations through their agile adoption efforts. The Process Framework has been received significantly positive feedback from experts and leaders in agile adoption industry.",
+      "absUrl": "https://arxiv.org/abs/cs/0612092v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0612092v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0612082",
+      "title": "Developing efficient parsers in Prolog: the CLF manual (v1.0)",
+      "authors": [
+        "Thierry Despeyroux"
+      ],
+      "authorsText": "Thierry Despeyroux",
+      "abstract": "This document describes a couple of tools that help to quickly design and develop computer (formalized) languages. The first one use Flex to perform lexical analysis and the second is an extention of Prolog DCGs to perfom syntactical analysis. Initially designed as a new component for the Centaur system, these tools are now available independently and can be used to construct efficient Prolog parsers that can be integrated in Prolog or heterogeneous systems. This is the initial version of the CLF documentation. Updated version will be available online when necessary.",
+      "absUrl": "https://arxiv.org/abs/cs/0612082v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0612082v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-12",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0611122",
+      "title": "Knowledge Representation Concepts for Automated SLA Management",
+      "authors": [
+        "Adrian Paschke",
+        "Martin Bichler"
+      ],
+      "authorsText": "Adrian Paschke, Martin Bichler",
+      "abstract": "Outsourcing of complex IT infrastructure to IT service providers has increased substantially during the past years. IT service providers must be able to fulfil their service-quality commitments based upon predefined Service Level Agreements (SLAs) with the service customer. They need to manage, execute and maintain thousands of SLAs for different customers and different types of services, which needs new levels of flexibility and automation not available with the current technology. The complexity of contractual logic in SLAs requires new forms of knowledge representation to automatically draw inferences and execute contractual agreements. A logic-based approach provides several advantages including automated rule chaining allowing for compact knowledge representation as well as flexibility to adapt to rapidly changing business requirements. We suggest adequate logical formalisms for representation and enforcement of SLA rules and describe a proof-of-concept implementation. The article describes selected formalisms of the ContractLog KR and their adequacy for automated SLA management and presents results of experiments to demonstrate flexibility and scalability of the approach.",
+      "absUrl": "https://arxiv.org/abs/cs/0611122v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0611122v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0611110",
+      "title": "The Implications of Network-Centric Software Systems on Software Architecture: A Critical Evaluation",
+      "authors": [
+        "Amine Chigani",
+        "James D. Arthur"
+      ],
+      "authorsText": "Amine Chigani, James D. Arthur",
+      "abstract": "The purpose of this paper is to evaluate the impact of emerging network-centric software systems on the field of software architecture. We first develop an insight concerning the term \"network-centric\" by presenting its origin and its implications within the context of software architecture. On the basis of this insight, we present our definition of a network-centric framework and its distinguishing characteristics. We then enumerate the challenges that face the field of software architecture as software development shifts from a platform-centric to a network-centric model. In order to face these challenges, we propose a formal approach embodied in a new architectural style that supports overcoming these challenges at the architectural level. Finally, we conclude by presenting an illustrative example to demonstrate the usefulness of the concepts of network centricity, summarizing our contributions, and linking our approach to future work that needs to be done in this area.",
+      "absUrl": "https://arxiv.org/abs/cs/0611110v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0611110v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0611092",
+      "title": "Design approaches in technology enhanced learning",
+      "authors": [
+        "Yishay Mor",
+        "Niall Winters"
+      ],
+      "authorsText": "Yishay Mor, Niall Winters",
+      "abstract": "Design is a critical to the successful development of any interactive learning environment (ILE). Moreover, in technology enhanced learning (TEL), the design process requires input from many diverse areas of expertise. As such, anyone undertaking tool development is required to directly address the design challenge from multiple perspectives. We provide a motivation and rationale for design approaches for learning technologies that draws upon Simon's seminal proposition of Design Science (Simon, 1969). We then review the application of Design Experiments (Brown, 1992) and Design Patterns (Alexander et al., 1977) and argue that a patterns approach has the potential to address many of the critical challenges faced by learning technologists.",
+      "absUrl": "https://arxiv.org/abs/cs/0611092v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0611092v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0611072",
+      "title": "Reconciling Synthesis and Decomposition: A Composite Approach to Capability Identification",
+      "authors": [
+        "Ramya Ravichandar",
+        "James D. Arthur",
+        "Robert P. Broadwater"
+      ],
+      "authorsText": "Ramya Ravichandar, James D. Arthur, Robert P. Broadwater",
+      "abstract": "Stakeholders' expectations and technology constantly evolve during the lengthy development cycles of a large-scale computer based system. Consequently, the traditional approach of baselining requirements results in an unsatisfactory system because it is ill-equipped to accommodate such change. In contrast, systems constructed on the basis of Capabilities are more change-tolerant; Capabilities are functional abstractions that are neither as amorphous as user needs nor as rigid as system requirements. Alternatively, Capabilities are aggregates that capture desired functionality from the users' needs, and are designed to exhibit desirable software engineering characteristics of high cohesion, low coupling and optimum abstraction levels. To formulate these functional abstractions we develop and investigate two algorithms for Capability identification: Synthesis and Decomposition. The synthesis algorithm aggregates detailed rudimentary elements of the system to form Capabilities. In contrast, the decomposition algorithm determines Capabilities by recursively partitioning the overall mission of the system into more detailed entities. Empirical analysis on a small computer based library system reveals that neither approach is sufficient by itself. However, a composite algorithm based on a complementary approach reconciling the two polar perspectives results in a more feasible set of Capabilities. In particular, the composite algorithm formulates Capabilities using the cohesion and coupling measures as defined by the decomposition algorithm and the abstraction level as determined by the synthesis algorithm.",
+      "absUrl": "https://arxiv.org/abs/cs/0611072v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0611072v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0611071",
+      "title": "Capabilities Engineering: Constructing Change-Tolerant Systems",
+      "authors": [
+        "Ramya Ravichandar",
+        "James D. Arthur",
+        "Shawn A. Bohner"
+      ],
+      "authorsText": "Ramya Ravichandar, James D. Arthur, Shawn A. Bohner",
+      "abstract": "We propose a Capabilities-based approach for building long-lived, complex systems that have lengthy development cycles. User needs and technology evolve during these extended development periods, and thereby, inhibit a fixed requirements-oriented solution specification. In effect, for complex emergent systems, the traditional approach of baselining requirements results in an unsatisfactory system. Therefore, we present an alternative approach, Capabilities Engineering, which mathematically exploits the structural semantics of the Function Decomposition graph - a representation of user needs - to formulate Capabilities. For any given software system, the set of derived Capabilities embodies change-tolerant characteristics. More specifically, each individual Capability is a functional abstraction constructed to be highly cohesive and to be minimally coupled with its neighbors. Moreover, the Capability set is chosen to accommodate an incremental development approach, and to reflect the constraints of technology feasibility and implementation schedules. We discuss our validation activities to empirically prove that the Capabilities-based approach results in change-tolerant systems.",
+      "absUrl": "https://arxiv.org/abs/cs/0611071v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0611071v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-11",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0610167",
+      "title": "ECA-RuleML: An Approach combining ECA Rules with temporal interval-based KR Event/Action Logics and Transactional Update Logics",
+      "authors": [
+        "Adrian Paschke"
+      ],
+      "authorsText": "Adrian Paschke",
+      "abstract": "An important problem to be addressed within Event-Driven Architecture (EDA) is how to correctly and efficiently capture and process the event/action-based logic. This paper endeavors to bridge the gap between the Knowledge Representation (KR) approaches based on durable events/actions and such formalisms as event calculus, on one hand, and event-condition-action (ECA) reaction rules extending the approach of active databases that view events as instantaneous occurrences and/or sequences of events, on the other. We propose formalism based on reaction rules (ECA rules) and a novel interval-based event logic and present concrete RuleML-based syntax, semantics and implementation. We further evaluate this approach theoretically, experimentally and on an example derived from common industry use cases and illustrate its benefits.",
+      "absUrl": "https://arxiv.org/abs/cs/0610167v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0610167v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0610097",
+      "title": "Reuse of Specification Patterns with the B Method",
+      "authors": [
+        "Sandrine Blazy",
+        "Frédéric Gervais",
+        "Régine Laleau"
+      ],
+      "authorsText": "Sandrine Blazy, Frédéric Gervais, Régine Laleau",
+      "abstract": "This paper describes an approach for reusing specification patterns. Specification patterns are design patterns that are expressed in a formal specification language. Reusing a specification pattern means instantiating it or composing it with other specification patterns. Three levels of composition are defined: juxtaposition, composition with inter-patterns links and unification. This paper shows through examples how to define specification patterns in B, how to reuse them directly in B, and also how to reuse the proofs associated with specification patterns.",
+      "absUrl": "https://arxiv.org/abs/cs/0610097v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0610097v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0610096",
+      "title": "Partial Evaluation for Program Comprehension",
+      "authors": [
+        "Sandrine Blazy"
+      ],
+      "authorsText": "Sandrine Blazy",
+      "abstract": "Program comprehension is the most tedious and time consuming task of software maintenance, an important phase of the software life cycle. This is particularly true while maintaining scientific application programs that have been written in Fortran for decades and that are still vital in various domains even though more modern languages are used to implement their user interfaces. Very often, programs have evolved as their application domains increase continually and have become very complex due to extensive modifications. This generality in programs is implemented by input variables whose value does not vary in the context of a given application. Thus, it is very interesting for the maintainer to propagate such information, that is to obtain a simplified program, which behaves like the initial one when used according to the restriction. We have adapted partial evaluation for program comprehension. Our partial evaluator performs mainly two tasks: constant propagation and statements simplification. It includes an interprocedural alias analysis. As our aim is program comprehension rather than optimization, there are two main differences with classical partial evaluation. We do not change the original",
+      "absUrl": "https://arxiv.org/abs/cs/0610096v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0610096v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0610094",
+      "title": "Migrating Multi-page Web Applications to Single-page AJAX Interfaces",
+      "authors": [
+        "Ali Mesbah",
+        "Arie van Deursen"
+      ],
+      "authorsText": "Ali Mesbah, Arie van Deursen",
+      "abstract": "Recently, a new web development technique for creating interactive web applications, dubbed AJAX, has emerged. In this new model, the single-page web interface is composed of individual components which can be updated/replaced independently. With the rise of AJAX web applications classical multi-page web applications are becoming legacy systems. If until a year ago, the concern revolved around migrating legacy systems to web-based settings, today we have a new challenge of migrating web applications to single-page AJAX applications. Gaining an understanding of the navigational model and user interface structure of the source application is the first step in the migration process. In this paper, we explore how reverse engineering techniques can help analyze classic web applications for this purpose. Our approach, using a schema-based clustering technique, extracts a navigational model of web applications, and identifies candidate user interface components to be migrated to a single-page AJAX interface. Additionally, results of a case study, conducted to evaluate our tool, are presented.",
+      "absUrl": "https://arxiv.org/abs/cs/0610094v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0610094v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0610085",
+      "title": "Symbolic Simulation-Checking of Dense-Time Systems",
+      "authors": [
+        "Farn Wang"
+      ],
+      "authorsText": "Farn Wang",
+      "abstract": "Intuitively, an (implementation) automata is simulated by a (specification) automata if every externally observable transition by the implementation automata can also be made by the specification automata. In this work, we present a symbolic algorithm for the simulation-checking of timed automatas. We first present a simulation-checking procedure that operates on state spaces, representable with convex polyhedra, of timed automatas. We then present techniques to represent those intermediate result convex polyhedra with zones and make the procedure an algorithm. We then discuss how to handle Zeno states in the implementation automata. Finally, we have endeavored to realize the algorithm and report the performance of our algorithm in the experiment.",
+      "absUrl": "https://arxiv.org/abs/cs/0610085v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0610085v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-10",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0609147",
+      "title": "Identifying Crosscutting Concerns Using Fan-in Analysis",
+      "authors": [
+        "Marius Marin",
+        "Arie van Deursen",
+        "Leon Moonen"
+      ],
+      "authorsText": "Marius Marin, Arie van Deursen, Leon Moonen",
+      "abstract": "Aspect mining is a reverse engineering process that aims at finding crosscutting concerns in existing systems. This paper proposes an aspect mining approach based on determining methods that are called from many different places, and hence have a high fan-in, which can be seen as a symptom of crosscutting functionality. The approach is semi-automatic, and consists of three steps: metric calculation, method filtering, and call site analysis. Carrying out these steps is an interactive process supported by an Eclipse plug-in called FINT. Fan-in analysis has been applied to three open source Java systems, totaling around 200,000 lines of code. The most interesting concerns identified are discussed in detail, which includes several concerns not previously discussed in the aspect-oriented literature. The results show that a significant number of crosscutting concerns can be recognized using fan-in analysis, and each of the three steps can be supported by tools.",
+      "absUrl": "https://arxiv.org/abs/cs/0609147v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0609147v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0609143",
+      "title": "ECA-LP / ECA-RuleML: A Homogeneous Event-Condition-Action Logic Programming Language",
+      "authors": [
+        "Adrian Paschke"
+      ],
+      "authorsText": "Adrian Paschke",
+      "abstract": "Event-driven reactive functionalities are an urgent need in nowadays distributed service-oriented applications and (Semantic) Web-based environments. An important problem to be addressed is how to correctly and efficiently capture and process the event-based behavioral, reactive logic represented as ECA rules in combination with other conditional decision logic which is represented as derivation rules. In this paper we elaborate on a homogeneous integration approach which combines derivation rules, reaction rules (ECA rules) and other rule types such as integrity constraint into the general framework of logic programming. The developed ECA-LP language provides expressive features such as ID-based updates with support for external and self-updates of the intensional and extensional knowledge, transac-tions including integrity testing and an event algebra to define and process complex events and actions based on a novel interval-based Event Calculus variant.",
+      "absUrl": "https://arxiv.org/abs/cs/0609143v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0609143v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0609120",
+      "title": "Rule-based Knowledge Representation for Service Level Agreement",
+      "authors": [
+        "Adrian Paschke"
+      ],
+      "authorsText": "Adrian Paschke",
+      "abstract": "Automated management and monitoring of service contracts like Service Level Agreements (SLAs) or higher-level policies is vital for efficient and reliable distributed service-oriented architectures (SOA) with high quality of ser-vice (QoS) levels. IT service provider need to manage, execute and maintain thousands of SLAs for different customers and different types of services, which needs new levels of flexibility and automation not available with the current technol-ogy. I propose a novel rule-based knowledge representation (KR) for SLA rules and a respective rule-based service level management (RBSLM) framework. My rule-based approach based on logic programming provides several advantages including automated rule chaining allowing for compact knowledge representation and high levels of automation as well as flexibility to adapt to rapidly changing business requirements. Therewith, I address an urgent need service-oriented busi-nesses do have nowadays which is to dynamically change their business and contractual logic in order to adapt to rapidly changing business environments and to overcome the restricting nature of slow change cycles.",
+      "absUrl": "https://arxiv.org/abs/cs/0609120v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0609120v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0609119",
+      "title": "Verification, Validation, Integrity of Rule Based Policies and Contracts in the Semantic Web",
+      "authors": [
+        "Adrian Paschke"
+      ],
+      "authorsText": "Adrian Paschke",
+      "abstract": "Rule-based policy and contract systems have rarely been studied in terms of their software engineering properties. This is a serious omission, because in rule-based policy or contract representation languages rules are being used as a declarative programming language to formalize real-world decision logic and create IS production systems upon. This paper adopts an SE methodology from extreme programming, namely test driven development, and discusses how it can be adapted to verification, validation and integrity testing (V&V&I) of policy and contract specifications. Since, the test-driven approach focuses on the behavioral aspects and the drawn conclusions instead of the structure of the rule base and the causes of faults, it is independent of the complexity of the rule language and the system under test and thus much easier to use and understand for the rule engineer and the user.",
+      "absUrl": "https://arxiv.org/abs/cs/0609119v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0609119v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0609104",
+      "title": "On Verifying Complex Properties using Symbolic Shape Analysis",
+      "authors": [
+        "Thomas Wies",
+        "Viktor Kuncak",
+        "Karen Zee",
+        "Andreas Podelski",
+        "Martin Rinard"
+      ],
+      "authorsText": "Thomas Wies, Viktor Kuncak, Karen Zee, Andreas Podelski, Martin Rinard",
+      "abstract": "One of the main challenges in the verification of software systems is the analysis of unbounded data structures with dynamic memory allocation, such as linked data structures and arrays. We describe Bohne, a new analysis for verifying data structures. Bohne verifies data structure operations and shows that 1) the operations preserve data structure invariants and 2) the operations satisfy their specifications expressed in terms of changes to the set of objects stored in the data structure. During the analysis, Bohne infers loop invariants in the form of disjunctions of universally quantified Boolean combinations of formulas. To synthesize loop invariants of this form, Bohne uses a combination of decision procedures for Monadic Second-Order Logic over trees, SMT-LIB decision procedures (currently CVC Lite), and an automated reasoner within the Isabelle interactive theorem prover. This architecture shows that synthesized loop invariants can serve as a useful communication mechanism between different decision procedures. Using Bohne, we have verified operations on data structures such as linked lists with iterators and back pointers, trees with and without parent pointers, two-level skip lists, array data structures, and sorted lists. We have deployed Bohne in the Hob and Jahob data structure analysis systems, enabling us to combine Bohne with analyses of data structure clients and apply it in the context of larger programs. This report describes the Bohne algorithm as well as techniques that Bohne uses to reduce the ammount of annotations and the running time of the analysis.",
+      "absUrl": "https://arxiv.org/abs/cs/0609104v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0609104v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0609025",
+      "title": "A XML Schema Definition based Universal User Interface",
+      "authors": [
+        "Prashant"
+      ],
+      "authorsText": "Prashant",
+      "abstract": "In current scenario, due to an ever increasing introduction of new types of interactive devices such as mobile phones and PDAs, end users or clients are demanding the services offered by organizations on their devices. Furthermore, developers are maintaining one application for each service and different versions of the same application for different types of devices. The organizations are also seeking structured information for processing, storing, analyzing the requests easier. To address these three requirements, this paper presents a solution called as XML schema definition based user interface based on XML technologies which provides common document structure.",
+      "absUrl": "https://arxiv.org/abs/cs/0609025v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0609025v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0609024",
+      "title": "Linux, Open Source and Unicode",
+      "authors": [
+        "Prashant"
+      ],
+      "authorsText": "Prashant",
+      "abstract": "This paper starts with a discussion on Linux and open source software. We then present a new encoding scheme EUTF that is Efficient UTF, where we introduce an efficient method of encoding. We use variable codes within a particular language and to indicate change of language and type of language we use certain special pattern of bits that act as indicators. By using this method we save on bits and memory and yet we have the scope of encoding all possible scripts and symbols hence preserving the main aim of Unicode.",
+      "absUrl": "https://arxiv.org/abs/cs/0609024v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0609024v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-09",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0608111",
+      "title": "An Architectural Style for Ajax",
+      "authors": [
+        "Ali Mesbah",
+        "Arie van Deursen"
+      ],
+      "authorsText": "Ali Mesbah, Arie van Deursen",
+      "abstract": "A new breed of web application, dubbed AJAX, is emerging in response to a limited degree of interactivity in large-grain stateless Web interactions. At the heart of this new approach lies a single page interaction model that facilitates rich interactivity. We have studied and experimented with several AJAX frameworks trying to understand their architectural properties. In this paper, we summarize three of these frameworks and examine their properties and introduce the SPIAR architectural style. We describe the guiding software engineering principles and the constraints chosen to induce the desired properties. The style emphasizes user interface component development, and intermediary delta-communication between client/server components, to improve user interactivity and ease of development. In addition, we use the concepts and principles to discuss various open issues in AJAX frameworks and application development.",
+      "absUrl": "https://arxiv.org/abs/cs/0608111v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0608111v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0608104",
+      "title": "Heap Reference Analysis Using Access Graphs",
+      "authors": [
+        "Uday Khedker",
+        "Amitabha Sanyal",
+        "Amey Karkare"
+      ],
+      "authorsText": "Uday Khedker, Amitabha Sanyal, Amey Karkare",
+      "abstract": "Despite significant progress in the theory and practice of program analysis, analysing properties of heap data has not reached the same level of maturity as the analysis of static and stack data. The spatial and temporal structure of stack and static data is well understood while that of heap data seems arbitrary and is unbounded. We devise bounded representations which summarize properties of the heap data. This summarization is based on the structure of the program which manipulates the heap. The resulting summary representations are certain kinds of graphs called access graphs. The boundedness of these representations and the monotonicity of the operations to manipulate them make it possible to compute them through data flow analysis.\nAn important application which benefits from heap reference analysis is garbage collection, where currently liveness is conservatively approximated by reachability from program variables. As a consequence, current garbage collectors leave a lot of garbage uncollected, a fact which has been confirmed by several empirical studies. We propose the first ever end-to-end static analysis to distinguish live objects from reachable objects. We use this information to make dead objects unreachable by modifying the program. This application is interesting because it requires discovering data flow information representing complex semantics. In particular, we discover four properties of heap data: liveness, aliasing, availability, and anticipability. Together, they cover all combinations of directions of analysis (i.e. forward and backward) and confluence of information (i.e. union and intersection). Our analysis can also be used for plugging memory leaks in C/C++ languages.",
+      "absUrl": "https://arxiv.org/abs/cs/0608104v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0608104v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0608038",
+      "title": "Morphisms of Coloured Petri Nets",
+      "authors": [
+        "Joachim Wehler"
+      ],
+      "authorsText": "Joachim Wehler",
+      "abstract": "We introduce the concept of a morphism between coloured nets. Our definition generalizes Petris definition for ordinary nets. A morphism of coloured nets maps the topological space of the underlying undirected net as well as the kernel and cokernel of the incidence map. The kernel are flows along the transition-bordered fibres of the morphism, the cokernel are classes of markings of the place-bordered fibres. The attachment of bindings, colours, flows and marking classes to a subnet is formalized by using concepts from sheaf theory. A coloured net is a sheaf-cosheaf pair over a Petri space and a morphism between coloured nets is a morphism between such pairs. Coloured nets and their morphisms form a category. We prove the existence of a product in the subcategory of sort-respecting morphisms. After introducing markings our concepts generalize to coloured Petri nets.",
+      "absUrl": "https://arxiv.org/abs/cs/0608038v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0608038v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-08",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0607130",
+      "title": "Towards Implementing an Enterprise Groupware-Integrated Human Resources Information System",
+      "authors": [
+        "Sergey V. Zykov"
+      ],
+      "authorsText": "Sergey V. Zykov",
+      "abstract": "Human resources management software is having a wide audience at present. However, no truly integrate solution has been proposed yet to improve the systems concerned. Approaches to extra data collection for appraisal decision-making are considered on the concept modeling theoretical basis. Current technologies in state-of-the-art HR management software are compared. Design and implementation aspects for a Web-wired truly integrated secure and scalable event-driven enterprise system are described. Benchmark results are presented. Field perspectives are discussed.",
+      "absUrl": "https://arxiv.org/abs/cs/0607130v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0607130v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0607129",
+      "title": "Enterprise Resource Planning Systems: the Integrated Approach",
+      "authors": [
+        "Sergey V. Zykov"
+      ],
+      "authorsText": "Sergey V. Zykov",
+      "abstract": "Enterprise resource planning (ERP) systems enjoy an increasingly wide coverage. However, no truly integrate solution has been proposed as yet. ERP classification is given. Recent trends in commercial systems are analyzed on the basis of human resources (HR) management software. An innovative \"straight through\" design and implementation process of an open, secure, and scalable integrated event-driven enterprise solution is suggested. Implementation results are presented.",
+      "absUrl": "https://arxiv.org/abs/cs/0607129v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0607129v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0607128",
+      "title": "The Integrated Approach to ERP: Embracing the Web",
+      "authors": [
+        "Sergey V. Zykov"
+      ],
+      "authorsText": "Sergey V. Zykov",
+      "abstract": "Integrated approach to enterprise resource planning (ERP) software design and implementation can significantly improve the entire corporate information infrastructure and it helps to benefit from power of Internet services. The approach proposed provides for corporate Web portal integrity, consistency, urgency and front-end data processing. Human resources (HR) ERP component implementation is discussed as an essential instance.",
+      "absUrl": "https://arxiv.org/abs/cs/0607128v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0607128v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0607127",
+      "title": "Integrating Enterprise Software Applications with Web Portal Technology",
+      "authors": [
+        "Sergey V. Zykov"
+      ],
+      "authorsText": "Sergey V. Zykov",
+      "abstract": "Web-portal based approach can significantly improve the entire corporate information infrastructure. The approach proposed provides for rapid and accurate front-end integration of heterogeneous corporate applications including enterprise resource planning (ERP) systems. Human resources ERP component and multimedia data warehouse implementations are discussed as essential instances.",
+      "absUrl": "https://arxiv.org/abs/cs/0607127v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0607127v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0607126",
+      "title": "Abstract Machine as a Model of Content Management Information System",
+      "authors": [
+        "Sergey V. Zykov"
+      ],
+      "authorsText": "Sergey V. Zykov",
+      "abstract": "Enterprise content management is an urgent issue of current scientific and practical activities in software design and implementation. However, papers known as yet give insufficient coverage of theoretical background of the software in question. The paper gives an attempt of building a state-based model of content management. In accordance with the theoretical principles outlined, a content management information system (CMIS) has been implemented in a large international oil-and-gas group of companies.",
+      "absUrl": "https://arxiv.org/abs/cs/0607126v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0607126v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0607125",
+      "title": "Enterprise Portal: from Model to Implementation",
+      "authors": [
+        "Sergey V. Zykov"
+      ],
+      "authorsText": "Sergey V. Zykov",
+      "abstract": "Portal technology can significantly improve the entire corporate information infrastructure. The approach proposed is based on rigorous and consistent (meta)data model and provides for efficient and accurate front-end integration of heterogeneous corporate applications including enterprise resource planning (ERP) systems, multimedia data warehouses and proprietary content databases. The methodology proposed embraces entire software lifecycle; it is illustrated by an enterprise-level Intranet portal implementation.",
+      "absUrl": "https://arxiv.org/abs/cs/0607125v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0607125v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0607124",
+      "title": "ConceptModeller: a Problem-Oriented Visual SDK for Globally Distributed Enterprise Systems",
+      "authors": [
+        "Sergey V. Zykov"
+      ],
+      "authorsText": "Sergey V. Zykov",
+      "abstract": "The paper describes problem-oriented approach to software development. The approach is a part of the original integrated methodology of enterprise Internet-based software design and implementation. All aspects of software development, from theory to implementation, are covered.",
+      "absUrl": "https://arxiv.org/abs/cs/0607124v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0607124v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0607123",
+      "title": "Enterprise Portal Development Tools: Problem-Oriented Approach",
+      "authors": [
+        "Sergey V. Zykov"
+      ],
+      "authorsText": "Sergey V. Zykov",
+      "abstract": "The paper deals with problem-oriented visual information system (IS) engineering for enterprise Internet-based applications, which is a vital part of the whole development process. The suggested approach is based on semantic network theory and a novel ConceptModeller CASE tool.",
+      "absUrl": "https://arxiv.org/abs/cs/0607123v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0607123v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0607122",
+      "title": "Enterprise Content Management: Theory and Engineering for Entire Lifecycle Support",
+      "authors": [
+        "Sergey V. Zykov"
+      ],
+      "authorsText": "Sergey V. Zykov",
+      "abstract": "The paper considers enterprise content management (ECM) issues in global heterogeneous distributed computational environment. Present-day enterprises have accumulated a huge data burden. Manipulating with such a bulk becomes an essential problem, particularly due to its global distribution, heterogeneous and weak-structured character. The conceptual approach to integrated ECM lifecycle support is presented, including overview of formal models, software development methodology and innovative software development tools. Implementation results proved shortening terms and reducing costs of implementation compared to commercial software available.",
+      "absUrl": "https://arxiv.org/abs/cs/0607122v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0607122v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0607121",
+      "title": "Object-Based Groupware: Theory, Design and Implementation Issues",
+      "authors": [
+        "Sergey V. Zykov",
+        "Gleb G. Pogodayev"
+      ],
+      "authorsText": "Sergey V. Zykov, Gleb G. Pogodayev",
+      "abstract": "Document management software systems are having a wide audience at present. However, groupware as a term has a wide variety of possible definitions. Groupware classification attempt is made in this paper. Possible approaches to groupware are considered including document management, document control and mailing systems. Lattice theory and concept modelling are presented as a theoretical background for the systems in question. Current technologies in state-of-the-art document managenent software are discussed. Design and implementation aspects for user-friendly integrate enterprise systems are described. Results for a real system to be implemented are given. Perspectives of the field in question are discussed.",
+      "absUrl": "https://arxiv.org/abs/cs/0607121v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0607121v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0607119",
+      "title": "Web-Based Enterprise Information Systems Development: The Integrated Methodology",
+      "authors": [
+        "Sergey V. Zykov"
+      ],
+      "authorsText": "Sergey V. Zykov",
+      "abstract": "The paper considers software development issues for large-scale enterprise information systems (IS) with databases (DB) in global heterogeneous distributed computational environment. Due to high IT development rates, the present-day society has accumulated and rapidly increases an extremely huge data burden. Manipulating with such huge data arrays becomes an essential problem, particularly due to their global distribution, heterogeneous and weak-structured character. The conceptual approach to integrated Internet-based IS design, development and implementation is presented, including formal models, software development methodology and original software development tools for visual problem-oriented development and content management. IS implementation results proved shortening terms and reducing costs of implementation compared to commercial software available.",
+      "absUrl": "https://arxiv.org/abs/cs/0607119v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0607119v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0607116",
+      "title": "Program Spectra Analysis in Embedded Software: A Case Study",
+      "authors": [
+        "Rui Abreu",
+        "Peter Zoeteweij",
+        "Arjan JC van Gemund"
+      ],
+      "authorsText": "Rui Abreu, Peter Zoeteweij, Arjan JC van Gemund",
+      "abstract": "Because of constraints imposed by the market, embedded software in consumer electronics is almost inevitably shipped with faults and the goal is just to reduce the inherent unreliability to an acceptable level before a product has to be released. Automatic fault diagnosis is a valuable tool to capture software faults without extra effort spent on testing. Apart from a debugging aid at design and integration time, fault diagnosis can help analyzing problems during operation, which allows for more accurate system recovery. In this paper we discuss perspectives and limitations for applying a particular fault diagnosis technique, namely the analysis of program spectra, in the area of embedded software in consumer electronics devices. We illustrate these by our first experience with a test case from industry.",
+      "absUrl": "https://arxiv.org/abs/cs/0607116v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0607116v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0607063",
+      "title": "Prioritizing Software Inspection Results using Static Profiling",
+      "authors": [
+        "Cathal Boogerd",
+        "Leon Moonen"
+      ],
+      "authorsText": "Cathal Boogerd, Leon Moonen",
+      "abstract": "Static software checking tools are useful as an additional automated software inspection step that can easily be integrated in the development cycle and assist in creating secure, reliable and high quality code. However, an often quoted disadvantage of these tools is that they generate an overly large number of warnings, including many false positives due to the approximate analysis techniques. This information overload effectively limits their usefulness.\nIn this paper we present ELAN, a technique that helps the user prioritize the information generated by a software inspection tool, based on a demand-driven computation of the likelihood that execution reaches the locations for which warnings are reported. This analysis is orthogonal to other prioritization techniques known from literature, such as severity levels and statistical analysis to reduce false positives. We evaluate feasibility of our technique using a number of case studies and assess the quality of our predictions by comparing them to actual values obtained by dynamic profiling.",
+      "absUrl": "https://arxiv.org/abs/cs/0607063v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0607063v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0607044",
+      "title": "Use of UML and Model Transformations for Workflow Process Definitions",
+      "authors": [
+        "Audris Kalnins",
+        "Valdis Vitolins"
+      ],
+      "authorsText": "Audris Kalnins, Valdis Vitolins",
+      "abstract": "Currently many different modeling languages are used for workflow definitions in BPM systems. Authors of this paper analyze the two most popular graphical languages, with highest possibility of wide practical usage - UML Activity diagrams (AD) and Business Process Modeling Notation (BPMN). The necessary in practice workflow aspects are briefly discussed, and on this basis a natural AD profile is proposed, which covers all of them. A functionally equivalent BPMN subset is also selected. The semantics of both languages in the context of process execution (namely, mapping to BPEL) is also analyzed in the paper. By analyzing AD and BPMN metamodels, authors conclude that an exact transformation from AD to BPMN is not trivial even for the selected subset, though these languages are considered to be similar. Authors show how this transformation could be defined in the MOLA transformation language.",
+      "absUrl": "https://arxiv.org/abs/cs/0607044v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0607044v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0607006",
+      "title": "Applying and Combining Three Different Aspect Mining Techniques",
+      "authors": [
+        "Mariano Ceccato",
+        "Marius Marin",
+        "Kim Mens",
+        "Leon Moonen",
+        "Paolo Tonella",
+        "Tom Tourwe"
+      ],
+      "authorsText": "Mariano Ceccato, Marius Marin, Kim Mens, Leon Moonen, Paolo Tonella, Tom Tourwe",
+      "abstract": "Understanding a software system at source-code level requires understanding the different concerns that it addresses, which in turn requires a way to identify these concerns in the source code. Whereas some concerns are explicitly represented by program entities (like classes, methods and variables) and thus are easy to identify, crosscutting concerns are not captured by a single program entity but are scattered over many program entities and are tangled with the other concerns. Because of their crosscutting nature, such crosscutting concerns are difficult to identify, and reduce the understandability of the system as a whole.\nIn this paper, we report on a combined experiment in which we try to identify crosscutting concerns in the JHotDraw framework automatically. We first apply three independently developed aspect mining techniques to JHotDraw and evaluate and compare their results. Based on this analysis, we present three interesting combinations of these three techniques, and show how these combinations provide a more complete coverage of the detected concerns as compared to the original techniques individually. Our results are a first step towards improving the understandability of a system that contains crosscutting concerns, and can be used as a basis for refactoring the identified crosscutting concerns into aspects.",
+      "absUrl": "https://arxiv.org/abs/cs/0607006v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0607006v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-07",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0606125",
+      "title": "Formalizing typical crosscutting concerns",
+      "authors": [
+        "Marius Marin"
+      ],
+      "authorsText": "Marius Marin",
+      "abstract": "We present a consistent system for referring crosscutting functionality, relating crosscutting concerns to specific implementation idioms, and formalizing their underlying relations through queries. The system is based on generic crosscutting concerns that we organize and describe in a catalog.\nWe have designed and implemented a tool support for querying source code for instances of the proposed generic concerns and organizing them in composite concern models. The composite concern model adds a new dimension to the dominant decomposition of the system for describing and making explicit source code relations specific to crosscutting concerns implementations.\nWe use the proposed approach to describe crosscutting concerns in design patterns and apply the tool to an opensource system (JHotDraw).",
+      "absUrl": "https://arxiv.org/abs/cs/0606125v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0606125v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0606113",
+      "title": "A common framework for aspect mining based on crosscutting concern sorts",
+      "authors": [
+        "Marius Marin",
+        "Leon Moonen",
+        "Arie van Deursen"
+      ],
+      "authorsText": "Marius Marin, Leon Moonen, Arie van Deursen",
+      "abstract": "The increasing number of aspect mining techniques proposed in literature calls for a methodological way of comparing and combining them in order to assess, and improve on, their quality. This paper addresses this situation by proposing a common framework based on crosscutting concern sorts which allows for consistent assessment, comparison and combination of aspect mining techniques. The framework identifies a set of requirements that ensure homogeneity in formulating the mining goals, presenting the results and assessing their quality.\nWe demonstrate feasibility of the approach by retrofitting an existing aspect mining technique to the framework, and by using it to design and implement two new mining techniques. We apply the three techniques to a known aspect mining benchmark and show how they can be consistently assessed and combined to increase the quality of the results. The techniques and combinations are implemented in FINT, our publicly available free aspect mining tool.",
+      "absUrl": "https://arxiv.org/abs/cs/0606113v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0606113v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0606112",
+      "title": "Product Centric Holons for Synchronisation and Interoperability in Manufacturing Environments",
+      "authors": [
+        "Salah Baina",
+        "Gérard Morel"
+      ],
+      "authorsText": "Salah Baina, Gérard Morel",
+      "abstract": "In the last few years, lot of work has been done in order to ensure enterprise applications interoperability; however, proposed solutions focus mainly on enterprise processes. Indeed, throughout product lifecycle coordination needs to be established between reality in the physical world (physical view) and the virtual world handled by manufacturing information systems (informational view). This paper presents a holonic approach that enables synchronisation of both physical and informational views. A model driven approach for interoperability is proposed to ensure interoperability of holon based models with other applications in the enterprise.",
+      "absUrl": "https://arxiv.org/abs/cs/0606112v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0606112v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0606108",
+      "title": "A Product Oriented Modelling Concept: Holons for systems synchronisation and interoperability",
+      "authors": [
+        "Salah Baïna",
+        "Hervé Panetto",
+        "Khalid Benali"
+      ],
+      "authorsText": "Salah Baïna, Hervé Panetto, Khalid Benali",
+      "abstract": "Nowadays, enterprises are confronted to growing needs for traceability, product genealogy and product life cycle management. To meet those needs, the enterprise and applications in the enterprise environment have to manage flows of information that relate to flows of material and that are managed in shop floor level. Nevertheless, throughout product lifecycle coordination needs to be established between reality in the physical world (physical view) and the virtual world handled by manufacturing information systems (informational view). This paper presents the \"Holon\" modelling concept as a means for the synchronisation of both physical view and informational views. Afterwards, we show how the concept of holon can play a major role in ensuring interoperability in the enterprise context.",
+      "absUrl": "https://arxiv.org/abs/cs/0606108v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0606108v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0606092",
+      "title": "Static Analysis using Parameterised Boolean Equation Systems",
+      "authors": [
+        "Christophe Joubert"
+      ],
+      "authorsText": "Christophe Joubert",
+      "abstract": "The well-known problem of state space explosion in model checking is even more critical when applying this technique to programming languages, mainly due to the presence of complex data structures. One recent and promising approach to deal with this problem is the construction of an abstract and correct representation of the global program state allowing to match visited states during program model exploration. In particular, one powerful method to implement abstract matching is to fill the state vector with a minimal amount of relevant variables for each program point. In this paper, we combine the on-the-fly model-checking approach (incremental construction of the program state space) and the static analysis method called influence analysis (extraction of significant variables for each program point) in order to automatically construct an abstract matching function. Firstly, we describe the problem as an alternation-free value-based mu-calculus formula, whose validity can be checked on the program model expressed as a labeled transition system (LTS). Secondly, we translate the analysis into the local resolution of a parameterised boolean equation system (PBES), whose representation enables a more efficient construction of the resulting abstract matching function. Finally, we show how our proposal may be elegantly integrated into CADP, a generic framework for both the design and analysis of distributed systems and the development of verification tools.",
+      "absUrl": "https://arxiv.org/abs/cs/0606092v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0606092v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0606027",
+      "title": "Building a logical model in the machining domain for CAPP expert systems",
+      "authors": [
+        "V. V. Kryssanov",
+        "A. S. Kleshchev",
+        "Y. Fukuda",
+        "K. Konishi"
+      ],
+      "authorsText": "V. V. Kryssanov, A. S. Kleshchev, Y. Fukuda, K. Konishi",
+      "abstract": "Recently, extensive efforts have been made on the application of expert system technique to solving the process planning task in the machining domain. This paper introduces a new formal method to design CAPP expert systems. The formal method is applied to provide a contour of the CAPP expert system building technology. Theoretical aspects of the formalism are described and illustrated by an example of know-how analysis. Flexible facilities to utilize multiple knowledge types and multiple planning strategies within one system are provided by the technology.",
+      "absUrl": "https://arxiv.org/abs/cs/0606027v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0606027v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0606003",
+      "title": "Modeling Aspect Mechanisms: A Top-Down Approach",
+      "authors": [
+        "Sergei Kojarski",
+        "David H. Lorenz"
+      ],
+      "authorsText": "Sergei Kojarski, David H. Lorenz",
+      "abstract": "A plethora of diverse aspect mechanisms exist today, all of which integrate concerns into artifacts that exhibit crosscutting structure. What we lack and need is a characterization of the design space that these aspect mechanisms inhabit and a model description of their weaving processes. A good design space representation provides a common framework for understanding and evaluating existing mechanisms. A well-understood model of the weaving process can guide the implementor of new aspect mechanisms. It can guide the designer when mechanisms implementing new kinds of weaving are needed. It can also help teach aspect-oriented programming (AOP). In this paper we present and evaluate such a model of the design space for aspect mechanisms and their weaving processes. We model weaving, at an abstract level, as a concern integration process. We derive a weaving process model (WPM) top-down, differentiating a reactive from a nonreactive process. The model provides an in-depth explanation of the key subpro existing aspect mechanisms.",
+      "absUrl": "https://arxiv.org/abs/cs/0606003v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0606003v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-06",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0605109",
+      "title": "Knowledge Flow Analysis for Security Protocols",
+      "authors": [
+        "Emina Torlak",
+        "Marten van Dijk",
+        "Blaise Gassend",
+        "Daniel Jackson",
+        "Srinivas Devadas"
+      ],
+      "authorsText": "Emina Torlak, Marten van Dijk, Blaise Gassend, Daniel Jackson, Srinivas Devadas",
+      "abstract": "Knowledge flow analysis offers a simple and flexible way to find flaws in security protocols. A protocol is described by a collection of rules constraining the propagation of knowledge amongst principals. Because this characterization corresponds closely to informal descriptions of protocols, it allows a succinct and natural formalization; because it abstracts away message ordering, and handles communications between principals and applications of cryptographic primitives uniformly, it is readily represented in a standard logic. A generic framework in the Alloy modelling language is presented, and instantiated for two standard protocols, and a new key management scheme.",
+      "absUrl": "https://arxiv.org/abs/cs/0605109v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0605109v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0605059",
+      "title": "Ontological Representations of Software Patterns",
+      "authors": [
+        "Jean-Marc Rosengard",
+        "Marian Ursu"
+      ],
+      "authorsText": "Jean-Marc Rosengard, Marian Ursu",
+      "abstract": "This paper is based on and advocates the trend in software engineering of extending the use of software patterns as means of structuring solutions to software development problems (be they motivated by best practice or by company interests and policies). The paper argues that, on the one hand, this development requires tools for automatic organisation, retrieval and explanation of software patterns. On the other hand, that the existence of such tools itself will facilitate the further development and employment of patterns in the software development process. The paper analyses existing pattern representations and concludes that they are inadequate for the kind of automation intended here. Adopting a standpoint similar to that taken in the semantic web, the paper proposes that feasible solutions can be built on the basis of ontological representations.",
+      "absUrl": "https://arxiv.org/abs/cs/0605059v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0605059v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0605038",
+      "title": "An Unfolding-Based Semantics for Logic Programming with Aggregates",
+      "authors": [
+        "Tran Cao Son",
+        "Enrico Pontelli",
+        "Islam Elkabani"
+      ],
+      "authorsText": "Tran Cao Son, Enrico Pontelli, Islam Elkabani",
+      "abstract": "The paper presents two equivalent definitions of answer sets for logic programs with aggregates. These definitions build on the notion of unfolding of aggregates, and they are aimed at creating methodologies to translate logic programs with aggregates to normal logic programs or positive programs, whose answer set semantics can be used to defined the semantics of the original programs. The first definition provides an alternative view of the semantics for logic programming with aggregates described by Pelov et al.\nThe second definition is similar to the traditional answer set definition for normal logic programs, in that, given a logic program with aggregates and an interpretation, the unfolding process produces a positive program. The paper shows how this definition can be extended to consider aggregates in the head of the rules.\nThe proposed views of logic programming with aggregates are simple and coincide with the ultimate stable model semantics, and with other semantic characterizations for large classes of program (e.g., programs with monotone aggregates and programs that are aggregate-stratified).\nMoreover, it can be directly employed to support an implementation using available answer set solvers. The paper describes a system, called ASP^A, that is capable of computing answer sets of programs with arbitrary (e.g., recursively defined) aggregates.",
+      "absUrl": "https://arxiv.org/abs/cs/0605038v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0605038v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0605033",
+      "title": "Mobile Agent Based Solutions for Knowledge Assessment in elearning Environments",
+      "authors": [
+        "Mihaela Dinsoreanu",
+        "Cristian Godja",
+        "Claudiu Anghel",
+        "Ioan Salomie",
+        "Tom Coffey"
+      ],
+      "authorsText": "Mihaela Dinsoreanu, Cristian Godja, Claudiu Anghel, Ioan Salomie, Tom Coffey",
+      "abstract": "E-learning is nowadays one of the most interesting of the \"e- \" domains available through the Internet. The main problem to create a Web-based, virtual environment is to model the traditional domain and to implement the model using the most suitable technologies. We analyzed the distance learning domain and investigated the possibility to implement some e-learning services using mobile agent technologies. This paper presents a model of the Student Assessment Service (SAS) and an agent-based framework developed to be used for implementing specific applications. A specific Student Assessment application that relies on the framework was developed.",
+      "absUrl": "https://arxiv.org/abs/cs/0605033v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0605033v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0605032",
+      "title": "A framework of reusable structures for mobile agent development",
+      "authors": [
+        "Tudor Marian",
+        "Bogdan Dumitriu",
+        "Mihaela Dinsoreanu",
+        "Ioan Salomie"
+      ],
+      "authorsText": "Tudor Marian, Bogdan Dumitriu, Mihaela Dinsoreanu, Ioan Salomie",
+      "abstract": "Mobile agents research is clearly aiming towards imposing agent based development as the next generation of tools for writing software. This paper comes with its own contribution to this global goal by introducing a novel unifying framework meant to bring simplicity and interoperability to and among agent platforms as we know them today. In addition to this, we also introduce a set of agent behaviors which, although tailored for and from the area of virtual learning environments, are none the less generic enough to be used for rapid, simple, useful and reliable agent deployment. The paper also presents an illustrative case study brought forward to prove the feasibility of our design.",
+      "absUrl": "https://arxiv.org/abs/cs/0605032v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0605032v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0605031",
+      "title": "On the Design of Agent-Based Systems using UML and Extensions",
+      "authors": [
+        "Mihaela Dinsoreanu",
+        "Ioan Salomie",
+        "Kalman Pusztai"
+      ],
+      "authorsText": "Mihaela Dinsoreanu, Ioan Salomie, Kalman Pusztai",
+      "abstract": "The Unified Software Development Process (USDP) and UML have been now generally accepted as the standard methodology and modeling language for developing Object-Oriented Systems. Although Agent-based Systems introduces new issues, we consider that USDP and UML can be used in an extended manner for modeling Agent-based Systems. The paper presents a methodology for designing agent-based systems and the specific models expressed in an UML-based notation corresponding to each phase of the software development process. UML was extended using the provided mechanism: stereotypes. Therefore, this approach can be managed with any CASE tool supporting UML. A Case Study, the development of a specific agent-based Student Evaluation System (SAS), is presented.",
+      "absUrl": "https://arxiv.org/abs/cs/0605031v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0605031v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0605020",
+      "title": "Applied MVC Patterns. A pattern language",
+      "authors": [
+        "Sergey Alpaev"
+      ],
+      "authorsText": "Sergey Alpaev",
+      "abstract": "How to get advantages of MVC model without making applications unnecessarily complex? The full-featured MVC implementation is on the top end of ladder of complexity. The other end is meant for simple cases that do not call for such complex designs, however still in need of the advantages of MVC patterns, such as ability to change the look-and-feel. This paper presents patterns of MVC implementation that help to benefit from the paradigm and keep the right balance between flexibility and implementation complexity.",
+      "absUrl": "https://arxiv.org/abs/cs/0605020v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0605020v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-05",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0604073",
+      "title": "Octave-GTK: A GTK binding for GNU Octave",
+      "authors": [
+        "Muthiah Annamalai",
+        "Hemant Kumar",
+        "Leela Velusamy"
+      ],
+      "authorsText": "Muthiah Annamalai, Hemant Kumar, Leela Velusamy",
+      "abstract": "This paper discusses the problems faced with interoperability between two programming languages, with respect to GNU Octave, and GTK API written in C, to provide the GTK API on this http URL -GTK is the fusion of two different API's: one exported by GNU Octave [scientific computing tool] and the other GTK [GUI toolkit]; this enables one to use GTK primitives within GNU Octave, to build graphical front ends,at the same time using octave engine for number crunching power. This paper illustrates our implementation of binding logic, and shows results extended to various other libraries using the same base code generator. Also shown, are methods of code generation, binding automation, and the niche we plan to fill in the absence of GUI in Octave. Canonical discussion of advantages, feasibility and problems faced in the process are elucidated.",
+      "absUrl": "https://arxiv.org/abs/cs/0604073v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0604073v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-04",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0604019",
+      "title": "The Case for Modeling Security, Privacy, Usability and Reliability (SPUR) in Automotive Software",
+      "authors": [
+        "K. Venkatesh Prasad",
+        "TJ Giuli",
+        "David Watson"
+      ],
+      "authorsText": "K. Venkatesh Prasad, TJ Giuli, David Watson",
+      "abstract": "Over the past five years, there has been considerable growth and established value in the practice of modeling automotive software requirements. Much of this growth has been centered on requirements of software associated with the established functional areas of an automobile, such as those associated with powertrain, chassis, body, safety and infotainment. This paper makes a case for modeling four additional attributes that are increasingly important as vehicles become information conduits: security, privacy, usability, and reliability. These four attributes are important in creating specifications for embedded in-vehicle automotive software.",
+      "absUrl": "https://arxiv.org/abs/cs/0604019v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0604019v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-04",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0603121",
+      "title": "minimUML: A Minimalist Approach to UML Diagraming for Early Computer Science Education",
+      "authors": [
+        "Scott Turner",
+        "Manuel A. Perez-Quinones",
+        "Stephen H. Edwards"
+      ],
+      "authorsText": "Scott Turner, Manuel A. Perez-Quinones, Stephen H. Edwards",
+      "abstract": "The Unified Modeling Language (UML) is commonly used in introductory Computer Science to teach basic object-oriented design. However, there appears to be a lack of suitable software to support this task. Many of the available programs that support UML focus on developing code and not on enhancing learning. Those that were designed for educational use sometimes have poor interfaces or are missing common and important features, such as multiple selection and undo/redo. There is a need for software that is tailored to an instructional environment and has all the useful and needed functionality for that specific task. This is the purpose of minimUML. minimUML provides a minimum amount of UML, just what is commonly used in beginning programming classes, while providing a simple, usable interface. In particular, minimUML was designed to support abstract design while supplying features for exploratory learning and error avoidance. In addition, it allows for the annotation of diagrams, through text or freeform drawings, so students can receive feedback on their work. minimUML was developed with the goal of supporting ease of use, supporting novice students, and a requirement of no prior-training for its use.",
+      "absUrl": "https://arxiv.org/abs/cs/0603121v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0603121v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0603037",
+      "title": "Deriving Conceptual Data Models from Domain Ontologies for Bioinformatics",
+      "authors": [
+        "Haya El-Ghalayini",
+        "Mohammed Odeh",
+        "Richard McClatchey"
+      ],
+      "authorsText": "Haya El-Ghalayini, Mohammed Odeh, Richard McClatchey",
+      "abstract": "This paper studies the role that ontologies can play in establishing conceptual data models during the process of information systems development. A mapping algorithm has been proposed and embedded in a special purpose Transformation-Engine to generate a conceptual data model from a given domain ontology. In addition, this paper focuses on applying the proposed approach to a bioinformatics context as the nature of biological data is considered a barrier in representing biological conceptual data models. Both quantitative and qualitative methods have been adopted to critically evaluate this new approach. The results of this evaluation indicate that the quality of the generated conceptual data models can reflect the problem domain entities and the associations between them. The results are encouraging and support the potential role that this approach can play in providing a suitable starting point for conceptual data model development.",
+      "absUrl": "https://arxiv.org/abs/cs/0603037v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0603037v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0603033",
+      "title": "Inter-component communication methods in object-oriented frameworks",
+      "authors": [
+        "Vaghinak Petrosyan"
+      ],
+      "authorsText": "Vaghinak Petrosyan",
+      "abstract": "Modern frameworks for development of graphical interfaces are using the native controls of the operating system. Because of that they are using operating system events model for inter-component communication. We consider a method to increase inter-component communication speed by sending messages from one component to the other passing over the operating system. Besides the messages subscription helps to avoid receiving of unnecessary messages.",
+      "absUrl": "https://arxiv.org/abs/cs/0603033v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0603033v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0603021",
+      "title": "Language Support for Optional Functionality",
+      "authors": [
+        "Joy Mukherjee",
+        "Srinidhi Varadarajan"
+      ],
+      "authorsText": "Joy Mukherjee, Srinidhi Varadarajan",
+      "abstract": "We recommend a programming construct - availability check - for programs that need to automatically adjust to presence or absence of segments of code. The idea is to check the existence of a valid definition before a function call is invoked. The syntax is that of a simple 'if' statement. The vision is to enable customization of application functionality through addition or removal of optional components, but without requiring complete re-building. Focus is on C-like compiled procedural languages and UNIX-based systems. Essentially, our approach attempts to combine the flexibility of dynamic libraries with the usability of utility (dependency) libraries. We outline the benefits over prevalent strategies mainly in terms of development complexity, crudely measured as lesser lines of code. We also allude to performance and flexibility facets. A Preliminary implementation and figures from early experimental evaluation are presented.",
+      "absUrl": "https://arxiv.org/abs/cs/0603021v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0603021v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0603016",
+      "title": "Object-Oriented Frameworks as Basis for Modularity in Program-Language Design",
+      "authors": [
+        "M.H. van Emden",
+        "S.C. Somosan"
+      ],
+      "authorsText": "M.H. van Emden, S.C. Somosan",
+      "abstract": "For the right application, the use of programming paradigms such as functional or logic programming can enormously increase productivity in software development. But powerful paradigms may come with exotic programming languages, while the management of software development dictates language standardization. This dilemma can be resolved by using component technology at the system design level. Here the units of deployment are object-oriented frameworks. It is conventional to analyze an application by object-oriented modeling. In the new approach, the analysis identifies the programming paradigm that is ideal for the application; development starts with object-oriented modeling of the paradigm. In our approach, a paradigm translates to an object-oriented framework so that it is no longer necessary to embody a programming paradigm in a language dedicated to it.",
+      "absUrl": "https://arxiv.org/abs/cs/0603016v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0603016v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-03",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0602082",
+      "title": "Digital Libraries: From Process Modelling to Grid-based Service Oriented Architecture",
+      "authors": [
+        "Zaheer Abbas Khan",
+        "Mohammed Odeh",
+        "Richard McClatchey"
+      ],
+      "authorsText": "Zaheer Abbas Khan, Mohammed Odeh, Richard McClatchey",
+      "abstract": "Graphical Business Process Modelling Languages (BPML) like Role Activity Diagrams (RAD) provide ease and flexibility for modelling business behaviour. However, these languages show limited applicability in terms of enactment over distributed systems paradigms like Service Oriented Architecture (SOA) based grid computing. This paper investigates RAD modelling of a Scientific Publishing Process (SPP) for Digital Libraries (DL) and tries to determine the suitability of Pi-Calculus based formal approaches to enact SOA based grid computing. In order to achieve this purpose, the Pi-Calculus based formal transformation from a RAD model of SPP for DL draws attention towards a number of challenging issues including issues that require particular design considerations for appropriate enactment in a SOA based grid system.",
+      "absUrl": "https://arxiv.org/abs/cs/0602082v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0602082v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-02",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0601119",
+      "title": "Engineering Conceptual Data Models from Domain Ontologies: A Critical Evaluation",
+      "authors": [
+        "Haya El-Ghalayini",
+        "Mohammed Odeh",
+        "Richard McClatchey"
+      ],
+      "authorsText": "Haya El-Ghalayini, Mohammed Odeh, Richard McClatchey",
+      "abstract": "This paper studies the differences and similarities between domain ontologies and conceptual data models and the role that ontologies can play in establishing conceptual data models during the process of information systems development. A mapping algorithm has been proposed and embedded in a special purpose Transformation Engine to generate a conceptual data model from a given domain ontology. Both quantitative and qualitative methods have been adopted to critically evaluate this new approach. In addition, this paper focuses on evaluating the quality of the generated conceptual data model elements using Bunge-Wand-Weber and OntoClean ontologies. The results of this evaluation indicate that the generated conceptual data model provides a high degree of accuracy in identifying the substantial domain entities along with their attributes and relationships being derived from the consensual semantics of domain knowledge. The results are encouraging and support the potential role that this approach can take part in process of information system development.",
+      "absUrl": "https://arxiv.org/abs/cs/0601119v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0601119v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0601118",
+      "title": "A Formal Architecture-Centric Model-Driven Approach for the Automatic Generation of Grid Applications",
+      "authors": [
+        "David Manset",
+        "Herve Verjus",
+        "Richard McClatchey",
+        "Flavio Oquendo"
+      ],
+      "authorsText": "David Manset, Herve Verjus, Richard McClatchey, Flavio Oquendo",
+      "abstract": "This paper discusses the concept of model-driven software engineering applied to the Grid application domain. As an extension to this concept, the approach described here, attempts to combine both formal architecture-centric and model-driven paradigms. It is a commonly recognized statement that Grid systems have seldom been designed using formal techniques although from past experience such techniques have shown advantages. This paper advocates a formal engineering approach to Grid system developments in an effort to contribute to the rigorous development of Grids software architectures. This approach addresses quality of service and cross-platform developments by applying the model-driven paradigm to a formal architecture-centric engineering method. This combination benefits from a formal semantic description power in addition to model-based transformations. The result of such a novel combined concept promotes the re-use of design models and facilitates developments in Grid computing.",
+      "absUrl": "https://arxiv.org/abs/cs/0601118v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0601118v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0601072",
+      "title": "Fast Frequent Querying with Lazy Control Flow Compilation",
+      "authors": [
+        "Remko Tronçon",
+        "Gerda Janssens",
+        "Bart Demoen",
+        "Henk Vandecasteele"
+      ],
+      "authorsText": "Remko Tronçon, Gerda Janssens, Bart Demoen, Henk Vandecasteele",
+      "abstract": "Control flow compilation is a hybrid between classical WAM compilation and meta-call, limited to the compilation of non-recursive clause bodies. This approach is used successfully for the execution of dynamically generated queries in an inductive logic programming setting (ILP). Control flow compilation reduces compilation times up to an order of magnitude, without slowing down execution. A lazy variant of control flow compilation is also presented. By compiling code by need, it removes the overhead of compiling unreached code (a frequent phenomenon in practical ILP settings), and thus reduces the size of the compiled code. Both dynamic compilation approaches have been implemented and were combined with query packs, an efficient ILP execution mechanism. It turns out that locality of data and code is important for performance. The experiments reported in the paper show that lazy control flow compilation is superior in both artificial and real life settings.",
+      "absUrl": "https://arxiv.org/abs/cs/0601072v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0601072v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-01",
+      "sourceVersion": "v1"
+    },
+    {
+      "id": "cs/0601035",
+      "title": "Deductive Object Programming",
+      "authors": [
+        "Francois Colonna"
+      ],
+      "authorsText": "Francois Colonna",
+      "abstract": "We propose some slight additions to O-O languages to implement the necessary features for using Deductive Object Programming (DOP). This way of programming based upon the manipulation of the Production Tree of the Objects of Interest, result in making Persistent these Objects and in sensibly lowering the code complexity.",
+      "absUrl": "https://arxiv.org/abs/cs/0601035v1",
+      "pdfUrl": "https://arxiv.org/pdf/cs/0601035v1",
+      "loaded": true,
+      "loading": false,
+      "error": "",
+      "sourceMonth": "2006-01",
+      "sourceVersion": "v1"
+    }
+  ]
+}
