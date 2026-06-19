@@ -81,7 +81,7 @@
     }
 
     function normalizeDecisionSyncTarget(syncTarget) {
-      return ['icse', 'fse'].includes(syncTarget) ? syncTarget : 'arxiv';
+      return ['icse', 'fse', 'ase'].includes(syncTarget) ? syncTarget : 'arxiv';
     }
 
     function getDecisionSheetLabel(syncTarget) {
@@ -91,6 +91,9 @@
       }
       if (normalizedSyncTarget === 'fse') {
         return 'FSE';
+      }
+      if (normalizedSyncTarget === 'ase') {
+        return 'ASE';
       }
       return 'arXiv';
     }

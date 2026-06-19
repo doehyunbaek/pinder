@@ -34,8 +34,10 @@ const SETTINGS_STORAGE_KEY = 'pinder-settings-v1';
 const LAST_ARXIV_SOURCE_STORAGE_KEY = 'pinder-last-arxiv-source-v1';
 const LAST_ICSE_TRACK_STORAGE_KEY = 'pinder-last-icse-track-v1';
 const LAST_FSE_TRACK_STORAGE_KEY = 'pinder-last-fse-track-v1';
+const LAST_ASE_TRACK_STORAGE_KEY = 'pinder-last-ase-track-v1';
 const ICSE_COLLECTION_SOURCE = 'data/icse.json';
 const FSE_COLLECTION_SOURCE = 'data/fse.json';
+const ASE_COLLECTION_SOURCE = 'data/ase.json';
 const CONFERENCE_SOURCE_CONFIGS = {
   icse: {
     mode: 'icse',
@@ -50,6 +52,13 @@ const CONFERENCE_SOURCE_CONFIGS = {
     source: FSE_COLLECTION_SOURCE,
     lastTrackStorageKey: LAST_FSE_TRACK_STORAGE_KEY,
     fileName: 'fse.json',
+  },
+  ase: {
+    mode: 'ase',
+    label: 'ASE',
+    source: ASE_COLLECTION_SOURCE,
+    lastTrackStorageKey: LAST_ASE_TRACK_STORAGE_KEY,
+    fileName: 'ase.json',
   },
 };
 
@@ -104,6 +113,7 @@ const elements = {
   sourceArxivOption: document.getElementById('sourceArxivOption'),
   sourceIcseOption: document.getElementById('sourceIcseOption'),
   sourceFseOption: document.getElementById('sourceFseOption'),
+  sourceAseOption: document.getElementById('sourceAseOption'),
   topbarBrand: document.getElementById('topbarBrand'),
   trackPickerWrap: document.getElementById('trackPickerWrap'),
   trackPickerLabel: document.getElementById('trackPickerLabel'),
@@ -340,6 +350,7 @@ function updateSourceMenu() {
   elements.sourceArxivOption.classList.toggle('active', currentSourceMode === 'arxiv');
   elements.sourceIcseOption.classList.toggle('active', currentSourceMode === 'icse');
   elements.sourceFseOption.classList.toggle('active', currentSourceMode === 'fse');
+  elements.sourceAseOption.classList.toggle('active', currentSourceMode === 'ase');
 }
 
 function openSourceMenu() {
@@ -492,8 +503,8 @@ function formatTrackPickerOptionLabel(trackOption = {}) {
   const rawLabel = String(trackOption.label || '').trim();
   const year = String(trackOption.year || '').trim();
   const suffix = rawLabel
-    .replace(/^(?:ICSE|FSE)\s+\d{4}\s*/i, '')
-    .replace(/^(?:ICSE|FSE)\s*/i, '')
+    .replace(/^(?:ICSE|FSE|ASE)\s+\d{4}\s*/i, '')
+    .replace(/^(?:ICSE|FSE|ASE)\s*/i, '')
     .trim();
 
   if (year && suffix) {
@@ -705,6 +716,7 @@ function getMissingDomRequirements() {
     'sourceArxivOption',
     'sourceIcseOption',
     'sourceFseOption',
+    'sourceAseOption',
     'topbarBrand',
     'trackPickerWrap',
     'trackPickerLabel',
@@ -880,15 +892,14 @@ function inferDecisionSourceType(decisionEntry = {}, paperId = '') {
     return 'arxiv';
   }
 
-  const paper = resolvedPaperId ? getPaperById(resolvedPaperId) : null;
-  const paperConferenceMode = getConferenceSourceMode(paper?.sourceUrl || '');
-  if (paperConferenceMode) {
-    return paperConferenceMode;
-  }
-
-  const absUrl = getDecisionAbsUrl(resolvedPaperId, decisionEntry);
+  const absUrl = String(decisionEntry.absUrl || '').trim() || getDecisionAbsUrl(resolvedPaperId, decisionEntry);
   if (/arxiv\.org\/abs\//i.test(absUrl)) {
     return 'arxiv';
+  }
+
+  const researchrConferenceMatch = absUrl.match(/\/(?:details|track)\/(icse|fse|ase)-\d{4}\//i);
+  if (researchrConferenceMatch && isConferenceSourceMode(researchrConferenceMatch[1].toLowerCase())) {
+    return researchrConferenceMatch[1].toLowerCase();
   }
 
   if (/fseconference\.org|esec-fse\.org/i.test(absUrl)) {
@@ -897,6 +908,12 @@ function inferDecisionSourceType(decisionEntry = {}, paperId = '') {
 
   if (/researchr\.org|icse-conferences\.org/i.test(absUrl)) {
     return getConferenceSourceMode(state.sourceUrl || getSourceUrlFromQuery()) || 'icse';
+  }
+
+  const paper = resolvedPaperId ? getPaperById(resolvedPaperId) : null;
+  const paperConferenceMode = getConferenceSourceMode(paper?.sourceUrl || '');
+  if (paperConferenceMode) {
+    return paperConferenceMode;
   }
 
   return 'arxiv';
@@ -1262,6 +1279,7 @@ function bindEvents() {
   elements.sourceArxivOption.addEventListener('click', () => switchSourceMode('arxiv'));
   elements.sourceIcseOption.addEventListener('click', () => switchSourceMode('icse'));
   elements.sourceFseOption.addEventListener('click', () => switchSourceMode('fse'));
+  elements.sourceAseOption.addEventListener('click', () => switchSourceMode('ase'));
   elements.settingsButton.addEventListener('click', toggleSettingsMenu);
   elements.filterButton.addEventListener('click', toggleFilterMenu);
   elements.searchInput.addEventListener('input', onSearchInputChange);
@@ -2231,8 +2249,8 @@ function buildIcseVisualizationPaperAriaLabel(paper, decisionKey = getDecisionKe
 function formatIcseTrackRowLabel(track) {
   const rawLabel = String(track?.label || track?.sourceLabel || '').trim();
   const normalizedLabel = rawLabel
-    .replace(/^(?:ICSE|FSE)\s+\d{4}\s*/i, '')
-    .replace(/^(?:ICSE|FSE)\s*/i, '')
+    .replace(/^(?:ICSE|FSE|ASE)\s+\d{4}\s*/i, '')
+    .replace(/^(?:ICSE|FSE|ASE)\s*/i, '')
     .trim();
 
   return normalizedLabel || 'Proceedings';

@@ -880,9 +880,10 @@
     sourceUrl = window.location.href,
     sourceLabel = '',
     concurrency = 8,
+    excludeBadgeLabels = [],
     onProgress = () => {},
   } = {}) {
-    const papers = parseResearchrAcceptedPapers(document, sourceUrl);
+    const papers = parseResearchrAcceptedPapers(document, sourceUrl, { excludeBadgeLabels });
     if (!papers.length) {
       throw new Error('Could not find any accepted papers in #event-overview.');
     }
@@ -934,8 +935,9 @@
     };
   }
 
-  function parseResearchrAcceptedPapers(trackDocument, sourceUrl = window.location.href) {
+  function parseResearchrAcceptedPapers(trackDocument, sourceUrl = window.location.href, { excludeBadgeLabels = [] } = {}) {
     const rows = Array.from(trackDocument.querySelectorAll('#event-overview table tr')).slice(1);
+    const normalizedExcludedBadges = normalizeComparisonTextList(excludeBadgeLabels);
 
     return rows
       .map((row, index) => {
@@ -945,6 +947,13 @@
         const eventId = cleanText(titleLink?.getAttribute('data-event-modal') || '');
 
         if (!eventId || !title) {
+          return null;
+        }
+
+        const badges = Array.from(cell.querySelectorAll('.pull-right [title], .label, .badge'))
+          .map((badgeElement) => cleanText(badgeElement.getAttribute('title') || badgeElement.textContent || ''))
+          .filter(Boolean);
+        if (badges.some((badge) => normalizedExcludedBadges.includes(normalizeComparisonText(badge)))) {
           return null;
         }
 
@@ -963,6 +972,7 @@
           title,
           authors,
           authorsText,
+          badges,
           abstract: '',
           absUrl: detailsUrl || `${cleanUrl(sourceUrl)}#${eventId}`,
           pdfUrl,
@@ -1160,6 +1170,8 @@
     excludeSectionTitlePrefixes = [],
     minPageCount = 0,
     maxPageEnd = 0,
+    includeTitlePatterns = [],
+    excludeTitlePatterns = [],
     publicationYear = 0,
     concurrency = 8,
     onProgress = () => {},
@@ -1171,6 +1183,8 @@
       excludeSectionTitlePrefixes,
       minPageCount,
       maxPageEnd,
+      includeTitlePatterns,
+      excludeTitlePatterns,
       publicationYear,
     });
     if (!papers.length) {
@@ -1256,6 +1270,8 @@
       excludeSectionTitlePrefixes = [],
       minPageCount = 0,
       maxPageEnd = 0,
+      includeTitlePatterns = [],
+      excludeTitlePatterns = [],
       publicationYear = 0,
     } = {},
   ) {
@@ -1268,6 +1284,10 @@
     })
       .map((entryElement, index) => {
         const title = cleanText(entryElement.querySelector('.title')?.textContent || '').replace(/\.$/, '');
+        if (!matchesDblpTitleFilters(title, { includeTitlePatterns, excludeTitlePatterns })) {
+          return null;
+        }
+
         const pageMetadata = parseDblpEntryPagination(entryElement);
         if (!matchesDblpPageFilters(pageMetadata, { minPageCount, maxPageEnd })) {
           return null;
@@ -1322,6 +1342,37 @@
         ...paper,
         order: index + 1,
       }));
+  }
+
+  function matchesDblpTitleFilters(title, { includeTitlePatterns = [], excludeTitlePatterns = [] } = {}) {
+    const normalizedTitle = cleanText(title || '');
+    if (!normalizedTitle) {
+      return false;
+    }
+
+    const includePatterns = buildRegexList(includeTitlePatterns);
+    if (includePatterns.length && !includePatterns.some((pattern) => pattern.test(normalizedTitle))) {
+      return false;
+    }
+
+    const excludePatterns = buildRegexList(excludeTitlePatterns);
+    if (excludePatterns.some((pattern) => pattern.test(normalizedTitle))) {
+      return false;
+    }
+
+    return true;
+  }
+
+  function buildRegexList(patterns = []) {
+    return (Array.isArray(patterns) ? patterns : [patterns])
+      .map((pattern) => {
+        try {
+          return pattern instanceof RegExp ? pattern : new RegExp(String(pattern || ''), 'i');
+        } catch (error) {
+          return null;
+        }
+      })
+      .filter(Boolean);
   }
 
   function getDblpConferenceEntryElements(

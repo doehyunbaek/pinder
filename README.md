@@ -31,10 +31,12 @@ To reduce repeat-load latency, Pinder also caches non-current arXiv monthly list
 - `app.js` — swipe logic, local saving, export, undo
 - `auth.js` — Firebase Authentication backed sign-in and Firestore sync logic
 - `google-api-config.js` — Firebase web app config for Auth and Firestore sync
-- `scrape.js` — client-side paper source fetcher/parser used by the app, plus reusable Researchr and DBLP conference scrapers used for ICSE datasets
+- `scrape.js` — client-side paper source fetcher/parser used by the app, plus reusable Researchr and DBLP conference scrapers used for conference datasets
 - `data/icse.json` — hardcoded ICSE 1976–2026 sources together with the scraped paper data
-- `scripts/scrape-icse-tracks.js` — Playwright-based collector that opens each ICSE source page and refreshes `data/icse.json`
-- `package.json` — development dependency for the ICSE scraping script
+- `data/fse.json` — hardcoded FSE 1993–2026 sources together with the scraped paper data
+- `data/ase.json` — hardcoded ASE/KBSE 1991–2025 sources together with the scraped paper data
+- `scripts/scrape-icse-tracks.js`, `scripts/scrape-fse-tracks.js`, `scripts/scrape-ase-tracks.js` — Playwright-based collectors that refresh the matching JSON dataset
+- `package.json` — development dependency and npm scripts for the scraping scripts
 
 ## Paper source
 
@@ -79,36 +81,42 @@ Each paper can include fields such as:
 
 Because arXiv does not expose browser-friendly CORS headers for this workflow, `scrape.js` uses a public CORS proxy to read arXiv pages client-side when needed. Local JSON files on the same origin are loaded directly.
 
-Bundled custom feed:
+Bundled custom conference feeds:
 
 - `data/icse.json`
+- `data/fse.json`
+- `data/ase.json`
 
-It contains the hardcoded ICSE 1976–2026 source metadata together with all collected paper abstracts.
+They contain hardcoded conference source metadata together with collected paper abstracts. ASE currently covers ASE/KBSE 1991–2025 research/technical paper tracks because ASE 2026 accepted papers are not published yet. Older ASE/KBSE DBLP-derived years are filtered to full research/technical papers only, excluding short/new-ideas, tool/demo, doctoral, poster, tutorial, keynote, and panel material where applicable.
 
 Examples:
 
 ```txt
 ?source=data/icse.json&track=2026
 ?source=data/icse.json&track=icse-2024-research-track
+?source=data/fse.json&track=fse-2026-research-papers
+?source=data/ase.json&track=ase-2025-papers
 ```
 
 If `track` is omitted, Pinder uses the collection's `defaultTrack`.
 
-Tap the source label in the header to switch between the default arXiv feed and the ICSE collection.
+Tap the source label in the header to switch between the default arXiv feed and the ICSE, FSE, or ASE collections.
 
-When an ICSE collection is loaded, the UI also shows an `ICSE year` dropdown in the header so you can switch years without editing the URL manually.
+When a conference collection is loaded, the UI also shows a conference year dropdown in the header so you can switch years without editing the URL manually.
 
-A collapsible `ICSE map` panel also appears above the card stack with one square per ICSE paper across all tracked years, colored by your review decision. Within each ICSE row, squares are sorted left-to-right as accept, weak accept, weak reject, reject, and unreviewed. Hovering a square shows a floating title tooltip near the cursor, and clicking it opens the abstract modal.
+A collapsible conference map panel also appears above the card stack with one square per paper across all tracked years, colored by your review decision. Within each row, squares are sorted left-to-right as accept, weak accept, weak reject, reject, and unreviewed. Hovering a square shows a floating title tooltip near the cursor, and clicking it opens the abstract modal.
 
 The top-right filter menu supports author filtering.
 
-## Regenerating the ICSE datasets
+## Regenerating the conference datasets
 
-The hardcoded ICSE track URLs and scraped outputs live together in:
+The hardcoded conference track URLs and scraped outputs live together in:
 
 - `data/icse.json`
+- `data/fse.json`
+- `data/ase.json`
 
-The collector navigates to each conference page with Playwright and runs the reusable scraper function from `scrape.js` inside that page, then writes the updated results back into `data/icse.json`.
+Each collector navigates to its conference page with Playwright and runs the reusable scraper function from `scrape.js` inside that page, then writes the updated results back into the matching JSON file.
 
 Notes on older ICSE years:
 
@@ -124,6 +132,8 @@ To re-scrape them:
 npm install
 npx playwright install chromium
 npm run scrape:icse
+npm run scrape:fse
+npm run scrape:ase
 ```
 
 Notes:
@@ -136,6 +146,8 @@ You can also scrape just one year or slug:
 ```bash
 node scripts/scrape-icse-tracks.js 2026
 node scripts/scrape-icse-tracks.js icse-2024-research-track
+node scripts/scrape-ase-tracks.js 2025
+node scripts/scrape-ase-tracks.js 2024 2023 2022
 ```
 
 To do a targeted second pass over already-derived legacy ACM DL record URLs for older no-DOI papers:
@@ -157,6 +169,7 @@ The app stores data under the signed-in Firebase user:
 - `users/{uid}/decisions/arxiv`
 - `users/{uid}/decisions/icse`
 - `users/{uid}/decisions/fse`
+- `users/{uid}/decisions/ase`
 
 Each decisions document contains a `decisions` map keyed by paper ID.
 
