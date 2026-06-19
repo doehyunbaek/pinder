@@ -34,7 +34,7 @@ To reduce repeat-load latency, Pinder also caches non-current arXiv monthly list
 - `scrape.js` — client-side paper source fetcher/parser used by the app, plus reusable Researchr and DBLP conference scrapers used for conference datasets
 - `data/icse.json` — hardcoded ICSE 1976–2026 sources together with the scraped paper data
 - `data/fse.json` — hardcoded FSE 1993–2026 sources together with the scraped paper data
-- `data/ase.json` — hardcoded ASE/KBSE 1991–2025 sources together with the scraped paper data
+- `data/ase.json` — hardcoded ASE 1997–2025 sources together with the scraped paper data
 - `scripts/scrape-icse-tracks.js`, `scripts/scrape-fse-tracks.js`, `scripts/scrape-ase-tracks.js` — Playwright-based collectors that refresh the matching JSON dataset
 - `package.json` — development dependency and npm scripts for the scraping scripts
 
@@ -87,7 +87,7 @@ Bundled custom conference feeds:
 - `data/fse.json`
 - `data/ase.json`
 
-They contain hardcoded conference source metadata together with collected paper abstracts. ASE currently covers ASE/KBSE 1991–2025 research/technical paper tracks because ASE 2026 accepted papers are not published yet. Older ASE/KBSE DBLP-derived years are filtered to full research/technical papers only, excluding short/new-ideas, tool/demo, doctoral, poster, tutorial, keynote, and panel material where applicable.
+They contain hardcoded conference source metadata together with collected paper abstracts. ASE currently covers ASE 1997–2025 research/technical paper tracks because ASE 2026 accepted papers are not published yet. Older ASE DBLP-derived years are filtered to full research/technical papers only, excluding short/new-ideas, tool/demo, doctoral, poster, tutorial, keynote, and panel material where applicable.
 
 Examples:
 
