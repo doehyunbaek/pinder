@@ -173,8 +173,8 @@ button {
 }
 
 .topbar-copy {
-  flex: 1;
-  min-width: 0;
+  flex: 1 1 260px;
+  min-width: min(100%, 220px);
 }
 
 .topbar-search {
