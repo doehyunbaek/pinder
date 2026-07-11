@@ -89,16 +89,16 @@ Bundled custom conference feeds:
 
 They contain hardcoded conference source metadata together with collected paper abstracts. ASE currently covers ASE 1997–2025 research/technical paper tracks because ASE 2026 accepted papers are not published yet. Older ASE DBLP-derived years are filtered to full research/technical papers only, excluding short/new-ideas, tool/demo, doctoral, poster, tutorial, keynote, and panel material where applicable.
 
-Examples:
+Short conference URLs:
 
 ```txt
-?source=data/icse.json&track=2026
-?source=data/icse.json&track=icse-2024-research-track
-?source=data/fse.json&track=fse-2026-research-papers
-?source=data/ase.json&track=ase-2025-papers
+?icse       # latest/default year
+?icse=2026
+?fse=2026
+?ase=2025
 ```
 
-If `track` is omitted, Pinder uses the collection's `defaultTrack`.
+The same `?conference=year` pattern works for every available year. Legacy `?source=data/icse.json&track=2026` URLs remain supported. If the year or `track` is omitted, Pinder uses the collection's `defaultTrack`.
 
 Tap the source label in the header to switch between the default arXiv feed and the ICSE, FSE, or ASE collections.
 

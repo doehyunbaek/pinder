@@ -241,13 +241,33 @@ async function init() {
   }
 }
 
+function getConferenceRoute() {
+  const searchParams = new URLSearchParams(window.location.search);
+  const mode = Object.keys(CONFERENCE_SOURCE_CONFIGS).find((conference) => searchParams.has(conference));
+  if (!mode) {
+    return null;
+  }
+
+  return {
+    mode,
+    year: searchParams.get(mode) || '',
+  };
+}
+
 function getSourceUrlFromQuery() {
   const requestedSourceUrl = new URLSearchParams(window.location.search).get('source');
-  return requestedSourceUrl || window.PinderScraper.DEFAULT_LIST_URL;
+  const conferenceRoute = getConferenceRoute();
+  return requestedSourceUrl || getConferenceSourceConfig(conferenceRoute?.mode)?.source || window.PinderScraper.DEFAULT_LIST_URL;
 }
 
 function getSourceTrackFromQuery() {
-  return new URLSearchParams(window.location.search).get('track') || '';
+  return new URLSearchParams(window.location.search).get('track') || getConferenceRoute()?.year || '';
+}
+
+function getConferenceUrl(sourceMode, year = '') {
+  const url = new URL(document.baseURI);
+  url.searchParams.set(sourceMode, year);
+  return url;
 }
 
 
@@ -450,20 +470,18 @@ function switchSourceMode(nextSourceMode) {
     return;
   }
 
-  const nextUrl = new URL(window.location.href);
+  let nextUrl = new URL(document.baseURI);
 
   const conferenceConfig = getConferenceSourceConfig(nextSourceMode);
   if (conferenceConfig) {
-    nextUrl.searchParams.set('source', conferenceConfig.source);
     const preferredTrackKey = loadLastSourcePreference(conferenceConfig.lastTrackStorageKey);
-    if (preferredTrackKey) {
-      nextUrl.searchParams.set('track', preferredTrackKey);
-    } else {
-      nextUrl.searchParams.delete('track');
-    }
+    const preferredTrack = state.trackOptions.find((track) => String(track.key) === preferredTrackKey);
+    nextUrl = getConferenceUrl(nextSourceMode, preferredTrack?.year || '');
   } else {
-    nextUrl.searchParams.set('source', loadLastSourcePreference(LAST_ARXIV_SOURCE_STORAGE_KEY) || window.PinderScraper.DEFAULT_LIST_URL);
-    nextUrl.searchParams.delete('track');
+    const preferredSource = loadLastSourcePreference(LAST_ARXIV_SOURCE_STORAGE_KEY);
+    if (preferredSource) {
+      nextUrl.searchParams.set('source', preferredSource);
+    }
   }
 
   showStatus(conferenceConfig ? `Switching to ${conferenceConfig.label}…` : 'Switching to arXiv…');
@@ -520,9 +538,15 @@ function onTrackPickerChange(event) {
     return;
   }
 
-  const nextUrl = new URL(window.location.href);
-  nextUrl.searchParams.set('source', getSourceUrlFromQuery());
-  nextUrl.searchParams.set('track', nextTrackKey);
+  const selectedTrack = state.trackOptions.find((track) => String(track.key) === nextTrackKey);
+  const sourceMode = getCurrentSourceMode();
+  const nextUrl = selectedTrack?.year
+    ? getConferenceUrl(sourceMode, selectedTrack.year)
+    : new URL(window.location.href);
+  if (!selectedTrack?.year) {
+    nextUrl.searchParams.set('source', getSourceUrlFromQuery());
+    nextUrl.searchParams.set('track', nextTrackKey);
+  }
   showStatus(`Switching ${getConferenceSourceConfig()?.label || 'conference'} track…`);
   window.location.assign(nextUrl.toString());
 }
