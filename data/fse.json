@@ -51225,32 +51225,6 @@
           "error": "",
           "scheduleText": "",
           "sessionText": ""
-        },
-        {
-          "order": 18,
-          "id": "b40379f3-f144-5118-a3df-0e214777d378",
-          "title": "The shape of things to come?",
-          "authors": [
-            "Richard F. Rashid"
-          ],
-          "authorsText": "Richard F. Rashid",
-          "abstract": "",
-          "absUrl": "https://dblp.org/rec/conf/sigsoft/Rashid00.html",
-          "pdfUrl": "",
-          "doiUrl": "https://doi.org/10.1145/355045.355067",
-          "publicationLinks": [
-            {
-              "label": "DOI",
-              "href": "https://doi.org/10.1145/355045.355067"
-            }
-          ],
-          "trackUrl": "https://dblp.org/db/conf/sigsoft/fse2000.html",
-          "detailsUrl": "https://dblp.org/rec/conf/sigsoft/Rashid00.html",
-          "loaded": true,
-          "loading": false,
-          "error": "",
-          "scheduleText": "",
-          "sessionText": ""
         }
       ]
     },
