@@ -12,7 +12,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>pinder</title>
     <base href="/pinder/" />
-    <link rel="stylesheet" href="./styles.css?v=20260703-01" />
+    <link rel="stylesheet" href="./styles.css?v=20260926-02" />
   </head>
   <body>
     <main class="app-shell">
@@ -50,7 +50,7 @@
                 </button>
                 <button class="source-menu-option" id="sourceAseOption" type="button" role="menuitem">
                   <span class="source-menu-option-title">ASE accepted papers</span>
-                  <span class="source-menu-option-hint">Browse ASE 1997–2025</span>
+                  <span class="source-menu-option-hint">Browse ASE 1997–2026</span>
                 </button>
               </div>
             </div>
@@ -129,7 +129,20 @@
                 <input id="showAuthorsToggle" type="checkbox" checked />
                 <span>Show authors</span>
               </label>
+              <label class="settings-option" for="hidePapersWithoutAbstractsToggle">
+                <input id="hidePapersWithoutAbstractsToggle" type="checkbox" checked />
+                <span>Hide papers without abstracts</span>
+              </label>
+              <label class="settings-option" for="lightModeToggle">
+                <input id="lightModeToggle" type="checkbox" />
+                <span>Light mode</span>
+              </label>
               <p class="settings-hint">Swipes and arrow keys still work when buttons are hidden.</p>
+
+              <div class="settings-divider"></div>
+              <p class="settings-title">Researchr transfer</p>
+              <button class="secondary-button" id="copyAcceptedToResearchrButton" type="button">Copy accepted → Researchr script</button>
+              <p class="settings-hint">Copy the script, then <a id="researchrTrackLink" href="https://conf.researchr.org/track/ase-2026/ase-2026-research-track?#event-overview" target="_blank" rel="noopener noreferrer">open the Researchr research track</a>, sign in, and paste it into that page’s console.</p>
 
               <div class="settings-divider"></div>
 
@@ -274,8 +287,8 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
-    <script src="./scrape.js?v=20260426-02"></script>
-    <script src="./auth.js?v=20260501-02"></script>
-    <script src="./app.js?v=20260711-01"></script>
+    <script src="./scrape.js?v=20260926-01"></script>
+    <script src="./auth.js?v=20260926-01"></script>
+    <script src="./app.js?v=20260926-09"></script>
   </body>
 </html>

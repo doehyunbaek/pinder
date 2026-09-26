@@ -12,7 +12,7 @@ Pinder is a static, client-side paper swiping app for GitHub Pages.
 - Or tap the on-screen buttons
 - Inside the abstract modal, use the arrow keys to rate the open paper
 - Use the sign-in/sign-out button in the top-right to connect Firebase sync
-- Use the settings button in the top-right to hide/show the on-screen buttons and authors
+- Use the settings button in the top-right to hide/show the on-screen buttons and authors, to toggle hiding papers without abstracts (on by default), and to switch between dark and light mode
 
 Each paper card shows:
 
@@ -33,8 +33,8 @@ To reduce repeat-load latency, Pinder also caches non-current arXiv monthly list
 - `google-api-config.js` — Firebase web app config for Auth and Firestore sync
 - `scrape.js` — client-side paper source fetcher/parser used by the app, plus reusable Researchr and DBLP conference scrapers used for conference datasets
 - `data/icse.json` — hardcoded ICSE 1976–2026 sources together with the scraped paper data
-- `data/fse.json` — hardcoded FSE 1993–2026 sources together with the scraped paper data
-- `data/ase.json` — hardcoded ASE 1997–2025 sources together with the scraped paper data
+- `data/fse.json` — hardcoded FSE 1993–2026 sources together with the scraped paper data; Researchr-backed years include per-paper `confUrl` and `researchrEventId`
+- `data/ase.json` — hardcoded ASE 1997–2026 sources together with the scraped paper data
 - `scripts/scrape-icse-tracks.js`, `scripts/scrape-fse-tracks.js`, `scripts/scrape-ase-tracks.js` — Playwright-based collectors that refresh the matching JSON dataset
 - `package.json` — development dependency and npm scripts for the scraping scripts
 
@@ -87,7 +87,7 @@ Bundled custom conference feeds:
 - `data/fse.json`
 - `data/ase.json`
 
-They contain hardcoded conference source metadata together with collected paper abstracts. ASE currently covers ASE 1997–2025 research/technical paper tracks because ASE 2026 accepted papers are not published yet. Older ASE DBLP-derived years are filtered to full research/technical papers only, excluding short/new-ideas, tool/demo, doctoral, poster, tutorial, keynote, and panel material where applicable.
+They contain hardcoded conference source metadata together with collected paper abstracts. ASE includes 2026 research papers as the default collection. Older ASE DBLP-derived years are filtered to full research/technical papers only, excluding short/new-ideas, tool/demo, doctoral, poster, tutorial, keynote, and panel material where applicable.
 
 Short conference URLs:
 
@@ -95,7 +95,7 @@ Short conference URLs:
 ?icse       # latest/default year
 ?icse=2026
 ?fse=2026
-?ase=2025
+?ase=2026
 ```
 
 The same `?conference=year` pattern works for every available year. Legacy `?source=data/icse.json&track=2026` URLs remain supported. If the year or `track` is omitted, Pinder uses the collection's `defaultTrack`.
@@ -103,6 +103,8 @@ The same `?conference=year` pattern works for every available year. Legacy `?sou
 Tap the source label in the header to switch between the default arXiv feed and the ICSE, FSE, or ASE collections.
 
 When a conference collection is loaded, the UI also shows a conference year dropdown in the header so you can switch years without editing the URL manually.
+
+To transfer Pinder's **Accept** decisions to Researchr, select a Researchr-backed conference year (ASE, ICSE, or FSE 2022–2026), then click **Copy accepted → Researchr script** in settings. Use the adjacent link to open that year's Researchr research track. Sign in to Researchr, paste the script in that tab's browser console, and confirm. The script matches papers by Researchr event ID where available (and verifies every match on the selected track), only adds missing stars, waits for each change, and stops on an error; it never removes existing stars. This is a manual transfer, not continuous sync.
 
 A collapsible conference map panel also appears above the card stack with one square per paper across all tracked years, colored by your review decision. Within each row, squares are sorted left-to-right as accept, weak accept, weak reject, reject, and unreviewed. Hovering a square shows a floating title tooltip near the cursor, and clicking it opens the abstract modal.
 
@@ -146,7 +148,7 @@ You can also scrape just one year or slug:
 ```bash
 node scripts/scrape-icse-tracks.js 2026
 node scripts/scrape-icse-tracks.js icse-2024-research-track
-node scripts/scrape-ase-tracks.js 2025
+node scripts/scrape-ase-tracks.js 2026
 node scripts/scrape-ase-tracks.js 2024 2023 2022
 ```
 

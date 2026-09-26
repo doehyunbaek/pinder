@@ -209,6 +209,7 @@
           setSettings(remoteSettings);
           saveSettings();
           applySettings();
+          renderIfReady();
           authState.syncMessage = 'Settings downloaded from Firestore.';
           authState.syncInProgress = false;
           authState.error = '';

@@ -722,6 +722,7 @@
       key,
       year,
       label: cleanText(track.sourceLabel || `Track ${index + 1}`),
+      trackUrl: cleanUrl(track.trackUrl || ''),
       paperCount: Number.isFinite(paperCount)
         ? paperCount
         : (Array.isArray(track.papers) ? track.papers.length : 0),

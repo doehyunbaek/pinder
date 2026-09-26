@@ -130,9 +130,13 @@ const elements = {
   topAuthButton: document.getElementById('topAuthButton'),
   settingsButton: document.getElementById('settingsButton'),
   settingsMenu: document.getElementById('settingsMenu'),
+  copyAcceptedToResearchrButton: document.getElementById('copyAcceptedToResearchrButton'),
+  researchrTrackLink: document.getElementById('researchrTrackLink'),
   showButtonsToggle: document.getElementById('showButtonsToggle'),
   showTitleToggle: document.getElementById('showTitleToggle'),
   showAuthorsToggle: document.getElementById('showAuthorsToggle'),
+  hidePapersWithoutAbstractsToggle: document.getElementById('hidePapersWithoutAbstractsToggle'),
+  lightModeToggle: document.getElementById('lightModeToggle'),
   authStatus: document.getElementById('authStatus'),
   syncStatus: document.getElementById('syncStatus'),
   progressPanel: document.getElementById('progressPanel'),
@@ -306,6 +310,7 @@ function initializeFeedState(sourceUrl, sourceLabel = '', {
   updateSourceLabel();
   updateSourceMenu();
   updateTrackPicker();
+  updateResearchrTrackLink();
   rememberCurrentSourceSelection();
 }
 
@@ -757,9 +762,13 @@ function getMissingDomRequirements() {
     'topAuthButton',
     'settingsButton',
     'settingsMenu',
+    'copyAcceptedToResearchrButton',
+    'researchrTrackLink',
     'showButtonsToggle',
     'showTitleToggle',
     'showAuthorsToggle',
+    'hidePapersWithoutAbstractsToggle',
+    'lightModeToggle',
     'authStatus',
     'syncStatus',
     'progressPanel',
@@ -814,6 +823,8 @@ function normalizeSettings(rawSettings = {}) {
     showActionButtons: rawSettings.showActionButtons !== false,
     showTitleTagline: rawSettings.showTitleTagline !== false,
     showAuthors: rawSettings.showAuthors !== false,
+    hidePapersWithoutAbstracts: rawSettings.hidePapersWithoutAbstracts !== false,
+    lightMode: rawSettings.lightMode === true,
     updatedAt: normalizeUpdatedAt(rawSettings.updatedAt),
   };
 }
@@ -1052,6 +1063,9 @@ function applySettings() {
   elements.showButtonsToggle.checked = showActionButtons;
   elements.showTitleToggle.checked = showTitleTagline;
   elements.showAuthorsToggle.checked = showAuthors;
+  elements.hidePapersWithoutAbstractsToggle.checked = state.settings.hidePapersWithoutAbstracts !== false;
+  elements.lightModeToggle.checked = state.settings.lightMode === true;
+  document.body.classList.toggle('light-mode', state.settings.lightMode === true);
   elements.actionGrid.classList.toggle('hidden', !showActionButtons);
   elements.topbarBrand.classList.toggle('hidden', !showTitleTagline);
   elements.authorsSection.classList.toggle('hidden', !showAuthors);
@@ -1253,6 +1267,151 @@ function onShowAuthorsToggleChange(event) {
   persistSettingsChange(event.target.checked ? 'Authors shown.' : 'Authors hidden.');
 }
 
+function onHidePapersWithoutAbstractsToggleChange(event) {
+  state.settings.hidePapersWithoutAbstracts = event.target.checked;
+  persistSettingsChange(event.target.checked ? 'Papers without abstracts hidden.' : 'Papers without abstracts shown.');
+  render();
+}
+
+function onLightModeToggleChange(event) {
+  state.settings.lightMode = event.target.checked;
+  persistSettingsChange(event.target.checked ? 'Light mode enabled.' : 'Dark mode enabled.');
+}
+
+async function copyScriptToClipboard(script, successMessage) {
+  if (navigator.clipboard?.writeText) {
+    try {
+      await navigator.clipboard.writeText(script);
+      flashStatus(successMessage);
+      return true;
+    } catch (error) {
+      console.warn('Clipboard API unavailable; trying legacy copy.', error);
+    }
+  }
+
+  const textarea = document.createElement('textarea');
+  textarea.value = script;
+  textarea.setAttribute('readonly', '');
+  textarea.style.position = 'fixed';
+  textarea.style.left = '-9999px';
+  document.body.appendChild(textarea);
+  textarea.select();
+  let copied = false;
+  try {
+    copied = document.execCommand('copy');
+  } catch (error) {
+    console.warn('Legacy clipboard copy unavailable.', error);
+  } finally {
+    textarea.remove();
+  }
+
+  if (copied) {
+    flashStatus(successMessage);
+    return true;
+  }
+  return window.prompt('Copy this script, then paste it into the Researchr research-track console:', script) !== null;
+}
+
+function updateResearchrTrackLink() {
+  const track = getResearchrTransferTrack();
+  elements.researchrTrackLink.href = track?.url || '#';
+  elements.researchrTrackLink.textContent = track
+    ? `open the ${track.mode.toUpperCase()} ${track.year} Researchr research track`
+    : 'Researchr track unavailable for this edition';
+  elements.researchrTrackLink.style.pointerEvents = track ? '' : 'none';
+  elements.copyAcceptedToResearchrButton.disabled = !track;
+}
+
+function getResearchrTransferTrack() {
+  const mode = getCurrentSourceMode();
+  const selectedTrack = state.trackOptions.find((track) => track.key === state.selectedTrackKey);
+  const year = selectedTrack?.year;
+  if (!year || !['ase', 'icse', 'fse'].includes(mode) || !selectedTrack.trackUrl) return null;
+
+  const url = new URL(selectedTrack.trackUrl);
+  if (url.hostname !== 'conf.researchr.org' || !url.pathname.startsWith(`/track/${mode}-${year}/`)) return null;
+  return { mode, year, url: `${url.origin}${url.pathname}#event-overview` };
+}
+
+function onCopyAcceptedToResearchrClick() {
+  const track = getResearchrTransferTrack();
+  if (!track) {
+    flashStatus('This edition has no supported Researchr track.');
+    return;
+  }
+
+  const accepted = state.papers
+    .filter((paper) => state.decisions[paper.id]?.decision === 'accept')
+    .map((paper) => ({
+      id: paper.researchrEventId || (track.mode === 'fse' ? '' : paper.id),
+      title: paper.title,
+      authors: paper.authors,
+      doiUrl: paper.doiUrl || '',
+      confUrl: paper.confUrl || '',
+    }));
+  if (!accepted.length) {
+    flashStatus(`No accepted ${track.mode.toUpperCase()} ${track.year} papers to transfer.`);
+    return;
+  }
+
+  const script = `void (async () => {
+    const expectedPath = ${JSON.stringify(new URL(track.url).pathname)};
+    if (location.hostname !== 'conf.researchr.org' || location.pathname !== expectedPath) {
+      console.error('Open this Researchr track first: ' + ${JSON.stringify(track.url)});
+      return;
+    }
+    if ([...document.querySelectorAll('a[href*="/signin/"]')].some(a => a.textContent.trim().toLowerCase() === 'sign in')) {
+      console.error('Sign in to Researchr before starring papers.');
+      return;
+    }
+    const accepted = ${JSON.stringify(accepted)};
+    const normalize = text => String(text || '').replace(/\\\\[a-zA-Z]+\\s*\\{([^}]*)\\}/g, '$1')
+      .toLowerCase().normalize('NFKD').replace(/[\\u0300-\\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, ' ').trim();
+    const rows = [...document.querySelectorAll('#event-overview tr')].filter(row => row.querySelector('[data-event-star]'));
+    const matches = accepted.map(paper => {
+      const candidates = rows.filter(row => {
+        const title = row.querySelector('a[data-event-modal]')?.textContent;
+        if (paper.id && row.querySelector('[data-event-star]')?.dataset.eventStar === paper.id) return true;
+        if (paper.confUrl && [...row.querySelectorAll('a[href*="/details/"]')]
+          .some(a => a.href === paper.confUrl)) return true;
+        const doi = paper.doiUrl?.replace(/^https?:\\/\\/doi\\.org\\//i, '').toLowerCase();
+        if (doi && [...row.querySelectorAll('a[href*="doi.org/"]')]
+          .some(a => a.href.toLowerCase().includes('doi.org/' + doi))) return true;
+        if (normalize(title) !== normalize(paper.title)) return false;
+        const authors = [...row.querySelectorAll('.performers a')].map(a => normalize(a.textContent));
+        return paper.authors.some(author => authors.includes(normalize(author)));
+      });
+      return { paper, candidates };
+    });
+    const unmatched = matches.filter(({ candidates }) => candidates.length !== 1);
+    if (unmatched.length || new Set(matches.map(({ candidates }) => candidates[0]?.querySelector('[data-event-star]')?.dataset.eventStar)).size !== matches.length) {
+      console.error('Missing or ambiguous Researchr paper matches; no stars changed.', unmatched.map(({ paper, candidates }) => ({ title: paper.title, matches: candidates.length })));
+      return;
+    }
+    const ids = matches.map(({ candidates }) => candidates[0].querySelector('[data-event-star]').dataset.eventStar);
+    const control = id => [...document.querySelectorAll('#event-overview [data-event-star]')].find(el => el.dataset.eventStar === id);
+    const isStarred = id => Boolean(control(id)?.querySelector('.glyphicon-star:not(.glyphicon-star-empty)'));
+    const toStar = ids.filter(id => !isStarred(id));
+    if (!confirm(\`Star \${toStar.length} unstarred ${track.mode.toUpperCase()} ${track.year} papers on Researchr? \${ids.length - toStar.length} already starred. No stars will be removed.\`)) return;
+    let starred = 0;
+    for (const id of toStar) {
+      if (isStarred(id)) continue;
+      control(id).click();
+      const deadline = Date.now() + 10000;
+      while (!isStarred(id) && Date.now() < deadline) await new Promise(resolve => setTimeout(resolve, 250));
+      if (!isStarred(id)) {
+        console.error(\`Stopped: star confirmation timed out for \${id}. \${starred} stars confirmed. Check Researchr before retrying.\`);
+        return;
+      }
+      starred++;
+      await new Promise(resolve => setTimeout(resolve, 350));
+    }
+    console.log(\`Done: \${starred} new stars; \${ids.length} accepted papers checked.\`);
+  })();`;
+  return copyScriptToClipboard(script, `Script copied for ${accepted.length} accepted papers. Open ${track.url} and paste it into the console while signed in.`);
+}
+
 function onDocumentClick(event) {
   if (!(event.target instanceof Node)) {
     return;
@@ -1315,6 +1474,9 @@ function bindEvents() {
   elements.showButtonsToggle.addEventListener('change', onShowButtonsToggleChange);
   elements.showTitleToggle.addEventListener('change', onShowTitleToggleChange);
   elements.showAuthorsToggle.addEventListener('change', onShowAuthorsToggleChange);
+  elements.hidePapersWithoutAbstractsToggle.addEventListener('change', onHidePapersWithoutAbstractsToggleChange);
+  elements.lightModeToggle.addEventListener('change', onLightModeToggleChange);
+  elements.copyAcceptedToResearchrButton.addEventListener('click', onCopyAcceptedToResearchrClick);
   elements.trackPicker.addEventListener('change', onTrackPickerChange);
 
   elements.actionButtons.forEach((button) => {
@@ -2438,9 +2600,15 @@ function isPaperVisibleBySearch(paper) {
   return title.includes(searchTerm) || abstract.includes(searchTerm) || authorsText.includes(searchTerm) || authorsList.some((a) => a.includes(searchTerm));
 }
 
+function hasPaperAbstract(paper) {
+  const abstract = String(paper?.abstract || '').trim();
+  return Boolean(abstract) && !/^no (?:description|abstract) available\.?$/i.test(abstract);
+}
+
 function isPaperVisible(paper) {
   return (
-    isPaperVisibleByAuthors(paper)
+    (state.settings.hidePapersWithoutAbstracts === false || !paper.loaded || hasPaperAbstract(paper))
+    && isPaperVisibleByAuthors(paper)
     && isPaperVisibleBySearch(paper)
   );
 }
