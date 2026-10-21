@@ -1065,7 +1065,9 @@ function applySettings() {
   elements.showAuthorsToggle.checked = showAuthors;
   elements.hidePapersWithoutAbstractsToggle.checked = state.settings.hidePapersWithoutAbstracts !== false;
   elements.lightModeToggle.checked = state.settings.lightMode === true;
-  document.body.classList.toggle('light-mode', state.settings.lightMode === true);
+  const lightMode = state.settings.lightMode === true;
+  document.documentElement.classList.toggle('light-mode', lightMode);
+  document.querySelector('meta[name="theme-color"]').content = lightMode ? '#f8fafc' : '#0f172a';
   elements.actionGrid.classList.toggle('hidden', !showActionButtons);
   elements.topbarBrand.classList.toggle('hidden', !showTitleTagline);
   elements.authorsSection.classList.toggle('hidden', !showAuthors);
@@ -2743,7 +2745,7 @@ function showStatus(message, isError = false) {
   window.clearTimeout(state.statusTimer);
   elements.statusPanel.textContent = message;
   elements.statusPanel.classList.remove('hidden');
-  elements.statusPanel.style.color = isError ? '#fecaca' : '#e2e8f0';
+  elements.statusPanel.classList.toggle('status-error', isError);
 }
 
 function hideStatus() {

@@ -505,6 +505,10 @@ button {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.status-panel.status-error {
+  color: #fecaca;
+}
+
 .card-stack {
   position: relative;
   min-height: 0;
@@ -1249,12 +1253,46 @@ button {
 }
 
 /* Paper cards remain light; the surrounding interface switches themes. */
-body.light-mode {
+:root.light-mode {
   color-scheme: light;
+  --card: #ffffff;
+  --card-muted: #e9edf2;
+  --shadow: 0 4px 16px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+.light-mode body {
   color: #1e293b;
-  background:
-    radial-gradient(circle at top, rgba(59, 130, 246, 0.11), transparent 32%),
-    linear-gradient(180deg, #f8fafc 0%, #edf2fa 100%);
+  background: #f8fafc;
+}
+
+.light-mode .paper-card {
+  border: 1px solid #e2e8f0;
+}
+
+.light-mode .current-card.dragging {
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+}
+
+.light-mode .source-switcher-label {
+  color: #64748b;
+}
+
+.light-mode .source-switcher-button {
+  text-align: left;
+}
+
+.light-mode .paper-link-actions a {
+  color: #475569;
+}
+
+.light-mode .paper-link-actions a:hover {
+  color: #1d4ed8;
+}
+
+.light-mode .secondary-button:disabled {
+  background: #f1f5f9;
+  color: #64748b;
+  opacity: 0.65;
 }
 
 .light-mode .eyebrow,
@@ -1269,6 +1307,7 @@ body.light-mode {
 .light-mode .icse-visualization-summary-meta,
 .light-mode .icse-visualization-hover,
 .light-mode .icse-paper-map-count,
+.light-mode .icse-paper-map-track,
 .light-mode .summary-label,
 .light-mode .author-list label { color: #475569; }
 
@@ -1315,7 +1354,14 @@ body.light-mode {
   color: #1e293b;
 }
 
-.light-mode .topbar-search-input::placeholder { color: #64748b; }
+.light-mode .status-panel.status-error {
+  color: #991b1b;
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.light-mode .topbar-search-input::placeholder,
+.light-mode .author-search-input::placeholder { color: #64748b; }
 .light-mode .topbar-search-filter,
 .light-mode .topbar-search-clear { color: #475569; }
 .light-mode .topbar-search-filter:hover,
@@ -1335,13 +1381,22 @@ body.light-mode {
   color: #1e293b;
 }
 
-.light-mode .secondary-button:hover { background: #e2e8f0; border-color: #94a3b8; }
-.light-mode .action-button.reject { color: #991b1b; background: #fee2e2; }
-.light-mode .action-button.weak-reject { color: #9a3412; background: #ffedd5; }
-.light-mode .action-button.weak-accept { color: #1e40af; background: #dbeafe; }
-.light-mode .action-button.accept { color: #166534; background: #dcfce7; }
+.light-mode .secondary-button:hover:not(:disabled) { background: #e2e8f0; border-color: #94a3b8; }
+.light-mode .action-button.reject,
+.light-mode .decision-badge.reject { color: #991b1b; background: #fee2e2; }
+.light-mode .action-button.weak-reject,
+.light-mode .decision-badge.weak-reject { color: #9a3412; background: #ffedd5; }
+.light-mode .action-button.weak-accept,
+.light-mode .decision-badge.weak-accept { color: #1e40af; background: #dbeafe; }
+.light-mode .action-button.accept,
+.light-mode .decision-badge.accept { color: #166534; background: #dcfce7; }
 .light-mode .secondary-button.danger { color: #991b1b; background: #fee2e2; border-color: #fecaca; }
 .light-mode .progress-track { background: #cbd5e1; }
 .light-mode .settings-divider { background: #cbd5e1; }
 .light-mode .icse-legend-swatch.undecided { border-color: #94a3b8; }
 .light-mode .icse-paper-square { border-color: #94a3b8; }
+.light-mode .icse-paper-square:hover,
+.light-mode .icse-paper-square:focus-visible {
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.25);
+}

@@ -12,7 +12,18 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>pinder</title>
     <base href="/pinder/" />
-    <link rel="stylesheet" href="./styles.css?v=20260926-02" />
+    <script>
+      // Restore the theme before styles load to avoid a dark flash on reload.
+      try {
+        const settings = JSON.parse(localStorage.getItem('pinder-settings-v1') || '{}');
+        const lightMode = settings?.lightMode === true;
+        document.documentElement.classList.toggle('light-mode', lightMode);
+        document.querySelector('meta[name="theme-color"]').content = lightMode ? '#f8fafc' : '#0f172a';
+      } catch (_) {
+        // Keep the default theme when storage is unavailable.
+      }
+    </script>
+    <link rel="stylesheet" href="./styles.css?v=20260926-05" />
   </head>
   <body>
     <main class="app-shell">
@@ -289,6 +300,6 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
     <script src="./scrape.js?v=20260926-01"></script>
     <script src="./auth.js?v=20260926-01"></script>
-    <script src="./app.js?v=20260926-09"></script>
+    <script src="./app.js?v=20260926-11"></script>
   </body>
 </html>
